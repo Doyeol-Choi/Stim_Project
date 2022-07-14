@@ -1,0 +1,8 @@
+package com.stim.dto;
+
+import lombok.Data;
+
+@Data
+public class CartDTO {
+
+}

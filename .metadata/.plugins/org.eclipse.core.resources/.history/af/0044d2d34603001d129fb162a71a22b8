@@ -1,0 +1,5 @@
+package com.stim.dto;
+
+public class MygameDTO {
+
+}
