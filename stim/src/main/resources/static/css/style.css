@@ -1,0 +1,177 @@
+@charset "UTF-8";
+
+* {
+	padding:0;
+	margin:0;
+	box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+#header {
+    width: 100%;
+    min-width:1200px;
+    height: 100px;
+    background-color: skyblue;
+}
+#stim_logo {
+    float: left;
+    height: 100px;
+    width: 30%;
+    margin-left: 50px;
+}
+#headerNav {
+    float: left;
+    width: auto;
+    height: 100px;
+}
+#headerNav > ul {
+    display: table;
+    margin-left: auto;
+    margin-right: auto;
+}
+#headerNav > ul > li {
+    display: table-cell;
+    padding: 0 10px;
+}
+#headerNav > ul > li > a {
+    display: inline-block;
+    width: 150px;
+    height: 100px;
+    font-weight: 600;
+    padding-top: 20px;
+    font-size: 16px;
+    color: #222;
+    position: relative;
+    text-align: center;
+}
+#headerNav > ul > li > a.active::before {
+    width: 100%;
+}
+#headerNav > ul > li > a:hover {
+    color: #ed1b29;
+}
+#headerNav > ul > li > a:hover::before {
+    width: 100%;
+}
+#headerNav > ul > li > a::before {
+    content: "";
+    display: block;
+    border-bottom: 4px solid #ed1b29;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-transition: width 280ms ease-in-out;
+    transition: width 280ms ease-in-out;
+}
+#loginBox {
+	float: right;
+	margin-right: 50px;
+	margin-top: 10px;
+	padding:20px;
+}
+#loginBox > button {
+	width: 80px;
+	height: 40px;
+}
+#gameNav {
+	clear: both;
+	width: 100%;
+	min-width: 1200px;
+	height: 50px;
+	position: relative;
+	background-color: black;
+}
+#gameNav > section {
+	float: left;
+	color: white;
+}
+#gameNav > section > ul {
+    display: table;
+}
+#gameNav > section > ul > li {
+    display: table-cell;
+    padding: 0 10px;
+}
+#gameNav > section > ul > li > a {
+    display: inline-block;
+    width: 150px;
+    height: 50px;
+    font-weight: 600;
+    padding-top: 10px;
+    font-size: 16px;
+    color: white;
+    position: relative;
+    text-align: center;
+}
+#serch {
+	float: right;
+	padding-top: 10px;
+	margin-right: 50px;
+}
+
+/* footer */
+footer{
+	clear: both;
+    width: 100%;
+    min-width: 1200px;
+    height: 200px;
+    margin: 0 auto;
+    font-size: 13px;
+    border-top: 1px solid #ccc;
+    background-color: black;
+}
+footer > div{
+    height: 50%;
+    border-bottom: 1px solid #ccc;
+    margin-top: 10px;
+}
+#foot_text{
+    color: rgba(204, 204, 204, 0.8);
+}
+#footerLogo {
+    width: 20%;
+    height: 100%;
+    float: left;
+}
+#foot_text{
+    float: left;
+    width: 50%;
+}
+#foot_text a{
+    text-decoration: none;
+    color:white;
+    border-right: 1px solid #ccc;
+    padding-right : 10px;
+    padding-left: 5px;
+}
+#foot_text a:last-child{
+    border: none;
+}
+#foot_text a:hover{
+    color: #ccc;
+}
+#sns{
+    margin-left: 5%;
+    width: 20%;
+    height: 80%;
+    float: left;
+}
+#sns a{
+    color: #ccc;
+    float: left;
+    width: 50%;
+}
+#sns img{
+    width: 20%;
+    height: 10%;
+}
