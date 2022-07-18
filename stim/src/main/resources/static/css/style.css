@@ -14,6 +14,12 @@ ul {
     list-style: none;
 }
 
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+
+.notosanskr * { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
 /* header */
 #header {
     width: 100%;
