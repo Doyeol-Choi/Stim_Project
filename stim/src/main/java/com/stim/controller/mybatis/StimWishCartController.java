@@ -9,7 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimWishCartService;
-import com.stim.vo.UserVO;
+import com.stim.vo.CartVO;
+import com.stim.vo.WishVO;
 
 @RestController
 public class StimWishCartController {
@@ -18,15 +19,27 @@ public class StimWishCartController {
 	private StimWishCartService stimWishCartService;
 	
 	// 예시 => 수정해서 사용
-//	@RequestMapping(value="user")
-//	public ModelAndView SelectAllUserView(UserVO uVo) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		List<UserVO> list = stimWishCartService.SelectAllUser();
-//		
-//		mav.addObject("list", list);
-//        mav.setViewName("user");
-//        
-//        return mav;
-//	}
+	@RequestMapping(value="wish")
+	public ModelAndView SelectAllUserView(WishVO wVo) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		List<WishVO> list = stimWishCartService.SelectWishGame();
+		
+		mav.addObject("list", list);
+        mav.setViewName("wish");
+               return mav;
+	}
+	
+	@RequestMapping(value="cart")
+	public ModelAndView SelectAllUserView(CartVO cVo) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		List<CartVO> list = stimWishCartService.SelectCartGame();
+		
+		mav.addObject("list", list);
+        mav.setViewName("cart");
+               return mav;
+	}
+	
+	
 }
