@@ -6,8 +6,11 @@
 <mapper namespace="com.stim.model.mapper.StimWishCartMapper">
  
  	<!-- 수정하시오 -->
-    <select id="SelectAllUser" resultType="com.stim.vo.UserVO">
-       SELECT * FROM user_tbl
+    <select id="SelectWishGame" resultType="com.stim.vo.WishVO">
+       SELECT * FROM wish_tbl
     </select>
- 
+    
+ 	<select id="SelectCartGame" resultType="com.stim.vo.CartVO">
+       SELECT * FROM cart_tbl
+    </select>
 </mapper>
