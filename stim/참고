@@ -1,0 +1,7 @@
+1) view 페이지의 기본경로 src/main/resources/templates
+
+2) css, ccript, img와 같이 view페이지 내에서 연동하는 기본경로 src/main/resources/static
+
+3) templates 의 sample.html 복사해서 페이지 기초 만들면 될듯
+
+4) 로그인부분(도열) - User / 프로필부분(성민) - Profile / 찜목록,장바구니(민중) - WishCart / 게임목록(민지) - GameList 로 구분해놓음

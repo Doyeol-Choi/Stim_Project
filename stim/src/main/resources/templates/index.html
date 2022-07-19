@@ -1,20 +1,66 @@
 <!DOCTYPE HTML>
 <html lagn="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack</title>
 	<link rel="shortcut icon" href="image/favicon.ico">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
-    	
+    	<div id = "mainGame" class = "contain">
+				<h1>이벤트 추천</h1>
+					<div id = "mainGame1">
+						<a href = ""><img  src="" alt=""></a>
+					</div>
+				<div id="mainGame2" class="subG">
+						<a href = ""><img  src="" alt=""></a>
+				</div>
+				<div id="mainGame3" class="subG">
+						<a href = ""><img  src="" alt=""></a>
+				</div>
+				<div id="mainGame4" class="subG">
+						<a href = ""><img  src="" alt=""></a>
+				</div>
+			</div>
+			
+			<div id="newGame" class = "contain">
+				<h1>최신 게임</h1>
+				<div id = "newGame1" class = "newSubG">
+					<a href = ""><img  src="" alt=""></a>
+					<p>게임 타이틀</p>
+				</div>
+				<div id = "newGame2" class = "newSubG">
+					<a href = ""><img  src="" alt=""></a>
+					<p>게임 타이틀</p>
+				</div>
+				<div id = "newGame3" class = "newSubG">
+					<a href = ""><img  src="" alt=""></a>
+					<p>게임 타이틀</p>
+				</div>
+			</div>
+			
+			<div id = "gameTag" class = "contain">
+				<h1>{name}님을 위한 추천 장르</h1>
+				<div id = "tag1" class = "gameTags">
+					<a href = "">태그 1</a>
+				</div>
+				<div id = "tag2" class = "gameTags">
+					<a href = "">태그 2</a>
+				</div>
+				<div id = "tag3" class = "gameTags">
+					<a href = "">태그 3</a>
+				</div>
+				<div id = "tag4" class = "gameTags">
+					<a href = "">태그 4</a>
+				</div>
+			</div>
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

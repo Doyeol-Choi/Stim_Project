@@ -7,6 +7,7 @@ CREATE TABLE user_tbl(
     user_password varchar2(20) NOT NULL,
     user_email varchar2(40) NOT NULL,
     user_phone char(11) NOT NULL,
+    user_picture varchar2(100) NOT NULL,
     user_admin char(1) NOT NULL         -- Y/N
     );
 
