@@ -6,8 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.stim.model.mapper.StimWishCartMapper;
-import com.stim.vo.CartVO;
-import com.stim.vo.WishVO;
+import com.stim.vo.UserVO;
 
 @Service
 public class StimWishCartServiceImp implements StimWishCartService {
@@ -17,11 +16,7 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	StimWishCartMapper stimWishCartMapper;
 
 	@Override
-	public List<WishVO> SelectWishGame() throws Exception {
-		return stimWishCartMapper.SelectWishGame();
-	}
-	@Override
-	public List<CartVO> SelectCartGame() throws Exception {
-		return stimWishCartMapper.SelectCartGame();
+	public List<UserVO> SelectAllUser() throws Exception {
+		return stimWishCartMapper.SelectAllUser();
 	}
 }

@@ -2,12 +2,9 @@ package com.stim.service.mybatis;
 
 import java.util.List;
 
-import com.stim.vo.CartVO;
-import com.stim.vo.WishVO;
+import com.stim.vo.UserVO;
 
 public interface StimWishCartService {
 
-	public List<WishVO> SelectWishGame() throws Exception;
-
-	public List<CartVO> SelectCartGame() throws Exception;
+	public List<UserVO> SelectAllUser() throws Exception;
 }
