@@ -14,9 +14,13 @@ public class StimProfileServiceImp implements StimProfileService {
 	@Autowired
 	StimProfileMapper stimProfileMapper;
 	
-	@Override
-	public List<UserVO> SelectAllUser() throws Exception {
-		return stimProfileMapper.SelectAllUser();
+	/*
+	 * @Override public List<UserVO> SelectAllUser() throws Exception { return
+	 * stimProfileMapper.SelectAllUser(); }
+	 */
+	
+	@Override public List<UserVO> SelectById() throws Exception {
+		return stimProfileMapper.SelectById();
 	}
-
+	
 }

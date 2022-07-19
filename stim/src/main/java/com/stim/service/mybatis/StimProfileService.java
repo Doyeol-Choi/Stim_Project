@@ -6,5 +6,6 @@ import com.stim.vo.UserVO;
 
 public interface StimProfileService {
 
-	public List<UserVO> SelectAllUser() throws Exception;
+	//public List<UserVO> SelectAllUser() throws Exception;
+	public List<UserVO> SelectById() throws Exception;
 }

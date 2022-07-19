@@ -10,5 +10,7 @@ import com.stim.vo.UserVO;
 public interface StimProfileMapper {
 
 	// 예시 메서드 수정해서 사용
-	public List<UserVO> SelectAllUser() throws Exception;
+	//public List<UserVO> SelectAllUser() throws Exception;
+	
+	public List<UserVO> SelectById() throws Exception;
 }
