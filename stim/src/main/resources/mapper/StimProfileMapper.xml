@@ -6,8 +6,11 @@
 <mapper namespace="com.stim.model.mapper.StimProfileMapper">
  	
  	<!-- 수정하시오 -->
-    <select id="SelectAllUser" resultType="com.stim.vo.UserVO">
-       SELECT * FROM user_tbl
+ <!--    <select id="SelectById" resultType="com.stim.vo.UserVO">
+       SELECT * FROM test1_tbl
     </select>
- 
+  -->
+	<select id="SelectById" resultType="hashmap">
+       SELECT * FROM testTable
+    </select>
 </mapper>

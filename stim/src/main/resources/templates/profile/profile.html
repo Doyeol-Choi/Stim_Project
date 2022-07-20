@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Steam Community :: ${id}</title>
+	<link rel="shortcut icon" href="image/favicon.ico">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
+    <div id="container">
+    	<div id="content">
+		    	<div id="container">
+		        <!--프로필, 프로필 수정-->
+		        <div id="profile">
+		            <div id="profile_avartar"><!-- 프로필 이미지-->
+		                <img src="./prof.jpg" alt="프사">
+		            </div>
+		            <div id="profile_id"> <!--프로필 아이디, 출신-->
+		                <h3><strong>${id}</strong></h3>
+		                <p>${nickname} ${Nation}</p>
+		            </div>
+		            <div id="profile_introduce">
+		                자기 소개 입니다
+		            </div>
+		        </div>
+		        <!--프로필 수정-->
+		            <button id="profile_update" onclick="">Edit profile</button>
+		        <!--댓글-->
+		        <div id="comment">
+		
+		        </div>
+		        <!--친구창-->
+		        <div id="friends">
+		
+		        </div>
+		    </div>
+    	</div>
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>

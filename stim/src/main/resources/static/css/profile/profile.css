@@ -1,0 +1,71 @@
+@charset "UTF-8";
+
+/* 화면 전체 크기 */
+#content{
+    width: 100%;
+    height: 100vh;
+    background-color: #222;
+}
+
+/* 프로필 전체 크기 */
+#container{
+    min-width: 800px;
+    z-index: 1;
+    width: 60%;
+    height: 100vh;
+    background-color: #444;
+    margin: 0 auto;
+}
+
+/* 프로필 정보 부분 */
+#profile{
+    width: 80%;
+    height: 25vh;
+    background-color: rgb(78, 82, 92);
+    position: relative;
+    display: inline-block;
+}
+
+/* 프로필 사진 */
+#profile_avartar{
+    float: left;
+    width: 40%;
+    height: 50%;
+    margin: 3%;
+}
+
+/* 프로필 아이디 */
+#profile_id{
+    float: left;
+    list-style: none;
+    color: rgb(228, 228, 228);
+    width: 40%;
+    height: 30%;
+}
+#prifile_id p{
+    float: left;
+    width: 20%;
+}
+
+/* 프로필 자기소개 */
+#profile_introduce{ 
+    margin-left: 35%;
+    width: 60%;
+    height: 20%;
+    margin-top: 20%;
+    background-color: rgb(78, 82, 92);
+    color: rgb(228, 228, 228);
+}
+
+/* 프로필 닉네임, 출신 국가 */
+#profile_update{
+    float: right;
+    width: 15%;
+    height: 5%;
+    margin-top: 5%;
+    margin-right: 3%;
+    background-color: rgb(74, 79, 88);
+    border: none;
+    font-size: 100%;
+    color: rgb(228, 228, 228);
+}

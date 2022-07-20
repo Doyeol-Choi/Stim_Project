@@ -14,8 +14,7 @@ public class StimUserServiceImp implements StimUserService {
 	@Autowired
 	StimUserMapper stimUserMapper;
 
-	@Override
-	public List<UserVO> SelectAllUser() throws Exception {
+	public List<UserVO> SelectAllUser() throws Exception{
 		return stimUserMapper.SelectAllUser();
 	}
 	

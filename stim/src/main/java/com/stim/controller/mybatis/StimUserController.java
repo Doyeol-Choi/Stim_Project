@@ -17,15 +17,16 @@ public class StimUserController {
 	@Resource
 	private StimUserService stimUserService;
 	
-	@RequestMapping(value="user")
-	public ModelAndView SelectAllUserView(UserVO uVo) throws Exception {
-		ModelAndView mav = new ModelAndView();
-		
-		List<UserVO> list = stimUserService.SelectAllUser();
-		
-		mav.addObject("list", list);
-        mav.setViewName("user");
-        
-        return mav;
-	}
+	// 예시 => 수정해서 사용
+//	@RequestMapping(value="user")
+//	public ModelAndView SelectAllUserView(UserVO uVo) throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		List<UserVO> list = stimWishCartService.SelectAllUser();
+//		
+//		mav.addObject("list", list);
+//        mav.setViewName("user");
+//        
+//        return mav;
+//	}
 }

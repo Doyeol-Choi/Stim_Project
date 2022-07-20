@@ -5,13 +5,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimProfileService;
+import com.stim.vo.ProFileCommentVO;
 import com.stim.vo.UserVO;
 
 @RestController
@@ -19,23 +21,11 @@ public class StimProfileController {
 
 	@Resource
 	private StimProfileService stimProfileService;
-	
-	@RequestMapping(value="profile")
-	public ModelAndView AllListView(UserVO uVo) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		
-		List<UserVO> AllList = stimProfileService.SelectById();
-		
-		mav.addObject("Alllist", AllList);
-		mav.setViewName("list");
+
+	public void setStimProfileService(StimProfileService stimProfileService) {
+		this.stimProfileService = stimProfileService;
 	}
 	
-	//받는거 이후 하기 
-	@GetMapping("/profile")
-	public String profile(UserVO uVo, Model model ) {
-		//UserVO uVo = //stimProfileService.
-		return "";
-	}
 	
 	// 예시 => 수정해서 사용
 //	@RequestMapping(value="user")
@@ -49,18 +39,20 @@ public class StimProfileController {
 //        
 //        return mav;
 //	}
+
 	
 	
+	@RequestMapping(value="/profile")
+    public ModelAndView AllListView(Map<String, Object> map) throws Exception{
+        ModelAndView mav = new ModelAndView();
+        
+        List<Map<String, Object>> AllList = stimProfileService.SelectById();
+        
+        mav.addObject("Alllist", AllList);
+        mav.setViewName("profile/profile");
+        return mav;
+    }
 	
-	@RequestMapping("/profile")
-	public ModelAndView AllListView(Map<String, Object> map) throws Exception{
-		ModelAndView mav = new ModelAndView();
-		
-		List<UserVO> AllList = stimProfileService.SelectById();
-		
-		mav.addObject("Alllist",AllList);
-		mav.setViewName("list");
-		
-		return mav;
-	}
+
+	
 }
