@@ -10,8 +10,15 @@ import com.stim.vo.WishVO;
 @Mapper
 public interface StimWishCartMapper {
 
-	// 예시 메서드 수정해서 사용
+	// 찜목록 
 	public List<WishVO> SelectWishGame() throws Exception;
-
+	// 장바구니
 	public List<CartVO> SelectCartGame() throws Exception;
+	// 찜목록에서 장바구니 추가
+	public void InsertCart() throws Exception;
+	// 찜목록에서 삭제
+	public void DeleteWish() throws Exception;
+	// 장바구니에서 삭제
+	public void DeleteCart() throws Exception;
+	
 }

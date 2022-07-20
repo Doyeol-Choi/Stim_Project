@@ -18,7 +18,7 @@ public class StimApplication {
 		SpringApplication.run(StimApplication.class, args);
 	}
 
-	// my batis sessionFactory
+	// mybatis sessionFactory
 	@Bean
     SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();

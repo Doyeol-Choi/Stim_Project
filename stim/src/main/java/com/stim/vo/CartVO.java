@@ -9,4 +9,9 @@ public class CartVO {
 	private int code;
 	private int userCode;
 	private int gameCode;
+	private String gameName;
+	private int price;
+	private int totalPrice;
+	private String picture;
+	
 }

@@ -8,4 +8,9 @@ public class WishVO {
 	private int code;
 	private int userCode;
 	private int gameCode;
+	private String gameName;
+	private String genre_1;
+	private String genre_2;
+	private String genre_3;
+	private String releaseDate;
 }

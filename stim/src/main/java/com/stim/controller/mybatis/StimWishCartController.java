@@ -18,9 +18,10 @@ public class StimWishCartController {
 	@Resource
 	private StimWishCartService stimWishCartService;
 	
-	// 예시 => 수정해서 사용
+
+//	 예시 => 수정해서 사용
 	@RequestMapping(value="wish")
-	public ModelAndView SelectAllUserView(WishVO wVo) throws Exception {
+	public ModelAndView SelectWishGame(WishVO wVo) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		List<WishVO> list = stimWishCartService.SelectWishGame();
@@ -32,7 +33,7 @@ public class StimWishCartController {
 	}
 	
 	@RequestMapping(value="cart")
-	public ModelAndView SelectAllUserView(CartVO cVo) throws Exception {
+	public ModelAndView SelectCartGame(CartVO cVo) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
 		List<CartVO> list = stimWishCartService.SelectCartGame();
