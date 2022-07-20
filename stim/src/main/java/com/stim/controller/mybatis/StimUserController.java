@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimUserService;
-import com.stim.vo.UserVO;
+import com.stim.vo.GameVO;
 
 @RestController
 public class StimUserController {
@@ -17,15 +17,15 @@ public class StimUserController {
 	@Resource
 	private StimUserService stimUserService;
 	
-	@RequestMapping(value="user")
-	public ModelAndView SelectAllUserView(UserVO uVo) throws Exception {
+	@RequestMapping(value="test")
+	public ModelAndView SelectAllUserView(GameVO gVo) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		List<UserVO> list = stimUserService.SelectAllUser();
+		List<GameVO> list = stimUserService.SelectAllGame();
 		
 		mav.addObject("list", list);
-        mav.setViewName("user");
-        
+		mav.setViewName("user/test");
+		
         return mav;
 	}
 }

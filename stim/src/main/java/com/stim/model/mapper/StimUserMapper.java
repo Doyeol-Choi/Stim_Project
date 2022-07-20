@@ -4,12 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.stim.vo.UserVO;
+import com.stim.vo.GameVO;
 
 @Mapper
 public interface StimUserMapper {
 	
 	// 유저 전체 검색
-	public List<UserVO> SelectAllUser() throws Exception;
+	public List<GameVO> SelectAllGame() throws Exception;
 	 
 }

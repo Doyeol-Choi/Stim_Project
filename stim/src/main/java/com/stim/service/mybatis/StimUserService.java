@@ -2,9 +2,9 @@ package com.stim.service.mybatis;
 
 import java.util.List;
 
-import com.stim.vo.UserVO;
+import com.stim.vo.GameVO;
 
 public interface StimUserService {
 
-	public List<UserVO> SelectAllUser() throws Exception;
+	public List<GameVO> SelectAllGame() throws Exception;
 }

@@ -1,7 +1,6 @@
 <!DOCTYPE HTML>
 <html lagn="ko"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack</title>
@@ -14,7 +13,10 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
-    	
+    	<h1>테스트</h1>
+    	<ul th:each="row:${list}">
+    		<li th:text="${row?.game_name}"></li>
+    	</ul>
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
