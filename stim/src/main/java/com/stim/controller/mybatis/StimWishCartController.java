@@ -3,8 +3,13 @@ package com.stim.controller.mybatis;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.apache.catalina.connector.Response;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,29 +22,43 @@ public class StimWishCartController {
 
 	@Resource
 	private StimWishCartService stimWishCartService;
-	
 
-//	 예시 => 수정해서 사용
-	@RequestMapping(value="wish")
-	public ModelAndView SelectWishGame(WishVO wVo) throws Exception {
+	@GetMapping("/wish/{user_code}")
+	public ModelAndView SelectWishGame(@PathVariable("user_code") int user_code) throws Exception {
+			
 		ModelAndView mav = new ModelAndView();
-		
-		List<WishVO> list = stimWishCartService.SelectWishGame();
-		
+		System.out.println(user_code);
+		List<WishVO> list = stimWishCartService.SelectWishGame(user_code);
+		System.out.println(list.size());
 		mav.addObject("list", list);
-        mav.setViewName("wish");
-        
+		mav.setViewName("wishcart/wish");
+
         return mav;
 	}
-	
-	@RequestMapping(value="cart")
-	public ModelAndView SelectCartGame(CartVO cVo) throws Exception {
+	@GetMapping("/cart")
+	public ModelAndView InsertCartGame(@RequestParam("user_code")int user_code,@RequestParam("game_code")int game_code) throws Exception {
+		 
+		 ModelAndView mav = new ModelAndView();
+		 
+		 
+		 stimWishCartService.InsertCartGame(user_code,game_code);
+		 
+		 List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
+		 
+		 mav.addObject("list", list);
+		 mav.setViewName("wishcart/cart");
+		 
+		 return mav;
+
+	}
+	@GetMapping("/cart/{user_code}")
+	public ModelAndView SelectCartGame(@PathVariable("user_code")int user_code) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		List<CartVO> list = stimWishCartService.SelectCartGame();
+		List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
 		
 		mav.addObject("list", list);
-        mav.setViewName("cart");
+        mav.setViewName("wishcart/cart");
         
         return mav;
 	}

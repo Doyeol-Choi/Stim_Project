@@ -17,13 +17,26 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	StimWishCartMapper stimWishCartMapper;
 
 	@Override
-	public List<WishVO> SelectWishGame() throws Exception {
-		return stimWishCartMapper.SelectWishGame();
+	public List<WishVO> SelectWishGame(int user_code) throws Exception {
+		return stimWishCartMapper.SelectWishGame(user_code);
 	}
 	
 	@Override
-	public List<CartVO> SelectCartGame() throws Exception {
+	public List<CartVO> SelectCartGame(int user_code) throws Exception {
 		return stimWishCartMapper.SelectCartGame();
 	}
-	
+	@Override
+	public void InsertCartGame(int user_code,int game_code) throws Exception {
+		
+	}
+
+	@Override
+	public void DeleteWishGame(int wish_code) throws Exception {
+		
+	}
+
+	@Override
+	public void DeleteCartGame(int cart_code) throws Exception {
+		
+	}
 }

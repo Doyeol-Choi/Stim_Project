@@ -11,14 +11,15 @@ import com.stim.vo.WishVO;
 public interface StimWishCartMapper {
 
 	// 찜목록 
-	public List<WishVO> SelectWishGame() throws Exception;
+	public List<WishVO> SelectWishGame(int user_code) throws Exception;
 	// 장바구니
 	public List<CartVO> SelectCartGame() throws Exception;
 	// 찜목록에서 장바구니 추가
-	public void InsertCart() throws Exception;
+	public void InsertCartGame(int user_code,int game_code) throws Exception;
 	// 찜목록에서 삭제
-	public void DeleteWish() throws Exception;
+	public void DeleteWishGame() throws Exception;
 	// 장바구니에서 삭제
-	public void DeleteCart() throws Exception;
+	public void DeleteCartGame() throws Exception;
+	
 	
 }

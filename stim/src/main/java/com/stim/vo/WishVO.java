@@ -4,13 +4,14 @@ import lombok.Data;
 
 @Data
 public class WishVO {
-	// 안쓸듯?2 UserDTO에 wishCode만 함쳐 쓰는게 나을지도
-	private int code;
-	private int userCode;
-	private int gameCode;
-	private String gameName;
+	//찜목록 VO
+	private int wish_code ;
+	private int user_code ;
+	private int game_code ;
+	private String game_name ;
+	private String game_price;
 	private String genre_1;
 	private String genre_2;
 	private String genre_3;
-	private String releaseDate;
+	private String game_releaseDate ;
 }

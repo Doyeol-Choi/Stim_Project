@@ -6,28 +6,33 @@
 	<title>Stim Pack</title>
 	<link rel="shortcut icon" href="image/favicon.ico">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/wishcart/wish.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
-    	<div class="list_box" th:each="list : ${list}">
+    	<div class="list_box" th:each="wish : ${list}">
 			<div class="game_image">
-				<span th:text="${list.gamename}" />
+<!-- 				<img alt="게임사진" id="game_image" th:src=""> -->
 			</div>
 			<div class="game_content">
 				<div class="content_top">
-					<p>가나다라마바사</p>
+					<span class="" th:text="${wish.game_name}"></span>
+					<span class="" th:text="${wish.game_price}"></span>
 				</div>
 				<div class="content_bottom">
-					<p>가나다라마바사</p>
+					<input type="button" value="장바구니 추가" th:onclick="|location.href='/cart(user_code=${wish.user_code},game_code=${wish.game_code})'|">
 				</div>
 			</div>
     	</div>
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+
+
+
 </body>
 </html>
