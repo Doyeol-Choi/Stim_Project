@@ -3,10 +3,11 @@ package com.stim.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 @EnableWebSecurity
@@ -34,12 +35,29 @@ public class SecurityConfig{
 	        .logout()						// logout할 경우
 	        	.logoutUrl("/logout")			// 로그아웃을 처리할 URL 입력
 	            .logoutSuccessUrl("/")			// 로그아웃 성공 시 "/"으로 이동
-        .and()
-        	.cors()
+	    .and()
+	    	.cors().configurationSource(corsConfigurationSource())
         .and()
         	.csrf().disable();
+		// Cross site Request forgery로 사이즈간 위조 요청인데, 즉 정상적인 사용자가 의도치 않은 위조요청을 보내는 것을 의미
+		// GET요청을 제외한 상태를 변화시킬 수 있는 POST, PUT, DELETE 요청으로부터 보호하는 csrf를 disable해서 post형식으로 회원가입이 가능하게 한다.
 		
 		return http.build();
+    }
+	
+	// CORS 허용 적용	/ https://toycoms.tistory.com/37
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+
+        configuration.addAllowedOrigin("*");	// 허용할 URL
+        configuration.addAllowedHeader("*");	// 허용할 Header
+        configuration.addAllowedMethod("*");	// 허용할 Http Method
+        configuration.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 	
 }
