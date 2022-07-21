@@ -5,16 +5,49 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack</title>
-	<link rel="shortcut icon" href="image/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/regFormStep2.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
-    	
+    	<div id="content">
+    		<div id="headline">
+		    	<h1>회원가입</h1>
+    		</div>
+    		<form action="registerS3" method="post" id="login_form">
+    			<label th:for="user_id">
+    				<span class="register_text exception">아이디</span>
+    			</label>
+    			<button id="check_id"><span>중복확인</span></button>
+    			<input type="text" name="user_id" id="user_id">
+    			<label th:for="user_password">
+    				<span class="register_text">비밀번호</span>
+    			</label>
+    			<input type="password" name="user_password" id="user_password">
+    			<label th:for="password_confirm">
+    				<span class="register_text">비밀번호 확인</span>
+    			</label>
+    			<input type="password" name="password_confirm" id="password_confirm">
+    			<label th:for="user_email">
+    				<span class="register_text">이메일</span>
+    			</label>
+    			<input type="email" name="user_email" id="user_email">
+    			<label th:for="user_phone">
+    				<span class="register_text">전화번호</span>
+    			</label>
+    			<input type="tel" name="user_phone" id="user_phone" placeholder="'-'을 제외한 번호를 입력해주세요">
+    		</form>
+    		<div id="register_btn">
+		    	<button type="submit" form="login_form">
+		    		<span>가입하기</span>
+		    	</button>
+		    </div>
+    	</div>
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #container {
-	height: 800px;
+	min-height: 800px;
 }
 
 #content {
@@ -32,7 +32,7 @@ form {
 	margin-top: 10px;
 }
 
-#id, #password {
+#user_id, #user_password {
 	width: 100%;
 	height: 40px;
 	background: #0E1B49;

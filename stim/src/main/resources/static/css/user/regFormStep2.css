@@ -14,22 +14,40 @@
 	font-size: 1.6em;
 }
 
-#stim_img {
-	width: 150px;
-}
-
-#headline > h2 {
+#headline {
 	margin-bottom: 20px;
 }
 
 form {
 	width: 400px;
-	margin:0 auto;
+	margin: 0 auto;
+	text-align: left;
 }
 
-#user_id, #user_email {
-	width: 100%;
+.register_text {
 	display: block;
+	font-size:20px;
+	color: rgba(255,255,255,0.4);
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+.exception {
+	display: inline-block;
+}
+
+#check_id {
+	width: 80px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+#check_id:hover {
+	cursor: pointer;
+}
+
+#user_id, #user_password, #password_confirm, #user_email, #user_phone {
+	width: 100%;
 	height: 40px;
 	background: #0E1B49;
     border-radius: 3px;
@@ -41,14 +59,14 @@ form {
     transition: border ease-in-out .5s;
     border: 1px solid white;
     outline: none;
-    margin-top: 30px;
 }
 
-#find_btn {
-	margin-top: 30px;
+#register_btn {
+	margin: 30px 0;
+	font-size: 0.8em;
 }
 
-#find_btn > button {
+#register_btn > button {
 	border-radius: 2px;
     border: none;
     padding: 1px;
@@ -60,7 +78,7 @@ form {
     margin-bottom: 20px;
 }
 
-#find_btn > button > span {
+#register_btn > button > span {
 	width: 150px;
 	height: 50px;
 	line-height: 50px;

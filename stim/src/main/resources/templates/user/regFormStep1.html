@@ -5,10 +5,10 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack</title>
-	<link rel="shortcut icon" href="image/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/user/regFormStep1.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/regFormStep1.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -36,7 +36,7 @@
 					<span>약관에 동의합니다.</span>
 				</label>
 			</form>
-			<button type="submit" id="agree_btn">
+			<button type="submit" id="agree_btn" onclick="location.href='registerS2'">
 				<span>동의합니다</span>
 			</button> 
     	</div>

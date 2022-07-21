@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #container {
-	height: 800px;
+	min-height: 800px;
 }
 
 #content {
@@ -27,7 +27,7 @@ form {
 	margin:0 auto;
 }
 
-#id, #email {
+#user_email {
 	width: 100%;
 	display: block;
 	height: 40px;
