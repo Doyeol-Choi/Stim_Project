@@ -4,7 +4,7 @@
 CREATE TABLE user_tbl(
     user_code number PRIMARY KEY,
     user_id varchar2(20) UNIQUE NOT NULL,
-    user_password varchar2(20) NOT NULL,
+    user_password varchar2(100) NOT NULL,
     user_email varchar2(40) NOT NULL,
     user_phone char(11) NOT NULL,
     user_picture varchar2(100) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE user_tbl(
     );
 
 CREATE SEQUENCE user_code_seq NOCACHE;
-    
+
 -- 친구테이블
 CREATE TABLE friend_tbl(
     friend_code number PRIMARY KEY,
@@ -151,7 +151,7 @@ INSERT INTO game_tbl VALUES
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'Rust',46000,'2018-02-09','Facepunch Studios','Facepunch Studios','Rust의 단 하나의 목적은 생존입니다. 이를 위해 당신은 굶주림, 갈증, 추위와 같은 어려움들을 이겨내야 합니다. 피신처를 건설하세요',15,'Rust.jpg');
 INSERT INTO game_tbl VALUES 
-(game_code_seq.nextval,'FIFA 22',66000,'2021-10-01','ElectronicArts Canada & ElectronicArts Romania','Electronic Arts','전 세계 17,000명 이상의 선수들, 700개 이상의 팀, 90개 이상의 경기장, 30개 이상의 리그를 만나볼 수 있는 세계적인 게임을 플레이하세요.',25,'FIFA22.jpg');
+(game_code_seq.nextval,'FIFA 22',66000,'2021-10-01','EA Canada and EA Romania','Electronic Arts','전 세계 17,000명 이상의 선수들, 700개 이상의 팀, 90개 이상의 경기장, 30개 이상의 리그를 만나볼 수 있는 세계적인 게임을 플레이하세요.',25,'FIFA22.jpg');
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'SD건담 배틀 얼라이언스',69800,'2022-08-25','ARTDINK','Bandai Namco Entertainment','『SD건담 배틀 얼라이언스』는 「기동전사 건담」 시리즈의 다양한 모빌슈트와 캐릭터가 각 작품의 세계관을 초월하여 함께 출연하는 새로운 SD건담 액션 RPG입니다.',15,'SDGUNDAM.jpg');
 INSERT INTO game_tbl VALUES 

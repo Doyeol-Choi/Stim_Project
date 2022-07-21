@@ -33,7 +33,11 @@ public class SecurityConfig{
         .and()
 	        .logout()						// logout할 경우
 	        	.logoutUrl("/logout")			// 로그아웃을 처리할 URL 입력
-	            .logoutSuccessUrl("/");			// 로그아웃 성공 시 "/"으로 이동
+	            .logoutSuccessUrl("/")			// 로그아웃 성공 시 "/"으로 이동
+        .and()
+        	.cors()
+        .and()
+        	.csrf().disable();
 		
 		return http.build();
     }

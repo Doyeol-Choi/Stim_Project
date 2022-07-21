@@ -19,7 +19,7 @@
     		<div id="headline">
 		    	<h1>회원가입</h1>
     		</div>
-    		<form action="registerS3" method="post" id="login_form">
+    		<form action="registerS3" method="post">
     			<label th:for="user_id">
     				<span class="register_text exception">아이디</span>
     			</label>
@@ -41,12 +41,12 @@
     				<span class="register_text">전화번호</span>
     			</label>
     			<input type="tel" name="user_phone" id="user_phone" placeholder="'-'을 제외한 번호를 입력해주세요">
+	    		<div id="register_btn">
+			    	<button type="submit">
+			    		<span>가입하기</span>
+			    	</button>
+			    </div>
     		</form>
-    		<div id="register_btn">
-		    	<button type="submit" form="login_form">
-		    		<span>가입하기</span>
-		    	</button>
-		    </div>
     	</div>
     </div>
     <!-- footer fragment 사용 -->
