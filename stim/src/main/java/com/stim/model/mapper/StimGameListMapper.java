@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.stim.vo.UserVO;
+import com.stim.vo.GameVO;
 
 @Mapper
 public interface StimGameListMapper {
 
-	// 예시 메서드 수정해서 사용
-	public List<UserVO> SelectAllUser() throws Exception;
+	// 게임 리스트 조회
+	public List<GameVO> SelectAllGameList() throws Exception;
+	
+	// 최신 게임 리스트 조회
+	public List<GameVO> SelectNewestGameList() throws Exception;
 }
