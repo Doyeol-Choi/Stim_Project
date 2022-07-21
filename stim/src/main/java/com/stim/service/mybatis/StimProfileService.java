@@ -1,10 +1,11 @@
 package com.stim.service.mybatis;
 
 import java.util.List;
-import java.util.Map;
+
+import com.stim.vo.UserVO;
 
 public interface StimProfileService {
 
 	//public List<UserVO> SelectAllUser() throws Exception;
-	public List<Map<String, Object>> SelectById() throws Exception;
+	public UserVO SelectById(String user_id) throws Exception;
 }

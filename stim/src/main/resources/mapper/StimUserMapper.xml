@@ -5,8 +5,9 @@
   
 <mapper namespace="com.stim.model.mapper.StimUserMapper">
  
-    <select id="SelectAllUser" resultType="com.stim.vo.UserVO">
+	<select id="SelectAllUser" resultType="com.stim.vo.UserVO">
        SELECT * FROM user_tbl
-    </select>
+    </select> 
+    
  
 </mapper>

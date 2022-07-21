@@ -3,10 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8" />
-	<title>Steam Community :: ${id}</title>
-	<link rel="shortcut icon" href="image/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/profile/profile.css}">
+	<title th:text="'Steam Community :: ' + ${user.user_nickname} "></title>
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -14,33 +15,66 @@
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
     	<div id="content">
-		    	<div id="container">
 		        <!--프로필, 프로필 수정-->
 		        <div id="profile">
 		            <div id="profile_avartar"><!-- 프로필 이미지-->
-		                <img src="./prof.jpg" alt="프사">
+		                <img th:src="@{/image/profile/testprofile.jpg}" alt="프사">
 		            </div>
 		            <div id="profile_id"> <!--프로필 아이디, 출신-->
-		                <h3><strong>${id}</strong></h3>
-		                <p>${nickname} ${Nation}</p>
+		                <h2 th:text="${user.user_nickname}"></h2>
+		                <br>
+		                <p th:text="${user.user_id}"></p>
 		            </div>
 		            <div id="profile_introduce">
 		                자기 소개 입니다
 		            </div>
 		        </div>
 		        <!--프로필 수정-->
-		            <button id="profile_update" onclick="">Edit profile</button>
-		        <!--댓글-->
-		        <div id="comment">
-		
+		        	<div id="profile_update">
+		        		<a onclick=""> <div>Edit profile</div></a>
+		        	</div>
+		        	
+		        <!--댓글 페이징-->
+		        <div id="comment_paging">
+		        	<div>
+		        		<div id="comment_page1"><h3>댓글</h3></div>
+		        		<div class="comment_page">
+			        		<a>${}개의 모든 댓글 보기</a>
+							<a>&lt;</a>
+							<span>1,2,3</span> <!-- 페이지 수 -->
+							<a>&gt;</a>
+						</div>
+		        	</div>
+				</div>
+		        <!-- 댓글,친구창 -->
+		        <div class="profile_content">
+		       		<!--친구창-->
+					<div class="profile_right">
+						<!-- 친구 : num -->
+						<div>
+							<a href="/${user_id}/{friends}"> &nbsp; <span>친구</span> &nbsp; <span>${friends}</span>  </a>
+						</div>
+						<!-- 친구 목록 -->
+					</div>
+					<div class="profile_left">
+						<div>댓글 일겁니다</div>
+					</div>
 		        </div>
-		        <!--친구창-->
+		        <div class="comment_footer">
+		        	<div class="comment_page">
+							<a>&lt;</a>
+							<span>1,2,3</span> <!-- 페이지 수 -->
+							<a>&gt;</a>
+					</div>
+		        </div>
+		        
 		        <div id="friends">
-		
+					
+					<div>
+					</div>
 		        </div>
 		    </div>
-    	</div>
-    </div>
+    </div>	
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
 </body>

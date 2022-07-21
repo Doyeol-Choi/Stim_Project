@@ -2,11 +2,11 @@
 <!--headerFragment 선언-->
 <header th:fragment="headerFragment">
 	<div id="header">
-        <a href="/"><img id="stim_logo" src="image/Stim_logo_white.png"></a>
+        <a href="/"><img id="stim_logo" th:src="@{/image/Stim_logo_white.png}"></a>
         <nav id="headerNav">
         	<ul>
 	           <li><a href="#">상점</a></li>
-	           <li><a href="#">정보</a></li>
+	           <li><a href="/profile/Sungmin ">정보</a></li>
 	           <li><a href="#">지원</a></li>
 	       </ul>
         </nav>
