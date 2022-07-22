@@ -13,4 +13,9 @@
 	<select id="SelectById" resultType="com.stim.vo.UserVO" parameterType="String">
        SELECT * FROM user_tbl WHERE user_id = #{user_id}
     </select>
+    
+    <!-- <update id="SelectByIdForUpdate" resultType="com.stim.vo.UserVO" >
+       UPDATE * FROM 
+    </update> -->
+    
 </mapper>

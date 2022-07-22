@@ -56,6 +56,25 @@ public class StimProfileController {
 		return mav;
 	}
 	
+	@GetMapping("/profile/edit/{user_id}")
+	public ModelAndView profileUpdate(@PathVariable("user_id") String user_id) {
+		ModelAndView mav = new ModelAndView();
+		
+		try {
+			//SelectByIdForUpdate
+			UserVO uVo = stimProfileService.SelectById(user_id);
+			mav.addObject("user", uVo);
+			
+			mav.setViewName("profile/edit/profileUpdate");
+			
+			//DB 불러오기 테스트용
+			System.out.println("특정 누군가 프로필 전달 : " + uVo);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
+	
 //	@RequestMapping(value="/profile")
 //    public ModelAndView AllListView(Map<String, Object> map) throws Exception{
 //        ModelAndView mav = new ModelAndView();

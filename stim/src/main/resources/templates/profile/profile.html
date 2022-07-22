@@ -18,7 +18,7 @@
 		        <!--프로필, 프로필 수정-->
 		        <div id="profile">
 		            <div id="profile_avartar"><!-- 프로필 이미지-->
-		                <img th:src="@{/image/profile/testprofile.jpg}" alt="프사">
+		                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
 		            </div>
 		            <div id="profile_id"> <!--프로필 아이디, 출신-->
 		                <h2 th:text="${user.user_nickname}"></h2>
@@ -26,12 +26,12 @@
 		                <p th:text="${user.user_id}"></p>
 		            </div>
 		            <div id="profile_introduce">
-		                자기 소개 입니다
+		                테스트입니다
 		            </div>
 		        </div>
 		        <!--프로필 수정-->
 		        	<div id="profile_update">
-		        		<a onclick=""> <div>Edit profile</div></a>
+		        		<a th:href="@{/profile/edit/Doyeol}"> <div>Edit profile</div></a>
 		        	</div>
 		        	
 		        <!--댓글 페이징-->

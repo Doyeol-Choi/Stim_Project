@@ -57,12 +57,13 @@ div{
 
 /* 프로필 자기소개 */
 #profile_introduce{ 
-    margin-left: 35%;
+	float:left;
     width: 60%;
-    height: 20%;
-    margin-top: 20%;
+    height: 60%;
+    margin-top:3%;
     background-color: #262B2F;
     color: rgb(228, 228, 228);
+    padding-left:10px;
 }
 
 /* 프로필 닉네임, 출신 국가 */
@@ -86,7 +87,7 @@ div{
 #comment_paging{
 	width: 66%;
 	height: 5%;
-	background-color:#32343B;
+	background-color:#131517;
 	margin: 2.25%;
 	border-radius: 7px;
 	color: rgb(228, 228, 228);
@@ -116,7 +117,7 @@ div{
 	margin-top: 6px;
     border-top: 2px solid #363f4c;
     color: rgb(228, 228, 228);
-    width: 80%;
+    width: 66%;
     margin-left:1.5vw;
 }
 
@@ -124,24 +125,24 @@ div{
 	position: relative;
 	width: 95%;
 	height: 55%;
-	background-color: gray;
+	background-color: #262B2F;
 	margin-left:1.2vw;
 }
 
 .profile_left{
-	width:70%;
+	width:69%;
 	height:98%;
-	background-color: #111923;
+	background-color: #363f4c;
 	z-index: 1;
 	border-radius: 10px;
 	float:left;
 	color:white;
-	margin-right: 1vw;
+	margin-left: 0.5%;
 }
 .profile_right{
 	width:28%;
 	height:98%;
-	background-color: #222;
+	background-color: #1B1E21;
 	float:right;
 	z-index: 1;
 }
