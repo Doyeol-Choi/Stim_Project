@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack</title>
+	<link rel="shortcut icon" href="image/favicon.ico">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/wishcart/wish.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
+    <div id="container">
+    	<div class="list_box" th:each="wish : ${list}" th:id="|wishListBox${wish.wish_code}|">
+			<div class="game_image">
+				<img th:src="@{/image/game/} + ${wish.game_picture}">
+			</div>
+			<div class="game_content">
+				<div class="content_top">
+					<span class="game_name" th:text="${wish.game_name}"></span>
+					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(wish.game_price, 3, 'COMMA')}"></span>
+				</div>
+				<div class="content_bottom">
+					
+					<span class="game_releaseDate" th:text="${'출시일: '+ #dates.format(wish.game_releaseDate,'yyyy-MM-dd')}"></span>
+					<div class="genre_box">
+						<span th:text="${wish.genre_1}"></span>
+						<span th:text="${wish.genre_2}"></span>
+						<span th:text="${wish.genre_3}"></span>
+					</div>
+					<!-- <button class="delete_wish_button" th:onclick="|location.href='@{/delete_wish(wish_code=${wish.wish_code},user_code=${wish.user_code})}'|" > -->
+					<button class="delete_wish_button" th:onclick="|delwish(${wish.wish_code})|" >
+						<span class="delete_wish">삭제</span>
+					</button>
+					
+					<input class="cart_button" type="button" value="장바구니 추가" th:onclick="|location.href='/cart(user_code=${wish.user_code},game_code=${wish.game_code})'|">
+				</div>
+			</div>
+    	</div>
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+
+	<script th:inline="javascript">
+		function delwish(wish_code){
+			let id = "#wishListBox" + wish_code
+	         $.ajax({
+	            url: "delete_wish",
+	               type: "POST",
+	               async: true,
+	               data: {
+	                  "wish_code" : wish_code
+	               },
+	               success: function (data) {
+	                  $(id).remove();
+	               }
+	          });
+	      }
+	</script>
+
+</body>
+</html>

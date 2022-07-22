@@ -157,6 +157,10 @@ ul {
 	box-shadow: 5px #222;
 }
 
+#container{
+	width: 100%;
+    background-color: #0E1B49;
+}
 
 /* footer */
 footer{
