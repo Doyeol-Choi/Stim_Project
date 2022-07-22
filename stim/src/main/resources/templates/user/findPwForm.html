@@ -8,14 +8,34 @@
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/findPw.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
-    	
-    </div>
+    	<div id="content">
+    		<div id="headline">
+		    	<img th:src="@{/image/Stim_white.png}" alt="stim" id="stim_img">
+		    	<h2>비밀번호를 잊으셨나요?</h2>
+		    	<span>계정 아이디와 계정을 등록할 때 사용한 이메일을 입력해주세요.</span>
+    		</div>
+    		<form action="/findid" method="post">
+    			<label>
+			        <input type="text" name="user_id" id="user_id" placeholder="아이디">
+	    		</label>
+	    		<label>
+			        <input type="email" name="user_email" id="user_email" placeholder="이메일 주소">
+	    		</label>
+	    	</form>
+	    	<div id="find_btn">
+		    	<button type="submit">
+		    		<span>비밀번호 찾기</span>
+		    	</button>
+		    </div>
+   		</div>
+   	</div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
 </body>

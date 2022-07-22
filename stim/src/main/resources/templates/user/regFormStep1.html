@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack</title>
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/regFormStep1.css}">
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
+    <div id="container">
+    	<div id="content">
+    		<h2>약관 동의</h2>
+    		<div id="context">
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    			<p>얄리얄리 얄라셩 얄라리 얄라</p>
+    		</div>
+    		<form action="registerS2" method="post">
+				<label>
+					<input type="checkbox" name="agree" value="true">
+					<span>약관에 동의합니다.</span>
+				</label>
+			</form>
+			<button type="submit" id="agree_btn" onclick="location.href='registerS2'">
+				<span>동의합니다</span>
+			</button> 
+    	</div>
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>

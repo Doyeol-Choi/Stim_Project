@@ -18,22 +18,18 @@
 	width: 150px;
 }
 
+#headline > h2 {
+	margin-bottom: 20px;
+}
+
 form {
 	width: 400px;
-	margin: 0 auto;
+	margin:0 auto;
 }
 
-.login_text {
-	display: block;
-	font-size:20px;
-	text-align: left;
-	color: rgba(255,255,255,0.4);
-	margin-bottom: 10px;
-	margin-top: 10px;
-}
-
-#user_id, #user_password {
+#user_id, #user_email {
 	width: 100%;
+	display: block;
 	height: 40px;
 	background: #0E1B49;
     border-radius: 3px;
@@ -45,10 +41,14 @@ form {
     transition: border ease-in-out .5s;
     border: 1px solid white;
     outline: none;
+    margin-top: 30px;
 }
 
-#login_btn {
+#find_btn {
 	margin-top: 30px;
+}
+
+#find_btn > button {
 	border-radius: 2px;
     border: none;
     padding: 1px;
@@ -60,7 +60,7 @@ form {
     margin-bottom: 20px;
 }
 
-#login_btn > span {
+#find_btn > button > span {
 	width: 150px;
 	height: 50px;
 	line-height: 50px;
@@ -71,46 +71,4 @@ form {
     box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
     background-position: 25%;
     background-size: 330% 100%;
-}
-
-#find_btn {
-	margin: 30px 0;
-	font-size: 0.8em;
-}
-
-.find_user {
-	margin: 20px;
-}
-
-.find_user > a {
-	color: white;
-	margin: 10px;
-}
-
-.find_user > a:hover {
-	color: #00AEEF;
-	text-decoration: underline;
-}
-
-#register_btn {
-	text-align: center;
-}
-
-#register_btn > span {
-	margin: 50px auto;
-	width: 200px;
-	height: 50px;
-	display: block;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.4);
-    padding: 0 15px;
-    font-size: 20px;
-    line-height: 50px;
-    border-radius: 2px;
-    color: white;
-}
-
-#register_btn > span:hover {
-	border-color: white;
-	cursor: pointer;
 }

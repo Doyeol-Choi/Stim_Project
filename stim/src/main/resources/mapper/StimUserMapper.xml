@@ -4,10 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.stim.model.mapper.StimUserMapper">
- 
-	<select id="SelectAllUser" resultType="com.stim.vo.UserVO">
-       SELECT * FROM user_tbl
-    </select> 
+
+ 	<!-- 로그인 -->
+    <select id="getUserAccount" resultType="com.stim.vo.UserVO" parameterType="String">
+        SELECT * FROM user_tbl
+        WHERE user_id = #{user_id}
+    </select>
     
- 
+       
+    <!-- 회원가입 -->
+    <insert id="registerUser" parameterType="com.stim.vo.UserVO">
+        INSERT INTO user_tbl
+        VALUES(user_code_seq.nextval, #{user_id}, #{user_password}, #{user_email}, #{user_phone}, 'noimage.jpg', 'N', #{user_nickname})
+    </insert>
+    
 </mapper>

@@ -16,10 +16,4 @@ public class GameVO {
 	private String game_context;
 	private int game_salesRate;
 
-
-
-
-
-
-
 }

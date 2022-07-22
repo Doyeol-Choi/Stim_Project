@@ -4,15 +4,16 @@
 CREATE TABLE user_tbl(
     user_code number PRIMARY KEY,
     user_id varchar2(20) UNIQUE NOT NULL,
-    user_password varchar2(20) NOT NULL,
+    user_password varchar2(200) NOT NULL,
     user_email varchar2(40) NOT NULL,
     user_phone char(11) NOT NULL,
     user_picture varchar2(100) NOT NULL,
-    user_admin char(1) NOT NULL         -- Y/N
+    user_admin char(1) NOT NULL,        -- Y/N
+    user_nickname varchar2(20) NOT NULL
     );
-
+--ALTER TABLE user_tbl ADD user_nickname varchar2(20) DEFAULT '테스트' NOT NULL;
 CREATE SEQUENCE user_code_seq NOCACHE;
-    
+
 -- 친구테이블
 CREATE TABLE friend_tbl(
     friend_code number PRIMARY KEY,
@@ -80,9 +81,9 @@ CREATE SEQUENCE game_code_seq NOCACHE;
 CREATE TABLE genre_tbl(
     genre_code number PRIMARY KEY,
     game_code number,
-    genre_1 varchar2(20),
-    genre_2 varchar2(20),
-    genre_3 varchar2(20)
+    genre_1 varchar2(30),
+    genre_2 varchar2(30),
+    genre_3 varchar2(30)
 );
 
 CREATE SEQUENCE genre_code_seq NOCACHE;
@@ -151,7 +152,7 @@ INSERT INTO game_tbl VALUES
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'Rust',46000,'2018-02-09','Facepunch Studios','Facepunch Studios','Rust의 단 하나의 목적은 생존입니다. 이를 위해 당신은 굶주림, 갈증, 추위와 같은 어려움들을 이겨내야 합니다. 피신처를 건설하세요',15,'Rust.jpg');
 INSERT INTO game_tbl VALUES 
-(game_code_seq.nextval,'FIFA 22',66000,'2021-10-01','EA Canada & EA Romania','Electronic Arts','전 세계 17,000명 이상의 선수들, 700개 이상의 팀, 90개 이상의 경기장, 30개 이상의 리그를 만나볼 수 있는 세계적인 게임을 플레이하세요.',25,'FIFA22.jpg');
+(game_code_seq.nextval,'FIFA 22',66000,'2021-10-01','EA Canada and EA Romania','Electronic Arts','전 세계 17,000명 이상의 선수들, 700개 이상의 팀, 90개 이상의 경기장, 30개 이상의 리그를 만나볼 수 있는 세계적인 게임을 플레이하세요.',25,'FIFA22.jpg');
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'SD건담 배틀 얼라이언스',69800,'2022-08-25','ARTDINK','Bandai Namco Entertainment','『SD건담 배틀 얼라이언스』는 「기동전사 건담」 시리즈의 다양한 모빌슈트와 캐릭터가 각 작품의 세계관을 초월하여 함께 출연하는 새로운 SD건담 액션 RPG입니다.',15,'SDGUNDAM.jpg');
 INSERT INTO game_tbl VALUES 
@@ -218,80 +219,80 @@ INSERT INTO game_tbl VALUES
 
 -- 장르테이블 샘플데이터
 INSERT INTO genre_tbl VALUES 
-(,,'오픈월드','액션','범죄');
+(genre_code_seq.nextval,1,'오픈월드','액션','범죄');
 INSERT INTO genre_tbl VALUES 
-(,,'탐험','생존','샌드박스');
+(genre_code_seq.nextval,2,'탐험','생존','샌드박스');
 INSERT INTO genre_tbl VALUES 
-(,,'생존','협동','건설');
+(genre_code_seq.nextval,3,'생존','협동','건설');
 INSERT INTO genre_tbl VALUES 
-(,,'RPG','판타지','오픈월드');
+(genre_code_seq.nextval,4,'RPG','판타지','오픈월드');
 INSERT INTO genre_tbl VALUES 
-(,,'RPG','농업','픽셀그래픽');
+(genre_code_seq.nextval,5,'RPG','농업','픽셀그래픽');
 INSERT INTO genre_tbl VALUES 
-(,,'생존','건설','액션');
+(genre_code_seq.nextval,6,'생존','건설','액션');
 INSERT INTO genre_tbl VALUES 
-(,,'축구','경쟁','시뮬레이션');
+(genre_code_seq.nextval,7,'축구','경쟁','시뮬레이션');
 INSERT INTO genre_tbl VALUES 
-(,,'3인칭','액션','로봇');
+(genre_code_seq.nextval,8,'3인칭','액션','로봇');
 INSERT INTO genre_tbl VALUES 
-(,,'샌드박스','캐주얼','건설');
+(genre_code_seq.nextval,9,'샌드박스','캐주얼','건설');
 INSERT INTO genre_tbl VALUES 
-(,,'애니메이션','경영','음악');
+(genre_code_seq.nextval,10,'애니메이션','경영','음악');
 INSERT INTO genre_tbl VALUES 
-(,,'RPG','액션','신화');
+(genre_code_seq.nextval,11,'RPG','액션','신화');
 INSERT INTO genre_tbl VALUES 
-(,,'유머','협동','액션');
+(genre_code_seq.nextval,12,'유머','협동','액션');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'격투','액션','멀티플레이어');
+(genre_code_seq.nextval,13,'격투','액션','멀티플레이어');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'군사','1인칭','오픈 월드');
+(genre_code_seq.nextval,14,'군사','1인칭','오픈 월드');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'생존','좀비','슈팅');
+(genre_code_seq.nextval,15,'생존','좀비','슈팅');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'1인칭 슈팅','온라인 협동','생존');
+(genre_code_seq.nextval,16,'1인칭 슈팅','온라인 협동','생존');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'어드벤처','인디','음악');
+(genre_code_seq.nextval,17,'어드벤처','인디','음악');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'탐험','포스트아포칼립스','오픈월드');
+(genre_code_seq.nextval,18,'탐험','포스트아포칼립스','오픈월드');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'분할 화면','퍼즐','어드벤처');
+(genre_code_seq.nextval,19,'분할 화면','퍼즐','어드벤처');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'파티 게임','퍼즐','건설');
+(genre_code_seq.nextval,20,'파티 게임','퍼즐','건설');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'연애 시뮬레이션','선정적인 내용','성인');
+(genre_code_seq.nextval,21,'연애 시뮬레이션','선정적인 내용','성인');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'공포','생존','고어');
+(genre_code_seq.nextval,22,'공포','생존','고어');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'전략','턴제 전략','역사');
+(genre_code_seq.nextval,23,'전략','턴제 전략','역사');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,,'고어','좀비','협동');
+(genre_code_seq.nextval,24,'고어','좀비','협동');
 INSERT INTO genre_tbl VALUES
-(, , '리듬', '음악', '인디');
+(genre_code_seq.nextval, 25, '리듬', '음악', '인디');
 INSERT INTO genre_tbl VALUES
-(, , '멀티플레이어', '액션', '슈팅');
+(genre_code_seq.nextval, 26, '멀티플레이어', '액션', '슈팅');
 INSERT INTO genre_tbl VALUES
-(, , '멀티플레이어', '온라인 협동', '우주');
+(genre_code_seq.nextval, 27, '멀티플레이어', '온라인 협동', '우주');
 INSERT INTO genre_tbl VALUES
-(, , '오픈 월드', 'RPG', '암살');
+(genre_code_seq.nextval, 28, '오픈 월드', 'RPG', '암살');
 INSERT INTO genre_tbl VALUES
-(, , '오픈 월드', '암살', '액션');
+(genre_code_seq.nextval, 29, '오픈 월드', '암살', '액션');
 INSERT INTO genre_tbl VALUES
-(, , '오픈 월드', '암살', '잠입');
+(genre_code_seq.nextval, 30, '오픈 월드', '암살', '잠입');
 INSERT INTO genre_tbl VALUES
-(, , '오픈 월드', '암살', '액션');
+(genre_code_seq.nextval, 31, '오픈 월드', '암살', '액션');
 INSERT INTO genre_tbl VALUES
-(, , '요리', 'RPG', '시뮬레이션');
+(genre_code_seq.nextval, 32, '요리', 'RPG', '시뮬레이션');
 INSERT INTO genre_tbl VALUES
-(, , '픽셀그래픽', '던전 크롤러', '건설');
+(genre_code_seq.nextval, 33, '픽셀그래픽', '던전 크롤러', '건설');
 INSERT INTO genre_tbl VALUES
-(, , '시뮬레이션', '캐주얼', '건설');
+(genre_code_seq.nextval, 34, '시뮬레이션', '캐주얼', '건설');
 INSERT INTO genre_tbl VALUES
-(, , '시뮬레이션', '픽셀그래픽', '연애시뮬레이션');
+(genre_code_seq.nextval, 35, '시뮬레이션', '픽셀그래픽', '연애시뮬레이션');
 INSERT INTO genre_tbl VALUES
-(, , '액션', '어드벤처', '잠입');
+(genre_code_seq.nextval, 36, '액션', '어드벤처', '잠입');
 INSERT INTO genre_tbl VALUES
-(, , '애니메이션', '액션', '어드벤처');
+(genre_code_seq.nextval, 37, '애니메이션', '액션', '어드벤처');
 INSERT INTO genre_tbl VALUES
-(, , '생존', '좀비', '오픈 월드');
+(genre_code_seq.nextval, 38, '생존', '좀비', '오픈 월드');
 
 commit;

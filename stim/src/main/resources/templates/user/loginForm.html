@@ -1,35 +1,49 @@
 <!DOCTYPE HTML>
 <html lagn="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack</title>
-	<link rel="shortcut icon" href="image/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/loginForm.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
-    	<h1>로그인</h1>
-    	<form action="/login" method="post">
-    		<label>
-    			Stim 계정 이름<br>
-		        <input type="text" name="id" id="id"><br>
-    		</label>
-    		<label>
-    			비밀번호<br>
-	        	<input type="password" name="password" id="password"><br>
-    		</label>
-    	</form>
-    	<div id="login_btn">
-	    	<button>로그인</button>
-	    	<a>아이디를 잊어버리셨나요?</a>
-	    	<a>비밀번호를 잊어버리셨나요?</a>
+    	<div id="content">
+    		<div id="headline">
+		    	<img th:src="@{/image/Stim_white.png}" alt="stim" id="stim_img">
+    		</div>
+	    	<form action="/login" method="post">
+	    		<label>
+	    			<span class="login_text">Stim 계정 이름</span>
+			        <input type="text" name="user_id" id="user_id">
+	    		</label>
+	    		<label>
+	    			<span class="login_text">비밀번호</span>
+		        	<input type="password" name="user_password" id="user_password">
+	    		</label>
+		    	<button type="submit" id="login_btn">
+		    		<span>로그인</span>
+		    	</button>
+	    	</form>
+	    	<div id="find_btn">
+		    	<div class="find_user">
+		    		<a href="/findId">아이디를 잊어버리셨나요?</a>
+		    	</div>
+		    	<div class="find_user">
+		    		<a href="/findPw">비밀번호를 잊어버리셨나요?</a>
+		    	</div>
+	    	</div>
+	    	<a href="/registerS1" id="register_btn">
+	    		<span>Stim 회원가입</span>
+	    	</a>
     	</div>
-    	<a>Stim 회원가입</a>
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
