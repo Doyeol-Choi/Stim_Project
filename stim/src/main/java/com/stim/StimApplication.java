@@ -30,9 +30,4 @@ public class StimApplication {
         return sessionFactory.getObject();
     }
 
-	// 비밀번호 암호화를 위한 메서드
-    @Bean	// 스프링 부트 버전업에 따라 public 생략이 가능한듯 하다.
-    BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
 }

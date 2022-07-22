@@ -1,4 +1,5 @@
-<html lagn="ko" xmlns:th="http://www.thymeleaf.org">
+<html lagn="ko" xmlns:th="http://www.thymeleaf.org"
+				xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <!--headerFragment 선언-->
 <header th:fragment="headerFragment">
 	<div id="header">
@@ -10,10 +11,12 @@
 	           <li><a href="#">지원</a></li>
 	       </ul>
         </nav>
-        <div id="loginBox">
-    	    <button onclick="location.href='#'" id="logout">로그아웃</button><br>
-    	    <a href="#">찜 목록</a>
-    	    <a href="#">장바구니</a>
+        <div id="loginBox_2">
+        	<img th:src="" alt="profile_picture">
+        	<span id="userNickName"><span sec:authentication="principal.user_nickname"></span>님</span>
+    	    <button onclick="location.href='/logout'" id="logout">로그아웃</button><br>
+    	    <a href="#" id="wishTag">찜 목록</a>
+    	    <a href="#" id="cartTag">장바구니</a>
         </div>
     </div>
     <nav id="gameNav">

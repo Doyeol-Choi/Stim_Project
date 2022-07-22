@@ -30,14 +30,14 @@ public class StimUserService implements UserDetailsService {
 	
 	@Override
 	public UserVO loadUserByUsername(String user_id) throws UsernameNotFoundException {
-		//여기서 받은 유저 패스워드와 비교하여 로그인 인증
-		UserVO uVo = stimUserMapper.getUserAccount(user_id);
+		//여기서 받은 유저 패스워드와 비교하여 유저 정보 받기
+		UserVO userVo = stimUserMapper.getUserAccount(user_id);
 		
-		if (uVo == null){
+		if (userVo == null){
             throw new UsernameNotFoundException("User not authorized.");
         }
 		
-		return uVo;
+		return userVo;
 	}
 
 }

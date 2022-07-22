@@ -8,9 +8,10 @@ CREATE TABLE user_tbl(
     user_email varchar2(40) NOT NULL,
     user_phone char(11) NOT NULL,
     user_picture varchar2(100) NOT NULL,
-    user_admin char(1) NOT NULL         -- Y/N
+    user_admin char(1) NOT NULL,        -- Y/N
+    user_nickname varchar2(20) NOT NULL
     );
-
+    
 CREATE SEQUENCE user_code_seq NOCACHE;
 
 -- 친구테이블

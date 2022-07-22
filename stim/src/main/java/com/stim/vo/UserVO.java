@@ -18,6 +18,8 @@ public class UserVO implements UserDetails {
 	private String user_email;
 	private String user_phone;
 	private String user_admin;
+	private String user_picture;
+	private String user_nickname;
 	
 	
 	// 해당 유저의 권한목록 리턴

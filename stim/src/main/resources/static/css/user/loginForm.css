@@ -48,11 +48,7 @@ form {
 }
 
 #login_btn {
-	margin: 30px 0;
-	font-size: 0.8em;
-}
-
-#login_btn > button {
+	margin-top: 30px;
 	border-radius: 2px;
     border: none;
     padding: 1px;
@@ -64,7 +60,7 @@ form {
     margin-bottom: 20px;
 }
 
-#login_btn > button > span {
+#login_btn > span {
 	width: 150px;
 	height: 50px;
 	line-height: 50px;
@@ -75,6 +71,11 @@ form {
     box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
     background-position: 25%;
     background-size: 330% 100%;
+}
+
+#find_btn {
+	margin: 30px 0;
+	font-size: 0.8em;
 }
 
 .find_user {

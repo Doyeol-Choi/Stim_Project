@@ -6,6 +6,11 @@
 	box-sizing: border-box;
 }
 
+body{
+    min-width: 1920px;
+    background-color: #0E1B49;
+}
+
 a {
     text-decoration: none;
 }
@@ -23,15 +28,17 @@ ul {
 /* header */
 #header {
     width: 100%;
-    min-width:1600px;
+    max-width: 1560px;
+    min-width: 1200px;
     height: 150px;
+    margin: 0 auto;
     background-color: #0E1B49;
 }
 #stim_logo {
     float: left;
     height: 150px;
     width: 300px;
-    margin-left: 300px;
+    margin-left: 100px;
 }
 #headerNav {
 	margin-top: 25px;
@@ -81,7 +88,7 @@ ul {
 }
 #loginBox {
 	float: right;
-	margin-right: 350px;
+	margin-right: 150px;
 	margin-top: 40px;
 	padding:20px;
 }
@@ -97,26 +104,31 @@ ul {
 	cursor: pointer;
 }
 #gameNav {
+	width: 100%;
+	background-color: #111;
+}
+#gameNavBox {
 	clear: both;
 	width: 100%;
 	min-width: 1200px;
+	max-width: 1560px;
+	margin: 0 auto;
 	height: 50px;
 	position: relative;
-	background-color: #111;
 }
-#gameNav > section {
+#gameNavBox > section {
 	float: left;
 	color: white;
 }
-#gameNav > section > ul {
+#gameNavBox > section > ul {
     display: table;
-    margin-left: 330px;
+    margin-left: 150px;
 }
-#gameNav > section > ul > li {
+#gameNavBox > section > ul > li {
     display: table-cell;
     padding: 0 10px;
 }
-#gameNav > section > ul > li > a {
+#gameNavBox > section > ul > li > a {
     display: inline-block;
     width: 150px;
     height: 50px;
@@ -127,13 +139,13 @@ ul {
     position: relative;
     text-align: center;
 }
-#gameNav > section > ul > li > a:hover{
+#gameNavBox > section > ul > li > a:hover{
 	color: #00AEEF;
 }
 #serch {
 	float: right;
 	height: 35px;
-	margin-right: 430px;
+	margin-right: 170px;
 	margin-top:6px;
 	padding: 0;
 }
@@ -159,6 +171,57 @@ ul {
 	cursor: pointer;
 }
 
+/* login header */
+#loginBox_2 {
+	float: right;
+	margin-right: 150px;
+	margin-top: 30px;
+}
+
+#profilePicture {
+	width: 80px;
+	height: 80px;
+	float: right;
+}
+
+#headUserInfo {
+	min-width: 120px;
+	height: 60px;
+	float: left;
+	text-align: center;
+	margin-right: 10px;
+	padding-top: 5px;
+}
+
+#userNickName {
+	color: white;
+}
+
+#headLogout {
+	margin: 10px auto;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+
+#wishcartTag {
+	clear: both;
+	float: right;
+	padding-top: 5px;
+	text-align: center;
+}
+
+#wishcartTag > a {
+	color: white;
+}
+
+#wishcartTag > a:hover {
+	color: #00AEEF;
+}
+
+#cartTag {
+	margin-left: 20px;	
+}
+
 /* content */
 #container{
 	width: 100%;
@@ -167,14 +230,18 @@ ul {
 
 /* footer */
 footer{
+	width: 100%;
+	background-color: black;
+    border-top: 1px solid #ccc;
+}
+#footerBox {
 	clear: both;
     width: 100%;
+    max-width: 1560px;
     min-width: 1200px;
     height: 200px;
     margin: 0 auto;
     font-size: 13px;
-    border-top: 1px solid #ccc;
-    background-color: black;
 }
 footer > div{
     height: 50%;

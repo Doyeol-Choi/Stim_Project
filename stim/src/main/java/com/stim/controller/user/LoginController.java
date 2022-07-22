@@ -13,12 +13,6 @@ public class LoginController {
         return "user/loginForm";
     }
 	
-	// 로그인 성공시 메인페이지로
-	@PostMapping("/login")
-	public String login() {
-        return "/";
-    }
-	
 	// 비밀번호 찾기 폼으로
 	@GetMapping("/findPw")
 	public String findPwForm() {

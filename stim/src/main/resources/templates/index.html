@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lagn="ko"
-      xmlns:th="http://www.thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org" 
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8" />
@@ -13,7 +13,7 @@
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
-    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
+    <!-- <th:block sec:authorize="isAuthenticated()" th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> -->
     <div id="container">
     	<div id = "mainGame" class = "contain">
 				<h1>이벤트 추천</h1>
@@ -48,7 +48,8 @@
 			</div>
 			
 			<div id = "gameTag" class = "contain">
-				<h1>{name}님을 위한 추천 장르</h1>
+				<h1 sec:authorize="!isAuthenticated()">추천 장르</h1>
+				<h1 sec:authorize="isAuthenticated()"><span sec:authentication="principal.user_nickname"></span>님을 위한 추천 장르</h1>
 				<div id = "tag1" class = "gameTags">
 					<a href = "">태그 1</a>
 				</div>
