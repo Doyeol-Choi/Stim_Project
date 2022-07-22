@@ -6,7 +6,7 @@
         <a href="/"><img id="stim_logo" th:src="@{/image/Stim_logo_white.png}"></a>
         <nav id="headerNav">
         	<ul>
-	           <li><a href="#">상점</a></li>
+	           <li><a href="/gameList">상점</a></li>
 	           <li><a th:href="@{/profile/Doyeol} ">정보</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
 	           <li><a href="#">지원</a></li>
 	       </ul>
@@ -23,7 +23,6 @@
 	    	    <button onclick="location.href='/logout'" id="headLogout">로그아웃</button><br>
         	</div>
         	<img th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}" alt="profilePicture" id="profilePicture">
-        	<!-- <img th:src="@{/image/profile/noimage.jpg}" alt="profilePicture" id="profilePicture"> -->
     	    <div id="wishcartTag">
     	    	<a href="#"><span id="wishTag">찜 목록</span></a>
     	    	<a href="#"><span id="cartTag">장바구니</span></a>
