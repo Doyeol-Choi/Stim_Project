@@ -11,7 +11,7 @@ CREATE TABLE user_tbl(
     user_admin char(1) NOT NULL,        -- Y/N
     user_nickname varchar2(20) NOT NULL
     );
-    
+--ALTER TABLE user_tbl ADD user_nickname varchar2(20) DEFAULT '테스트' NOT NULL;
 CREATE SEQUENCE user_code_seq NOCACHE;
 
 -- 친구테이블
