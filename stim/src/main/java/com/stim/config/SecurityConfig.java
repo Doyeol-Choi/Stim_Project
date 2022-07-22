@@ -25,11 +25,6 @@ public class SecurityConfig{
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-<<<<<<< HEAD
-				.anyRequest().permitAll()	// 나머지주소는 인증없이 접근 가능하다
-			.and()
-				.csrf().disable();
-=======
 //				.antMatchers("/user/**").authenticated()     
 //						// user주소에 대해서 인증을 요구한다
 //				.antMatchers("/manager/**").access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")	
@@ -56,8 +51,7 @@ public class SecurityConfig{
         	.csrf().disable();
 		// Cross site Request forgery로 사이즈간 위조 요청인데, 즉 정상적인 사용자가 의도치 않은 위조요청을 보내는 것을 의미
 		// GET요청을 제외한 상태를 변화시킬 수 있는 POST, PUT, DELETE 요청으로부터 보호하는 csrf를 disable해서 post형식으로 회원가입이 가능하게 한다.
-		
->>>>>>> origin/doyeol
+
 		return http.build();
     }
      

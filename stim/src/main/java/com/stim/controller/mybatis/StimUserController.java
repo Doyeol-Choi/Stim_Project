@@ -1,17 +1,12 @@
 package com.stim.controller.mybatis;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.stim.service.mybatis.StimUserService;
 import com.stim.service.user.StimUserService;
 import com.stim.vo.UserVO;
 
@@ -23,23 +18,8 @@ import lombok.RequiredArgsConstructor;
 public class StimUserController {
 
 	@Resource
-	private StimUserService stimUserService;
 	private final StimUserService stimUserService;
-	
-<<<<<<< HEAD
-	// 예시 => 수정해서 사용
-//	@RequestMapping(value="user")
-//	public ModelAndView SelectAllUserView(UserVO uVo) throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		
-//		List<UserVO> list = stimWishCartService.SelectAllUser();
-//		
-//		mav.addObject("list", list);
-//        mav.setViewName("user");
-//        
-//        return mav;
-//	}
-=======
+
 	// 회원가입 step3 이동
 	@PostMapping("/registerS3")
 	public ModelAndView registerFormStep3(UserVO uVo) {
@@ -66,5 +46,5 @@ public class StimUserController {
 //		
 //		return mav;
 //    }
->>>>>>> origin/doyeol
+
 }
