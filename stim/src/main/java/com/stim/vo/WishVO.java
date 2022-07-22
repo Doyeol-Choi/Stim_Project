@@ -1,5 +1,7 @@
 package com.stim.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -13,5 +15,6 @@ public class WishVO {
 	private String genre_1;
 	private String genre_2;
 	private String genre_3;
-	private String game_releaseDate ;
+	private String game_picture;
+	private Date game_releaseDate ;
 }

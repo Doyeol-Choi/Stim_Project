@@ -14,8 +14,9 @@ public class SecurityConfig{
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-				.anyRequest().permitAll();	// 나머지주소는 인증없이 접근 가능하다
-		
+				.anyRequest().permitAll()	// 나머지주소는 인증없이 접근 가능하다
+			.and()
+				.csrf().disable();
 		return http.build();
     }
      

@@ -3,15 +3,14 @@ package com.stim.controller.mybatis;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.stim.service.mybatis.StimWishCartService;
 import com.stim.vo.CartVO;
@@ -27,9 +26,9 @@ public class StimWishCartController {
 	public ModelAndView SelectWishGame(@PathVariable("user_code") int user_code) throws Exception {
 			
 		ModelAndView mav = new ModelAndView();
-		System.out.println(user_code);
+		
 		List<WishVO> list = stimWishCartService.SelectWishGame(user_code);
-		System.out.println(list.size());
+	
 		mav.addObject("list", list);
 		mav.setViewName("wishcart/wish");
 
@@ -45,6 +44,7 @@ public class StimWishCartController {
 		 
 		 List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
 		 
+		
 		 mav.addObject("list", list);
 		 mav.setViewName("wishcart/cart");
 		 
@@ -63,4 +63,26 @@ public class StimWishCartController {
         return mav;
 	}
 	
+	
+//	  @GetMapping("/delete_wish") 
+//	  public RedirectView DeleteWishGame(
+//			  @RequestParam("wish_code")int wish_code,
+//			  @RequestParam(value="user_code")int user_code) throws Exception {
+//	  stimWishCartService.DeleteWishGame(wish_code);  
+//	  
+//	  String asd = "/wish/"+ user_code;
+//	  
+//	  return new RedirectView(asd);
+//	  }
+	 
+	
+	@PostMapping("/wish/delete_wish") 
+	  public void DeleteWishGame(
+			  @RequestParam("wish_code") int wish_code) throws Exception {
+
+		stimWishCartService.DeleteWishGame(wish_code);  
+	  
+	  }
+	 
 }
+

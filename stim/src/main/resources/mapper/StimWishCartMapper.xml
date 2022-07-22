@@ -8,7 +8,8 @@
  	<!-- 수정하시오 -->
     <select id="SelectWishGame" resultType="com.stim.vo.WishVO" parameterType="int">
         SELECT wish_code,w.user_code AS user_code, w.game_code AS game_code, ga.game_name AS game_name, game_price,
-		ge.genre_1 AS genre_1, ge.genre_2 AS genre_2, ge.genre_3 AS genre_3, ga.game_releaseDate AS game_releaseDate 
+		ge.genre_1 AS genre_1, ge.genre_2 AS genre_2, ge.genre_3 AS genre_3, ga.game_releaseDate AS game_releaseDate, 
+		ga.game_picture AS game_picture 
 		FROM wish_tbl w, game_tbl ga, genre_tbl ge 
 		WHERE w.user_code = #{user_code}
 		AND w.game_code = ge.game_code
@@ -23,4 +24,9 @@
 		AND w.game_code = ge.game_code
 		AND w.game_code = ga.game_code -->
     </select>
+    
+    <delete id="DeleteWishGame" parameterType="int">
+    	DELETE wish_tbl WHERE wish_code = #{wish_code}
+    </delete>
+    
 </mapper>

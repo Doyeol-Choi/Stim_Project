@@ -7,9 +7,9 @@
 
 .list_box {
 	margin : 0 auto;
-	margin-bottom: 50px;
-	width : 1000px;
-	height : 180px;
+	margin-bottom: 25px;
+	width : 1200px;
+	height : 200px;
     position: relative;
     background-color: red;
     border-radius: 4px;
@@ -18,52 +18,86 @@
 
 .game_image {
 
-    width: 130px;
-    height: 100px;
-    border: 2px solid rgb(149, 150, 150);
-    border-radius: 10px;
-    background-color: orange;
+    width: 250px;
+    height: 180px;
     position: absolute;
-    top: 40px;
-    left: 30px;
+    top: 8px;
+    left: 10px;
+}
+.game_image img{
+	width: 300px;
+    height: 180px;
 }
 
-/* .game_content{
-	background-color: skyblue;
-    width: 450px;
-    height: 200px;
-    position: absolute;
-    top: 10px;
-    right : 10px;
-} */
 .content_top {
 	background-color: green;
-    width: 700px;
-    height: 80px;
+    width: 850px;
+    height: 100px;
     position: absolute;
     top: 10px;
     right : 10px;
     
+    
+}
+.game_name{
+	font-size: 30px;
+	position:absolute ;
+	top: 15px;
+	left: 30px;	
 }
 
+.game_price{
+	font-size: 30px;
+	position:absolute ;
+	top: 15px;
+	right: 30px;
+}
 .content_bottom {
 	background-color: pink;
-    width: 700px;
-    height: 80px;
+    width: 850px;
+    height: 90px;
    	position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     right : 10px;
 }
 
+.game_releaseDate{
+	font-size: 20px;
+	position: absolute;
+	bottom: 55px;
+	left: 20px;	
+}
+.genre_box{
+	font-size: 17px;
+	position: absolute;
+	bottom: 15px;
+	left: 20px;	
+}
+.genre_box > span {
+	margin-right: 10px;
+}
 
-
-
-
-
-
-
-
-
+.cart_button{
+	font-size: 15px;
+	width: 100px;
+	height: 40px;
+	position: absolute;
+	bottom: 15px;
+	right: 20px;	
+}
+.delete_wish_button{
+	
+	font-size: 15px;
+	width: 50px;
+	height: 40px;
+	position: absolute;
+	bottom: 13px;
+	right: 150px;
+}
+.delete_wish{
+	font-size: 15px;
+	
+}
 
 
 
