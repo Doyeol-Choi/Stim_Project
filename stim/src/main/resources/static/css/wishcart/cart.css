@@ -3,7 +3,7 @@
 #container {
 	min-height: 900px;
 	padding-top: 30px;
-	
+	position: relative;
 }
 
 .list_box {
@@ -12,7 +12,7 @@
 	width : 1100px;
 	height : 200px;
     position: relative;
-    background-color: #00AEEF;
+    background-color:#00AEEF;
     border-radius: 4px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .content_top {
-	background-color: #00AEEF;
+	background-color:#00AEEF;
     width: 750px;
     height: 100px;
     position: absolute;
@@ -51,10 +51,10 @@
 	font-size: 30px;
 	position:absolute ;
 	top: 15px;
-	right: 30px;
+	right: 25px;
 }
 .content_bottom {
-	background-color: #00AEEF;
+	background-color:#00AEEF;
     width: 750px;
     height: 90px;
    	position: absolute;
@@ -86,18 +86,39 @@
 	bottom: 15px;
 	right: 20px;	
 }
-.delete_wish_button{
+.delete_cart_button{
 	
 	font-size: 15px;
 	width: 50px;
 	height: 40px;
 	position: absolute;
-	bottom: 15px;
+	bottom: 13px;
 	right: 130px;
 }
-.delete_wish{
+.delete_cart{
 	font-size: 15px;
+	
 }
+.pay_button{
+	font-size: 15px;
+	width: 100px;
+	height: 40px;
+	position: absolute;
+	bottom: 15px;
+	right: 20px;	
+}
+.total_price{
+	color: white;
+	font-size: 15px;
+	/* width: 100px;
+	height: 40px; */
+	position: absolute;
+	bottom: 30px;
+	right: 180px;
+}
+
+
+
 
 
 

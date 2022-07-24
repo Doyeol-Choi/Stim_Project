@@ -24,12 +24,13 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	// 장바구니 조회
 	@Override
 	public List<CartVO> SelectCartGame(int user_code) throws Exception {
-		return stimWishCartMapper.SelectCartGame();
+		return stimWishCartMapper.SelectCartGame(user_code);
 	}
 	//찜목록에서 장바구니 넣기
 	@Override
-	public void InsertCartGame(int user_code,int game_code) throws Exception {
-		
+	@Transactional
+	public void InsertCartGame(int user_code, int game_code) throws Exception {
+		stimWishCartMapper.InsertCartGame(user_code,game_code);
 	}
 	//찜목록 삭제
 	@Override
@@ -39,7 +40,15 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	}
 	//장바구니 삭제
 	@Override
+	@Transactional
 	public void DeleteCartGame(int cart_code) throws Exception {
+		stimWishCartMapper.DeleteCartGame(cart_code);
+	}
+	// // 장바구니 총금액
+	@Override
+	public List<CartVO> TotalPriceGame(int user_code) throws Exception{
+		return stimWishCartMapper.TotalPriceGame(user_code);
 		
 	}
+	
 }

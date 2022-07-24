@@ -6,16 +6,74 @@
 	<title>Stim Pack</title>
 	<link rel="shortcut icon" href="image/favicon.ico">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
-	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/wishcart/cart.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
+    	<div class="list_box" th:each="cart : ${list}" th:id="|cartListBox${cart.cart_code}|">
+			<div class="game_image">
+				<img th:src="@{/image/game/} + ${cart.game_picture}">
+			</div>
+			<div class="game_content">
+				<div class="content_top">
+					<span class="game_name" th:text="${cart.game_name}"></span>
+					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(cart.game_price, 3, 'COMMA')}"></span>
+				</div>
+				<div class="content_bottom">
+					
+					<span class="game_releaseDate" th:text="${'출시일: '+ #dates.format(cart.game_releaseDate,'yyyy-MM-dd')}"></span>
+					<div class="genre_box">
+						<span th:text="${cart.genre_1}"></span>
+						<span th:text="${cart.genre_2}"></span>
+						<span th:text="${cart.genre_3}"></span>
+					</div>
+					<!-- <button class="delete_wish_button" th:onclick="|location.href='@{/delete_wish(wish_code=${wish.wish_code},user_code=${wish.user_code})}'|" > -->
+					<button class="delete_cart_button" th:onclick="|delcart(${cart.cart_code})|" >
+						<span class="delete_cart">삭제</span>
+					</button>
+					
+					<!-- <button class="cart_button" th:onclick="|location.href='@{/_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
+						<span class="delete_wish">결제</span>
+					</button> -->
+					<!-- <button class="cart_button" th:onclick="|insertcart(${wish.wish_code},${wish.user_code},${wish.game_code})|">
+						<span class="delete_wish">장바구니 추가</span>
+					</button> -->
+				</div>
+			</div>
+    	</div>
     	
+    	<span class="total_price" th:text="${'총 결제 금액 : ₩' + #numbers.formatInteger(total[0].total_price,3,'COMMA')}"></span>
+    	<button class="pay_button" th:onclick="|location.href=''|">
+			<span class="pay">결제</span>
+		</button>
     </div>
     <!-- footer fragment 사용 -->
+    
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+    
+    <script th:inline="javascript">
+    
+		function delcart(cart_code){
+			let id = "#cartListBox" + cart_code
+	         $.ajax({
+	            url: "delete_cart",
+	               type: "POST",
+	               async: true,
+	               data: {
+	                  "cart_code" : cart_code
+	               },
+	               success: function (data) {
+	                  $(id).remove();
+	               }
+	          });
+	      }
+	
+	</script>
+    
 </body>
 </html>

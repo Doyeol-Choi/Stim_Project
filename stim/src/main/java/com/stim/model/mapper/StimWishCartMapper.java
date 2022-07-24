@@ -14,16 +14,17 @@ public interface StimWishCartMapper {
 	public List<WishVO> SelectWishGame(int user_code) throws Exception;
 	
 	// 장바구니
-	public List<CartVO> SelectCartGame() throws Exception;
+	public List<CartVO> SelectCartGame(int user_code) throws Exception;
 	
 	// 찜목록에서 장바구니 추가
-	public void InsertCartGame(int user_code,int game_code) throws Exception;
+	public void InsertCartGame(int user_code, int game_code) throws Exception;
 	
 	// 찜목록에서 삭제
 	public void DeleteWishGame(int wish_code) throws Exception;
 	
 	// 장바구니에서 삭제
-	public void DeleteCartGame() throws Exception;
+	public void DeleteCartGame(int cart_code) throws Exception;
 	
-	
+	// 장바구니 총금액
+	public List<CartVO> TotalPriceGame(int user_code) throws Exception;
 }
