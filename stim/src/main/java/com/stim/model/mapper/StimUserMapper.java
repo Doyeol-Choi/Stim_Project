@@ -18,4 +18,7 @@ public interface StimUserMapper {
 
     // 회원가입
     void registerUser(UserVO uVo);
+    
+    // 아이디 중복 체크
+    int checkById(String user_id);
 }

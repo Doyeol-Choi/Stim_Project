@@ -3,6 +3,8 @@ package com.stim.controller.user;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
@@ -26,14 +28,30 @@ public class LoginController {
     }
 	
 	// 회원가입 step1 이동
-	@GetMapping("/registerS1")
+	@RequestMapping("/registerS1")
 	public String registerFormStep1() {
         return "user/regFormStep1";
     }
 	
-	// 회원가입 step2 이동
+	// 회원가입 step2 Get으로 이동시 step1 이동
 	@GetMapping("/registerS2")
-	public String registerFormStep2() {
-        return "user/regFormStep2";
+	public String registerFormStep2Get() {
+        return "user/regFormStep1";
+    }
+	
+//	// 약관동의 후 올때만 step2로 이동
+//	@PostMapping("/registerS2")
+//	public String registerFormStep2(@RequestParam(value="agree", required=false, defaultValue="false")boolean agree) {
+//		if(!agree) {
+//			return "redirect:registerS1";
+//		}
+//		
+//		return "user/regFormStep2";
+//    }
+	
+	// step3 Get방식으로 접근시 메인페이지로 이동
+	@GetMapping("/registerS3")
+	public String registerFormStep3Get() {
+        return "index";
     }
 }

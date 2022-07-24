@@ -11,11 +11,16 @@
         WHERE user_id = #{user_id}
     </select>
     
-       
     <!-- 회원가입 -->
     <insert id="registerUser" parameterType="com.stim.vo.UserVO">
         INSERT INTO user_tbl
         VALUES(user_code_seq.nextval, #{user_id}, #{user_password}, #{user_email}, #{user_phone}, 'noimage.jpg', 'N', #{user_nickname})
     </insert>
+    
+    <!-- 아이디 체크 -->
+    <select id="checkById" resultType="int" parameterType="String">
+        SELECT count(*) FROM user_tbl
+        WHERE user_id = #{user_id}
+    </select>
     
 </mapper>

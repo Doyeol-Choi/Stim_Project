@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>아이디 중복 체크</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/user/checkId.css}">
+<script type="text/javascript" th:src="@{/js/regForm.js}"></script>
+</head>
+<body>
+	<h2>아이디 중복 체크</h2>
+	<form action="CheckId" method="GET" name="regFrom">
+		<label for="user_id">아이디 : </label>
+		<input type="text" name="user_id" id="user_id" th:value="${user_id}">
+		<input type="submit" value="중복 체크"><br>
+		<!-- 중복 아이디 존재 -->
+		<span th:if="${result == 1}" th:text="|${user_id}는 이미 사용중인 아이디 입니다.|" class="checkText">	
+			<script type="text/javascript">
+				opener.document.regFrom.user_id.value = "";
+			</script>
+		</span>
+		<!-- 중복 아이디 존재 -->
+		<span th:if="${result != 1}" th:text="|${user_id}는 사용가능한 아이디 입니다.|" class="checkText"></span>
+		<input th:if="${result != 1}" type="button" value="사용하기" onclick="checkIdUse()" id="useId">	
+	</form>
+</body>
+</html>
