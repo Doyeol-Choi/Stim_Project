@@ -21,4 +21,13 @@ public interface StimUserMapper {
     
     // 아이디 중복 체크
     int checkById(String user_id);
+    
+    // 아이디 찾기
+    String findIdByEmail(String user_email);
+    
+    // 비밀번호 찾기
+	public int findPwByUserId(String user_id, String user_email);
+
+	// 비밀번호 찾기 => 새로운 비밀번호
+	public void changePwByUserId(String user_id, String user_password);
 }

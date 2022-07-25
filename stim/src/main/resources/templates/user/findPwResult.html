@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack</title>
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/findPwResult.css}">
+	<script type="text/javascript" th:src="@{/js/user.js}"></script>
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <div id="container">
+    	<div id="content">
+    		<h1>비밀번호 찾기 결과</h1>
+    		<div th:if="${result != 1}" class="findPwResult">
+    			<p>해당 아이디와 이메일로 가입된 정보가 없습니다.</p>
+    		</div>
+    		<div th:if="${result == 1}" class="findIdResult">
+    			<form action="findPwChange" method="post">
+    				<input type="hidden" name="user_id" th:value="${user_id}">
+    				<label th:for="user_password">
+	    				<span class="input_text">바꿀 비밀번호</span>
+	    			</label>
+	    			<input type="password" name="user_password" id="user_password" placeholder="비밀번호를 입력해주세요">
+	    			<label th:for="password_confirm">
+	    				<span class="input_text">비밀번호 확인</span>
+	    			</label>
+	    			<input type="password" name="password_confirm" id="password_confirm" placeholder="비밀번호를 확인해주세요">
+	    			<div id="change_btn">
+				    	<button type="submit" onclick="return checkPw()">
+				    		<span>비밀번호 변경</span>
+				    	</button>
+				    </div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>

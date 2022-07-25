@@ -39,19 +39,10 @@ public class LoginController {
         return "user/regFormStep1";
     }
 	
-//	// 약관동의 후 올때만 step2로 이동
-//	@PostMapping("/registerS2")
-//	public String registerFormStep2(@RequestParam(value="agree", required=false, defaultValue="false")boolean agree) {
-//		if(!agree) {
-//			return "redirect:registerS1";
-//		}
-//		
-//		return "user/regFormStep2";
-//    }
-	
 	// step3 Get방식으로 접근시 메인페이지로 이동
 	@GetMapping("/registerS3")
 	public String registerFormStep3Get() {
         return "index";
     }
+
 }

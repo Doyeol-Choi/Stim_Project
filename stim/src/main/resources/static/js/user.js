@@ -36,3 +36,25 @@ function checkReg() {
 	}
 	
 }
+
+function checkPw() {
+	if(document.getElementById('user_password').value != document.getElementById('password_confirm').value){
+		alert("비밀번호가 일치하지 않습니다.");
+		
+		document.getElementById('user_password').value = "";
+		document.getElementById('password_confirm').value = "";
+		
+		document.getElementById('user_password').focus();
+		return false;
+	}
+	
+	if(document.getElementById('user_password').value.length < 4 || document.getElementById('user_password').value.length > 12) {
+		alert("비밀번호는 4~12자리로 만들어주세요.");
+		
+		document.getElementById('user_password').value = "";
+		document.getElementById('password_confirm').value = "";
+		
+		document.getElementById('user_password').focus();
+		return false;
+	}
+}
