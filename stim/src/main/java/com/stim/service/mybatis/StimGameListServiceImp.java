@@ -28,6 +28,30 @@ public class StimGameListServiceImp implements StimGameListService {
 		List<GameVO> newGameList = stimGameListMapper.SelectNewestGameList();
 		return newGameList;
 	}
+
+	
+	// 게임 인기 리스트 조회
+	@Override
+	public List<GameVO> SelectPopularGameList() throws Exception {
+		List<GameVO> popularGameList = stimGameListMapper.SelectPopularGameList();
+		return popularGameList;
+	}
+
+
+	// 키워드로 검색된 리스트 조회
+	@Override
+	public List<GameVO> SelectGameListByKeyword(String keyword) throws Exception {
+		List<GameVO> gVoList = null;
+		gVoList = stimGameListMapper.SelectGameListByKeyword(keyword);	
+		
+		
+		return gVoList;
+	}
+
+
+
+
+
 	
 	
 }

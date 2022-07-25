@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack 게임 상점 목록</title>
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameList.css?after}">
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
+    <div id="container">
+	    <div id = "gameLists">
+	   		<h1>게임 목록</h1>			
+	   		<div id="gameList" class="games">
+				<table id="gameListTable">
+					<tr>
+						<th>게임 이미지</th>
+						<th>이름</th>
+						<th>출시일</th>
+						<th>가격</th>
+					</tr>
+					<tr th:each="list: ${gameList}" id="gtable">
+						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
+						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
+						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
+						<td th:text="${list.game_price}" id="gSetPrice"></td>
+					</tr>
+				</table>
+				
+			</div>
+			<div id="tagSearchBar" class="games">
+				<h3>필터</h3>
+				<input type="button" id="reset" onclick="location.href='http://localhost:4860/gameList'" value="초기화">
+				<form action="">
+					<input type="text" id="tagSearch" placeholder="태그 검색">
+					<input type="hidden" value="">
+				</form> 
+				<div id="priceTagSearch" class="tagSearches">
+					<h4>가격</h4>
+					<a>10,000 ▼</a><br>
+					<a>10,000 ~ 30,000</a><br>
+					<a>30,000 ~ 50,000</a><br>
+					<a>50,000 ▲</a>
+				</div>
+				<div id="genreTagSearch" class="tagSearches">
+					<h4>태그</h4>
+				</div>
+			</div>				
+		</div>    	
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>
