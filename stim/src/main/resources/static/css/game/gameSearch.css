@@ -1,0 +1,168 @@
+@charset "UTF-8";
+* {
+	padding:0;
+	margin:0;
+	box-sizing: border-box;
+}
+#container{
+	width: 100%;
+    background-color: #0E1B49;
+    min-width: 1500px;
+	height: 790px;
+}
+#gameLists{
+	width: 80%;
+	margin: 0 auto;
+	max-width: 1560px;
+	padding-left: 38px;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+#gameLists h1{
+	padding: 30px 0 2px 30px;
+	color: white;
+}
+#gameLists p{
+	padding-left:40px;
+	padding-bottom: 13px;
+	color: white;
+	font-size: 12px;
+}
+
+
+/* 게임 리스트 스크롤바 설정 */
+#gameList::-webkit-scrollbar {
+  width: 20px;
+}
+#gameList::-webkit-scrollbar-thumb {
+	height: 30px;
+	background-color: #00AEEF;
+	border-radius: 20px;
+}
+#gameList::-webkit-scrollbar-track {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+}
+
+
+/* 게임 리스트 */
+#gameList{
+	float:left;
+	width: 1080px;
+	margin: 0 20px;
+	height: 680px;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.3);
+    overflow-x:hidden;
+    overflow-y: auto;
+}
+#gameListTable{
+	margin: 5px;
+	width: 1050px;
+}
+#gameListTable, th{
+	text-align: center;
+	border-bottom: 1px;
+	border-collapse: collapse;
+	padding: 5px;
+	color: white;
+}
+#gameListTable th{
+	background-color: rgba(255, 255, 255, 0.1);
+}
+#gameListTable > td{
+	height: 158px;
+}
+#gtable > td{
+	border-top: solid 1px rgba(255, 255, 255, 0.5);
+}
+#gtable > td:last-child{
+	border-right: none;
+}
+#gameListTable > tr > td > a:visited, a:link{
+	color: white;
+}
+
+
+/* 테이블 별 설정 */
+#gImage{
+	padding: 0px;
+	width: 280px;
+}
+#gImage > img{
+	margin: 0px;
+	width: 280px;
+	height: 100%;
+}
+#gn{
+	padding: 0 100px;
+	font-size: 20px;
+	font-weight: 500;
+}
+#gn:hover{
+	color: #00AEEF;
+}
+#gReleaseDate{
+	padding: 0 10px;
+	font-size: 12px;
+	color:#aaa;
+}
+#gSetPrice{
+	padding: 0 40px;
+	font-size: 20px;
+	color: #00AEEF;
+}
+
+
+
+
+/* 키워드 태그 검색 */
+#tagSearchBar{
+	float:left;
+	width: 320px;
+	height: 650px;
+	background-color: rgba(0, 0, 0, 0.3);
+	padding: 10px;
+}
+#tagSearchBar h3{
+	float: left;
+	color: #00AEEF;
+}
+#reset{
+	float:right;
+	border: none;
+	color: white;
+	background-color: transparent;
+	padding-top: 5px;
+	padding-right: 15px;
+}
+#reset:hover{
+	cursor: pointer;
+	color: #00AEEF;
+}
+#tagSearch{
+	margin: 10px 0;
+	float:both;
+	width:300px;
+	height: 30px;
+	padding: 5px;
+	background-color: rgba(255, 255, 255, 0.2);
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
+.tagSearches{
+	width:300px;
+	height:270px;
+	background-color: rgba(255, 255, 255, 0.2);
+	margin-bottom: 10px;
+}
+.tagSearches h4{
+	text-align: center;
+	color: white;
+	padding: 5px 0;
+	background-color: rgba(0, 0, 0, 0.3);
+}
+#priceTagSearch{
+	float:both;
+}

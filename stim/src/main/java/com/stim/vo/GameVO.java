@@ -15,7 +15,7 @@ public class GameVO {
 	private String game_distribution;
 	private String game_context;
 	private int game_salesRate;
-
+	private String game_picture;
 
 
 

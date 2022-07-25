@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack 게임 상점 목록</title>
+	<link rel="shortcut icon" href="image/favicon.ico">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/game/gameList.css">
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
+    <div id="container">
+	    <div id = "gameLists">
+	   	<h1>할인 게임</h1>
+			<div id="gameList" class="games">
+       		</th:block>
+				<table>
+					<tr>
+						<th>이름</th>
+						<td></td>
+					</tr>
+				</table>
+			
+			</div>
+			<div id="tagSearch" class="games">
+			<h4>필터</h4>
+			
+			</div>			
+		</div>    	
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>

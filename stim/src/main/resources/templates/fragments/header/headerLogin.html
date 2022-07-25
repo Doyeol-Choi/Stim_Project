@@ -5,7 +5,7 @@
         <a href="/"><img id="stim_logo" src="image/Stim_logo_white.png"></a>
         <nav id="headerNav">
         	<ul>
-	           <li><a href="#">상점</a></li>
+	           <li><a href="/gameList">상점</a></li>
 	           <li><a href="#">정보</a></li>
 	           <li><a href="#">지원</a></li>
 	       </ul>
@@ -19,13 +19,13 @@
     <nav id="gameNav">
     	<section>
     		<ul>
-	           <li><a href="#">인기 게임</a></li>
-	           <li><a href="#">최신 게임</a></li>
-	           <li><a href="#">할인 게임</a></li>
+	           <li><a href="/gameListPopular">인기 게임</a></li>
+	           <li><a href="/gameListNew">최신 게임</a></li>
+	           <li><a href="/gameListSale">할인 게임</a></li>
 	       	</ul>
 		</section>
-      	<form id="serch" action="">
-	       	<input type="text" name="" id="" placeholder="검색">
+      	<form id="serch" action="/gameListSearch">
+	       	<input type="text" name="keyword" id="keyword" placeholder="제목/내용/개발사 검색">
     	   	<input type="submit" value="검색">
        	</form>
     </nav>

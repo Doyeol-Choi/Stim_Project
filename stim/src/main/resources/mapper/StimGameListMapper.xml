@@ -4,18 +4,41 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.stim.model.mapper.StimGameListMapper">
-
-	<!-- 게임 상점 목록 출력 (게임 코드 내림차순) -->
-    <select id="SelectAllGameList" resultType="com.stim.vo.GameVO">
+	
+	<sql id="selectAll">
        SELECT * 
        FROM game_tbl
+	</sql>
+	
+	<!-- 게임 상점 목록 출력 (게임 코드 내림차순) -->
+    <select id="SelectAllGameList" resultType="com.stim.vo.GameVO">
+       <include refid="selectAll" />
        ORDER BY game_code DESC
     </select>
     
-    <!-- 최신 게임 목록 출력 (게임 날ㄹ짜 최신순/내림차순) -->
+    
+    <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) -->
     <select id="SelectNewestGameList" resultType="com.stim.vo.GameVO">
-       SELECT * 
-       FROM game_tbl
+       <include refid="selectAll" />
 		ORDER BY game_releaseDate DESC
+    </select>
+    
+    
+    <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) -->
+    <select id="SelectPopularGameList" resultType="com.stim.vo.GameVO">
+       <include refid="selectAll" />
+		ORDER BY game_salesRate DESC
+    </select>
+    
+    
+    <!-- 특정 키워드에 따라 검색된 게임 목록 출력 -->
+    <select id="SelectGameListByKeyword" resultType="com.stim.vo.GameVO">
+    	<include refid="selectAll" />
+		<if test="keyword != null">
+			where LOWER(game_name) like '%'||#{keyword}||'%'
+			OR LOWER(game_developer) like '%'||#{keyword}||'%'
+			OR LOWER(game_context) like '%'||#{keyword}||'%'
+			ORDER BY game_code DESC
+		</if>
     </select>
 </mapper>
