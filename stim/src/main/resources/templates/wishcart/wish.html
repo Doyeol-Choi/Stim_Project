@@ -37,7 +37,12 @@
 						<span class="delete_wish">삭제</span>
 					</button>
 					
-					<input class="cart_button" type="button" value="장바구니 추가" th:onclick="|location.href='/cart(user_code=${wish.user_code},game_code=${wish.game_code})'|">
+					<button class="cart_button" th:onclick="|location.href='@{/insert_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
+						<span class="delete_wish">장바구니 추가</span>
+					</button>
+			<!--    <button class="cart_button" th:onclick="|insertcart(${wish.wish_code},${wish.user_code},${wish.game_code})|">
+						<span class="delete_wish">장바구니 추가</span>
+					</button> -->
 				</div>
 			</div>
     	</div>
@@ -60,6 +65,29 @@
 	               }
 	          });
 	      }
+		
+		/* function insertCart(wish_code, user_code, game_code){
+			let id = "#wishListBox" + wish_code
+	    	$.ajax({
+				url: "insert_cart",
+	            type: "POST",
+	            async: true,
+	            data: {
+	            		"user_code" : user_code,
+	            		"game_code" : game_code
+	            	//"insertCart":JSON.stringify()
+	            	//"command": command
+	            },
+	            success: function (data) {
+	            	alert("데이터전송 성공");	
+	           		},
+	            //error: function (error){
+	           	//        alert("에러");
+	            //	    } 
+	            });
+			}
+		 */
+	
 	</script>
 
 </body>

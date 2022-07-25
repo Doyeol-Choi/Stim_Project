@@ -1,17 +1,24 @@
 package com.stim.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class CartVO {
 
-	// 안쓸듯?3 UserDTO에 wishCode만 함쳐 쓰는게 나을지도
+	// 장바구니
 	private int cart_code ;
 	private int user_code ;
 	private int game_code ;
 	private String game_name ;
-	private int game_price ;
-	private int totalPrice;
-	private String game_picture ;
+	private String game_price ;
+	private String genre_1;
+	private String genre_2;
+	private String genre_3;
+	private String game_picture;
+	private Date game_releaseDate ;
+	private String total_price;
+	
 	
 }
