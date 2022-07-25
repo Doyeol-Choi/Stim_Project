@@ -78,11 +78,22 @@ div{
     font-size: 100%;
     color: rgb(228, 228, 228);
 }
+#profile_update:hover{
+	outline: 4px solid skyblue;
+	transition-duration:initial;
+	color : skyblue;
+}
 #profile_update > a{
-	text-align: center;
 	margin-top: 1vh;
 	font-size: 22px;
+	text-decoration: none;
+	color: rgb(228, 228, 228);
 }
+#profile_update > a > div{
+	text-align: center;
+	margin-top: 1vh;
+}
+
 
 #comment_paging{
 	width: 66%;

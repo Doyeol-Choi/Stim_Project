@@ -69,6 +69,8 @@ public class StimProfileController {
 	public ModelAndView profileNewUpdate(@Valid UserVO uVo, Errors errors) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println("테스트 1");
+		
+		// 유효성 검사 
 		if (errors.hasErrors()) {
 			mav.addObject("user", uVo);
 			
