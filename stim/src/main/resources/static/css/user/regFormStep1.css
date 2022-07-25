@@ -23,11 +23,12 @@
 	border-radius: 2px;
     border: none;
     padding: 1px;
-    display: inline-block;
+    display: block;
     cursor: pointer;
     color: #c3e1f8;
     background: transparent;
     text-shadow: 1px 1px 0px rgb(0 0 0 / 30%);
+    margin: 0 auto;
 	margin-top: 30px;
 }
 

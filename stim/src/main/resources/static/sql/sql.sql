@@ -3,17 +3,19 @@
 -- 회원 테이블
 CREATE TABLE user_tbl(
     user_code number PRIMARY KEY,
-    user_id varchar2(20) UNIQUE NOT NULL,
+    user_id varchar2(60) UNIQUE NOT NULL,
     user_password varchar2(200) NOT NULL,
     user_email varchar2(40) NOT NULL,
     user_phone char(11) NOT NULL,
     user_picture varchar2(100) NOT NULL,
     user_admin char(1) NOT NULL,        -- Y/N
-    user_nickname varchar2(20) NOT NULL
+    user_nickname varchar2(40) NOT NULL
     );
 --ALTER TABLE user_tbl ADD user_nickname varchar2(20) DEFAULT '테스트' NOT NULL;
+--ALTER TABLE user_tbl MODIFY user_id varchar2(60);
+--ALTER TABLE user_tbl MODIFY user_nickname varchar2(40);
 CREATE SEQUENCE user_code_seq NOCACHE;
-
+SELECT * FROM user_tbl;
 -- 친구테이블
 CREATE TABLE friend_tbl(
     friend_code number PRIMARY KEY,

@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+.checkText {
+	color: red;
+}
+
+#useId {
+	display: block;
+}

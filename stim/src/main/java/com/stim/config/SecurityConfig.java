@@ -1,29 +1,32 @@
 package com.stim.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.stim.service.user.StimOauth2Service;
+
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig{
-	
-	// 비밀번호 암호화를 위한 메서드
-    @Bean	// 스프링 부트 버전업에 따라 public 생략이 가능한듯 하다.
-    BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
-    }
+public class SecurityConfig {
+    
+    @Autowired
+    private StimOauth2Service stimOauth2Service;
 	
 	@Bean
-    public
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+		http.cors()
+	    		.configurationSource(corsConfigurationSource())
+        .and()
+        	.csrf().disable()
+        .authorizeRequests()
 //				.antMatchers("/user/**").authenticated()     
 //						// user주소에 대해서 인증을 요구한다
 //				.antMatchers("/manager/**").access("hasRole('ROLE_MANAGER') or hasRole('ROLE_ADMIN')")	
@@ -44,16 +47,29 @@ public class SecurityConfig{
 	        	.logoutUrl("/logout")			// 로그아웃을 처리할 URL 입력
 	            .logoutSuccessUrl("/")	// 로그아웃 성공 시 이동할 맵핑으로 이동
 	            .invalidateHttpSession(true)	// 세션 초기화
-	    .and()
-	    	.cors().configurationSource(corsConfigurationSource())
-        .and()
-        	.csrf().disable();
+        .and()					
+	        .oauth2Login()				// OAuth2기반의 로그인인 경우
+	            .loginPage("/loginForm")		// 인증이 필요한 URL에 접근하면 /loginForm으로 이동
+	            .defaultSuccessUrl("/")			// 로그인 성공하면 "/" 으로 이동
+	            .failureUrl("/loginForm")		// 로그인 실패 시 /loginForm으로 이동
+	            .userInfoEndpoint()				// 로그인 성공 후 사용자정보를 가져온다
+	            .userService(stimOauth2Service);	//사용자정보를 처리할 때 사용한다
+
 		// Cross site Request forgery로 사이즈간 위조 요청인데, 즉 정상적인 사용자가 의도치 않은 위조요청을 보내는 것을 의미
 		// GET요청을 제외한 상태를 변화시킬 수 있는 POST, PUT, DELETE 요청으로부터 보호하는 csrf를 disable해서 post형식으로 회원가입이 가능하게 한다.
 
 		return http.build();
     }
-     
+    
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+            .antMatchers("/resources/**")
+            .antMatchers("/css/**")
+//            .antMatchers("/vendor/**")
+//            .antMatchers("/js/**")
+//            .antMatchers("/favicon*/**")
+            .antMatchers("/img/**");
+    }
 	
 	// CORS 허용 적용
     @Bean
