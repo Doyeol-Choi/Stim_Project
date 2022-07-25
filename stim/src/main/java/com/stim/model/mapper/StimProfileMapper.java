@@ -9,10 +9,13 @@ import com.stim.vo.UserVO;
 @Mapper
 public interface StimProfileMapper {
 
-	// 예시 메서드 수정해서 사용
+	// 유저 프로필 
 	public UserVO SelectById(String user_id) throws Exception;
 
-	public UserVO SelectByIdForUpdate(String user_id);
+	public void SelectByIdForUpdate(UserVO uVo);
+	
+	// 
+	public void DeleteById(String user_id) throws Exception;
 	
 	//public List<Map<String, Object>> SelectById() throws Exception;
 }

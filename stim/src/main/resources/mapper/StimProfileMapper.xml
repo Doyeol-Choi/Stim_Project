@@ -14,6 +14,19 @@
        SELECT * FROM user_tbl WHERE user_id = #{user_id}
     </select>
     
+    <update id="SelectByIdForUpdate" parameterType="com.stim.vo.UserVO">
+		UPDATE user_tbl
+		SET 	user_nickname = #{user_nickname},
+				user_email = #{user_email},
+				user_phone = #{user_phone},
+				user_picture = #{user_picture}
+		WHERE user_id = #{user_id}
+    </update>
+    
+    <delete id="DeleteById" parameterType="String">
+    
+    </delete>
+    
     <!-- <update id="SelectByIdForUpdate" resultType="com.stim.vo.UserVO" >
        UPDATE * FROM 
     </update> -->
