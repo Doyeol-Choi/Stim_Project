@@ -32,7 +32,8 @@ public class StimUserController {
 		ModelAndView mav = new ModelAndView();
 		
 		if(!agree) {
-			mav.setViewName("redirect:registerS1");
+			mav.addObject("chk", -1);
+			mav.setViewName("user/regFormStep1");
 			return mav;
 		}
 		mav.addObject("uVo", new UserVO());

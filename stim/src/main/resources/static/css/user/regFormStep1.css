@@ -19,6 +19,11 @@
 	margin-bottom: 30px;
 }
 
+#chkError {
+	color: red;
+	display: block;
+}
+
 #agree_btn {
 	border-radius: 2px;
     border: none;
