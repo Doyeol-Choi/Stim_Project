@@ -12,9 +12,9 @@ CREATE TABLE user_tbl(
     user_nickname varchar2(40) NOT NULL
     );
 --ALTER TABLE user_tbl ADD user_nickname varchar2(20) DEFAULT '테스트' NOT NULL;
---ALTER TABLE user_tbl MODIFY user_id varchar2(60);
+--ALTER TABLE user_tbl MODIFY user_password varchar2(200);
 --ALTER TABLE user_tbl MODIFY user_nickname varchar2(40);
-CREATE SEQUENCE user_code_seq NOCACHE;
+CREATE SEQUENCE user_code_seq NOCACHE;+
 SELECT * FROM user_tbl;
 -- 친구테이블
 CREATE TABLE friend_tbl(

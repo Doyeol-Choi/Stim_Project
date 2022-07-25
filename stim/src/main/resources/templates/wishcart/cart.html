@@ -15,6 +15,7 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
+      <div id="cartList">
     	<div class="list_box" th:each="cart : ${list}" th:id="|cartListBox${cart.cart_code}|">
 			<div class="game_image">
 				<img th:src="@{/image/game/} + ${cart.game_picture}">
@@ -32,10 +33,14 @@
 						<span th:text="${cart.genre_2}"></span>
 						<span th:text="${cart.genre_3}"></span>
 					</div>
-					<!-- <button class="delete_wish_button" th:onclick="|location.href='@{/delete_wish(wish_code=${wish.wish_code},user_code=${wish.user_code})}'|" > -->
-					<button class="delete_cart_button" th:onclick="|delcart(${cart.cart_code})|" >
+					<button class="delete_cart_button" th:onclick="|location.href='@{/delete_cart(cart_code=${cart.cart_code},user_code=${cart.user_code})}'|" >
 						<span class="delete_cart">삭제</span>
 					</button>
+					
+					
+					<!--ajax <button class="delete_cart_button" th:onclick="|delcart(${cart.cart_code, cart.game_price, total[].total[0].total_price})|" >
+						<span class="delete_cart">삭제</span>
+					</button> -->
 					
 					<!-- <button class="cart_button" th:onclick="|location.href='@{/_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
 						<span class="delete_wish">결제</span>
@@ -46,8 +51,15 @@
 				</div>
 			</div>
     	</div>
-    	
-    	<span class="total_price" th:text="${'총 결제 금액 : ₩' + #numbers.formatInteger(total[0].total_price,3,'COMMA')}"></span>
+      </div>
+     
+      	<span class="total">총 결제 금액 : ₩</span>
+      	<span th:if="${not #strings.isEmpty(total)}">
+    		<span id="total_price" th:text="${#numbers.formatInteger(total,3,'COMMA')}"></span>
+    	</span>
+    	<span th:if="${#strings.isEmpty(total)}">
+    		<span id="total_price" th:text="0"></span>
+    	</span>
     	<button class="pay_button" th:onclick="|location.href=''|">
 			<span class="pay">결제</span>
 		</button>
@@ -57,8 +69,8 @@
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
     
     <script th:inline="javascript">
-    
-		function delcart(cart_code){
+    	
+		function delcart(cart_code, game_price){
 			let id = "#cartListBox" + cart_code
 	         $.ajax({
 	            url: "delete_cart",

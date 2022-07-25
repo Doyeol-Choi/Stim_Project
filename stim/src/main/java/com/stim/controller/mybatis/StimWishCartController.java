@@ -41,7 +41,7 @@ public class StimWishCartController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
-		List<CartVO> total  = stimWishCartService.TotalPriceGame(user_code);
+		String total  = stimWishCartService.TotalPriceGame(user_code);
 	
 		mav.addObject("list", list);
 		mav.addObject("total", total);
@@ -61,49 +61,62 @@ public class StimWishCartController {
 //	  
 //	  return new RedirectView(asd);
 //	  }
+	
+	//장바구니 삭제	
+	  @GetMapping("/delete_cart") 
+	  public RedirectView DeleteWishGame(
+			  @RequestParam("cart_code")int cart_code,
+			  @RequestParam(value="user_code")int user_code) throws Exception {
+	  stimWishCartService.DeleteCartGame(cart_code);  
+	  
+	  String asd = "/cart/"+ user_code;
+	  
+	  return new RedirectView(asd);
+	  }
 	 
+	  
 	 // ajax 사용 찜목록 삭제
 	@PostMapping("/wish/delete_wish") 
 	  public void DeleteWishGame(@RequestParam("wish_code") int wish_code) throws Exception {
 
 		stimWishCartService.DeleteWishGame(wish_code);  
-	  
+		
 	  }
 	
 	 // ajax 사용 장바구니 삭제
-	@PostMapping("/cart/delete_cart") 
-	  public void DeleteCartGame(@RequestParam("cart_code") int cart_code) throws Exception {
-
-		stimWishCartService.DeleteCartGame(cart_code);  
-	  
-	  }
+//	@PostMapping("/cart/delete_cart") 
+//	  public void DeleteCartGame(@RequestParam("cart_code") int cart_code) throws Exception {
+//
+//		stimWishCartService.DeleteCartGame(cart_code);  
+//		
+//	  }
 	
 	  // 찜목록에서 장바구니 넣기
-	  @GetMapping("/insert_cart") 
-	  public RedirectView InsertCartGame(
-			  @RequestParam("user_code") int user_code,
-			  @RequestParam("game_code") int game_code) throws Exception {
-	  
-		  stimWishCartService.InsertCartGame(user_code, game_code);  
-  
-		  String url = "/wish/"+ user_code;
-		  
-		  return new RedirectView(url);
-	  }
+//	  @GetMapping("/insert_cart") 
+//	  public RedirectView InsertCartGame(
+//			  @RequestParam("user_code") int user_code,
+//			  @RequestParam("game_code") int game_code) throws Exception {
+//	  
+//		  stimWishCartService.InsertCartGame(user_code, game_code);  
+//  
+//		  String url = "/wish/"+ user_code;
+//		  
+//		  return new RedirectView(url);
+//	  }
 	
 	
 	
 	// ajax 사용 찜목록에서 장바구니 넣기
-//	@PostMapping("/wish/insert_cart") 
-//	  public void InsertCartGame(
-//			  @RequestParam("user_code") int user_code,
-//			  @RequestParam("game_code") int game_code) throws Exception {
-//		
-//		System.out.println(user_code);
-//		System.out.println(game_code);
-//		stimWishCartService.InsertCartGame(user_code, game_code);  
-//	  
-//	  }
+	@PostMapping("/insert_cart") 
+	  public void InsertCartGame(
+			  @RequestParam("user_code") int user_code,
+			  @RequestParam("game_code") int game_code) throws Exception {
+		
+		System.out.println(user_code);
+		System.out.println(game_code);
+		stimWishCartService.InsertCartGame(user_code, game_code);  
+	  
+	  }
 	 
 }
 

@@ -18,6 +18,6 @@ public interface StimWishCartService {
 	public void DeleteCartGame(int cart_code) throws Exception;
 	
 	// 장바구니 총금액
-	public List<CartVO> TotalPriceGame(int user_code) throws Exception;
+	public String TotalPriceGame(int user_code) throws Exception;
 	
 }

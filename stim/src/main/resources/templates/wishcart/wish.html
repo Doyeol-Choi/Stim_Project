@@ -15,6 +15,7 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
+    	<div id="wishList">
     	<div class="list_box" th:each="wish : ${list}" th:id="|wishListBox${wish.wish_code}|">
 			<div class="game_image">
 				<img th:src="@{/image/game/} + ${wish.game_picture}">
@@ -37,16 +38,17 @@
 						<span class="delete_wish">삭제</span>
 					</button>
 					
-					<button class="cart_button" th:onclick="|location.href='@{/insert_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
-						<span class="delete_wish">장바구니 추가</span>
-					</button>
-			<!--    <button class="cart_button" th:onclick="|insertcart(${wish.wish_code},${wish.user_code},${wish.game_code})|">
+					<!-- <button class="cart_button" th:onclick="|location.href='@{/insert_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
 						<span class="delete_wish">장바구니 추가</span>
 					</button> -->
+					 <button class="cart_button" th:onclick="|insertcart(${wish.user_code},${wish.game_code})|">
+						<span class="delete_wish">장바구니 추가</span>
+					</button>
 				</div>
 			</div>
-    	</div>
+		</div>
     </div>
+   </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
 
@@ -66,10 +68,10 @@
 	          });
 	      }
 		
-		/* function insertCart(wish_code, user_code, game_code){
-			let id = "#wishListBox" + wish_code
+		 function insertcart(user_code, game_code){
+			
 	    	$.ajax({
-				url: "insert_cart",
+				url: "/insert_cart",
 	            type: "POST",
 	            async: true,
 	            data: {
@@ -79,14 +81,14 @@
 	            	//"command": command
 	            },
 	            success: function (data) {
-	            	alert("데이터전송 성공");	
-	           		},
+	            	alert("장바구니 넣기 성공");	
+	           		}
 	            //error: function (error){
 	           	//        alert("에러");
 	            //	    } 
 	            });
 			}
-		 */
+		 
 	
 	</script>
 

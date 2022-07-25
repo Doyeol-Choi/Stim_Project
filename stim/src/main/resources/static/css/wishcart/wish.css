@@ -16,6 +16,28 @@
     border-radius: 4px;
 }
 
+#wishList{
+	width: 1150px;
+	margin: 0 auto;
+	height: 850px;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.3);
+    overflow-x:hidden;
+    overflow-y: auto;
+}
+#wishList::-webkit-scrollbar {
+  width: 20px;
+}
+#wishList::-webkit-scrollbar-thumb {
+	height: 30px;
+	background-color: #00AEEF;
+	border-radius: 20px;
+}
+#wishList::-webkit-scrollbar-track {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+}
+
 
 .game_image {
 
@@ -98,7 +120,19 @@
 .delete_wish{
 	font-size: 15px;
 }
-
+/* 찜목록 스크롤바 설정 */
+#gameList::-webkit-scrollbar {
+  width: 20px;
+}
+#gameList::-webkit-scrollbar-thumb {
+	height: 30px;
+	background-color: #00AEEF;
+	border-radius: 20px;
+}
+#gameList::-webkit-scrollbar-track {
+	background-color: rgba(255, 255, 255, 0.1);
+	border-radius: 20px;
+}
 
 
 
