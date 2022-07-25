@@ -41,4 +41,15 @@
 			ORDER BY game_code DESC
 		</if>
     </select>
+    
+    
+   
+    
+    <!-- 선택한 태그에 따라 검색된 게임 목록 출력 -->
+    <select id="SelectGameListByTags" resultType="com.stim.vo.GameVO">
+    	SELECT * 
+		FROM game_tbl gm INNER JOIN genre_tbl gn
+		ON gm.game_code = gn.game_code
+		WHERE (gn.genre_1=#{genre} OR gn.genre_2=#{genre} OR gn.genre_3=#{genre})
+    </select>
 </mapper>

@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.vo.GameVO;
+import com.stim.vo.GenreVO;
 
 @RestController
 public class StimGameListController {
@@ -20,7 +21,8 @@ public class StimGameListController {
 	private StimGameListService stimGameListService;
 
 		
-	/* 상점 */
+	
+	/* 상점 페이지 이동 */
 	@GetMapping("/gameList")
 	public ModelAndView gameList() {
 		ModelAndView mav = new ModelAndView();
@@ -40,6 +42,7 @@ public class StimGameListController {
 		
 		return mav;	
     }
+	
 	
 	
 	///////////////////////////////////////////////////////
@@ -65,6 +68,7 @@ public class StimGameListController {
     }
 	
 	
+	
 	/////////////////////////////////////////////////////
 	/* 최신 게임 페이지 이동 */
 	@RequestMapping("/gameListNew")
@@ -88,6 +92,7 @@ public class StimGameListController {
     }
 	
 	
+	
 	/////////////////////////////////////////////////////
 	/* 할인 게임 페이지 이동 */
 	@GetMapping("/gameListSale")
@@ -97,9 +102,7 @@ public class StimGameListController {
 	
 	
 	
-	
-	
-	
+	////////////////////////////////////////////////////	
 	/* 검색 페이지 이동 */
 	@GetMapping("/gameListSearch")
 	public ModelAndView gameListSearch(@RequestParam(value="keyword") String keyword) {
@@ -120,5 +123,29 @@ public class StimGameListController {
         return mav;
     }
 	
+	
+	
+	////////////////////////////////////////////////////
+	/* 태그 검색 페이지 이동 */
+	@GetMapping("/gameListTagSearch")
+	public ModelAndView gameTagSearch(@RequestParam(value="genre",required=false,defaultValue="") String genre,
+									  @RequestParam(value="price",required=false,defaultValue="") String price,
+									  @RequestParam(value="tagSearch",required=false,defaultValue="") String tagSearch) {
+	ModelAndView mav = new ModelAndView();
+	try {
+	
+		List<GameVO> searchedByTag = stimGameListService.SelectGameListByTags(tagSearch);
+		mav.addObject("gameList", searchedByTag);
+		
+		mav.setViewName("game/gameListSearch");
+		System.out.println("검색된 태그의 게임 리스트 수: " + searchedByTag.size());
+	
+	
+	} catch (Exception e) {
+	e.printStackTrace();
+	}	
+	
+	return mav;
+	}
 	
 }

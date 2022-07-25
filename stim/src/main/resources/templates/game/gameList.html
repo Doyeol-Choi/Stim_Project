@@ -37,31 +37,89 @@
 				<h3>필터</h3>
 				<input type="button" id="reset" onclick="location.href='http://localhost:4860/gameList'" value="초기화">
 				<form action="gameListTagSearch">
-					<input type="text" id="tagSearch" placeholder="태그 검색">
-					<input type="hidden" value="">
+					<input type="text" name="tagSearch" id="tagSearch" placeholder="기타 태그 검색">
+					<button id="button">검색</button>
 					<div id="priceTagSearch" class="tagSearches">
 						<h4>가격</h4>
 						<ul id="priceTag">
-							<li><a th:href="@{/gameList(price=0010)}">10,000 미만</a></li>
-							<li><a th:href="@{/gameList(price=1030)}">10,000 이상 30,000 미만</a></li>
-							<li><a th:href="@{/gameList(price=3050)}">30,000 이상 50,000 미만</a></li>
-							<li><a th:href="@{/gameList(price=5000)}">50,000 이상</a></li>
+							<li>
+								<input type="radio" name="price" value="10">
+								<span>10,000 미만</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="30">
+								<span>30,000 미만</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="50">
+								<span>50,000 미만</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="5000">
+								<span>50,000 이상</span>
+							</li>
 						</ul>
 					</div>
 					<div id="genreTagSearch" class="tagSearches">
 						<h4>태그</h4>
 						<ul id="genreTag">
-							<li><a th:href="@{/gameList(genre=1)}">액션</a></li>
-							<li><a th:href="@{/gameList(genre=2)}">퍼즐</a></li>
-							<li><a th:href="@{/gameList(genre=3)}">전략</a></li>
-							<li><a th:href="@{/gameList(genre=4)}">공포</a></li>
+							<li>
+								<input type="checkbox" name="genre" value="액션" onclick='checkGenre()'>
+								<span>액션</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre" value="퍼즐" onclick='checkGenre()'>
+								<span>퍼즐</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre" value="오픈 월드" onclick='checkGenre()'>
+								<span>오픈 월드</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre" value="시뮬레이션" onclick='checkGenre()'>
+								<span>시뮬레이션</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre" value="생존" onclick='checkGenre()'>
+								<span>생존</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre" value="좀비" onclick='checkGenre()'>
+								<span>좀비</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre" value="건설" onclick='checkGenre()'>
+								<span>건설</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre" value="협동" onclick='checkGenre()'>
+								<span>협동</span>
+							</li>
 						</ul>
 					</div>
+					<div id='result'></div>
 				</form> 
 			</div>			
 		</div>    	
-	color: #00AEEF;    </div>
-	
+	</div>
+    <!-- <script th:inline="javascript">
+    function checkGenre() {
+        // 체크한 데이터를 담을 배열 선언
+        const arr = [];
+        // Name이 Color인 속성 취득
+        const genre = document.getElementsByName("genre");
+        let price = document.getElementsByName("price");
+        // 취득한 속성 만큼 루프
+        for (let i = 0; i < genre.length; i++) {
+          // 속성중에 체크 된 항목이 있을 경우
+          if (genre[i].checked == true) {
+          	arr.push(genre[i].value);
+          }
+        }
+        // 결과를 표시
+        console.log(arr);
+    }
+	</script> -->
     
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

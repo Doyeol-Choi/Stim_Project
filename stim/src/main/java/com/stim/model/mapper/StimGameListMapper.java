@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.stim.vo.GameVO;
+import com.stim.vo.GenreVO;
 
 @Mapper
 public interface StimGameListMapper {
@@ -20,4 +21,9 @@ public interface StimGameListMapper {
 	
 	// 키워드로 검색된 게임 리스트 조회
 	public List<GameVO> SelectGameListByKeyword(String keyword) throws Exception;
+	
+	
+	// 태그로 검색된 게임 리스트 조회
+	public List<GameVO> SelectGameListByTags(String tag) throws Exception;
+	
 }
