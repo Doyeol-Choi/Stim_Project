@@ -2,8 +2,12 @@ package com.stim.model.mapper;
 
 
 
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
+import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
 
 @Mapper
@@ -19,5 +23,16 @@ public interface StimProfileMapper {
 	
 	// 
 	public void DeleteById(String user_id) throws Exception;
+
+	
+	// 댓글 삽입
+	public void InsertComment(String user_id, String comment_text);
+
+	// 댓글 출력
+	public List<ProFileVO> getCommentInfo(HashMap<String, Integer> map);
+	
+	
+	
+	
 	
 }

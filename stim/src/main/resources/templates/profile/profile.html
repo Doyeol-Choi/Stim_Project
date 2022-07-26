@@ -56,7 +56,19 @@
 						<!-- 친구 목록 -->
 					</div>
 					<div class="profile_left">
-						<div>댓글 일겁니다</div>
+						<!-- 로그인 시 보이게 해야함 -->
+						<div class="comment_write">
+							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${user.user_picture}"> </a>
+							<form id="comment_form" action="comment" method="post">
+								<input type="hidden" name="user_id" value="${user.user_id}">
+								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
+								<input type="submit" value="댓글 남기기">
+							</form>
+						</div>
+						<div class="comment_list">
+							<div >
+							</div>
+						</div>
 					</div>
 		        </div>
 		        <div class="comment_footer">

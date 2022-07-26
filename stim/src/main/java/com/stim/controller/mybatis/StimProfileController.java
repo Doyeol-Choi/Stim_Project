@@ -9,8 +9,10 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.stim.service.mybatis.StimProfileService;
 import com.stim.service.user.StimUserService;
@@ -97,6 +99,16 @@ public class StimProfileController {
 		}
 		return mav;
 	}
-
+	
+	@PostMapping("/comment")
+	public RedirectView InsertComment(@RequestParam("user_id") String user_id,
+									  @RequestParam("comment_text") String comment_text) throws Exception {
+		
+		stimProfileService.InsertComment(user_id, comment_text);
+		
+		String url = "/profile/" + user_id;
+		return new RedirectView(url);
+	}
+	
 	
 }
