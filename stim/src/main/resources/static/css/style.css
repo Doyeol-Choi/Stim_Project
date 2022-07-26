@@ -203,6 +203,13 @@ header {
 	border-radius: 5px;
 }
 
+#headLogout:hover {
+	background-color: #1E3D65;
+	color: white;
+	box-shadow: 5px #222;
+	cursor: pointer;
+}
+
 #wishcartTag {
 	clear: both;
 	float: right;

@@ -9,8 +9,7 @@
 	           <li><a href="/gameList">상점</a></li>
 	           <li><a th:href="@{/profile/Doyeol} ">정보</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
 	           <li><a href="#">지원</a></li>
-	           <!-- <li sec:authorize="isAuthenticated()"><a href="#" th:if="${#authentication.principal.user_admin.equal('Y')}">관리자</a></li> -->
-	           <li sec:authorize="isAuthenticated()"><a href="#" th:if="|${#authentication.principal.user_admin.equal('Y')}|">관리자</a></li>
+	           <li sec:authorize="isAuthenticated()"><a href="#" th:if="|${#strings.equals(#authentication.principal.user_admin, 'Y')}|">관리자</a></li>
 	       </ul>
         </nav>
         <!-- 로그인 전 -->
