@@ -4,11 +4,12 @@
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack</title>
-	<link rel="shortcut icon" href="image/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/wishcart/cart.css}">
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -54,13 +55,16 @@
       </div>
      
       	<span class="total">총 결제 금액 : ₩</span>
-      	<span th:if="${not #strings.isEmpty(total)}">
+      	<span th:if="${total != null}">
     		<span id="total_price" th:text="${#numbers.formatInteger(total,3,'COMMA')}"></span>
     	</span>
-    	<span th:if="${#strings.isEmpty(total)}">
+    	<span th:if="${total == null}">
     		<span id="total_price" th:text="0"></span>
     	</span>
-    	<button class="pay_button" th:onclick="|location.href=''|">
+    	<!-- <button class="pay_button" th:onclick="|IMP(${total})|">
+			<span class="pay">결제</span>
+		</button> -->
+		<button class="pay_button" id="pay" value="${total}">
 			<span class="pay">결제</span>
 		</button>
     </div>
@@ -69,7 +73,7 @@
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
     
     <script th:inline="javascript">
-    	
+    	document.cookie = "crossCookie=bar; SameSite=None; Secure";
 		function delcart(cart_code, game_price){
 			let id = "#cartListBox" + cart_code
 	         $.ajax({
@@ -84,6 +88,36 @@
 	               }
 	          });
 	      }
+		
+		$('#pay').click (function (total){
+			
+		    var IMP = window.IMP; 
+		    IMP.init('TC0ONETIME'); 
+		    IMP.request_pay({
+		    	pg : "kakaopay", 
+		        pay_method : 'card',
+		        merchant_uid : 'merchant_' + new Date().getTime(),
+		        name : '결제',
+		        amount : total,
+		        buyer_email : '구매자 이메일',
+		        buyer_name : '구매자 이름',
+		        buyer_tel : '구매자 번호',
+		        buyer_addr : '구매자 주소',
+		        buyer_postcode : '구매자 주소',
+		        m_redirect_url : '/index'
+		        },  
+		        function(rsp) {
+		        if ( rsp.success ) {
+		            var msg = '결제가 완료되었습니다.';
+		            location.href='/';
+		        } else {
+		            var msg = '결제에 실패하였습니다.';
+		            rsp.error_msg;
+		            
+		        }
+		    });
+		});
+		
 	
 	</script>
     

@@ -18,7 +18,7 @@ public class CartVO {
 	private String genre_3;
 	private String game_picture;
 	private Date game_releaseDate ;
-	private String total_price;
+	private int total_price;
 	
 	
 }

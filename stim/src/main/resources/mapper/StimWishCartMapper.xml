@@ -44,7 +44,7 @@
     </delete>
     
     <!-- 장바구니 총금액 -->
-    <select id="TotalPriceGame" resultType="String" parameterType="int">
+    <select id="TotalPriceGame" resultType="Integer" parameterType="int">
     	SELECT SUM(ga.game_price) AS total_price FROM cart_tbl c, game_tbl ga
 		WHERE c.user_code = #{user_code} 
 		and c.game_code = ga.game_code

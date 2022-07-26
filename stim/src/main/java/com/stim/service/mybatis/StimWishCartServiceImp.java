@@ -46,7 +46,7 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	}
 	// // 장바구니 총금액
 	@Override
-	public String TotalPriceGame(int user_code) throws Exception{
+	public Integer TotalPriceGame(int user_code) throws Exception{
 		return stimWishCartMapper.TotalPriceGame(user_code);
 		
 	}

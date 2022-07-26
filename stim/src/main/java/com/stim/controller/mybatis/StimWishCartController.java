@@ -41,7 +41,7 @@ public class StimWishCartController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
-		String total  = stimWishCartService.TotalPriceGame(user_code);
+		Integer total  = stimWishCartService.TotalPriceGame(user_code);
 	
 		mav.addObject("list", list);
 		mav.addObject("total", total);
