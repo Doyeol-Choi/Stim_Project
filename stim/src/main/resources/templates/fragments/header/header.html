@@ -9,6 +9,8 @@
 	           <li><a href="/gameList">상점</a></li>
 	           <li><a th:href="@{/profile/Doyeol} ">정보</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
 	           <li><a href="#">지원</a></li>
+	           <!-- <li sec:authorize="isAuthenticated()"><a href="#" th:if="${#authentication.principal.user_admin.equal('Y')}">관리자</a></li> -->
+	           <li sec:authorize="isAuthenticated()"><a href="#" th:if="|${#authentication.principal.user_admin.equal('Y')}|">관리자</a></li>
 	       </ul>
         </nav>
         <!-- 로그인 전 -->
@@ -42,7 +44,7 @@
 				<input type="text" name="keyword" id="keyword" placeholder="제목/내용/개발사 검색">
 				<input type="submit" value="검색">
 			</form>
-		<div>
+		</div>
     </nav>
 </header>
 </html>
