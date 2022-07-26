@@ -17,6 +17,7 @@
 	    <div id = "gameLists">
 	   	<h1>게임 목록</h1>
 	   	<p th:text="${gameList.size} + '개의 항목이 검색되었습니다.'" />
+	   	<p th:text="${genre}" />
 			<div id="gameList" class="games">
 				<table id="gameListTable">
 					<tr>
@@ -69,7 +70,7 @@
 								<span>50,000 이상</span>
 							</li>
 							<li>
-								<input type="radio" name="price" value="10000000" checked hidden="hidden">
+								<input type="radio" name="price" value="90000" checked hidden="hidden">
 							</li>
 						</ul>
 					</div>

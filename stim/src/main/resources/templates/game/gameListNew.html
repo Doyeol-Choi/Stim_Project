@@ -23,12 +23,20 @@
 						<th>이름</th>
 						<th>출시일</th>
 						<th>가격</th>
+						<th>장르</th>
 					</tr>
 					<tr th:each="list: ${gameList}" id="gtable">
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
 						<td th:text="${list.game_price}" id="gSetPrice"></td>
+						<td th:inline="text" id="gTags">
+						    [[${list.genre_1}]]
+						    <br><br>
+						    [[${list.genre_2}]]
+						    <br><br>
+						    [[${list.genre_3}]]
+						</td>
 					</tr>
 				</table>
 				

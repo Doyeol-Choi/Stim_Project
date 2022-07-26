@@ -6,50 +6,79 @@
 <mapper namespace="com.stim.model.mapper.StimGameListMapper">
 	
 	<sql id="selectAll">
-       SELECT * 
-       FROM game_tbl
+      	SELECT * 
+		FROM game_tbl gm INNER JOIN genre_tbl gn
+		ON gm.game_code = gn.game_code
 	</sql>
 	
 	<!-- 게임 상점 목록 출력 (게임 코드 내림차순) -->
-    <select id="SelectAllGameList" resultType="com.stim.vo.GameVO">
+    <select id="SelectAllGameList" resultMap="gameMap, genreMap">
        <include refid="selectAll" />
-       ORDER BY game_code DESC
+		ORDER BY gm.game_code DESC
     </select>
     
     
     <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) -->
-    <select id="SelectNewestGameList" resultType="com.stim.vo.GameVO">
+    <select id="SelectNewestGameList" resultMap="gameMap, genreMap">
        <include refid="selectAll" />
-		ORDER BY game_releaseDate DESC
+		ORDER BY gm.game_releaseDate DESC
     </select>
     
     
     <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) -->
-    <select id="SelectPopularGameList" resultType="com.stim.vo.GameVO">
+    <select id="SelectPopularGameList" resultMap="gameMap, genreMap">
        <include refid="selectAll" />
-		ORDER BY game_salesRate DESC
+		ORDER BY gm.game_salesRate DESC
     </select>
     
     
     <!-- 특정 키워드에 따라 검색된 게임 목록 출력 -->
-    <select id="SelectGameListByKeyword" resultType="com.stim.vo.GameVO">
+    <select id="SelectGameListByKeyword" resultMap="gameMap, genreMap">
     	<include refid="selectAll" />
 		<if test="keyword != null">
-			where LOWER(game_name) like '%'||#{keyword}||'%'
-			OR LOWER(game_developer) like '%'||#{keyword}||'%'
-			OR LOWER(game_context) like '%'||#{keyword}||'%'
-			ORDER BY game_code DESC
+			where LOWER(gm.game_name) like '%'||#{keyword}||'%'
+			OR LOWER(gm.game_developer) like '%'||#{keyword}||'%'
+			OR LOWER(gm.game_context) like '%'||#{keyword}||'%'
+			ORDER BY gm.game_code DESC
 		</if>
     </select>
     
     
+    
+    
+    <resultMap type="com.stim.vo.GenreVO" id="genreMap">
+    	<result column="genre_code" property="genre_code"/>
+    	<result column="game_code" property="game_code"/>
+    	<result column="genre_1" property="genre_1"/>
+    	<result column="genre_2" property="genre_2"/>
+    	<result column="genre_3" property="genre_3"/>
+    </resultMap>
+    <resultMap type="com.stim.vo.GameVO" id="gameMap">
+    	<result column="game_code" property="game_code"/>
+    	<result column="game_name" property="game_name"/>
+    	<result column="game_price" property="game_price"/>
+    	<result column="game_releaseDate" property="game_releaseDate"/>
+    	<result column="game_developer" property="game_developer"/>
+    	<result column="game_distribution" property="game_distribution"/>
+    	<result column="game_context" property="game_context"/>
+    	<result column="game_salesRate" property="game_salesRate"/>
+    	<result column="game_picture" property="game_picture"/>
+    </resultMap>
    
     
-    <!-- 선택한 태그에 따라 검색된 게임 목록 출력 -->
-    <select id="SelectGameListByTags" resultType="com.stim.vo.GameVO">
+    
+    <select id="SelectGameListByTags" resultMap="gameMap, genreMap">
     	SELECT * 
 		FROM game_tbl gm INNER JOIN genre_tbl gn
 		ON gm.game_code = gn.game_code
-		WHERE (gn.genre_1=#{genre} OR gn.genre_2=#{genre} OR gn.genre_3=#{genre})
+		<where>
+
+			<!-- tagSearch와 price값이 둘 다 비어있지 않고 null이 아니라면 -->
+			(gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
+			OR (#{price}-20000 <![CDATA[<=]]> gm.game_price AND gm.game_price <![CDATA[<]]> #{price})
+			
+	  	  	  
+
+		</where>
     </select>
 </mapper>

@@ -12,7 +12,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.vo.GameVO;
-import com.stim.vo.GenreVO;
 
 @RestController
 public class StimGameListController {
@@ -128,17 +127,25 @@ public class StimGameListController {
 	////////////////////////////////////////////////////
 	/* 태그 검색 페이지 이동 */
 	@GetMapping("/gameListTagSearch")
-	public ModelAndView gameTagSearch(@RequestParam(value="genre",required=false,defaultValue="") String genre,
-									  @RequestParam(value="price",required=false,defaultValue="") String price,
-									  @RequestParam(value="tagSearch",required=false,defaultValue="") String tagSearch) {
+	public ModelAndView gameTagSearch(@RequestParam(value="tagSearch") String tagSearch,
+									  @RequestParam(value="genre[]",required=false,defaultValue="") List<String> genre,
+									  @RequestParam(value="price",required=false,defaultValue="") int price) {
 	ModelAndView mav = new ModelAndView();
-	try {
-	
-		List<GameVO> searchedByTag = stimGameListService.SelectGameListByTags(tagSearch);
-		mav.addObject("gameList", searchedByTag);
+	try {		
+		List<GameVO> searchedByTag = stimGameListService.SelectGameListByTags(tagSearch, price);
+
 		
-		mav.setViewName("game/gameListSearch");
-		System.out.println("검색된 태그의 게임 리스트 수: " + searchedByTag.size());
+		System.out.println("태그: "+genre);	
+		System.out.println("태그 리스트 사이즈: " + genre.size());
+		System.out.println("가격: "+price);
+		System.out.println("검색된 태그의 게임 리스트 수: " + searchedByTag.size() +"\n");
+		
+		
+		mav.addObject("gameList", searchedByTag);
+		mav.addObject("genre", genre);
+		mav.addObject("price", price);
+		mav.setViewName("game/gameListTagSearch");
+
 	
 	
 	} catch (Exception e) {
@@ -148,4 +155,7 @@ public class StimGameListController {
 	return mav;
 	}
 	
+
+	
+
 }

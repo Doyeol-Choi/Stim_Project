@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.stim.vo.GameVO;
-import com.stim.vo.GenreVO;
 
 @Mapper
 public interface StimGameListMapper {
 
+	
 	// 게임 리스트 조회
 	public List<GameVO> SelectAllGameList() throws Exception;
 	
@@ -25,5 +25,7 @@ public interface StimGameListMapper {
 	
 	// 태그로 검색된 게임 리스트 조회
 	public List<GameVO> SelectGameListByTags(String tag) throws Exception;
+
+	public List<GameVO> SelectGameListByTags(String tagSearch, int price);
 	
 }

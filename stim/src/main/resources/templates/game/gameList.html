@@ -23,40 +23,52 @@
 						<th>이름</th>
 						<th>출시일</th>
 						<th>가격</th>
+						<th>장르</th>
 					</tr>
 					<tr th:each="list: ${gameList}" id="gtable">
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
 						<td th:text="${list.game_price}" id="gSetPrice"></td>
+						<td th:inline="text" id="gTags">
+						    [[${list.genre_1}]]
+						    <br><br>
+						    [[${list.genre_2}]]
+						    <br><br>
+						    [[${list.genre_3}]]
+						</td>
 					</tr>
 				</table>
 		
 			</div>
 			<div id="tagSearchBar" class="games">
 				<h3>필터</h3>
-				<input type="button" id="reset" onclick="location.href='http://localhost:4860/gameList'" value="초기화">
+				<input type="button" id="reset" onclick="location.href='/gameList'" value="초기화">
+				
 				<form action="gameListTagSearch">
 					<input type="text" name="tagSearch" id="tagSearch" placeholder="기타 태그 검색">
-					<button id="button">검색</button>
+					<input type="submit" id="button" value="검색">
 					<div id="priceTagSearch" class="tagSearches">
 						<h4>가격</h4>
 						<ul id="priceTag">
 							<li>
-								<input type="radio" name="price" value="10">
+								<input type="radio" name="price" value="10000">
 								<span>10,000 미만</span>
 							</li>
 							<li>
-								<input type="radio" name="price" value="30">
-								<span>30,000 미만</span>
+								<input type="radio" name="price" value="30000">
+								<span>10,000 이상 ~ 30,000 미만</span>
 							</li>
 							<li>
-								<input type="radio" name="price" value="50">
-								<span>50,000 미만</span>
+								<input type="radio" name="price" value="50000">
+								<span>30,000 이상 ~ 50,000 미만</span>
 							</li>
 							<li>
-								<input type="radio" name="price" value="5000">
+								<input type="radio" name="price" value="70000">
 								<span>50,000 이상</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="90000" checked hidden="hidden">
 							</li>
 						</ul>
 					</div>
@@ -64,35 +76,35 @@
 						<h4>태그</h4>
 						<ul id="genreTag">
 							<li>
-								<input type="checkbox" name="genre" value="액션" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="액션">
 								<span>액션</span>
 							</li>
 							<li>
-								<input type="checkbox" name="genre" value="퍼즐" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="퍼즐">
 								<span>퍼즐</span>
 							</li>
 							<li>
-								<input type="checkbox" name="genre" value="오픈 월드" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="오픈 월드">
 								<span>오픈 월드</span>
 							</li>
 							<li>
-								<input type="checkbox" name="genre" value="시뮬레이션" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="시뮬레이션">
 								<span>시뮬레이션</span>
 							</li>
 							<li>
-								<input type="checkbox" name="genre" value="생존" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="생존">
 								<span>생존</span>
 							</li>
 							<li>
-								<input type="checkbox" name="genre" value="좀비" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="좀비">
 								<span>좀비</span>
 							</li>
 							<li>
-								<input type="checkbox" name="genre" value="건설" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="건설">
 								<span>건설</span>
 							</li>
 							<li>
-								<input type="checkbox" name="genre" value="협동" onclick='checkGenre()'>
+								<input type="checkbox" name="genre[]" value="협동">
 								<span>협동</span>
 							</li>
 						</ul>
@@ -102,24 +114,7 @@
 			</div>			
 		</div>    	
 	</div>
-    <!-- <script th:inline="javascript">
-    function checkGenre() {
-        // 체크한 데이터를 담을 배열 선언
-        const arr = [];
-        // Name이 Color인 속성 취득
-        const genre = document.getElementsByName("genre");
-        let price = document.getElementsByName("price");
-        // 취득한 속성 만큼 루프
-        for (let i = 0; i < genre.length; i++) {
-          // 속성중에 체크 된 항목이 있을 경우
-          if (genre[i].checked == true) {
-          	arr.push(genre[i].value);
-          }
-        }
-        // 결과를 표시
-        console.log(arr);
-    }
-	</script> -->
+
     
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

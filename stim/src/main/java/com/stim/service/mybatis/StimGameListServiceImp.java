@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.stim.model.mapper.StimGameListMapper;
 import com.stim.vo.GameVO;
-import com.stim.vo.GenreVO;
 
 @Service
 public class StimGameListServiceImp implements StimGameListService {
@@ -53,6 +52,13 @@ public class StimGameListServiceImp implements StimGameListService {
 	@Override
 	public List<GameVO> SelectGameListByTags(String tag) throws Exception {
 		List<GameVO> tagList = stimGameListMapper.SelectGameListByTags(tag);
+		return tagList;
+	}
+
+
+	@Override
+	public List<GameVO> SelectGameListByTags(String tagSearch, int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListByTags(tagSearch, price);
 		return tagList;
 	}
 
