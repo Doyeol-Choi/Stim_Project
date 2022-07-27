@@ -22,6 +22,7 @@ public class StimWishCartController {
 	@Resource
 	private StimWishCartService stimWishCartService;
 
+	// 찜목록
 	@GetMapping("/wish/{user_code}")
 	public ModelAndView SelectWishGame(@PathVariable("user_code") int user_code) throws Exception {
 			
@@ -35,7 +36,7 @@ public class StimWishCartController {
         return mav;
 	}
 
-	
+	// 장바구니 목록
 	@GetMapping("/cart/{user_code}")
 	public ModelAndView SelectCartGame(@PathVariable("user_code")int user_code) throws Exception {
 		ModelAndView mav = new ModelAndView();

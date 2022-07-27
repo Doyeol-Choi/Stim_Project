@@ -43,12 +43,8 @@
 						<span class="delete_cart">삭제</span>
 					</button> -->
 					
-					<!-- <button class="cart_button" th:onclick="|location.href='@{/_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
-						<span class="delete_wish">결제</span>
-					</button> -->
-					<!-- <button class="cart_button" th:onclick="|insertcart(${wish.wish_code},${wish.user_code},${wish.game_code})|">
-						<span class="delete_wish">장바구니 추가</span>
-					</button> -->
+					
+					
 				</div>
 			</div>
     	</div>
@@ -61,10 +57,8 @@
     	<span th:if="${total == null}">
     		<span id="total_price" th:text="0"></span>
     	</span>
-    	<!-- <button class="pay_button" th:onclick="|IMP(${total})|">
-			<span class="pay">결제</span>
-		</button> -->
-		<button class="pay_button" id="pay" value="${total}">
+    	
+		<button class="pay_button" th:onclick="|paybtn(${user_code},${total})|">
 			<span class="pay">결제</span>
 		</button>
     </div>
@@ -73,7 +67,7 @@
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
     
     <script th:inline="javascript">
-    	document.cookie = "crossCookie=bar; SameSite=None; Secure";
+    	
 		function delcart(cart_code, game_price){
 			let id = "#cartListBox" + cart_code
 	         $.ajax({
@@ -88,37 +82,26 @@
 	               }
 	          });
 	      }
-		
-		$('#pay').click (function (total){
+		function paybtn(user_code, total){
 			
-		    var IMP = window.IMP; 
-		    IMP.init('TC0ONETIME'); 
-		    IMP.request_pay({
-		    	pg : "kakaopay", 
-		        pay_method : 'card',
-		        merchant_uid : 'merchant_' + new Date().getTime(),
-		        name : '결제',
-		        amount : total,
-		        buyer_email : '구매자 이메일',
-		        buyer_name : '구매자 이름',
-		        buyer_tel : '구매자 번호',
-		        buyer_addr : '구매자 주소',
-		        buyer_postcode : '구매자 주소',
-		        m_redirect_url : '/index'
-		        },  
-		        function(rsp) {
-		        if ( rsp.success ) {
-		            var msg = '결제가 완료되었습니다.';
-		            location.href='/';
-		        } else {
-		            var msg = '결제에 실패하였습니다.';
-		            rsp.error_msg;
-		            
-		        }
-		    });
-		});
+				$.ajax({
+					url:'/kakaopay' ,
+					data: { "user_code" : user_code,
+							"total":total
+						   },
+					dataType :'json',
+					success:function(data){
+						var box = data.next_redirect_pc_url;
+						window.open(box);
+					},
+					error:function(error){
+						alert(error);
+					}
+				});
+			};
+				
 		
-	
+		
 	</script>
     
 </body>
