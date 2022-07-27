@@ -21,7 +21,7 @@ public class StimGameListController {
 
 		
 	
-	/* 상점 페이지 이동 *///경민♥
+	/* 상점 페이지 이동 */
 	@GetMapping("/gameList")
 	public ModelAndView gameList() {
 		ModelAndView mav = new ModelAndView();
@@ -45,7 +45,7 @@ public class StimGameListController {
 	
 	
 	///////////////////////////////////////////////////////
-	/* 인기 게임 페이지 이동 *///경민♥
+	/* 인기 게임 페이지 이동 */
 	@GetMapping("/gameListPopular")
 	public ModelAndView popGameList() {
 		ModelAndView mav = new ModelAndView();
@@ -69,7 +69,7 @@ public class StimGameListController {
 	
 	
 	/////////////////////////////////////////////////////
-	/* 최신 게임 페이지 이동 *///경민♥
+	/* 최신 게임 페이지 이동 */
 	@RequestMapping("/gameListNew")
 	public ModelAndView newGameList() {
 		ModelAndView mav = new ModelAndView();
@@ -93,7 +93,7 @@ public class StimGameListController {
 	
 	
 	/////////////////////////////////////////////////////
-	/* 할인 게임 페이지 이동 */ //경민♥
+	/* 할인 게임 페이지 이동 */
 	@GetMapping("/gameListSale")
 	public String gameListSale() {
         return "game/gameListSale";
@@ -102,7 +102,7 @@ public class StimGameListController {
 	
 	
 	////////////////////////////////////////////////////	
-	/* 검색 페이지 이동 */ //경민♥
+	/* 검색 페이지 이동 */ 
 	@GetMapping("/gameListSearch")
 	public ModelAndView gameListSearch(@RequestParam(value="keyword") String keyword) {
 		ModelAndView mav = new ModelAndView();
@@ -125,7 +125,7 @@ public class StimGameListController {
 	
 	
 	////////////////////////////////////////////////////
-	/* 태그 검색 페이지 이동 *///경민♥
+	/* 태그 검색 페이지 이동 */
 	@GetMapping("/gameListTagSearch")
 	public ModelAndView gameTagSearch(@RequestParam(value="tagSearch") String tagSearch,
 									  @RequestParam(value="genre[]",required=false,defaultValue="") List<String> genre,
