@@ -71,14 +71,9 @@
     	SELECT * 
 		FROM game_tbl gm INNER JOIN genre_tbl gn
 		ON gm.game_code = gn.game_code
-		<where>
+  		
+			WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
+  			AND gm.game_price <![CDATA[<]]> #{price}
 
-			<!-- tagSearch와 price값이 둘 다 비어있지 않고 null이 아니라면 -->
-			(gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
-			OR (#{price}-20000 <![CDATA[<=]]> gm.game_price AND gm.game_price <![CDATA[<]]> #{price})
-			
-	  	  	  
-
-		</where>
     </select>
 </mapper>

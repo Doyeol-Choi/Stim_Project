@@ -133,7 +133,14 @@ public class StimGameListController {
 	ModelAndView mav = new ModelAndView();
 	try {		
 		List<GameVO> searchedByTag = stimGameListService.SelectGameListByTags(tagSearch, price);
-
+		String test = "";
+		
+		
+		for(int i=0; i<genre.size(); i++) {
+			test += genre.get(i) + ", ";
+		}
+		
+		test += tagSearch;
 		
 		System.out.println("태그: "+genre);	
 		System.out.println("태그 리스트 사이즈: " + genre.size());
@@ -141,6 +148,7 @@ public class StimGameListController {
 		System.out.println("검색된 태그의 게임 리스트 수: " + searchedByTag.size() +"\n");
 		
 		
+		mav.addObject("tag", test);
 		mav.addObject("gameList", searchedByTag);
 		mav.addObject("genre", genre);
 		mav.addObject("price", price);
