@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack</title>
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/adminHeader :: headerFragment"></th:block>
+    <div id="container">
+    	
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>
