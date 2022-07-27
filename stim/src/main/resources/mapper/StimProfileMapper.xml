@@ -23,20 +23,24 @@
 		WHERE user_id = #{user_id}
     </update>
     
-    <insert id="InsertComment" parameterType="String">
-    	INSERT INTO
-    	VALUES (comment_code_seq.nextval, #{user_code}, #{comment_nickname}, #{comment_context}, sysdate)
+    <insert id="InsertComment" parameterType="com.stim.vo.ProFileVO">
+    	INSERT INTO profile_comment_tbl
+    	VALUES (comment_code_seq.nextval, #{user_code}, #{comment_context}, sysdate, #{writer_code})
     </insert>
     
     <select id="getCommentInfo" parameterType="hashmap" resultType="com.stim.vo.ProFileVO">
-    	SELECT comment_code, 
-    		   c.user_code AS user_code, 
-    		   comment_nickname, 
-    		   comment_context, 
-    		   profile_regdate,
-    		   u.user_picture AS user_picture
-		FROM profile_comment_tbl c, user_tbl u
-		WHERE c.user_code = #{user_code}
+       SELECT comment_code, 
+       c.user_code AS user_code,  
+       u.user_nickname AS comment_nickname,
+       comment_context, 
+       profile_regdate,
+       user_picture 
+	   FROM user_tbl u, profile_comment_tbl c
+       WHERE u.user_code = c.writer_code
+       AND c.user_code = (SELECT user_code FROM user_tbl WHERE user_id = #{user_id})
+       ORDER BY profile_regdate desc
     </select>
+    
+    
     
 </mapper>

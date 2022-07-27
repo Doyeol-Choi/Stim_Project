@@ -40,20 +40,28 @@ DROP SEQUENCE comment_code_seq;
 CREATE TABLE profile_comment_tbl(
     comment_code number PRIMARY KEY,
     user_code number,
-    comment_nickname varchar2(20) NOT NULL,
     comment_context clob NOT NULL,
     profile_regdate date NOT NULL,
-    --write_code number,
+    writer_code number,
     CONSTRAINT FK_uCode FOREIGN KEY(user_code) REFERENCES user_tbl(user_code) 
 );
 CREATE SEQUENCE comment_code_seq NOCACHE;
 
 INSERT INTO profile_comment_tbl
-VALUES(comment_code_seq.nextval, 1, 'Sungmin', '테스트123', sysdate);
+VALUES(comment_code_seq.nextval, 1, '테스트123', sysdate, 1);
 INSERT INTO profile_comment_tbl
-VALUES(comment_code_seq.nextval, 1, 'Minji', '담배 마렵네', TO_DATE(20220624));
+VALUES(comment_code_seq.nextval, 1, '담배 마렵네', TO_DATE(20220624), 2);
 INSERT INTO profile_comment_tbl
-VALUES(comment_code_seq.nextval, 1, 'Minjung', '테스트321', TO_DATE(20220705));
+VALUES(comment_code_seq.nextval, 1, '테스트321', TO_DATE(20220705), 3);
+COMMIT;
+
+
+INSERT INTO profile_comment_tbl
+VALUES(comment_code_seq.nextval, 2, '테스트321', sysdate, 1);
+INSERT INTO profile_comment_tbl
+VALUES(comment_code_seq.nextval, 2, '민지민지', TO_DATE(20220624), 2);
+INSERT INTO profile_comment_tbl
+VALUES(comment_code_seq.nextval, 2, '테스트312321', TO_DATE(20220705), 3);
 COMMIT;
 
 SELECT comment_code, c.user_code AS user_code, comment_nickname AS writer, comment_context AS content, profile_regdate AS regDate 
@@ -61,12 +69,16 @@ FROM profile_comment_tbl c, user_tbl u
 WHERE c.user_code = u.user_code;
 
 SELECT * FROM profile_comment_tbl;
+
+
 SELECT comment_code, 
        c.user_code AS user_code,  
        comment_nickname, 
        comment_context, 
        profile_regdate,
-       (SELECT user_picture FROM user_tbl u, profile_comment_tbl c WHERE u.user_code IN 1 ) AS user_picture
-FROM profile_comment_tbl c, user_tbl u
-WHERE u.user_id = 'Sungmin';
+       user_picture,
+       user_nickname
+FROM user_tbl u, profile_comment_tbl c
+WHERE u.user_code = c.writer_code;
+
 -----------------------------------------

@@ -38,10 +38,13 @@
 		        	<div>
 		        		<div id="comment_page1"><h3>댓글</h3></div>
 		        		<div class="comment_page">
-			        		<a>${}개의 모든 댓글 보기</a>
-							<a>&lt;</a>
-							<span>1,2,3</span> <!-- 페이지 수 -->
-							<a>&gt;</a>
+		        			<div >
+		        				<a> <span th:text="${#lists.size(list)}"></span> 개의 모든 댓글 보기</a>
+								<!-- <a>&lt;</a>
+								<span>1,2,3</span> 페이지 수
+								<a>&gt;</a> -->
+		        			</div>
+			        		
 						</div>
 		        	</div>
 				</div>
@@ -59,14 +62,23 @@
 						<!-- 로그인 시 보이게 해야함 -->
 						<div class="comment_write">
 							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${user.user_picture}"> </a>
-							<form id="comment_form" action="comment" method="post">
-								<input type="hidden" name="user_id" value="${user.user_id}">
+							<form id="comment_form" th:action="@{/comment}" method="post">
+								<input type="hidden" name="user_code" th:value="${user.user_code}">
+								<input type="hidden" name="user_id" th:value="${user.user_id}"> 
+								<input type="hidden" name="writer_code" th:value="2"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
 								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
+								<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
 								<input type="submit" value="댓글 남기기">
 							</form>
 						</div>
-						<div class="comment_list">
-							<div >
+						<div class="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}">
+							<div class="comment_image">
+								<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}"> </a>
+							</div>
+							<div class="comment_content">
+								<span class="comment_nickname" th:text="${list.comment_nickname}"></span>
+								<span class="comment_context" th:text="${list.comment_context}"></span>
+								<span class="comment_regdate" th:text="${'작성 일 :' + #dates.format(list.profile_regdate,'yyyy-MM-dd HH:mm')}"></span>
 							</div>
 						</div>
 					</div>
@@ -87,6 +99,25 @@
 		    </div>
     </div>	
     <!-- footer fragment 사용 -->
-    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+    <!-- <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+    <script th:inline="javascript">
+    	function insertComment(user_code, user_id, writer_code, comment_text){
+    		$.ajax({
+    			url: "comment",
+    			type: "POST",
+    			async: true,
+    			data: {
+    				"user_code" : user_code,
+    				"user_id" : user_id,
+    				"writer_code" : writer_code,
+    				"comment_text" : comment_text
+    			}, datatype: "text",
+    			success : function(data){
+    				alert("ss");
+    				'#mentListBox' + writer_code.append()
+    			}
+    		});
+    	}
+    </script> -->
 </body>
 </html>

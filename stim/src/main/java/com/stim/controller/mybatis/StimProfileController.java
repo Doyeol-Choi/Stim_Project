@@ -1,5 +1,7 @@
 package com.stim.controller.mybatis;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.stim.service.mybatis.StimProfileService;
 import com.stim.service.user.StimUserService;
+import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
 
 @RestController
@@ -25,10 +28,6 @@ public class StimProfileController {
 	private StimProfileService stimProfileService;
 	@Resource private StimUserService stimUserService;
 
-	public void setStimProfileService(StimProfileService stimProfileService) {
-		this.stimProfileService = stimProfileService;
-	}
-
 	/* 프로필 */
 	@GetMapping("/profile/{user_id}")
 	public ModelAndView profileList(@PathVariable("user_id") String user_id) {
@@ -36,7 +35,11 @@ public class StimProfileController {
 		
 		try {
 			UserVO uVo = stimProfileService.SelectById(user_id);
+			
+			List<ProFileVO> list = stimProfileService.getCommentInfo(user_id);
+			
 			mav.addObject("user", uVo);
+			mav.addObject("list", list);
 			
 			mav.setViewName("profile/profile");
 			
@@ -48,6 +51,7 @@ public class StimProfileController {
 		return mav;
 	}
 	
+	//프로필 수정
 	@GetMapping("/profile/edit/{user_id}")
 	public ModelAndView profileUpdate(@PathVariable("user_id") String user_id) {
 		ModelAndView mav = new ModelAndView();
@@ -66,7 +70,7 @@ public class StimProfileController {
 		return mav;
 	}
 	
-	
+	//프로필 수정
 	@PostMapping("/profile/edit/update")
 	public ModelAndView profileNewUpdate(@Valid UserVO uVo, Errors errors) {
 		ModelAndView mav = new ModelAndView();
@@ -100,15 +104,42 @@ public class StimProfileController {
 		return mav;
 	}
 	
+	//댓글 저장 No Ajax
 	@PostMapping("/comment")
-	public RedirectView InsertComment(@RequestParam("user_id") String user_id,
-									  @RequestParam("comment_text") String comment_text) throws Exception {
-		
-		stimProfileService.InsertComment(user_id, comment_text);
+	public RedirectView InsertComment(@RequestParam("user_code") int user_code,
+									  @RequestParam("comment_text") String comment_text,
+									  @RequestParam("writer_code") int writer_code,
+									  @RequestParam("user_id") String user_id) throws Exception {
+		System.out.println("인서트 테스트");
+		ProFileVO pVo = new ProFileVO();
+		pVo.setUser_code(user_code);
+		pVo.setComment_context(comment_text);
+		pVo.setWriter_code(writer_code);
+		stimProfileService.InsertComment(pVo);
 		
 		String url = "/profile/" + user_id;
+		System.out.println(url);
+		
 		return new RedirectView(url);
 	}
 	
-	
+	//댓글 저장 ajax
+//	@PostMapping("/comment")
+//	public void InsertComment(@RequestParam("user_code") int user_code,
+//							  @RequestParam("writer_code") int writer_code,
+//							  @RequestParam("comment_text") String comment_text) throws Exception{
+//		
+//		//테스트 용
+//		System.out.println(user_code);
+//		System.out.println(writer_code);
+//		System.out.println(comment_text);
+//		//
+//		
+//		ProFileVO pVo = new ProFileVO();
+//		pVo.setUser_code(user_code);
+//		pVo.setComment_context(comment_text);
+//		pVo.setWriter_code(writer_code);
+//		
+//		stimProfileService.InsertComment(pVo);
+//	}
 }

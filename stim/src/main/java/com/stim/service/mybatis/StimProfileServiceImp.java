@@ -33,13 +33,13 @@ public class StimProfileServiceImp implements StimProfileService {
 
 	@Override
 	@Transactional
-	public void InsertComment(String user_id, String comment_text ) throws Exception {
-		stimProfileMapper.InsertComment(user_id, comment_text);
+	public void InsertComment(ProFileVO pVo) throws Exception {
+		stimProfileMapper.InsertComment(pVo);
 	}
 
 	@Override
-	public List<ProFileVO> getCommentInfo(HashMap<String, Integer> map) throws Exception {
-		return stimProfileMapper.getCommentInfo(map);
+	public List<ProFileVO> getCommentInfo(String user_id) throws Exception {
+		return stimProfileMapper.getCommentInfo(user_id);
 	}
 	 
 	

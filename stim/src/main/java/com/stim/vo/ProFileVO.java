@@ -12,5 +12,10 @@ public class ProFileVO {
 	private String comment_nickname;
 	private String comment_context;
 	private Date profile_regdate;
+	private int writer_code;
 	private String user_picture;
+	
+	public ProFileVO() {
+	}
+	
 }

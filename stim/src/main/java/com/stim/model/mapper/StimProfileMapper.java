@@ -26,10 +26,10 @@ public interface StimProfileMapper {
 
 	
 	// 댓글 삽입
-	public void InsertComment(String user_id, String comment_text);
+	public void InsertComment(ProFileVO pVo);
 
 	// 댓글 출력
-	public List<ProFileVO> getCommentInfo(HashMap<String, Integer> map);
+	public List<ProFileVO> getCommentInfo(String user_id);
 	
 	
 	

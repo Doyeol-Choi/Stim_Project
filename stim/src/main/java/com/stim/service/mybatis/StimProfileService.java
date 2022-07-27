@@ -14,7 +14,7 @@ public interface StimProfileService {
 
 	public void DeleteById(String user_id) throws Exception;
 	
-	public void InsertComment(String user_id, String comment_text) throws Exception;
+	public void InsertComment(ProFileVO pVo) throws Exception;
 	
-	public List<ProFileVO> getCommentInfo(HashMap<String, Integer> map) throws Exception;
+	public List<ProFileVO> getCommentInfo(String user_id) throws Exception;
 }
