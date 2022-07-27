@@ -57,8 +57,8 @@ public class StimGameListServiceImp implements StimGameListService {
 
 
 	@Override
-	public List<GameVO> SelectGameListByTags(String tagSearch, int price) throws Exception {
-		List<GameVO> tagList = stimGameListMapper.SelectGameListByTags(tagSearch, price);
+	public List<GameVO> SelectAllGameListByPrice(int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectAllGameListByPrice(price);
 		return tagList;
 	}
 

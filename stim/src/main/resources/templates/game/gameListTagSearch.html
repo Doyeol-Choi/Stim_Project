@@ -7,7 +7,7 @@
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameSearch.css?after}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameTagSearch.css?after}">
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -16,9 +16,8 @@
     <div id="container">
 	    <div id = "gameLists">
 	   	<h1>게임 목록</h1>
-	   	<p th:text="${gameList.size} + '개의 항목이 검색되었습니다.'" />
-	   	<!-- <p th:if="${not #lists.isEmpty(genre)}" th:text="|${#strings.substring(#strings.toString(genre)}, ${tag}|" /> -->
-		<p th:if="${not #strings.isEmpty(tag)}" th:text="${tag}" />
+	   	<p th:text="${gameList.size} + '개의 항목이 검색되었습니다.'" id = "searchNum"/>
+		<p th:if="${not #strings.isEmpty(tag)}" th:text="'선택한 태그 항목: ' + ${tag}" id="selectWhat" />
 			<div id="gameList" class="games">
 				<table id="gameListTable">
 					<tr>
@@ -47,12 +46,13 @@
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
 						<td th:text="${list.game_price}" id="gSetPrice"></td>
 						<td th:inline="text" id="gTags">
-						    [[${list.genre_1}]] <span th:text="${#strings.indexOf(list.genre_1, tag)}"></span>
+						    [[${list.genre_1}]]
 						    <br><br>
 						    [[${list.genre_2}]]
 						    <br><br>
 						    [[${list.genre_3}]]
 						</td>
+						</th:block>
 					</tr>
 				</table>
 		
@@ -69,19 +69,19 @@
 						<ul id="priceTag">
 							<li>
 								<input type="radio" name="price" value="10000">
-								<span>10,000 미만</span>
+								<span>10,000 이하</span>
 							</li>
 							<li>
 								<input type="radio" name="price" value="30000">
-								<span>30,000 미만</span>
+								<span>30,000 이하</span>
 							</li>
 							<li>
 								<input type="radio" name="price" value="50000">
-								<span>50,000 미만</span>
+								<span>50,000 이하</span>
 							</li>
 							<li>
 								<input type="radio" name="price" value="100000">
-								<span>100,000 미만</span>
+								<span>100,000 이하</span>
 							</li>
 							<li>
 								<input type="radio" name="price" value="1000000" checked hidden="hidden">

@@ -65,15 +65,36 @@
     	<result column="game_picture" property="game_picture"/>
     </resultMap>
    
-    
-    
     <select id="SelectGameListByTags" resultMap="gameMap, genreMap">
     	SELECT * 
 		FROM game_tbl gm INNER JOIN genre_tbl gn
 		ON gm.game_code = gn.game_code
-  		
-			WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
-  			AND gm.game_price <![CDATA[<]]> #{price}
+		WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
+		ORDER BY gm.game_code DESC
+		<!-- AND gm.game_price <![CDATA[<]]> #{price} -->
 
     </select>
+   
+   	<!-- 게임 상점 목록 출력 (게임 코드 내림차순) -->
+    <select id="SelectAllGameListByPrice" resultMap="gameMap, genreMap">
+       	<include refid="selectAll" />
+       	Where gm.game_price <![CDATA[<]]> #{price}
+		ORDER BY gm.game_code DESC
+    </select>
+   
+    
+    
+    <!-- 할인하는 게임 목록 출력 -->
+    <select id="" resultMap="gameMap, genreMap">
+    	<include refid="selectAll" />
+		<if test="keyword != null">
+			where LOWER(gm.game_name) like '%'||#{keyword}||'%'
+			OR LOWER(gm.game_developer) like '%'||#{keyword}||'%'
+			OR LOWER(gm.game_context) like '%'||#{keyword}||'%'
+			ORDER BY gm.game_code DESC
+		</if>
+    </select>
+    
+    
+    
 </mapper>

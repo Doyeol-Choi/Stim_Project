@@ -26,6 +26,6 @@ public interface StimGameListMapper {
 	// 태그로 검색된 게임 리스트 조회
 	public List<GameVO> SelectGameListByTags(String tag) throws Exception;
 
-	public List<GameVO> SelectGameListByTags(String tagSearch, int price);
+	public List<GameVO> SelectAllGameListByPrice(int price);
 	
 }

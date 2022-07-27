@@ -3,7 +3,6 @@ package com.stim.service.mybatis;
 import java.util.List;
 
 import com.stim.vo.GameVO;
-import com.stim.vo.GenreVO;
 
 public interface StimGameListService {
 
@@ -22,5 +21,5 @@ public interface StimGameListService {
 	// 태그로 검색된 게임 리스트 조회
 	public List<GameVO> SelectGameListByTags(String tag) throws Exception;
 
-	public List<GameVO> SelectGameListByTags(String tagSearch, int price) throws Exception;
+	public List<GameVO> SelectAllGameListByPrice(int price) throws Exception;
 }
