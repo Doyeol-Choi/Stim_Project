@@ -111,6 +111,14 @@ CREATE TABLE sale_tbl(
 
 CREATE SEQUENCE sale_code_seq NOCACHE;
 
+-- 로그인 유지를 위한 테이블
+CREATE TABLE persistent_logins (
+    username varchar(64),
+    series varchar(64) PRIMARY KEY,
+    token varchar(64),
+    last_used timestamp
+);
+
 -- 친구 테이블 외래키
 ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user1 FOREIGN KEY(friend_user1) references user_tbl (user_code);
 ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user2 FOREIGN KEY(friend_user2) references user_tbl (user_code);
