@@ -27,4 +27,7 @@ public interface StimWishCartMapper {
 	
 	// 장바구니 총금액
 	public Integer TotalPriceGame(int user_code) throws Exception;
+	
+	// 결제완료 후 장바구니 목록 삭제
+	public void DeleteCartAllGame(int user_code) throws Exception;
 }

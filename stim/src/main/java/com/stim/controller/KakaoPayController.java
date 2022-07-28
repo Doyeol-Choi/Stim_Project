@@ -37,7 +37,7 @@ public class KakaoPayController {
 				// 정보 파라미터
 				String pram = "cid=TC0ONETIME&partner_order_id=partner_order_id&"
 						+ "partner_user_id=partner_user_id&item_name=game&quantity=1&total_amount="+total+"&"
-						+ "tax_free_amount=0&approval_url=http://localhost:4860/&fail_url=http://localhost:4860/cart/"+user_code+"&"
+						+ "tax_free_amount=0&approval_url=http://localhost:4860/pay_success"+user_code+"&fail_url=http://localhost:4860/cart/"+user_code+"&"
 						+ "cancel_url=http://localhost:4860/cart/"+user_code;
 				OutputStream out = server.getOutputStream();	// 주는애
 				DataOutputStream dataOut = new DataOutputStream(out);	//데이터 주는놈

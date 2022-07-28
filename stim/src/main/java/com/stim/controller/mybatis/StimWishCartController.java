@@ -118,6 +118,29 @@ public class StimWishCartController {
 		stimWishCartService.InsertCartGame(user_code, game_code);  
 	  
 	  }
-	 
+	// 결제완료
+	
+	  @GetMapping("/pay_success/{user_code}") 
+	  public RedirectView PaySuccess(
+			  @PathVariable("user_code") int user_code,
+			  @RequestParam("page") int page ) throws Exception {
+		  
+	  stimWishCartService.DeleteCartAllGame(user_code);  
+	  
+	  String main = "/";
+	  String profile = "/profile/"+ user_code;
+	  if(page == 1) {
+		  return new RedirectView(main);
+	  }else if (page == 2 ) {
+		  return new RedirectView(profile);
+	  }
+	  return null;
+	  
+	  }
+	
+	
+	
+	
+	
 }
 

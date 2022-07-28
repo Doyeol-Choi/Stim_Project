@@ -51,4 +51,11 @@
 		group by c.user_code
     </select>
     
+    <!-- 결제 완료후 장바구니 목록 삭제 -->
+    <delete id="DeleteCartAllGame" parameterType="int">
+    	DELETE cart_tbl WHERE user_code = #{user_code}
+    </delete>
+
+    
+    
 </mapper>
