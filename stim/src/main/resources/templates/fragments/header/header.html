@@ -4,10 +4,12 @@
 <header th:fragment="headerFragment">
 	<div id="header">
         <a href="/"><img id="stim_logo" th:src="@{/image/Stim_logo_white.png}"></a>
+        <!-- 로그인 전 후 nav 만들어야함 -->
         <nav id="headerNav">
         	<ul>
 	           <li><a href="/gameList">상점</a></li>
-	           <li><a th:href="@{/profile/Doyeol} ">정보</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
+	           <!-- 로그인 구현 시 수정해야함  -->
+	           <li><a th:href="@{/profile/1} ">정보</a></li> <!--로그인 시  th:href="@{/profile/${user.user_code}}  -->
 	           <li><a href="#">지원</a></li>
 	       </ul>
         </nav>

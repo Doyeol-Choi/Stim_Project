@@ -105,4 +105,7 @@ public class UserVO implements UserDetails, OAuth2User {
 		return oAuth2UserVO.getProviderId();
 	}
 
+
+
+
 }

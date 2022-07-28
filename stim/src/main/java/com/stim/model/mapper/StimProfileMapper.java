@@ -1,18 +1,35 @@
 package com.stim.model.mapper;
 
-
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
 
 @Mapper
 public interface StimProfileMapper {
 
-	// 예시 메서드 수정해서 사용
-	public UserVO SelectById(String user_id) throws Exception;
-
-	public UserVO SelectByIdForUpdate(String user_id);
+	// 유저 프로필 
 	
-	//public List<Map<String, Object>> SelectById() throws Exception;
+	// - 1. 유저 검색 후 프로필 출력
+	public UserVO SelectById(int user_code) throws Exception;
+
+	// - 2. 유저 검색 후 업데이트 
+	public void SelectByIdForUpdate(UserVO uVo);
+	
+	// 
+	public void DeleteById(String user_id) throws Exception;
+
+	
+	// 댓글 삽입
+	public void InsertComment(ProFileVO pVo);
+
+	// 댓글 출력
+	public List<ProFileVO> getCommentInfo(int user_code);
+	
+	
+	
+	
+	
 }
