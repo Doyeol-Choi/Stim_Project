@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack 게임 상세 페이지</title>
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameDetailView.css?after}">
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <div id="container">
+    	<div id="contents">
+	    	<h1>{game_name}</h1>
+	    	<div id="gameImg" class="gameInformation">
+	    		<img alt="" src="">
+	    		<div id="aboutGame" class="gameInformation">
+	    			<section id="gameSection">
+    					<article id="gameContext">
+	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+	    				</article>
+					</section>
+					<section>
+    					<article id="gameGrade">
+	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
+	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
+	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
+	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
+	    				</article>
+					</section>
+    			</div>
+	    	</div>
+	    	<div id="gameInfo" class="gameInformation">
+	    		<div id="barBackground">
+		    		<div id="barText">
+			    		<ul>
+			    			<li>개발사</li>
+			    			<li>배급사</li>
+			    			<li>출시일</li>
+			    			<li>태그 1, 2, 3</li>
+			    		</ul>
+			    		장바구니
+		    			찜하기
+		    		</div>
+	    		</div>
+	    	</div>	   	
+    	</div>
+    	
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>

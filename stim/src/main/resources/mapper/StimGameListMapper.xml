@@ -5,6 +5,19 @@
   
 <mapper namespace="com.stim.model.mapper.StimGameListMapper">
 	
+    <resultMap type="com.stim.vo.GameVO" id="gameMap">
+    	<result column="game_code" property="game_code"/>
+    	<result column="game_name" property="game_name"/>
+    	<result column="game_price" property="game_price"/>
+    	<result column="game_releaseDate" property="game_releaseDate"/>
+    	<result column="game_developer" property="game_developer"/>
+    	<result column="game_distribution" property="game_distribution"/>
+    	<result column="game_context" property="game_context"/>
+    	<result column="game_salesRate" property="game_salesRate"/>
+    	<result column="game_picture" property="game_picture"/>
+    </resultMap>
+	
+	
 	<sql id="selectAll">
       	SELECT * 
 		FROM game_tbl gm INNER JOIN genre_tbl gn
@@ -35,7 +48,7 @@
     
     
     <!-- 특정 키워드에 따라 검색된 게임 목록 출력 -->
-    <select id="SelectGameListByKeyword" resultMap="gameMap">
+    <select id="SelectGameListByKeyword" resultMap="gameMap" parameterType="String">
     	<include refid="selectAll" />
 		<if test="keyword != null">
 			where LOWER(gm.game_name) like '%'||#{keyword}||'%'
@@ -44,21 +57,7 @@
 			ORDER BY gm.game_code DESC
 		</if>
     </select>
-    
-    
-    
 
-    <resultMap type="com.stim.vo.GameVO" id="gameMap">
-    	<result column="game_code" property="game_code"/>
-    	<result column="game_name" property="game_name"/>
-    	<result column="game_price" property="game_price"/>
-    	<result column="game_releaseDate" property="game_releaseDate"/>
-    	<result column="game_developer" property="game_developer"/>
-    	<result column="game_distribution" property="game_distribution"/>
-    	<result column="game_context" property="game_context"/>
-    	<result column="game_salesRate" property="game_salesRate"/>
-    	<result column="game_picture" property="game_picture"/>
-    </resultMap>
    
    <!-- 장르에 검색한 tag가 포함되어 있는 게임 목록 출력  -->
     <select id="SelectGameListByTags" resultMap="gameMap">
@@ -66,12 +65,12 @@
 		FROM game_tbl gm INNER JOIN genre_tbl gn
 		ON gm.game_code = gn.game_code
 		WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
+<!-- 		AND gm.game_price <![CDATA[<=]]> #{price} -->
 		ORDER BY gm.game_code DESC
-		<!-- AND gm.game_price <![CDATA[<=]]> #{price} -->
     </select>
    
    	<!-- 선택한 값 이하의 게임 목록을 출력 -->
-    <select id="SelectAllGameListByPrice" resultMap="gameMap">
+    <select id="SelectAllGameListByPrice" resultMap="gameMap" parameterType="int">
        	<include refid="selectAll" />
        	Where gm.game_price <![CDATA[<=]]> #{price}
 		ORDER BY gm.game_code DESC
@@ -82,7 +81,7 @@
     <!-- 할인하는 게임 목록 출력 -->
     <select id="SelectAllGameListForSale" resultMap="gameMap">
     	<include refid="selectAll" />
-		ORDER BY gm.game_name DESC
+		ORDER BY gm.game_name ASC
     </select>
     
     

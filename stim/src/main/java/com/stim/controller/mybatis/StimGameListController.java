@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.vo.GameVO;
+import com.stim.vo.ProFileVO;
+import com.stim.vo.UserVO;
 
 @RestController
 public class StimGameListController {
@@ -33,8 +36,6 @@ public class StimGameListController {
 
 	        mav.setViewName("game/gameList");
 			System.out.println("게임 리스트 수: " + list.size()); // 콘솔 확인 용
-
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -50,15 +51,11 @@ public class StimGameListController {
 	public ModelAndView popGameList() {
 		ModelAndView mav = new ModelAndView();
 		try {
-			
-			
-			List<GameVO> popGList = stimGameListService.SelectPopularGameList();
+			List<GameVO> popGList = stimGameListService.SelectPopularGameList(); 
 			mav.addObject("gameList", popGList);
 
-	        mav.setViewName("game/gameListPopular");
+	        mav.setViewName("game/gameListPopular"); // 인기 페이지 이동
 			System.out.println("인기 게임 리스트 수: " + popGList.size()); // 콘솔 확인 용
-
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,16 +70,13 @@ public class StimGameListController {
 	@RequestMapping("/gameListNew")
 	public ModelAndView newGameList() {
 		ModelAndView mav = new ModelAndView();
-		try {
-			
-			
+		try {			
 			List<GameVO> newGList = stimGameListService.SelectNewestGameList();
 			mav.addObject("gameList", newGList);
 
-	        mav.setViewName("game/gameListNew");
+	        mav.setViewName("game/gameListNew"); // 최신 게임 페이지 이동
 			System.out.println("최신 게임 리스트 수: " + newGList.size()); // 콘솔 확인 용
 
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -98,15 +92,11 @@ public class StimGameListController {
 	public ModelAndView gameListSale() {
 		ModelAndView mav = new ModelAndView();
 		try {
-			
-			
 			List<GameVO> saleGList = stimGameListService.SelectAllGameListForSale();
 			mav.addObject("gameList", saleGList);
 
-	        mav.setViewName("game/gameListSale");
-			System.out.println("최신 게임 리스트 수: " + saleGList.size()); // 콘솔 확인 용
-
-			
+	        mav.setViewName("game/gameListSale"); // 할인 페이지 이동
+			System.out.println("할인 게임 리스트 수: " + saleGList.size()); // 콘솔 확인 용			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,10 +116,8 @@ public class StimGameListController {
 			List<GameVO> searchedByKey = stimGameListService.SelectGameListByKeyword(keyword);
 			mav.addObject("gameList", searchedByKey);
 			
-	        mav.setViewName("game/gameListSearch");
-			System.out.println("검색된 게임 리스트 수: " + searchedByKey.size());
-
-			
+	        mav.setViewName("game/gameListSearch"); // 검색 페이지 이동
+			System.out.println("검색된 게임 리스트 수: " + searchedByKey.size()); // 콘솔 확인용
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -157,10 +145,7 @@ public class StimGameListController {
 					
 				}
 				
-				String test = "";
-				
-				
-
+				String test = ""; // 체크한 태그 받을 문자열
 				for(int i=0; i<genre.size(); i++) { // checkbox에서 선택한 태그들의 수만큼 for문을 돌린다.
 					test += genre.get(i) + ", "; // (태그), 형태로 문자열에 추가된다.
 					for(int j=0; j<searchedByTag.size(); j++) { // tagSearch 검색어 조건에 맞는 게임들의 리스트 크기만큼 for문을 돌린다.
@@ -178,9 +163,7 @@ public class StimGameListController {
 								searchedByTag.remove(j);
 								j--; // 다시 이전 번호로 돌아가 확인						
 							}
-							
 						}
-						
 					}
 				}
 			
@@ -190,22 +173,17 @@ public class StimGameListController {
 				if(test.endsWith(", ")) {
 					test = test.substring(0, test.length()-2);
 				}
-				
-				
+								
 
 				// 콘솔 확인 용:: 콘솔에 선택한 태그와 가격, 검색된 리스트의 수를 출력한다.
 				System.out.println("태그: "+test);	
 				System.out.println("가격: "+price);
 				System.out.println("검색된 태그의 게임 리스트 수: " + searchedByTag.size() +"\n");
 				
-				
 				mav.addObject("tag", test);
 				mav.addObject("gameList", searchedByTag);
 				
-				mav.setViewName("game/gameListTagSearch");
-		
-			
-		
+				mav.setViewName("game/gameListTagSearch"); // 게임 태그 검색 페이지 이동		
 		}catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -214,6 +192,22 @@ public class StimGameListController {
 	}
 	
 
+	////////////////////////////////////////////////////
+	/* 게임 상세 페이지 이동 */
+	@GetMapping("/gameDetailView")
+	public ModelAndView gameDetailViewPage(@RequestParam(value="game_code") int game_code) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		try {
+			System.out.println("받은 게임 코드: " + game_code);
+			
+			
+			
+			mav.setViewName("game/gameDetailView");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return mav;
+	}
 	
 
 }
