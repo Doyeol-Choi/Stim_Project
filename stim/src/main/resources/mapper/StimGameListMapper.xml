@@ -12,14 +12,14 @@
 	</sql>
 	
 	<!-- 게임 상점 목록 출력 (게임 코드 내림차순) -->
-    <select id="SelectAllGameList" resultMap="gameMap, genreMap">
+    <select id="SelectAllGameList" resultMap="gameMap">
        <include refid="selectAll" />
 		ORDER BY gm.game_code DESC
     </select>
     
     
     <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) -->
-    <select id="SelectNewestGameList" resultMap="gameMap, genreMap">
+    <select id="SelectNewestGameList" resultMap="gameMap">
         <include refid="selectAll" />
         WHERE rownum <![CDATA[<=]]> 10
 		ORDER BY gm.game_releaseDate DESC
@@ -27,7 +27,7 @@
     
     
     <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) -->
-    <select id="SelectPopularGameList" resultMap="gameMap, genreMap">
+    <select id="SelectPopularGameList" resultMap="gameMap">
      	<include refid="selectAll" />
      	WHERE rownum <![CDATA[<=]]> 10
 		ORDER BY gm.game_salesRate DESC	
@@ -35,7 +35,7 @@
     
     
     <!-- 특정 키워드에 따라 검색된 게임 목록 출력 -->
-    <select id="SelectGameListByKeyword" resultMap="gameMap, genreMap">
+    <select id="SelectGameListByKeyword" resultMap="gameMap">
     	<include refid="selectAll" />
 		<if test="keyword != null">
 			where LOWER(gm.game_name) like '%'||#{keyword}||'%'
@@ -47,14 +47,7 @@
     
     
     
-    
-    <resultMap type="com.stim.vo.GenreVO" id="genreMap">
-    	<result column="genre_code" property="genre_code"/>
-    	<result column="game_code" property="game_code"/>
-    	<result column="genre_1" property="genre_1"/>
-    	<result column="genre_2" property="genre_2"/>
-    	<result column="genre_3" property="genre_3"/>
-    </resultMap>
+
     <resultMap type="com.stim.vo.GameVO" id="gameMap">
     	<result column="game_code" property="game_code"/>
     	<result column="game_name" property="game_name"/>
@@ -68,7 +61,7 @@
     </resultMap>
    
    <!-- 장르에 검색한 tag가 포함되어 있는 게임 목록 출력  -->
-    <select id="SelectGameListByTags" resultMap="gameMap, genreMap">
+    <select id="SelectGameListByTags" resultMap="gameMap">
     	SELECT * 
 		FROM game_tbl gm INNER JOIN genre_tbl gn
 		ON gm.game_code = gn.game_code
@@ -78,7 +71,7 @@
     </select>
    
    	<!-- 선택한 값 이하의 게임 목록을 출력 -->
-    <select id="SelectAllGameListByPrice" resultMap="gameMap, genreMap">
+    <select id="SelectAllGameListByPrice" resultMap="gameMap">
        	<include refid="selectAll" />
        	Where gm.game_price <![CDATA[<=]]> #{price}
 		ORDER BY gm.game_code DESC
@@ -87,7 +80,7 @@
     
     
     <!-- 할인하는 게임 목록 출력 -->
-    <select id="SelectAllGameListForSale" resultMap="gameMap, genreMap">
+    <select id="SelectAllGameListForSale" resultMap="gameMap">
     	<include refid="selectAll" />
 		ORDER BY gm.game_name DESC
     </select>
