@@ -50,11 +50,28 @@ public class StimWishCartServiceImp implements StimWishCartService {
 		return stimWishCartMapper.TotalPriceGame(user_code);
 		
 	}
+	// 결제 완료 후 보유게임 목록에 넣기
+	@Override
+	@Transactional
+	public void InsertMyGame(int user_code, int game_code) throws Exception{
+		stimWishCartMapper.InsertMyGame(user_code, game_code);
+	}
+	
+	
 	// 결제완료 후 장바구니 목록 삭제
 	@Override
 	@Transactional
 	public void DeleteCartAllGame(int user_code) throws Exception{
 		stimWishCartMapper.DeleteCartAllGame(user_code);
 	}
+	// 결제완료 후 찜목록 삭제
+	@Override
+	@Transactional
+	public void DeleteWishAllGame(int user_code, int game_code) throws Exception {
+		stimWishCartMapper.DeleteWishAllGame(user_code, game_code);
+		
+	}
+	
+
 	
 }
