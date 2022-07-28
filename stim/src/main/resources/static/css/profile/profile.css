@@ -33,14 +33,14 @@ div{
     width: 184px;
     height: 184px;
     margin: 3%;
+    text-align: center;
 }
-#profile_avartar > button {
-	border: none;
-	background-color: transparent;
-	z-index: 10;
+#profile_avartar > a {
+	color: white;
 }
-#profile_avartar > button:hover {
+#profile_avartar > a:hover {
 	cursor: pointer;
+	color: #00AEEF;
 }
 /* 프로필 아이디 */
 #profile_id{

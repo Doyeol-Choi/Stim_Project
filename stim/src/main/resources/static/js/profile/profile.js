@@ -1,5 +1,5 @@
 function changPicture(user_code) {
-	let url = "changePicture?user_code="+user_code;
+	let url = "/changePicture?user_code="+user_code.toString();
 	
-	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbar=yes, resizeable=no, width=450, height=200");
+	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbar=yes, resizeable=no, width=450, height=300");
 }

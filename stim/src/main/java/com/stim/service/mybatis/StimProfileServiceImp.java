@@ -16,6 +16,8 @@ public class StimProfileServiceImp implements StimProfileService {
 	@Autowired
 	StimProfileMapper stimProfileMapper;
 	
+//	Logger log = LoggerFactory.getLogger(getClass());
+	
 	@Override
 	public UserVO SelectById(int user_code) throws Exception { 
 		return	stimProfileMapper.SelectById(user_code); 
@@ -43,7 +45,22 @@ public class StimProfileServiceImp implements StimProfileService {
 		return stimProfileMapper.getCommentInfo(user_code);
 	}
 	 
-	
+//	public void fileUpload(MultipartFile multipartFile) {
+//		String uploadDir = "";
+//		Path serverPath = Paths.get(
+//                uploadDir +
+//                        File.separator +
+//                        StringUtils.cleanPath(multipartFile.getOriginalFilename()));
+//
+//        try {
+//            Files.copy(multipartFile.getInputStream(), serverPath, StandardCopyOption.REPLACE_EXISTING);
+//        } catch (IOException e) {
+//            log.error("fail to store file : name={}, exception={}",
+//                      multipartFile.getOriginalFilename(),
+//                      e.getMessage());
+//            throw new FileStorageException("fail to store file");
+//        }
+//    }
 
 	
 }

@@ -1,9 +1,11 @@
 package com.stim.controller.mybatis;
 
+import java.net.URL;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.security.core.Authentication;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -100,6 +103,49 @@ public class StimProfileController {
 			e.printStackTrace();
 		}
 		return mav;
+	}
+	
+	// 프로필 사진 변경폼으로 이동
+	@GetMapping("/changePicture")
+	public ModelAndView ChangePicture(@RequestParam("user_code") int user_code, Authentication authentication) {
+		ModelAndView mav = new ModelAndView();
+		// 로그인 체크
+		if (authentication != null) {
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			// 로그인 유저와 프로필 유저가 같은지 체크
+			if (uVo.getUser_code() == user_code) {						
+				mav.addObject("user_code", user_code);
+				mav.setViewName("profile/edit/pictureUpdateForm");
+				
+				return mav;
+			}
+		}
+		mav.setViewName("redirect:/");
+		return mav;
+	}
+	
+	// 프로필 사진 업데이트
+	@PostMapping("/pictureUpdate")
+	public RedirectView pictureUpdate(@RequestParam("user_code") int user_code, @RequestParam("picture") MultipartFile file, Authentication authentication) {
+		// 로그인 체크
+		if (authentication != null) {
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			// 로그인 유저와 프로필 유저가 같은지 체크
+			if (uVo.getUser_code() == user_code) {						
+				
+				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/profile/");
+				System.out.println(path);
+//			    File dest = new File(filePath);
+//			    files.transferTo(dest);
+				
+				
+				String url = "redirect:/profile/" + user_code;
+				
+				return new RedirectView(url);
+			}
+		}
+		String url = "redirect:/";
+		return new RedirectView(url);
 	}
 	
 	//댓글 저장 No Ajax
