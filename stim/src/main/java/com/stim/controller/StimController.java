@@ -19,7 +19,7 @@ public class StimController {
 	
 	@GetMapping("/adminPage")
 	public String adminPage(Authentication authentication) {
-		if(authentication.getPrincipal() != null) {
+		if(authentication != null) {
 			UserVO uVo = (UserVO) authentication.getPrincipal();
 			if (uVo.getUser_admin().equals("Y")) {
 				return "/admin/admin"; 

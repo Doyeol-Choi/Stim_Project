@@ -7,7 +7,7 @@
         <nav id="headerNav">
         	<ul>
 	           <li><a href="/gameList">상점</a></li>
-	           <li><a th:href="@{/profile/Doyeol} ">정보</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
+	           <li><a th:href="@{/profile/Doyeol} ">유저 찾기</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
 	           <li><a href="#">지원</a></li>
 	           <li sec:authorize="isAuthenticated()"><a href="/adminPage" th:if="|${#strings.equals(#authentication.principal.user_admin, 'Y')}|">관리자</a></li>
 	       </ul>
@@ -23,10 +23,12 @@
 	        	<h3 id="userNickName"><span sec:authentication="principal.user_nickname"></span>님</h3>
 	    	    <button onclick="location.href='/logout'" id="headLogout">로그아웃</button><br>
         	</div>
-        	<img th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}" alt="profilePicture" id="profilePicture">
+        	<a th:href="@{|/profile/${#authentication.principal.user_code}|}">
+	        	<img th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}" alt="profilePicture" id="profilePicture">
+        	</a>
     	    <div id="wishcartTag">
-    	    	<a th:href="@{'/wish/'+${#authentication.principal.user_code}}"><span id="wishTag">찜 목록</span></a>
-    	    	<a th:href="@{'/cart/'+${#authentication.principal.user_code}}"><span id="cartTag">장바구니</span></a>
+    	    	<a th:href="@{|/wish/${#authentication.principal.user_code}|}"><span id="wishTag">찜 목록</span></a>
+    	    	<a th:href="@{|/cart/${#authentication.principal.user_code}|}"><span id="cartTag">장바구니</span></a>
     	    </div>
         </div>
     </div>
