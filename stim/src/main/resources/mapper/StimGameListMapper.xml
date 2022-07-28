@@ -20,15 +20,17 @@
     
     <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) -->
     <select id="SelectNewestGameList" resultMap="gameMap, genreMap">
-       <include refid="selectAll" />
+        <include refid="selectAll" />
+        WHERE rownum <![CDATA[<=]]> 10
 		ORDER BY gm.game_releaseDate DESC
     </select>
     
     
     <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) -->
     <select id="SelectPopularGameList" resultMap="gameMap, genreMap">
-       <include refid="selectAll" />
-		ORDER BY gm.game_salesRate DESC
+     	<include refid="selectAll" />
+     	WHERE rownum <![CDATA[<=]]> 10
+		ORDER BY gm.game_salesRate DESC	
     </select>
     
     
@@ -65,34 +67,29 @@
     	<result column="game_picture" property="game_picture"/>
     </resultMap>
    
+   <!-- 장르에 검색한 tag가 포함되어 있는 게임 목록 출력  -->
     <select id="SelectGameListByTags" resultMap="gameMap, genreMap">
     	SELECT * 
 		FROM game_tbl gm INNER JOIN genre_tbl gn
 		ON gm.game_code = gn.game_code
 		WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
 		ORDER BY gm.game_code DESC
-		<!-- AND gm.game_price <![CDATA[<]]> #{price} -->
-
+		<!-- AND gm.game_price <![CDATA[<=]]> #{price} -->
     </select>
    
-   	<!-- 게임 상점 목록 출력 (게임 코드 내림차순) -->
+   	<!-- 선택한 값 이하의 게임 목록을 출력 -->
     <select id="SelectAllGameListByPrice" resultMap="gameMap, genreMap">
        	<include refid="selectAll" />
-       	Where gm.game_price <![CDATA[<]]> #{price}
+       	Where gm.game_price <![CDATA[<=]]> #{price}
 		ORDER BY gm.game_code DESC
     </select>
    
     
     
     <!-- 할인하는 게임 목록 출력 -->
-    <select id="" resultMap="gameMap, genreMap">
+    <select id="SelectAllGameListForSale" resultMap="gameMap, genreMap">
     	<include refid="selectAll" />
-		<if test="keyword != null">
-			where LOWER(gm.game_name) like '%'||#{keyword}||'%'
-			OR LOWER(gm.game_developer) like '%'||#{keyword}||'%'
-			OR LOWER(gm.game_context) like '%'||#{keyword}||'%'
-			ORDER BY gm.game_code DESC
-		</if>
+		ORDER BY gm.game_name DESC
     </select>
     
     

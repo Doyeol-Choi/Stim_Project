@@ -32,7 +32,7 @@ public class StimGameListController {
 			mav.addObject("gameList", list);
 
 	        mav.setViewName("game/gameList");
-			System.out.println("게임 리스트 수: " + list.size());
+			System.out.println("게임 리스트 수: " + list.size()); // 콘솔 확인 용
 
 			
 		} catch (Exception e) {
@@ -56,7 +56,7 @@ public class StimGameListController {
 			mav.addObject("gameList", popGList);
 
 	        mav.setViewName("game/gameListPopular");
-			System.out.println("인기 게임 리스트 수: " + popGList.size());
+			System.out.println("인기 게임 리스트 수: " + popGList.size()); // 콘솔 확인 용
 
 			
 		} catch (Exception e) {
@@ -80,7 +80,7 @@ public class StimGameListController {
 			mav.addObject("gameList", newGList);
 
 	        mav.setViewName("game/gameListNew");
-			System.out.println("최신 게임 리스트 수: " + newGList.size());
+			System.out.println("최신 게임 리스트 수: " + newGList.size()); // 콘솔 확인 용
 
 			
 		} catch (Exception e) {
@@ -95,8 +95,23 @@ public class StimGameListController {
 	/////////////////////////////////////////////////////
 	/* 할인 게임 페이지 이동 */
 	@GetMapping("/gameListSale")
-	public String gameListSale() {
-        return "game/gameListSale";
+	public ModelAndView gameListSale() {
+		ModelAndView mav = new ModelAndView();
+		try {
+			
+			
+			List<GameVO> saleGList = stimGameListService.SelectAllGameListForSale();
+			mav.addObject("gameList", saleGList);
+
+	        mav.setViewName("game/gameListSale");
+			System.out.println("최신 게임 리스트 수: " + saleGList.size()); // 콘솔 확인 용
+
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return mav;	
     }
 	
 	
@@ -138,7 +153,8 @@ public class StimGameListController {
 					// tagSearch 검색어가 없는 경우, 전체 게임을 출력한다.
 					searchedByTag = stimGameListService.SelectAllGameListByPrice(price);
 				} else {
-					searchedByTag = stimGameListService.SelectGameListByTags(tagSearch);			
+					searchedByTag = stimGameListService.SelectGameListByTags(tagSearch);
+					
 				}
 				
 				String test = "";
@@ -151,7 +167,7 @@ public class StimGameListController {
 						if(!((searchedByTag.get(j).getGenre_1().equals(genre.get(i)) || 
 								searchedByTag.get(j).getGenre_2().equals(genre.get(i)) || 
 								searchedByTag.get(j).getGenre_3().equals(genre.get(i))) &&
-								searchedByTag.get(j).getGame_price() <= price)) { 
+								searchedByTag.get(j).getGame_price() <= price)) { // 기본 price 값은 1000000 (1000000원 이하의 게임들)
 							// 선택한 태그 문자열 안에 태그 1,2,3과 같은 것이 확인하고, 없으면
 							
 							// 인덱스 넘버가 리스트 크기보다 커지면 마지막 것을 삭제하고 for문 탈출
@@ -177,7 +193,7 @@ public class StimGameListController {
 				
 				
 
-				// 콘솔에 선택한 태그와 가격, 검색된 리스트의 수를 출력한다.
+				// 콘솔 확인 용:: 콘솔에 선택한 태그와 가격, 검색된 리스트의 수를 출력한다.
 				System.out.println("태그: "+test);	
 				System.out.println("가격: "+price);
 				System.out.println("검색된 태그의 게임 리스트 수: " + searchedByTag.size() +"\n");
