@@ -9,7 +9,7 @@ public interface StimProfileService {
 	
 	public UserVO SelectById(int user_code) throws Exception;
 
-	public void SelectByIdForUpdate(UserVO uVo) throws Exception;
+	public void UpdateUserInfo(UserVO uVo) throws Exception;
 
 	public void DeleteById(String user_id) throws Exception;
 	

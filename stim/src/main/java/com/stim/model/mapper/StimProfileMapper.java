@@ -15,8 +15,8 @@ public interface StimProfileMapper {
 	// - 1. 유저 검색 후 프로필 출력
 	public UserVO SelectById(int user_code) throws Exception;
 
-	// - 2. 유저 검색 후 업데이트 
-	public void SelectByIdForUpdate(UserVO uVo);
+	// - 2. 유저 정보 업데이트 
+	public void UpdateUserInfo(UserVO uVo);
 	
 	// 
 	public void DeleteById(String user_id) throws Exception;

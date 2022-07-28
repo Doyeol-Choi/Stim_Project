@@ -1,0 +1,9 @@
+@charset "UTF-8";
+
+form {
+	margin-left: 30px;
+}
+#inputText {
+	margin-bottom: 30px;
+	display: block;
+}

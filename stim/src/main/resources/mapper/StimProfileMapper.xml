@@ -14,12 +14,11 @@
        SELECT * FROM user_tbl WHERE user_code = #{user_code}
     </select>
     
-    <update id="SelectByIdForUpdate" parameterType="com.stim.vo.UserVO">
+    <update id="UpdateUserInfo" parameterType="com.stim.vo.UserVO">
 		UPDATE user_tbl
 		SET 	user_nickname = #{user_nickname},
 				user_email = #{user_email},
-				user_phone = #{user_phone},
-				user_picture = #{user_picture}
+				user_phone = #{user_phone}
 		WHERE user_code = #{user_code}
     </update>
     

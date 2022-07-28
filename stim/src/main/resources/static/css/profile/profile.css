@@ -34,6 +34,14 @@ div{
     height: 184px;
     margin: 3%;
 }
+#profile_avartar > button {
+	border: none;
+	background-color: transparent;
+	z-index: 10;
+}
+#profile_avartar > button:hover {
+	cursor: pointer;
+}
 /* 프로필 아이디 */
 #profile_id{
     float: left;
@@ -81,7 +89,7 @@ div{
 	text-decoration: none;
 	color: rgb(228, 228, 228);
 }
-#profile_update > a > div{
+#profile_update > a > span{
 	text-align: center;
 	margin-top: 1vh;
 }

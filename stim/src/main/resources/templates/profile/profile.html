@@ -12,13 +12,12 @@
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
-    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
     	<div id="content">
 		        <!--프로필, 프로필 수정-->
 		        <div id="profile">
 		            <div id="profile_avartar"><!-- 프로필 이미지-->
-		                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
+		                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사" th:onclick="|changPicture(${user.user_code})|">
 		            </div>
 		            <div id="profile_id"> <!--프로필 아이디, 출신-->
 		                <h2 th:text="${user.user_nickname}"></h2>
@@ -31,7 +30,7 @@
 		        </div>
 		        <!--프로필 수정-->
 		        	<div id="profile_update">
-		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"> <div>Edit profile</div></a>
+		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"><span>Edit profile</span></a>
 		        	</div>
 		        <!--댓글 페이징-->
 		        <div id="comment_paging">
@@ -65,7 +64,7 @@
 							<form id="comment_form" th:action="@{/comment}" method="post">
 								<input type="hidden" name="user_code" th:value="${user.user_code}">
 								<input type="hidden" name="user_id" th:value="${user.user_id}"> 
-								<input type="hidden" name="writer_code" th:value="2"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
+								<input type="hidden" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
 								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
 								<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
 								<input type="submit" value="댓글 남기기">

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>프로필 변경</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/profile/pictureUpdateForm.css}">
+</head>
+<body>
+	<h2>아이디 중복 체크</h2>
+	<form action="pictureUpdate" method="post" enctype="multipart/form-data">
+		<label>
+			<span id="inputText">새 프로필 사진 등록</span>
+			<input type="file" name="picture" accept="image/jpeg, image/png">
+		</label>
+		<input type="submit" value="수정">
+		<button type="button" onclick="">취소</button>
+	</form>
+</body>
+</html>

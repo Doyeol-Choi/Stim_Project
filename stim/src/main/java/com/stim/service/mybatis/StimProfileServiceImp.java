@@ -16,13 +16,15 @@ public class StimProfileServiceImp implements StimProfileService {
 	@Autowired
 	StimProfileMapper stimProfileMapper;
 	
-	@Override public UserVO SelectById(int user_code) throws Exception { 
+	@Override
+	public UserVO SelectById(int user_code) throws Exception { 
 		return	stimProfileMapper.SelectById(user_code); 
 	}
 	
 	@Transactional
-	@Override public void SelectByIdForUpdate(UserVO uVo) throws Exception{
-		stimProfileMapper.SelectByIdForUpdate(uVo);
+	@Override
+	public void UpdateUserInfo(UserVO uVo) throws Exception{
+		stimProfileMapper.UpdateUserInfo(uVo);
 	}
 
 	@Override

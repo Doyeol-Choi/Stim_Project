@@ -1,12 +1,12 @@
 package com.stim.controller.mybatis;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,14 +21,18 @@ import com.stim.service.user.StimUserService;
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 public class StimProfileController {
 
 	@Resource
 	private StimProfileService stimProfileService;
-	@Resource private StimUserService stimUserService;
+	@Resource
+	private final StimUserService stimUserService;
 
-	/* 프로필 */
+	// 프로필
 	@GetMapping("/profile/{user_code}")
 	public ModelAndView profileList(@PathVariable("user_code") int user_code) {
 		ModelAndView mav = new ModelAndView();
@@ -43,60 +47,54 @@ public class StimProfileController {
 			
 			mav.setViewName("profile/profile");
 			
-			//DB 불러오기 테스트용
-			//System.out.println("프로필 가져오기: " + uVo);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
 	
-	//프로필 수정
+	//프로필 수정 폼으로 이동
 	@GetMapping("/profile/edit/{user_code}")
 	public ModelAndView profileUpdate(@PathVariable("user_code") int user_code) {
 		ModelAndView mav = new ModelAndView();
 		
 		try {
-			//SelectByIdForUpdate
 			UserVO uVo = stimProfileService.SelectById(user_code);
 			mav.addObject("user", uVo);
 			
 			mav.setViewName("profile/edit/profileUpdate");
 			System.out.println("주소로 받아온 유저 : "+uVo.getUser_nickname());
-			//DB 불러오기 테스트용
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
 	
-	//프로필 수정
+	//프로필 수정 진행
 	@PostMapping("/profile/edit/update")
-	public ModelAndView profileNewUpdate(@Valid UserVO uVo, Errors errors) {
+	public ModelAndView profileNewUpdate(@Valid UserVO user, Errors errors, Authentication authentication) {
 		ModelAndView mav = new ModelAndView();
-		System.out.println("테스트 1");
-		
+
 		// 유효성 검사 
 		if (errors.hasErrors()) {
-			mav.addObject("user", uVo);
-			
+			mav.addObject("user", user);
+			System.out.println(errors);	// 콘솔에서 에러 확인
 			Map<String, String> validatorResult = stimUserService.validateHandling(errors);
             for (String key : validatorResult.keySet()) {
             	mav.addObject(key, validatorResult.get(key));
+            	System.out.println("여기오지?");
             }
 			
-            System.out.println("테스트2");
-			mav.setViewName("profile/edit/profileUpdate");
+            mav.setViewName("profile/edit/profileUpdate");
 			return mav;
 		}
 		
 		try {
-			//SelectByIdForUpdate
-			stimProfileService.SelectByIdForUpdate(uVo);	
-			mav.addObject("user", uVo);
-			mav.setViewName("profile/edit/profileUpdate");
-			//DB 불러오기 테스트용
-			System.out.println("특정 누군가 프로필 수정 : " + uVo.getUser_nickname());
+			stimProfileService.UpdateUserInfo(user);
+			
+			mav.setViewName("redirect:/profile/" + user.getUser_code());
+
+			System.out.println("특정 누군가 프로필 수정 : " + user.getUser_nickname());
 		}catch(Exception e) {
 			System.out.println("프로필 업데이트 안됨.");
 			e.printStackTrace();
