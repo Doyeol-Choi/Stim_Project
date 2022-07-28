@@ -1,6 +1,5 @@
 package com.stim.service.mybatis;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,8 @@ public class StimProfileServiceImp implements StimProfileService {
 	@Autowired
 	StimProfileMapper stimProfileMapper;
 	
-	@Override public UserVO SelectById(String user_id) throws Exception { 
-		return	stimProfileMapper.SelectById(user_id); 
+	@Override public UserVO SelectById(int user_code) throws Exception { 
+		return	stimProfileMapper.SelectById(user_code); 
 	}
 	
 	@Transactional
@@ -38,8 +37,8 @@ public class StimProfileServiceImp implements StimProfileService {
 	}
 
 	@Override
-	public List<ProFileVO> getCommentInfo(String user_id) throws Exception {
-		return stimProfileMapper.getCommentInfo(user_id);
+	public List<ProFileVO> getCommentInfo(int user_code) throws Exception {
+		return stimProfileMapper.getCommentInfo(user_code);
 	}
 	 
 	

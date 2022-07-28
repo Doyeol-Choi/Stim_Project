@@ -16,7 +16,7 @@
     <div id="container">
     	<div class="small_header">
     		 <div><img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사"></div>
-    		 <div><a th:href="@{'/profile/'+${user.user_id}}"> <strong th:text="${user.user_nickname}"/></a></div>
+    		 <div><a th:href="@{'/profile/'+${user.user_id}}"> <strong th:text="${user.user_nickname}"/></strong></a></div>
     		 <div>>><a th:href="@{'/profile/edit/'+${user.user_id}}">프로필 수정</a></div>
     	</div>
     	<form id="update_form" action="/profile/edit/update" method="post">

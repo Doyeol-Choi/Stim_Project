@@ -29,14 +29,14 @@ public class StimProfileController {
 	@Resource private StimUserService stimUserService;
 
 	/* 프로필 */
-	@GetMapping("/profile/{user_id}")
-	public ModelAndView profileList(@PathVariable("user_id") String user_id) {
+	@GetMapping("/profile/{user_code}")
+	public ModelAndView profileList(@PathVariable("user_code") int user_code) {
 		ModelAndView mav = new ModelAndView();
 		
 		try {
-			UserVO uVo = stimProfileService.SelectById(user_id);
+			UserVO uVo = stimProfileService.SelectById(user_code);
 			
-			List<ProFileVO> list = stimProfileService.getCommentInfo(user_id);
+			List<ProFileVO> list = stimProfileService.getCommentInfo(user_code);
 			
 			mav.addObject("user", uVo);
 			mav.addObject("list", list);
@@ -52,13 +52,13 @@ public class StimProfileController {
 	}
 	
 	//프로필 수정
-	@GetMapping("/profile/edit/{user_id}")
-	public ModelAndView profileUpdate(@PathVariable("user_id") String user_id) {
+	@GetMapping("/profile/edit/{user_code}")
+	public ModelAndView profileUpdate(@PathVariable("user_code") int user_code) {
 		ModelAndView mav = new ModelAndView();
 		
 		try {
 			//SelectByIdForUpdate
-			UserVO uVo = stimProfileService.SelectById(user_id);
+			UserVO uVo = stimProfileService.SelectById(user_code);
 			mav.addObject("user", uVo);
 			
 			mav.setViewName("profile/edit/profileUpdate");
@@ -117,7 +117,7 @@ public class StimProfileController {
 		pVo.setWriter_code(writer_code);
 		stimProfileService.InsertComment(pVo);
 		
-		String url = "/profile/" + user_id;
+		String url = "/profile/" + user_code;
 		System.out.println(url);
 		
 		return new RedirectView(url);

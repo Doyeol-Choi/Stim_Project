@@ -23,7 +23,7 @@ form > ul {
 
 .small_header{
 	margin: 0 auto;
-	width: 50%;
+	width: 80%;
 	background-color: rgba(58, 62, 71, 0.5);
 	color: rgb(228, 228, 228); 
 	position : relative;
@@ -64,6 +64,13 @@ form > ul {
 	color : #969696;
 	background-color: #202225;
 }
+#update_form > ul{
+	margin : 0 auto;
+	width: 80%;
+	height: 80%;
+}
+
+
 #update_form > ul > li > input {
 	box-shadow: inset 1px 1px 0px #000a;
     border: none;

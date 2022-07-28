@@ -10,8 +10,8 @@
        SELECT * FROM test1_tbl
     </select>
   -->
-	<select id="SelectById" resultType="com.stim.vo.UserVO" parameterType="String">
-       SELECT * FROM user_tbl WHERE user_id = #{user_id}
+	<select id="SelectById" resultType="com.stim.vo.UserVO" parameterType="int">
+       SELECT * FROM user_tbl WHERE user_code = #{user_code}
     </select>
     
     <update id="SelectByIdForUpdate" parameterType="com.stim.vo.UserVO">
@@ -20,7 +20,7 @@
 				user_email = #{user_email},
 				user_phone = #{user_phone},
 				user_picture = #{user_picture}
-		WHERE user_id = #{user_id}
+		WHERE user_code = #{user_code}
     </update>
     
     <insert id="InsertComment" parameterType="com.stim.vo.ProFileVO">
@@ -28,7 +28,7 @@
     	VALUES (comment_code_seq.nextval, #{user_code}, #{comment_context}, sysdate, #{writer_code})
     </insert>
     
-    <select id="getCommentInfo" parameterType="hashmap" resultType="com.stim.vo.ProFileVO">
+    <select id="getCommentInfo" parameterType="int" resultType="com.stim.vo.ProFileVO">
        SELECT comment_code, 
        c.user_code AS user_code,  
        u.user_nickname AS comment_nickname,
@@ -37,7 +37,7 @@
        user_picture 
 	   FROM user_tbl u, profile_comment_tbl c
        WHERE u.user_code = c.writer_code
-       AND c.user_code = (SELECT user_code FROM user_tbl WHERE user_id = #{user_id})
+       AND c.user_code = (SELECT user_code FROM user_tbl WHERE user_code = #{user_code})
        ORDER BY profile_regdate desc
     </select>
     
