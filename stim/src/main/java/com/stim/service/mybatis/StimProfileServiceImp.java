@@ -40,6 +40,18 @@ public class StimProfileServiceImp implements StimProfileService {
 	public List<ProFileVO> getCommentInfo(int user_code) throws Exception {
 		return stimProfileMapper.getCommentInfo(user_code);
 	}
+
+	@Override
+	public List<ProFileVO> SelectMyGames(int user_code) throws Exception {
+		
+		return stimProfileMapper.SelectMyGames(user_code);
+	}
+
+	@Override
+	public List<ProFileVO> SelectMyFriends(int user_code) throws Exception {
+		
+		return stimProfileMapper.SelectMyFriends(user_code);
+	}
 	 
 	
 

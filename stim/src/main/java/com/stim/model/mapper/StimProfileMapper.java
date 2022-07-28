@@ -23,13 +23,15 @@ public interface StimProfileMapper {
 
 	
 	// 댓글 삽입
-	public void InsertComment(ProFileVO pVo);
+	public void InsertComment(ProFileVO pVo) throws Exception;
 
 	// 댓글 출력
-	public List<ProFileVO> getCommentInfo(int user_code);
-	
-	
-	
-	
+	public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
+
+	// 게임 출력
+	public List<ProFileVO> SelectMyGames(int user_code) throws Exception;
+
+	// 친구 출력
+	public List<ProFileVO> SelectMyFriends(int user_code) throws Exception; 
 	
 }

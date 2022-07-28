@@ -15,6 +15,13 @@ public class ProFileVO {
 	private int writer_code;
 	private String user_picture;
 	
+	private int game_code;
+	private String game_name;
+	private String game_picture;
+	
+	private int friend_code;
+	private String friend_nickname;
+	
 	public ProFileVO() {
 	}
 	

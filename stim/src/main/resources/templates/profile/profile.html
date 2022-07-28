@@ -33,32 +33,33 @@
 		        	<div id="profile_update">
 		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"> <div>Edit profile</div></a>
 		        	</div>
-		        <!--댓글 페이징-->
+		        <!--댓글 페이징-->	        
 		        <div id="comment_paging">
 		        	<div>
 		        		<div id="comment_page1"><h3>댓글</h3></div>
 		        		<div class="comment_page">
 		        			<div >
 		        				<a> <span th:text="${#lists.size(list)}"></span> 개의 모든 댓글 보기</a>
-								<!-- <a>&lt;</a>
-								<span>1,2,3</span> 페이지 수
-								<a>&gt;</a> -->
 		        			</div>
 			        		
 						</div>
 		        	</div>
 				</div>
+				
+				<div class="game_lists">
+				        	<div class="game_list"  th:each="game_list : ${game_list}">
+								<div class="game_picture">
+										<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
+								</div>
+								<div class="game_content">
+									<span class="game_name" th:text="${game_list.game_name}"></span>
+								</div>
+							</div>
+				        </div>
+				
 		        <!-- 댓글,친구창 -->
 		        <div class="profile_content">
 		       		<!--친구창-->
-					<div class="profile_right">
-						<!-- 친구 : num -->
-						<div>
-							<a href="/${user_id}/{friends}"> &nbsp; <span>친구</span> &nbsp; <span>${friends}</span>  </a>
-						</div>
-						<!-- 친구 목록 -->
-					</div>
-					<div class="profile_left">
 						<!-- 로그인 시 보이게 해야함 -->
 						<div class="comment_write">
 							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${user.user_picture}"> </a>
@@ -71,7 +72,8 @@
 								<input type="submit" value="댓글 남기기">
 							</form>
 						</div>
-						<div class="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}">
+					<div class="profile_left">
+						<div id="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}">
 							<div class="comment_image">
 								<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}"> </a>
 							</div>
@@ -83,23 +85,20 @@
 						</div>
 					</div>
 		        </div>
+		        <div class="profile_right">
+						<!-- 친구 : num -->
+						<div class="friends">
+							<a href="/${user_id}/{friends}"> &nbsp; <span>친구</span> &nbsp; <span>${friends}</span>  </a>
+						</div>
+						<!-- 친구 목록 -->
+					</div>
 		        <div class="comment_footer">
-		        	<div class="comment_page">
-							<a>&lt;</a>
-							<span>1,2,3</span> <!-- 페이지 수 -->
-							<a>&gt;</a>
-					</div>
-		        </div>
-		        
-		        <div id="friends">
-					
-					<div>
-					</div>
 		        </div>
 		    </div>
     </div>	
     <!-- footer fragment 사용 -->
-    <!-- <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+    <!-- 
     <script th:inline="javascript">
     	function insertComment(user_code, user_id, writer_code, comment_text){
     		$.ajax({
