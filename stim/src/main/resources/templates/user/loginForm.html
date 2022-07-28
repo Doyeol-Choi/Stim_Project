@@ -9,11 +9,12 @@
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/user/loginForm.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/login.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
-    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
     	<div id="content">
     		<div id="headline">
@@ -28,13 +29,21 @@
 	    			<span class="login_text">비밀번호</span>
 		        	<input type="password" name="user_password" id="user_password">
 	    		</label>
+	    		<label>
+	    			<input type="checkbox" id="rememberId">
+	    			<span class="checkboxText">아이디 저장</span>
+	    		</label>
+	    		<label>
+	    			<input type="checkbox" id="rememberMe" name="remember-me">
+	    			<span class="checkboxText">로그인 유지</span>
+	    		</label>
 		    	<button type="submit" id="login_btn">
 		    		<span>로그인</span>
 		    	</button>
 	    	</form>
-	    	<a href="/oauth2/authorization/google">구글 로그인</a>
-	    	<a href="/oauth2/authorization/naver">네이버 로그인</a>
-	    	<a href="/oauth2/authorization/kakao">카카오 로그인</a>
+	    	<a href="/oauth2/authorization/google"><img class="loginIcon" th:src="@{/image/googleLoginIcon.png}"></a>
+	    	<a href="/oauth2/authorization/naver"><img class="loginIcon" th:src="@{/image/naverLoginIcon.png}"></a>
+	    	<a href="/oauth2/authorization/kakao"><img class="loginIcon" th:src="@{/image/kakaoLoginIcon.png}"></a>
 	    	<div id="find_btn">
 		    	<div class="find_user">
 		    		<a href="/findId">아이디를 잊어버리셨나요?</a>

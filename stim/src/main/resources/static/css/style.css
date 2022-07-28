@@ -8,7 +8,6 @@
 
 body{
     min-width: 1920px;
-    background-color: #0E1B49;
 }
 
 a {
@@ -19,13 +18,17 @@ ul {
     list-style: none;
 }
 
+header {
+	width: 100%;
+	background-color: #0E1B49;
+}
+
 #header {
     width: 100%;
     max-width: 1560px;
     min-width: 1200px;
     height: 150px;
     margin: 0 auto;
-    background-color: #0E1B49;
 }
 #stim_logo {
     float: left;
@@ -200,6 +203,13 @@ ul {
 	border-radius: 5px;
 }
 
+#headLogout:hover {
+	background-color: #1E3D65;
+	color: white;
+	box-shadow: 5px #222;
+	cursor: pointer;
+}
+
 #wishcartTag {
 	clear: both;
 	float: right;
@@ -250,7 +260,7 @@ footer > div{
     width: 380px;
     height: 100%;
     float: left;
-    margin-left: 280px;
+    margin-left: 180px;
 }
 #foot_text{
     float: left;

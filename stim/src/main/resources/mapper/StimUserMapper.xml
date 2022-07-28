@@ -23,4 +23,22 @@
         WHERE user_id = #{user_id}
     </select>
     
+    <!-- 아이디 찾기 -->
+    <select id="findIdByEmail" resultType="String" parameterType="String">
+        SELECT user_id FROM user_tbl
+        WHERE user_email = #{user_email}
+    </select>
+    
+    <!-- 비밀번호 찾기 -->
+    <select id="findPwByUserId" resultType="int" parameterType="String">
+        SELECT count(*) FROM user_tbl
+        WHERE user_id = #{user_id} AND user_email = #{user_email}
+    </select>
+    
+    <!-- 비밀번호 변경 -->
+    <update id="changePwByUserId" parameterType="String">
+    	UPDATE user_tbl SET user_password = #{user_password} 
+    	WHERE user_id = #{user_id}
+    </update>
+    
 </mapper>

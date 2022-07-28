@@ -8,18 +8,22 @@
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/user/regFormStep3.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/findIdResult.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <div id="container">
     	<div id="content">
-    		<h1>회원가입 완료</h1>
-    		<span id="regText" th:text="${regUser.user_nickname} + '님 환영합니다!'"></span>
-    		<button id="home_btn" onclick="location.href='/'">
-		    		<span>로그인</span>
-		    </button>
+    		<h1>아이디 찾기 결과</h1>
+    		<div th:if="${not #strings.isEmpty(user_id)}" class="findIdResult">
+    			<p>아이디는</p>
+    			<span id="findIdContent" th:text="${user_id}"></span>
+    			<p>입니다.</p>
+    		</div>
+    		<div th:if="${#strings.isEmpty(user_id)}" class="findIdResult">
+    			<p>해당 이메일로 가입된 정보가 없습니다.</p>
+    		</div>
     	</div>
     </div>
     <!-- footer fragment 사용 -->

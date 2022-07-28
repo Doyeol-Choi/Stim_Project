@@ -34,7 +34,6 @@ public class StimUserService implements UserDetailsService {
     }
 	
 	public int checkById(String user_id) {
-		
 		int result = stimUserMapper.checkById(user_id);
 		
 		return result;
@@ -64,6 +63,27 @@ public class StimUserService implements UserDetailsService {
         }
 		
 		return userVo;
+	}
+	
+	// 아이디 찾기
+	public String findIdByEmail(String user_email) {
+		String email = stimUserMapper.findIdByEmail(user_email);
+		
+		return email;
+	}
+
+	// 비밀번호 찾기
+	public int findPwByUserId(String user_id, String user_email) {
+		int result = stimUserMapper.findPwByUserId(user_id, user_email);
+		
+		return result;
+	}
+
+	// 비밀번호 찾기 => 새로운 비밀번호
+	@Transactional
+	public void changePwByUserId(String user_id, String password) {
+		String user_password = encoder.encode(password);
+		stimUserMapper.changePwByUserId(user_id, user_password);
 	}
 
 }

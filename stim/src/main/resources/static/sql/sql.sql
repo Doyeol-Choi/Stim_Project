@@ -1,5 +1,5 @@
 -- 4줘해줘 프로젝트 ^ㅗ^
- 
+SELECT * FROM game_tbl WHERE rownum <= 10 ORDER BY game_releaseDate DESC;
 -- 회원 테이블
 CREATE TABLE user_tbl(
     user_code number PRIMARY KEY,
@@ -16,6 +16,8 @@ CREATE TABLE user_tbl(
 --ALTER TABLE user_tbl MODIFY user_nickname varchar2(40);
 CREATE SEQUENCE user_code_seq NOCACHE;+
 SELECT * FROM user_tbl;
+UPDATE user_tbl SET user_admin = 'Y' WHERE user_id = 'admin';
+commit;
 -- 친구테이블
 CREATE TABLE friend_tbl(
     friend_code number PRIMARY KEY,
@@ -110,6 +112,14 @@ CREATE TABLE sale_tbl(
 );
 
 CREATE SEQUENCE sale_code_seq NOCACHE;
+
+-- 로그인 유지를 위한 테이블
+CREATE TABLE persistent_logins (
+    username varchar(64),
+    series varchar(64) PRIMARY KEY,
+    token varchar(64),
+    last_used timestamp
+);
 
 -- 친구 테이블 외래키
 ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user1 FOREIGN KEY(friend_user1) references user_tbl (user_code);

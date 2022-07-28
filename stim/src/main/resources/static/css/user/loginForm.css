@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
 #container {
-	min-height: 800px;
+	min-height: 850px;
 }
 
 #content {
 	min-width: 600px;
 	width: 50%;
 	margin: 0 auto;
-	padding-top: 80px;
+	padding-top: 40px;
 	text-align: center;
 	color: white;
 	font-size: 1.6em;
@@ -47,6 +47,11 @@ form {
     outline: none;
 }
 
+.checkboxText {
+	font-size: 0.6em;
+	margin-right: 20px;
+}
+
 #login_btn {
 	margin-top: 30px;
 	border-radius: 2px;
@@ -73,6 +78,13 @@ form {
     background-size: 330% 100%;
 }
 
+.loginIcon {
+	width: 60px;
+	height: 60px;
+	margin: 0 10px;
+	margin-top: 20px;
+}
+
 #find_btn {
 	margin: 30px 0;
 	font-size: 0.8em;
@@ -97,7 +109,7 @@ form {
 }
 
 #register_btn > span {
-	margin: 50px auto;
+	margin: 40px auto;
 	width: 200px;
 	height: 50px;
 	display: block;

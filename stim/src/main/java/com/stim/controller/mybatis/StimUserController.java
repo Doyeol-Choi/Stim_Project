@@ -41,6 +41,7 @@ public class StimUserController {
 		return mav;
     }
 	
+	// 아이디 중복체크
 	@GetMapping("/CheckId")
 	public ModelAndView checkId(@RequestParam("user_id") String user_id) {
 		ModelAndView mav = new ModelAndView();
@@ -77,5 +78,41 @@ public class StimUserController {
 		
         return mav;
     }
+	
+	// 아이디 찾기
+	@PostMapping("/findId")
+	public ModelAndView findIdByUserEmail(@RequestParam("user_email") String user_email) {
+		ModelAndView mav = new ModelAndView();
+
+		String user_id = stimUserService.findIdByEmail(user_email);
+		mav.addObject("user_id", user_id);
+		mav.setViewName("user/findIdResult");
+		
+		return mav;
+	}
+	
+	// 비밀번호 찾기
+	@PostMapping("/findPw")
+	public ModelAndView findPwByUserId(@RequestParam("user_id") String user_id, @RequestParam("user_email") String user_email) {
+		ModelAndView mav = new ModelAndView();
+
+		int result = stimUserService.findPwByUserId(user_id, user_email);
+		mav.addObject("result", result);
+		mav.addObject("user_id", user_id);
+		mav.setViewName("user/findPwResult");
+		
+		return mav;
+	}
+	
+	// 비밀번호 찾기로 비밀번호 변경
+	@PostMapping("findPwChange")
+	public ModelAndView findPwChange(@RequestParam("user_id") String user_id, @RequestParam("user_password") String user_password) {
+		ModelAndView mav = new ModelAndView();
+		
+		stimUserService.changePwByUserId(user_id, user_password);
+		mav.setViewName("user/loginForm");
+		
+		return mav;
+	}
 
 }
