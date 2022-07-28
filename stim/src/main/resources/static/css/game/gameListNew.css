@@ -89,7 +89,7 @@ body{
 	height: 100%;
 }
 #gn{
-	padding: 0 100px;
+	padding: 0 90px;
 	font-size: 20px;
 	font-weight: 500;
 }
@@ -106,6 +106,10 @@ body{
 	font-size: 20px;
 	color: #00AEEF;
 }
+#gTags{
+	font-size: 11px;
+	color:#aaa;
+}
 
 
 
@@ -114,7 +118,7 @@ body{
 #tagSearchBar{
 	float:left;
 	width: 320px;
-	height: 650px;
+	height: 545px;
 	background-color: rgba(0, 0, 0, 0.3);
 	padding: 10px;
 }
@@ -145,11 +149,44 @@ body{
 	border-radius: 5px;
 	color: white;
 }
+#tagSearch:focus{
+	background-color: rgba(0, 0, 0, 0.3);
+}
+#button{
+	float: right;
+	position:relative;
+	top: -40px;
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 5px;
+	color: white;
+	background-color: rgba(0, 0, 0, 0.3);
+	padding: 5px;
+}
+#button:hover{
+	cursor: pointer;
+	color: #00AEEF;
+	background-color: rgba(0, 0, 0, 0.3);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+
 .tagSearches{
 	width:300px;
-	height:270px;
+	height:220px;
 	background-color: rgba(255, 255, 255, 0.2);
 	margin-bottom: 10px;
+	color: #ccc;
+}
+.tagSearches:focus{
+	margin: 10px 0;
+	float:both;
+	width:300px;
+	height: 30px;
+	padding: 5px;
+	background-color: rgba(255, 255, 255, 0.2);
+	border: none;
+	border-radius: 5px;
+	color: white;
 }
 .tagSearches h4{
 	text-align: center;
@@ -158,5 +195,31 @@ body{
 	background-color: rgba(0, 0, 0, 0.3);
 }
 #priceTagSearch{
-	float:both;
+	float: both;
+}
+#priceTag{
+	padding: 10px;
+	display: inline-block;
+}
+#genreTag{
+	padding: 15px;
+	display: inline-block;
+}
+#priceTag li{
+	padding: 10px 15px;
+	border-radius: 5px;
+}
+#genreTag{
+	padding: 10px 25px;
+}
+#priceTag li a:link, a:visited{
+	color: #ccc;
+}
+#priceTag li:hover{
+	color: white;
+	font-weight: 540;
+	border: 1px solid white;
+}
+#priceTag li a:focus{
+	color: #00AEEF;
 }

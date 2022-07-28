@@ -42,11 +42,31 @@ public class StimGameListServiceImp implements StimGameListService {
 	@Override
 	public List<GameVO> SelectGameListByKeyword(String keyword) throws Exception {
 		List<GameVO> gVoList = null;
-		gVoList = stimGameListMapper.SelectGameListByKeyword(keyword);	
-		
-		
+		gVoList = stimGameListMapper.SelectGameListByKeyword(keyword);			
 		return gVoList;
 	}
+
+
+	// 태그 키워드 또는 가격으로 검색된 리스트 조회
+	@Override
+	public List<GameVO> SelectGameListByTags(String tag) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListByTags(tag);
+		return tagList;
+	}
+	@Override
+	public List<GameVO> SelectAllGameListByPrice(int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectAllGameListByPrice(price);
+		return tagList;
+	}
+
+
+	// 할인을 위한 게임 리스트 조회
+	@Override
+	public List<GameVO> SelectAllGameListForSale() throws Exception {
+		List<GameVO> gameListForSale = stimGameListMapper.SelectAllGameListForSale();
+		return gameListForSale;
+	}
+
 
 
 

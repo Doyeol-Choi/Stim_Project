@@ -5,11 +5,10 @@ import lombok.Data;
 @Data
 public class GenreVO {
 
-	private int code;
-	private int gameCode;
-	private int userCode;
-	private String genre1;
-	private String genre2;
-	private String genre3;
+	private int genre_code;
+	private int game_code;
+	private String genre_1;
+	private String genre_2;
+	private String genre_3;
 	
 }

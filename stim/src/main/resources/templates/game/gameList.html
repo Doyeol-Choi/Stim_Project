@@ -23,45 +23,98 @@
 						<th>이름</th>
 						<th>출시일</th>
 						<th>가격</th>
+						<th>장르</th>
 					</tr>
 					<tr th:each="list: ${gameList}" id="gtable">
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
 						<td th:text="${list.game_price}" id="gSetPrice"></td>
+						<td th:inline="text" id="gTags">
+						    [[${list.genre_1}]]
+						    <br><br>
+						    [[${list.genre_2}]]
+						    <br><br>
+						    [[${list.genre_3}]]
+						</td>
 					</tr>
 				</table>
 		
 			</div>
 			<div id="tagSearchBar" class="games">
 				<h3>필터</h3>
-				<input type="button" id="reset" onclick="location.href='http://localhost:4860/gameList'" value="초기화">
+				<input type="button" id="reset" onclick="location.href='/gameList'" value="초기화">
+				
 				<form action="gameListTagSearch">
-					<input type="text" id="tagSearch" placeholder="태그 검색">
-					<input type="hidden" value="">
+					<input type="text" name="tagSearch" id="tagSearch" placeholder="기타 태그 검색">
+					<input type="submit" id="button" value="검색">
 					<div id="priceTagSearch" class="tagSearches">
 						<h4>가격</h4>
 						<ul id="priceTag">
-							<li><a th:href="@{/gameList(price=0010)}">10,000 미만</a></li>
-							<li><a th:href="@{/gameList(price=1030)}">10,000 이상 30,000 미만</a></li>
-							<li><a th:href="@{/gameList(price=3050)}">30,000 이상 50,000 미만</a></li>
-							<li><a th:href="@{/gameList(price=5000)}">50,000 이상</a></li>
+							<li>
+								<input type="radio" name="price" value="10000">
+								<span>10,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="30000">
+								<span>30,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="50000">
+								<span>50,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="100000">
+								<span>100,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="1000000" checked hidden="hidden">
+							</li>
 						</ul>
 					</div>
 					<div id="genreTagSearch" class="tagSearches">
 						<h4>태그</h4>
 						<ul id="genreTag">
-							<li><a th:href="@{/gameList(genre=1)}">액션</a></li>
-							<li><a th:href="@{/gameList(genre=2)}">퍼즐</a></li>
-							<li><a th:href="@{/gameList(genre=3)}">전략</a></li>
-							<li><a th:href="@{/gameList(genre=4)}">공포</a></li>
+							<li>
+								<input type="checkbox" name="genre[]" value="액션">
+								<span>액션</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="퍼즐">
+								<span>퍼즐</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="오픈 월드">
+								<span>오픈 월드</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="시뮬레이션">
+								<span>시뮬레이션</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="생존">
+								<span>생존</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="좀비">
+								<span>좀비</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="건설">
+								<span>건설</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="협동">
+								<span>협동</span>
+							</li>
 						</ul>
 					</div>
+					<div id='result'></div>
 				</form> 
 			</div>			
 		</div>    	
-	color: #00AEEF;    </div>
-	
+	</div>
+
     
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

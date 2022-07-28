@@ -7,7 +7,7 @@
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameListPop.css?after}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameList.css?after}">
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -15,7 +15,7 @@
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
 	    <div id = "gameLists">
-	   		<h1>게임 목록</h1>			
+	   		<h1>인기 top 10</h1>			
 	   		<div id="gameList" class="games">
 				<table id="gameListTable">
 					<tr>
@@ -23,32 +23,93 @@
 						<th>이름</th>
 						<th>출시일</th>
 						<th>가격</th>
+						<th>장르</th>
 					</tr>
 					<tr th:each="list: ${gameList}" id="gtable">
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
 						<td th:text="${list.game_price}" id="gSetPrice"></td>
+						<td th:inline="text" id="gTags">
+						    [[${list.genre_1}]]
+						    <br><br>
+						    [[${list.genre_2}]]
+						    <br><br>
+						    [[${list.genre_3}]]
+						</td>
 					</tr>
 				</table>
 			</div>
 			<div id="tagSearchBar" class="games">
 				<h3>필터</h3>
-				<input type="button" id="reset" onclick="location.href='http://localhost:4860/gameList'" value="초기화">
-				<form action="">
-					<input type="text" id="tagSearch" placeholder="태그 검색">
-					<input type="hidden" value="">
-				</form> 
-				<div id="priceTagSearch" class="tagSearches">
-					<h4>가격</h4>
-					<a>10,000 ▼</a><br>
-					<a>10,000 ~ 30,000</a><br>
-					<a>30,000 ~ 50,000</a><br>
-					<a>50,000 ▲</a>
-				</div>
-				<div id="genreTagSearch" class="tagSearches">
-					<h4>태그</h4>
-				</div>		
+				<input type="button" id="reset" onclick="location.href='/gameList'" value="초기화">
+				
+				<form action="gameListTagSearch">
+					<input type="text" name="tagSearch" id="tagSearch" placeholder="기타 태그 검색">
+					<input type="submit" id="button" value="검색">
+					<div id="priceTagSearch" class="tagSearches">
+						<h4>가격</h4>
+						<ul id="priceTag">
+							<li>
+								<input type="radio" name="price" value="10000">
+								<span>10,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="30000">
+								<span>30,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="50000">
+								<span>50,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="100000">
+								<span>100,000 이하</span>
+							</li>
+							<li>
+								<input type="radio" name="price" value="1000000" checked hidden="hidden">
+							</li>
+						</ul>
+					</div>
+					<div id="genreTagSearch" class="tagSearches">
+						<h4>태그</h4>
+						<ul id="genreTag">
+							<li>
+								<input type="checkbox" name="genre[]" value="액션">
+								<span>액션</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="퍼즐">
+								<span>퍼즐</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="오픈 월드">
+								<span>오픈 월드</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="시뮬레이션">
+								<span>시뮬레이션</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="생존">
+								<span>생존</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="좀비">
+								<span>좀비</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="건설">
+								<span>건설</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="협동">
+								<span>협동</span>
+							</li>
+						</ul>
+					</div>
+					<div id='result'></div>
+				</form>	
 			</div>		
 		</div>    	
     </div>
