@@ -16,6 +16,8 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
+    <div id="contents">
+    <h1>장바구니</h1>
       <div id="cartList">
     	<div class="list_box" th:each="cart : ${list}" th:id="|cartListBox${cart.cart_code}|">
 			<div class="game_image">
@@ -28,11 +30,9 @@
 				</div>
 				<div class="content_bottom">
 					
-					<span class="game_releaseDate" th:text="${'출시일: '+ #dates.format(cart.game_releaseDate,'yyyy-MM-dd')}"></span>
+					<span class="game_releaseDate">출시일: </span>[[${#dates.format(cart.game_releaseDate,'yyyy-MM-dd')}]]
 					<div class="genre_box">
-						<span th:text="${cart.genre_1}"></span>
-						<span th:text="${cart.genre_2}"></span>
-						<span th:text="${cart.genre_3}"></span>
+						<span>태그:</span> [[${cart.genre_1}]], [[${cart.genre_2}]], [[${cart.genre_3}]]
 					</div>
 					<button class="delete_cart_button" th:onclick="|location.href='@{/delete_cart(cart_code=${cart.cart_code},user_code=${cart.user_code})}'|" >
 						<span class="delete_cart">삭제</span>
@@ -48,19 +48,24 @@
 				</div>
 			</div>
     	</div>
+    	</div>
+      
+      <div id="buyButton">
+	      	<span class="total">총 결제 금액 : ₩</span>
+	      	<span th:if="${total != null}">
+	    		<span id="total_price" th:text="${#numbers.formatInteger(total,3,'COMMA')}"></span>
+	    	</span>
+	    	<span th:if="${total == null}">
+	    		<span id="total_price" th:text="0"></span>
+	    	</span>
+	    	
+			<button class="pay_button" th:onclick="|paybtn(${user_code},${total})|">
+				<span class="pay">결제</span>
+			</button>
+			</div>
+      
       </div>
-     
-      	<span class="total">총 결제 금액 : ₩</span>
-      	<span th:if="${total != null}">
-    		<span id="total_price" th:text="${#numbers.formatInteger(total,3,'COMMA')}"></span>
-    	</span>
-    	<span th:if="${total == null}">
-    		<span id="total_price" th:text="0"></span>
-    	</span>
-    	
-		<button class="pay_button" th:onclick="|paybtn(${user_code},${total})|">
-			<span class="pay">결제</span>
-		</button>
+    
     </div>
     <!-- footer fragment 사용 -->
     

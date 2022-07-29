@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.stim.service.mybatis.StimWishCartService;
 import com.stim.vo.CartVO;
+import com.stim.vo.UserVO;
 import com.stim.vo.WishVO;
 
 @RestController
@@ -25,36 +27,50 @@ public class StimWishCartController {
 
 	// 찜목록
 	@GetMapping("/wish/{user_code}")
-	public ModelAndView SelectWishGame(@PathVariable("user_code") int user_code) throws Exception {
-			
+	public ModelAndView SelectWishGame(@PathVariable("user_code") int user_code, Authentication authentication) throws Exception {
+		
 		ModelAndView mav = new ModelAndView();
-		
-		List<WishVO> wlist = stimWishCartService.SelectWishGame(user_code);
-		List<Integer> game_code = stimWishCartService.SelectCartGameCode(user_code);
-		if(game_code.isEmpty()) {
-			game_code= new ArrayList<>();
+		if(authentication != null) {
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			if(uVo.getUser_code()==user_code) {
+			
+			List<WishVO> wlist = stimWishCartService.SelectWishGame(user_code);
+			List<Integer> game_code = stimWishCartService.SelectCartGameCode(user_code);
+			if(game_code.isEmpty()) {
+				game_code= new ArrayList<>();
+			}
+			
+			mav.addObject("wlist", wlist);
+			mav.addObject("game_code", game_code);
+			mav.setViewName("wishcart/wish");
+	
+	        return mav;
+			}
 		}
-		
-		mav.addObject("wlist", wlist);
-		mav.addObject("game_code", game_code);
-		mav.setViewName("wishcart/wish");
-
-        return mav;
+		mav.setViewName("redirect:/loginForm");
+		return mav;
 	}
 
 	// 장바구니 목록
 	@GetMapping("/cart/{user_code}")
-	public ModelAndView SelectCartGame(@PathVariable("user_code")int user_code) throws Exception {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView SelectCartGame(@PathVariable("user_code")int user_code, Authentication authentication) throws Exception {
 		
-		List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
-		Integer total  = stimWishCartService.TotalPriceGame(user_code);
-	
-		mav.addObject("list", list);
-		mav.addObject("total", total);
-        mav.setViewName("wishcart/cart");
-        
-        return mav;
+		ModelAndView mav = new ModelAndView();
+		if(authentication != null) {
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			if(uVo.getUser_code()==user_code) {
+				List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
+				Integer total  = stimWishCartService.TotalPriceGame(user_code);
+			
+				mav.addObject("list", list);
+				mav.addObject("total", total);
+		        mav.setViewName("wishcart/cart");
+		        
+		        return mav;
+					}
+		}
+		mav.setViewName("redirect:/loginForm");
+		return mav;
 	}
 	
 	//찜목록 삭제	
