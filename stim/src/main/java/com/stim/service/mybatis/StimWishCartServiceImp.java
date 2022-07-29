@@ -71,6 +71,11 @@ public class StimWishCartServiceImp implements StimWishCartService {
 		stimWishCartMapper.DeleteWishAllGame(user_code, game_code);
 		
 	}
+	// 장바구니 게임 코드 가져오기
+	@Override
+	public List<Integer> SelectCartGameCode(int user_code) throws Exception {
+		return stimWishCartMapper.SelectCartGameCode(user_code);
+	}
 	
 
 	

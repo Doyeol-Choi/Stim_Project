@@ -1,5 +1,6 @@
 package com.stim.controller.mybatis;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -28,9 +29,14 @@ public class StimWishCartController {
 			
 		ModelAndView mav = new ModelAndView();
 		
-		List<WishVO> list = stimWishCartService.SelectWishGame(user_code);
-	
-		mav.addObject("list", list);
+		List<WishVO> wlist = stimWishCartService.SelectWishGame(user_code);
+		List<Integer> game_code = stimWishCartService.SelectCartGameCode(user_code);
+		if(game_code.isEmpty()) {
+			game_code= new ArrayList<>();
+		}
+		
+		mav.addObject("wlist", wlist);
+		mav.addObject("game_code", game_code);
 		mav.setViewName("wishcart/wish");
 
         return mav;

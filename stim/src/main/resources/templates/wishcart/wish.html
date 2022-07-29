@@ -16,7 +16,7 @@
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
     	<div id="wishList">
-    	<div class="list_box" th:each="wish : ${list}" th:id="|wishListBox${wish.wish_code}|">
+    	<div class="list_box" th:each="wish : ${wlist}" th:id="|wishListBox${wish.wish_code}|">
 			<div class="game_image">
 				<img th:src="@{/image/game/} + ${wish.game_picture}">
 			</div>
@@ -41,9 +41,18 @@
 					<!-- <button class="cart_button" th:onclick="|location.href='@{/insert_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
 						<span class="delete_wish">장바구니 추가</span>
 					</button> -->
-					 <button class="cart_button" th:onclick="|insertcart(${wish.user_code},${wish.game_code})|">
+					<button th:if="${not #lists.contains(game_code, wish.game_code)}" th:id="|wish${wish.game_code}|" class="cart_button" th:onclick="|insertcart(${wish.user_code},${wish.game_code})|">
 						<span class="delete_wish">장바구니 추가</span>
 					</button>
+					<button th:id="|cart${wish.game_code}|" class="cart_button hideBtn" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
+						<span class="delete_wish">장바구니 이동</span>
+					</button>
+					<button th:if="${#lists.contains(game_code, wish.game_code)}" class="cart_button" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
+						<span class="delete_wish">장바구니 이동</span>
+					</button> -->
+					<!-- <a id="" class="view_cart_button" th:href="@{|/cart/${wish.user_code}|}">							
+						장바구니 보기
+					</a> -->
 				</div>
 			</div>
 		</div>
@@ -69,7 +78,8 @@
 	      }
 		
 		 function insertcart(user_code, game_code){
-			
+			let wishBtn = "#wish"+game_code;
+			let cartBtn = "#cart"+game_code;
 	    	$.ajax({
 				url: "/insert_cart",
 	            type: "POST",
@@ -81,12 +91,15 @@
 	            	//"command": command
 	            },
 	            success: function (data) {
-	            	alert("장바구니 넣기 성공");	
+	            	alert("장바구니 넣기 성공");
+	            	
 	           		}
 	            //error: function (error){
 	           	//        alert("에러");
 	            //	    } 
 	            });
+	    	$(wishBtn).css('display', 'none');
+        	$(cartBtn).css('display', 'inline-block');
 			}
 		 
 	

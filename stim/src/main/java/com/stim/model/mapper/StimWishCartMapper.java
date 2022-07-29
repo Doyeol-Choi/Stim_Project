@@ -36,5 +36,8 @@ public interface StimWishCartMapper {
 
 	// 결제완료 후 찜목록 목록 삭제
 	public void DeleteWishAllGame(int user_code, int game_code) throws Exception;
+
+	// 장바구니 게임코드 가져오기
+	public List<Integer> SelectCartGameCode(int user_code) throws Exception;
 	
 }

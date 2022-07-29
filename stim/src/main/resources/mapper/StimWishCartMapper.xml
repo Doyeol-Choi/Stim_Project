@@ -68,4 +68,9 @@
     	AND game_code = #{game_code}
     </delete>
     
+    <!-- 장바구니 게임코드 가져오기 -->
+    <select id="SelectCartGameCode" resultType="Integer" parameterType="int">
+    	SELECT game_code FROM cart_tbl
+    	WHERE user_code = #{user_code}
+    </select>
 </mapper>
