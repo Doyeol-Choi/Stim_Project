@@ -17,6 +17,7 @@ public class StimController {
         return "index";
     }
 	
+	// 관리자 페이지로 이동
 	@GetMapping("/adminPage")
 	public String adminPage(Authentication authentication) {
 		if(authentication != null) {
@@ -27,5 +28,5 @@ public class StimController {
 		}
 		return "index";
 	}
-
+	
 }

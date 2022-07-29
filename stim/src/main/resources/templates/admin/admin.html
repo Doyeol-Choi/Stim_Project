@@ -8,12 +8,15 @@
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminMain.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/adminHeader :: headerFragment"></th:block>
     <div id="container">
-    	
+    	<div id="content">
+    		<button th:onclick="location.href='/changeDiscountList'">세일목록생성</button>
+    	</div>
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

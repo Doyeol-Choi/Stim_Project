@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lagn="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8" />
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
@@ -20,7 +21,7 @@
 		        <div id="profile">
 		            <div id="profile_avartar"><!-- 프로필 이미지-->
 		                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
-		                <a th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
+		                <a sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
 		            </div>
 		            <div id="profile_id"> <!--프로필 아이디, 출신-->
 		                <h2 th:text="${user.user_nickname}"></h2>
@@ -63,8 +64,8 @@
 		        <div class="profile_content">
 		       		<!--친구창-->
 						<!-- 로그인 시 보이게 해야함 -->
-						<div class="comment_write">
-							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${user.user_picture}"> </a>
+						<div sec:authorize="isAuthenticated()" class="comment_write">
+							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}"> </a>
 							<form id="comment_form" th:action="@{/comment}" method="post">
 								<input type="hidden" name="user_code" th:value="${user.user_code}">
 								<input type="hidden" name="user_id" th:value="${user.user_id}"> 
