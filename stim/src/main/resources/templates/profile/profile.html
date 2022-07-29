@@ -47,15 +47,15 @@
 				</div>
 				
 				<div class="game_lists">
-				        	<div class="game_list"  th:each="game_list : ${game_list}">
-								<div class="game_picture">
-										<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
-								</div>
-								<div class="game_content">
-									<span class="game_name" th:text="${game_list.game_name}"></span>
-								</div>
-							</div>
-				        </div>
+		        	<div class="game_list"  th:each="game_list : ${game_list}">
+						<div class="game_picture">
+								<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
+						</div>
+						<div class="game_content">
+							<span class="game_name" th:text="${game_list.game_name}"></span>
+						</div>
+					</div>
+				</div>
 				
 		        <!-- 댓글,친구창 -->
 		        <div class="profile_content">
@@ -67,28 +67,43 @@
 								<input type="hidden" name="user_code" th:value="${user.user_code}">
 								<input type="hidden" name="user_id" th:value="${user.user_id}"> 
 								<input type="hidden" name="writer_code" th:value="2"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
-								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
+								<textarea id="comment_text" name="comment_text" rows="1" placeholder="댓글 써줘요" onkeydown="send()" ></textarea>
 								<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
-								<input type="submit" value="댓글 남기기">
+								<span id="comment_cont"></span>
+								<input id="comment_submit" type="submit" value="댓글 남기기">
 							</form>
 						</div>
 					<div class="profile_left">
-						<div id="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}">
-							<div class="comment_image">
-								<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}"> </a>
-							</div>
-							<div class="comment_content">
-								<span class="comment_nickname" th:text="${list.comment_nickname}"></span>
-								<span class="comment_context" th:text="${list.comment_context}"></span>
-								<span class="comment_regdate" th:text="${'작성 일 :' + #dates.format(list.profile_regdate,'yyyy-MM-dd HH:mm')}"></span>
+						<div id="comment_lists">
+							<div id="comment_list" th:each="lists : ${list}" th:id="|mentListBox${lists.comment_code}">
+								<div class="comment_image">
+									<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${lists.user_picture}"> </a>
+								</div>
+								<div class="comment_content">
+									<div class="comment_nickname" th:text="${lists.comment_nickname}"> <a></a> </div> 
+									<span class="comment_regdate" th:text="${#dates.format(lists.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
+									<div class="comment_context" th:text="${lists.comment_context}"></div>
+									
+								</div>
 							</div>
 						</div>
+						
 					</div>
 		        </div>
 		        <div class="profile_right">
-						<!-- 친구 : num -->
+						<!-- 친구 : num 명 -->
 						<div class="friends">
-							<a href="/${user_id}/{friends}"> &nbsp; <span>친구</span> &nbsp; <span>${friends}</span>  </a>
+							<a> 친구 : <span th:text="${#lists.size(f_list)}"></span> 명 </a>
+							<br>
+							<span> <strong>친구 목록</strong> </span>
+							<div class="friend_list" th:each="f: ${f_list}">
+								<div class="friend_picutre">
+									<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}">
+								</div>
+								<div class="friend_content">
+									<span class="friend_nickname" th:text="${f.friend_nickname}"></span>
+								</div>
+							</div>
 						</div>
 						<!-- 친구 목록 -->
 					</div>
@@ -98,6 +113,14 @@
     </div>	
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+    <script>
+		 	// textarea태그값 받아오기
+		    var str = document.getElementById("comment_text").value;
+		    // 값에서 엔터를 <br>태그로 변경하기
+		    str = str.replace(/(?:\r\n|\r|\n)/g, "<br />");
+		    // <br>태그로 변경한 값을 다시 넣어주기
+		    document.getElementById("comment_cont").innerHTML = str;
+    </script>
     <!-- 
     <script th:inline="javascript">
     	function insertComment(user_code, user_id, writer_code, comment_text){

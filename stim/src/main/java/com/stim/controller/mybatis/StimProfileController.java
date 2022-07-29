@@ -37,11 +37,12 @@ public class StimProfileController {
 			
 			List<ProFileVO> list = stimProfileService.getCommentInfo(user_code);
 			List<ProFileVO> game_list = stimProfileService.SelectMyGames(user_code);
- 			
+ 			List<ProFileVO> f_list = stimProfileService.SelectMyFriends(user_code);
 			
 			mav.addObject("game_list",game_list);
 			mav.addObject("user", uVo);
 			mav.addObject("list", list);
+			mav.addObject("f_list",f_list);
 			
 			mav.setViewName("profile/profile");
 			

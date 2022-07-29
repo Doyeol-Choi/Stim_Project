@@ -43,13 +43,11 @@ public class StimProfileServiceImp implements StimProfileService {
 
 	@Override
 	public List<ProFileVO> SelectMyGames(int user_code) throws Exception {
-		
 		return stimProfileMapper.SelectMyGames(user_code);
 	}
 
 	@Override
-	public List<ProFileVO> SelectMyFriends(int user_code) throws Exception {
-		
+	public List<ProFileVO> SelectMyFriends(int user_code) throws Exception {	
 		return stimProfileMapper.SelectMyFriends(user_code);
 	}
 	 
