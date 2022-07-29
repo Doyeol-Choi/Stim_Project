@@ -49,6 +49,10 @@ public class StimProfileController {
 			List<ProFileVO> game_list = stimProfileService.SelectMyGames(user_code);
  			List<ProFileVO> f_list = stimProfileService.SelectMyFriends(user_code);
 			
+// 			if(game_list.isEmpty()) {
+// 				game_list= null;
+// 			}
+ 			
 			mav.addObject("game_list",game_list);
 			mav.addObject("user", uVo);
 			mav.addObject("list", list);
@@ -188,6 +192,18 @@ public class StimProfileController {
 		return new RedirectView(url);
 	}
 	
+	//댓글 삭제 
+	@GetMapping("/comment/delete")
+	public RedirectView DeleteComment(@RequestParam("comment_code") int comment_code,
+									  @RequestParam("user_code") int user_code) throws Exception{
+		System.out.println("삭제 테스트");
+		
+		stimProfileService.DeleteCommentByCode(comment_code);
+		String url = "/profile/" + user_code;
+		
+		return new RedirectView(url);
+	}
+	
 	//댓글 저장 ajax
 //	@PostMapping("/comment")
 //	public void InsertComment(@RequestParam("user_code") int user_code,
@@ -207,5 +223,6 @@ public class StimProfileController {
 //		
 //		stimProfileService.InsertComment(pVo);
 //	}
+	
 	
 }

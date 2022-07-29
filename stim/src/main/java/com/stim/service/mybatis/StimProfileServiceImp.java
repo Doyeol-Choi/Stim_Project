@@ -28,11 +28,6 @@ public class StimProfileServiceImp implements StimProfileService {
 	}
 
 	@Override
-	public void DeleteById(String user_id) throws Exception {
-		stimProfileMapper.DeleteById(user_id);
-	}
-
-	@Override
 	@Transactional
 	public void InsertComment(ProFileVO pVo) throws Exception {
 		stimProfileMapper.InsertComment(pVo);
@@ -57,6 +52,13 @@ public class StimProfileServiceImp implements StimProfileService {
 	public void UpdatePicture(ProFileVO pVo) throws Exception {
 		stimProfileMapper.UpdatePicture(pVo);
 	}
+
+	@Override
+	public void DeleteCommentByCode(int comment_code) throws Exception {
+		stimProfileMapper.DeleteCommentByCode(comment_code);
+	}
+
+
 	 
 //	public void fileUpload(MultipartFile multipartFile) {
 //		String uploadDir = "";
