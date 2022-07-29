@@ -16,13 +16,15 @@ public class StimProfileServiceImp implements StimProfileService {
 	@Autowired
 	StimProfileMapper stimProfileMapper;
 	
-	@Override public UserVO SelectById(int user_code) throws Exception { 
+	@Override
+	public UserVO SelectById(int user_code) throws Exception { 
 		return	stimProfileMapper.SelectById(user_code); 
 	}
 	
 	@Transactional
-	@Override public void SelectByIdForUpdate(UserVO uVo) throws Exception{
-		stimProfileMapper.SelectByIdForUpdate(uVo);
+	@Override
+	public void UpdateUserInfo(UserVO uVo) throws Exception{
+		stimProfileMapper.UpdateUserInfo(uVo);
 	}
 
 	@Override
@@ -50,8 +52,28 @@ public class StimProfileServiceImp implements StimProfileService {
 	public List<ProFileVO> SelectMyFriends(int user_code) throws Exception {	
 		return stimProfileMapper.SelectMyFriends(user_code);
 	}
-	 
 	
+	@Override
+	public void UpdatePicture(ProFileVO pVo) throws Exception {
+		stimProfileMapper.UpdatePicture(pVo);
+	}
+	 
+//	public void fileUpload(MultipartFile multipartFile) {
+//		String uploadDir = "";
+//		Path serverPath = Paths.get(
+//                uploadDir +
+//                        File.separator +
+//                        StringUtils.cleanPath(multipartFile.getOriginalFilename()));
+//
+//        try {
+//            Files.copy(multipartFile.getInputStream(), serverPath, StandardCopyOption.REPLACE_EXISTING);
+//        } catch (IOException e) {
+//            log.error("fail to store file : name={}, exception={}",
+//                      multipartFile.getOriginalFilename(),
+//                      e.getMessage());
+//            throw new FileStorageException("fail to store file");
+//        }
+//    }
 
 	
 }

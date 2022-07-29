@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/user/regFormStep2.css}">
-	<script type="text/javascript" th:src="@{/js/user.js}"></script>
+	<script type="text/javascript" th:src="@{/js/user/user.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -25,12 +25,12 @@
     			</label>
     			<input type="button" id="check_id" onclick="checkId()" value="중복확인">
     			<input type="text" name="user_id" id="user_id" th:value="${uVo.user_id}" placeholder="아이디를 입력해주세요">
-    			<input type="hidden" name="chkId" id="chkId">
+    			<input type="hidden" name="chkId" id="chkId" th:value="${chkId}">
     			<span th:text="${valid_user_id}" class="input_error"></span>
     			<label th:for="user_password">
     				<span class="register_text">비밀번호</span>
     			</label>
-    			<input type="password" name="user_password" id="user_password" placeholder="비밀번호를 입력해주세요">
+    			<input type="password" name="user_password" id="user_password" placeholder="비밀번호를 입력해주세요" required>
     			<span th:text="${valid_user_password}" class="input_error"></span>
     			<label th:for="password_confirm">
     				<span class="register_text">비밀번호 확인</span>

@@ -5,20 +5,22 @@
 	<meta charset="UTF-8" />
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<title th:text="'Steam Community :: ' + ${user.user_nickname} "></title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profile/profile.css}">
-	<title th:text="'Steam Community :: ' + ${user.user_nickname} "></title>
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/profile/profile.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
-    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
     	<div id="content">
 		        <!--프로필, 프로필 수정-->
 		        <div id="profile">
 		            <div id="profile_avartar"><!-- 프로필 이미지-->
 		                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
+		                <a th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
 		            </div>
 		            <div id="profile_id"> <!--프로필 아이디, 출신-->
 		                <h2 th:text="${user.user_nickname}"></h2>
@@ -31,7 +33,7 @@
 		        </div>
 		        <!--프로필 수정-->
 		        	<div id="profile_update">
-		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"> <div>Edit profile</div></a>
+		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"><span>Edit profile</span></a>
 		        	</div>
 		        <!--댓글 페이징-->	        
 		        <div id="comment_paging">
@@ -66,8 +68,8 @@
 							<form id="comment_form" th:action="@{/comment}" method="post">
 								<input type="hidden" name="user_code" th:value="${user.user_code}">
 								<input type="hidden" name="user_id" th:value="${user.user_id}"> 
-								<input type="hidden" name="writer_code" th:value="2"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
-								<textarea id="comment_text" name="comment_text" rows="1" placeholder="댓글 써줘요" onkeydown="send()" ></textarea>
+								<input type="hidden" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
+								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
 								<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
 								<span id="comment_cont"></span>
 								<input id="comment_submit" type="submit" value="댓글 남기기">

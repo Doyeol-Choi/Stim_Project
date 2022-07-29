@@ -24,7 +24,7 @@ function checkReg() {
 		document.getElementById('user_id').focus();
 		return false;
 	}
-	
+	/*
 	if(document.getElementById('user_password').value != document.getElementById('password_confirm').value){
 		alert("비밀번호가 일치하지 않습니다.");
 		
@@ -34,7 +34,8 @@ function checkReg() {
 		document.getElementById('user_password').focus();
 		return false;
 	}
-	
+	*/
+	checkPw();
 }
 
 function checkPw() {

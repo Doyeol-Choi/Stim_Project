@@ -14,12 +14,11 @@
        SELECT * FROM user_tbl WHERE user_code = #{user_code}
     </select>
     
-    <update id="SelectByIdForUpdate" parameterType="com.stim.vo.UserVO">
+    <update id="UpdateUserInfo" parameterType="com.stim.vo.UserVO">
 		UPDATE user_tbl
 		SET 	user_nickname = #{user_nickname},
 				user_email = #{user_email},
-				user_phone = #{user_phone},
-				user_picture = #{user_picture}
+				user_phone = #{user_phone}
 		WHERE user_code = #{user_code}
     </update>
     
@@ -47,6 +46,12 @@
 		WHERE g.game_code=m.game_code
 		AND m.user_code = #{user_code}
     </select>
+
+    <update id="UpdatePicture" parameterType="com.stim.vo.ProFileVO">
+		UPDATE user_tbl
+		SET user_picture = #{user_picture}
+		WHERE user_code = #{user_code}
+    </update>
     
     <select id="SelectMyFriends" parameterType="int" resultType="com.stim.vo.ProFileVO">
     	SELECT user_code, 

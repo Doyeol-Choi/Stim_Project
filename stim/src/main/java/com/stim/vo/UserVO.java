@@ -23,7 +23,6 @@ public class UserVO implements UserDetails, OAuth2User {
 	private int user_code;
 	@NotBlank(message = "아이디는 필수 입력 값입니다.")
 	private String user_id;
-	@NotBlank(message = "비밀번호는 필수 입력 값입니다.")
 	@Pattern(regexp = "^[a-z0-9-_]{4,12}$", message = "비밀번호는 4~12자 영문 대 소문자, 숫자, 특수문자를 사용하세요.")
 	private String user_password;
 	@NotBlank(message = "이메일은 필수 입력 값입니다.")

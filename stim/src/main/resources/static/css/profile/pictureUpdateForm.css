@@ -1,0 +1,43 @@
+@charset "UTF-8";
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+h2 {
+	margin: 30px;
+}
+form {
+	margin-left: 40px;
+}
+#inputText {
+	margin-bottom: 30px;
+	display: block;
+}
+
+#btns {
+	width: 100%;
+	display: block;
+	margin-top: 20px;
+	text-align: right;
+}
+#btns > input[type="button"] {
+	width: 60px;
+	height: 30px;
+	margin-right: 10px;
+}
+#btns > button {
+	width: 60px;
+	height: 30px;
+	margin-right: 30px;
+}
+#textBox {
+	width: 100%;
+	margin-top: 30px;
+	font-size: 1.4em;	
+	padding-left: 50px;	
+	display: none;
+}
+#successText {
+	color: blue;
+}
