@@ -199,15 +199,17 @@ public class StimGameListController {
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("받은 게임 코드: " + game_code);
-			
-			
-			
+			GameVO gameDetailInfo = stimGameListService.SelectGameDetailInfo(game_code);
+			mav.addObject("gameInfo", gameDetailInfo);
+
 			mav.setViewName("game/gameDetailView");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		return mav;
 	}
+	
+	
 	
 
 }

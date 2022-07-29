@@ -86,4 +86,11 @@
     
     
     
+    <!-- 게임 상세 페이지 정보 -->
+    <select id="SelectGameDetailInfo" resultMap="gameMap">
+    	<include refid="selectAll" />
+   		WHERE gm.game_code = #{game_code}
+    </select>
+    
+    
 </mapper>

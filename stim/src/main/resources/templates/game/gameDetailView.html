@@ -14,39 +14,67 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <div id="container">
     	<div id="contents">
-	    	<h1>{game_name}</h1>
+	    	<h1 th:inline="text">[[${gameInfo.game_name}]]</h1>
 	    	<div id="gameImg" class="gameInformation">
-	    		<img alt="" src="">
+	    		<div style="width: 1020px; height: 500px; margin-left: 20px; background-color: black; padding-left: 45px;">
+
+		    		<img alt="gameImg" th:src="@{/image/game/} + ${gameInfo.game_picture}">
+	    		</div>
 	    		<div id="aboutGame" class="gameInformation">
 	    			<section id="gameSection">
-    					<article id="gameContext">
-	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
-	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
-	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
-	    					블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라블라
+    					<article id="gameContext" th:inline="text" >
+	    					[[${gameInfo.game_context}]]
 	    				</article>
 					</section>
-					<section>
-    					<article id="gameGrade">
-	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
-	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
-	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
-	    					폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝폴짝
-	    				</article>
-					</section>
+					<div id="gameGrade">
+						<div>
+	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
+	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
+	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
+	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
+	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
+	    				</div>
+					</div>
     			</div>
 	    	</div>
 	    	<div id="gameInfo" class="gameInformation">
 	    		<div id="barBackground">
 		    		<div id="barText">
 			    		<ul>
-			    			<li>개발사</li>
-			    			<li>배급사</li>
-			    			<li>출시일</li>
-			    			<li>태그 1, 2, 3</li>
+			    			<li id="miniImg">
+   				    		<img alt="gameImg" th:src="@{/image/game/} + ${gameInfo.game_picture}">
+		    				</li>
+			    			<li class="liText" th:inline="text">
+			    				개발사: <span>[[${gameInfo.game_developer}]]</span>
+			    			</li>
+			    			<li class="liText" th:inline="text">
+			    				배급사: <span>[[${gameInfo.game_distribution}]]</span>
+			    			</li>
+			    			<li class="liText">
+			    				출시일: <span>[[${#dates.format(gameInfo.game_releaseDate, 'yy. MM. dd')}]]</span>
+			    			</li>
+			    			<li class="liText" th:inline="text">
+			    				태  그: <span>[[${gameInfo.genre_1}]], [[${gameInfo.genre_2}]], [[${gameInfo.genre_3}]]</span>
+			    			</li>
+			    			<li class="liText" th:inline="text">
+			    				가  격: <span>[[${gameInfo.game_price}]]</span>
+			    			</li>
 			    		</ul>
-			    		장바구니
-		    			찜하기
+			    		<div class="wishCart" id="payNow">
+		    				<button th:onclick="|paybtn(${user_code},${total})|">
+		    					바로 구매
+		    				</button>
+			    		</div>
+			    		<div class="wishCart">
+			    			<button th:onclick="|insertwish(${user_code},${game_code})|">
+			    				찜하기
+			    			</button>			    		
+			    		</div>
+			    		<div class="wishCart">
+		    				<button th:onclick="|insertcart(${user_code},${game_code})|">
+		    					장바구니
+		    				</button>
+			    		</div>
 		    		</div>
 	    		</div>
 	    	</div>	   	
@@ -55,5 +83,9 @@
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+    
+    
+    
+    
 </body>
 </html>

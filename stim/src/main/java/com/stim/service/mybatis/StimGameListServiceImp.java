@@ -67,6 +67,15 @@ public class StimGameListServiceImp implements StimGameListService {
 		return gameListForSale;
 	}
 
+	
+	
+	// 선택한 게임의 상세 정보를 조회
+	@Override
+	public GameVO SelectGameDetailInfo(int game_code) throws Exception {
+		GameVO gameDetailInfo = stimGameListMapper.SelectGameDetailInfo(game_code);
+		return gameDetailInfo;
+	}
+
 
 
 

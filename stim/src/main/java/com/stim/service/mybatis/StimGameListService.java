@@ -25,5 +25,7 @@ public interface StimGameListService {
 	// 할인을 위한 게임 리스트 조회
 	public List<GameVO> SelectAllGameListForSale() throws Exception;
 	
+	// 선택한 게임의 상세 정보를 조회
+	public GameVO SelectGameDetailInfo(int game_code) throws Exception;
 	
 }
