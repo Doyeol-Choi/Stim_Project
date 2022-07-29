@@ -28,7 +28,7 @@ public class KakaoPayController {
 		try {
 			URL payUrl = new URL("https://kapi.kakao.com/v1/payment/ready");
 			try {// 카카오 디벨로퍼 단건결제페이지에 있는 양식 그대로 옮김
-				System.out.println("1234123");
+				
 				HttpURLConnection server = (HttpURLConnection) payUrl.openConnection(); //서버연결
 				server.setRequestMethod("POST");
 				server.setRequestProperty("Authorization", "KakaoAK 325966b20fbf7d9bf0737903ad5a11c4" );
@@ -37,7 +37,7 @@ public class KakaoPayController {
 				// 정보 파라미터
 				String pram = "cid=TC0ONETIME&partner_order_id=partner_order_id&"
 						+ "partner_user_id=partner_user_id&item_name=game&quantity=1&total_amount="+total+"&"
-						+ "tax_free_amount=0&approval_url=http://localhost:4860/pay_success"+user_code+"&fail_url=http://localhost:4860/cart/"+user_code+"&"
+						+ "tax_free_amount=0&approval_url=http://localhost:4860/paysuccess/"+user_code+"&fail_url=http://localhost:4860/cart/"+user_code+"&"
 						+ "cancel_url=http://localhost:4860/cart/"+user_code;
 				OutputStream out = server.getOutputStream();	// 주는애
 				DataOutputStream dataOut = new DataOutputStream(out);	//데이터 주는놈
@@ -50,7 +50,7 @@ public class KakaoPayController {
 				InputStream in;				// 받는애
 				if(result==200) {
 					in = server.getInputStream();
-					System.out.println("22222");
+					System.out.println("결제성공");
 				}else {
 					in = server.getErrorStream();
 					System.out.println(in);

@@ -51,11 +51,26 @@
 		group by c.user_code
     </select>
     
+    <!-- 결제 완료후 보유게임테이블에 넣기 -->
+    <insert id="InsertMyGame" parameterType="int">
+    	INSERT INTO mygame_tbl VALUES
+		(mygame_code_seq.nextval, #{user_code}, #{game_code})
+    </insert>
+    
     <!-- 결제 완료후 장바구니 목록 삭제 -->
     <delete id="DeleteCartAllGame" parameterType="int">
     	DELETE cart_tbl WHERE user_code = #{user_code}
     </delete>
 
+    <!-- 결제 완료후 장바구니 목록 삭제 -->
+    <delete id="DeleteWishAllGame" parameterType="int">
+    	DELETE wish_tbl WHERE user_code = #{user_code}
+    	AND game_code = #{game_code}
+    </delete>
     
-    
+    <!-- 장바구니 게임코드 가져오기 -->
+    <select id="SelectCartGameCode" resultType="Integer" parameterType="int">
+    	SELECT game_code FROM cart_tbl
+    	WHERE user_code = #{user_code}
+    </select>
 </mapper>
