@@ -182,6 +182,7 @@ header {
 	width: 80px;
 	height: 80px;
 	float: right;
+	background-color: white;
 }
 
 #headUserInfo {

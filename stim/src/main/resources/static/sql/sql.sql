@@ -9,7 +9,7 @@ CREATE TABLE user_tbl(
     user_phone char(11) NOT NULL,
     user_picture varchar2(100) NOT NULL,
     user_admin char(1) NOT NULL,        -- Y/N
-    user_nickname varchar2(40) NOT NULL
+    user_nickname varchar2(60) NOT NULL
     );
 --ALTER TABLE user_tbl ADD user_nickname varchar2(20) DEFAULT '테스트' NOT NULL;
 --ALTER TABLE user_tbl MODIFY user_password varchar2(200);

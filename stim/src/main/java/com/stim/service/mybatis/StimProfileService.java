@@ -16,4 +16,6 @@ public interface StimProfileService {
 	public void InsertComment(ProFileVO pVo) throws Exception;
 	
 	public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
+
+	public void UpdatePicture(ProFileVO pVo);
 }

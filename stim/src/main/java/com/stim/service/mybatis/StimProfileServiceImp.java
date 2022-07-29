@@ -16,8 +16,6 @@ public class StimProfileServiceImp implements StimProfileService {
 	@Autowired
 	StimProfileMapper stimProfileMapper;
 	
-//	Logger log = LoggerFactory.getLogger(getClass());
-	
 	@Override
 	public UserVO SelectById(int user_code) throws Exception { 
 		return	stimProfileMapper.SelectById(user_code); 
@@ -43,6 +41,11 @@ public class StimProfileServiceImp implements StimProfileService {
 	@Override
 	public List<ProFileVO> getCommentInfo(int user_code) throws Exception {
 		return stimProfileMapper.getCommentInfo(user_code);
+	}
+
+	@Override
+	public void UpdatePicture(ProFileVO pVo) {
+		stimProfileMapper.UpdatePicture(pVo);
 	}
 	 
 //	public void fileUpload(MultipartFile multipartFile) {

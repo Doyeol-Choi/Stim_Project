@@ -28,6 +28,9 @@ public interface StimProfileMapper {
 	// 댓글 출력
 	public List<ProFileVO> getCommentInfo(int user_code);
 	
+	// 프로필 사진 변경
+	public void UpdatePicture(ProFileVO pVo);
+	
 	
 	
 	

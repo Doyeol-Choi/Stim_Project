@@ -1,11 +1,12 @@
 package com.stim.controller.mybatis;
 
-import java.net.URL;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.security.core.Authentication;
@@ -128,20 +129,33 @@ public class StimProfileController {
 	@PostMapping("/pictureUpdate")
 	public RedirectView pictureUpdate(@RequestParam("user_code") int user_code, @RequestParam("picture") MultipartFile file, Authentication authentication) {
 		// 로그인 체크
-		if (authentication != null) {
+		if (authentication != null & !file.isEmpty()) {
 			UserVO uVo = (UserVO) authentication.getPrincipal();
+			String existingPic = uVo.getUser_picture();
+			System.out.println(existingPic);
 			// 로그인 유저와 프로필 유저가 같은지 체크
-			if (uVo.getUser_code() == user_code) {						
-				
+			if (uVo.getUser_code() == user_code) {
 				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/profile/");
-				System.out.println(path);
-//			    File dest = new File(filePath);
-//			    files.transferTo(dest);
-				
-				
-				String url = "redirect:/profile/" + user_code;
-				
-				return new RedirectView(url);
+				String uuid = UUID.randomUUID().toString();
+				String picName = uuid + "_" + file.getOriginalFilename();
+			    File savePic = new File(path + "/" + picName);
+			    ProFileVO pVo = new ProFileVO();
+			    pVo.setUser_code(user_code);
+			    pVo.setUser_picture(picName);
+			    try {
+					file.transferTo(savePic);
+					stimProfileService.UpdatePicture(pVo);
+					uVo.setUser_picture(picName);
+					if(!existingPic.equals("noimage.jpg")) {
+						File deletePic = new File(path + "/" + existingPic);
+						deletePic.delete();
+						System.out.println("삭제");
+					}
+				} catch (IllegalStateException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		String url = "redirect:/";
