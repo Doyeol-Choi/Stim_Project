@@ -29,8 +29,8 @@
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
-						<td th:inline="text" id="gSetPrice">
-						    <span style="color:white; font-size:10px;">원가: [[${list.game_price}]]</span>
+						<td id="gSetPrice">
+						    <span style="color:white; font-size:10px;">원가: [[${#numbers.formatInteger(list.game_price, 0, 'COMMA')}]]</span>
 						    <br>
 	    				    <span style="color:white; font-size:12px; background-color: #00AEEF; padding: 2px;">nnn%</span>
 	    				    <br>

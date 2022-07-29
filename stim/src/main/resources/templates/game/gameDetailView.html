@@ -57,22 +57,22 @@
 			    				태  그: <span>[[${gameInfo.genre_1}]], [[${gameInfo.genre_2}]], [[${gameInfo.genre_3}]]</span>
 			    			</li>
 			    			<li class="liText" th:inline="text">
-			    				가  격: <span>[[${gameInfo.game_price}]]</span>
+			    				가  격: <span>[[${#numbers.formatInteger(gameInfo.game_price, 0, 'COMMA')}]] 원</span>
 			    			</li>
 			    		</ul>
 			    		<div class="wishCart" id="payNow">
 		    				<button th:onclick="|paybtn(${user_code},${total})|">
-		    					바로 구매
+		    					바로 구매하기
 		    				</button>
 			    		</div>
 			    		<div class="wishCart">
-			    			<button th:onclick="|insertwish(${user_code},${game_code})|">
+			    			<button th:onclick="|insertwish(${user_code},${gameInfo.game_code})|">
 			    				찜하기
 			    			</button>			    		
 			    		</div>
 			    		<div class="wishCart">
 		    				<button th:onclick="|insertcart(${user_code},${game_code})|">
-		    					장바구니
+		    					장바구니 담기
 		    				</button>
 			    		</div>
 		    		</div>
@@ -83,7 +83,6 @@
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
-    
     
     
     

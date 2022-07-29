@@ -94,6 +94,8 @@
 }
 .liText span{
 	color: white;
+	font-size: 11px;
+	font-weight: 600;
 }
 .wishCart{
 	margin: 10px auto;
