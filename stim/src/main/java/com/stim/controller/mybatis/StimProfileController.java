@@ -147,19 +147,21 @@ public class StimProfileController {
 			    ProFileVO pVo = new ProFileVO();
 			    pVo.setUser_code(user_code);
 			    pVo.setUser_picture(picName);
-			    try {
+				try {
 					file.transferTo(savePic);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				}
+				try {
 					stimProfileService.UpdatePicture(pVo);
-					uVo.setUser_picture(picName);
-					if(!existingPic.equals("noimage.jpg")) {
-						File deletePic = new File(path + "/" + existingPic);
-						deletePic.delete();
-						System.out.println("삭제");
-					}
-				} catch (IllegalStateException e) {
+				} catch (Exception e) {
 					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
+				}
+				uVo.setUser_picture(picName);
+				if(!existingPic.equals("noimage.jpg")) {
+					File deletePic = new File(path + "/" + existingPic);
+					deletePic.delete();
+					System.out.println("삭제");
 				}
 			}
 		}
