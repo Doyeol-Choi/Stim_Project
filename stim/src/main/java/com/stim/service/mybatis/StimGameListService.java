@@ -28,4 +28,10 @@ public interface StimGameListService {
 	// 선택한 게임의 상세 정보를 조회
 	public GameVO SelectGameDetailInfo(int game_code) throws Exception;
 	
+	// 할인 목록 삭제
+	public void discountListRemove() throws Exception;
+	
+	// 할인 목록 생성
+	public void createDiscountList(int discount, int code) throws Exception;
+	
 }

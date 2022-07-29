@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stim.model.mapper.StimGameListMapper;
 import com.stim.vo.GameVO;
@@ -74,6 +75,22 @@ public class StimGameListServiceImp implements StimGameListService {
 	public GameVO SelectGameDetailInfo(int game_code) throws Exception {
 		GameVO gameDetailInfo = stimGameListMapper.SelectGameDetailInfo(game_code);
 		return gameDetailInfo;
+	}
+
+	
+	// 할인 목록 갱신을 위해 기존 목록 삭제
+	@Override
+	@Transactional
+	public void discountListRemove() throws Exception {
+		stimGameListMapper.discountListRemove();
+	}
+
+
+	// 할인 목록 생성
+	@Override
+	@Transactional
+	public void createDiscountList(int discount, int code) throws Exception {
+		stimGameListMapper.createDiscountList(discount, code);
 	}
 
 

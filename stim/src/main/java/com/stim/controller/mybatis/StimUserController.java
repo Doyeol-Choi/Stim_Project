@@ -133,16 +133,5 @@ public class StimUserController {
 		
 		return mav;
 	}
-	
-	// 관리자가 할인목록 갱신
-	@GetMapping("/changeDiscountList")
-	public void changeDiscountList(Authentication authentication) {
-		if(authentication != null) {
-			UserVO uVo = (UserVO) authentication.getPrincipal();
-			if (uVo.getUser_admin().equals("Y")) {
-			}
-		}
-	}
-
 
 }

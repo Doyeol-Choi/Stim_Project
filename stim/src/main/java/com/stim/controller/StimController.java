@@ -1,11 +1,8 @@
 package com.stim.controller;
 
 
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import com.stim.vo.UserVO;
 
 
 @Controller
@@ -16,17 +13,5 @@ public class StimController {
 	public String index() {
         return "index";
     }
-	
-	// 관리자 페이지로 이동
-	@GetMapping("/adminPage")
-	public String adminPage(Authentication authentication) {
-		if(authentication != null) {
-			UserVO uVo = (UserVO) authentication.getPrincipal();
-			if (uVo.getUser_admin().equals("Y")) {
-				return "/admin/admin"; 
-			}
-		}
-		return "index";
-	}
 	
 }

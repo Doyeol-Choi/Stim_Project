@@ -82,7 +82,8 @@ CREATE TABLE game_tbl(
 ALTER TABLE game_tbl ADD game_discount number;
 SELECT * FROM game_tbl;
 CREATE SEQUENCE game_code_seq NOCACHE;
-
+UPDATE game_tbl SET game_discount = 30
+    	WHERE game_code = (SELECT g.game_code FROM (SELECT rownum AS rownumber, game_code FROM game_tbl) g WHERE g.rownumber = 3);
 --장르 테이블
 CREATE TABLE genre_tbl(
     genre_code number PRIMARY KEY,
