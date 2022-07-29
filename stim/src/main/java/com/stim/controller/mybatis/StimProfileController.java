@@ -1,6 +1,5 @@
 package com.stim.controller.mybatis;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,9 +36,13 @@ public class StimProfileController {
 			UserVO uVo = stimProfileService.SelectById(user_code);
 			
 			List<ProFileVO> list = stimProfileService.getCommentInfo(user_code);
+			List<ProFileVO> game_list = stimProfileService.SelectMyGames(user_code);
+ 			List<ProFileVO> f_list = stimProfileService.SelectMyFriends(user_code);
 			
+			mav.addObject("game_list",game_list);
 			mav.addObject("user", uVo);
 			mav.addObject("list", list);
+			mav.addObject("f_list",f_list);
 			
 			mav.setViewName("profile/profile");
 			
@@ -142,4 +145,5 @@ public class StimProfileController {
 //		
 //		stimProfileService.InsertComment(pVo);
 //	}
+	
 }

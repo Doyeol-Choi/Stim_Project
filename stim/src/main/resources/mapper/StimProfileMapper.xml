@@ -41,6 +41,20 @@
        ORDER BY profile_regdate desc
     </select>
     
+    <select id="SelectMyGames" parameterType="int" resultType="com.stim.vo.ProFileVO">		
+    	SELECT g.game_name AS game_name, g.game_picture AS game_picture 
+		FROM mygame_tbl m, game_tbl g
+		WHERE g.game_code=m.game_code
+		AND m.user_code = #{user_code}
+    </select>
     
+    <select id="SelectMyFriends" parameterType="int" resultType="com.stim.vo.ProFileVO">
+    	SELECT user_code, 
+    		   user_picture AS friend_picture, 
+    		   user_nickname AS friend_nickname 
+		FROM user_tbl 
+		WHERE user_code IN(SELECT friend_user1 FROM friend_tbl WHERE friend_user2 = #{user_code} AND friend_accepted='Y') 
+		OR user_code IN(SELECT friend_user2 FROM friend_tbl WHERE friend_user1= #{user_code} AND friend_accepted='Y')	
+    </select>
     
 </mapper>

@@ -15,6 +15,17 @@ public class ProFileVO {
 	private int writer_code;
 	private String user_picture;
 	
+	//보유 게임 목록
+	//private int game_code;
+	private String game_name;
+	private String game_picture;
+	
+	//친구 목록
+	//private int friend_code;
+	private String friend_picture;
+	private String friend_nickname;
+	
+	//Lombok은 파라미터 다 채운 생성자만 만들어 줌
 	public ProFileVO() {
 	}
 	
