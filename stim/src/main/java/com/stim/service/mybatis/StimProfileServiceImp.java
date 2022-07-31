@@ -57,6 +57,7 @@ public class StimProfileServiceImp implements StimProfileService {
 	public void UpdatePicture(ProFileVO pVo) throws Exception {
 		stimProfileMapper.UpdatePicture(pVo);
 	}
+
 	 
 //	public void fileUpload(MultipartFile multipartFile) {
 //		String uploadDir = "";

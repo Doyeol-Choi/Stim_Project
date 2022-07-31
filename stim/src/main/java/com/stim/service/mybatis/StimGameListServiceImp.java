@@ -1,6 +1,10 @@
 package com.stim.service.mybatis;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,7 +97,20 @@ public class StimGameListServiceImp implements StimGameListService {
 		stimGameListMapper.createDiscountList(discount, code);
 	}
 
-
+	// 할인 목록을 뽑기위한 랜덤게임 10개 선정
+	@Override
+	public List<Integer> randomGame(int count) {
+		Set<Integer> set = new HashSet<>();
+		Random random = new Random();
+		while (set.size() < 10) {
+			int num = random.nextInt(count);
+			if(num != 0) {
+				set.add(num);				
+			}
+		}
+		List<Integer> list = new ArrayList<>(set);
+		return list;
+	}
 
 
 

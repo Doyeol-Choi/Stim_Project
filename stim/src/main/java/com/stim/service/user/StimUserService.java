@@ -1,7 +1,12 @@
 package com.stim.service.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,6 +18,7 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.FieldError;
 
 import com.stim.model.mapper.StimUserMapper;
+import com.stim.vo.SearchUserVO;
 import com.stim.vo.UserVO;
 
 import lombok.RequiredArgsConstructor;
@@ -27,7 +33,7 @@ public class StimUserService implements UserDetailsService {
 	private BCryptPasswordEncoder encoder;
 	
 	@Transactional	// 트랜잭션 보장이 된 메소드로 설정 해준다.
-    public void registerUser(UserVO uVo){	// 회원가입
+    public void registerUser(UserVO uVo) throws Exception {	// 회원가입
         uVo.setUser_password(encoder.encode(uVo.getPassword()));
         uVo.setUser_admin("N");
         stimUserMapper.registerUser(uVo);
@@ -41,7 +47,7 @@ public class StimUserService implements UserDetailsService {
 	
 	// 회원가입 유효성 체크
 	@Transactional(readOnly = true)
-	public Map<String, String> validateHandling(Errors errors) {
+	public Map<String, String> validateHandling(Errors errors) throws Exception {
 		Map<String, String> validatorResult = new HashMap<>();
 		
 		// 유효성 검사에 실패한 목록
@@ -66,14 +72,14 @@ public class StimUserService implements UserDetailsService {
 	}
 	
 	// 아이디 찾기
-	public String findIdByEmail(String user_email) {
+	public String findIdByEmail(String user_email) throws Exception {
 		String email = stimUserMapper.findIdByEmail(user_email);
 		
 		return email;
 	}
 
 	// 비밀번호 찾기
-	public int findPwByUserId(String user_id, String user_email) {
+	public int findPwByUserId(String user_id, String user_email) throws Exception {
 		int result = stimUserMapper.findPwByUserId(user_id, user_email);
 		
 		return result;
@@ -81,9 +87,58 @@ public class StimUserService implements UserDetailsService {
 
 	// 비밀번호 찾기 => 새로운 비밀번호
 	@Transactional
-	public void changePwByUserId(String user_id, String password) {
+	public void changePwByUserId(String user_id, String password) throws Exception {
 		String user_password = encoder.encode(password);
 		stimUserMapper.changePwByUserId(user_id, user_password);
 	}
+	
+	// 유저 찾기에서 닉네임으로 유저 목록 검색
+	public List<SearchUserVO> SearchUserByNickname(String user_nickname) throws Exception {
+		return stimUserMapper.SearchUserByNickname(user_nickname);
+	}
 
+	// 유저 찾기에서 유저 코드로 유저 검색
+	public SearchUserVO SearchUserByCode(int user_code) throws Exception {
+		return stimUserMapper.SearchUserByCode(user_code);
+	}
+
+	// 램덤으로 유저코드 뽑기
+	public List<Integer> randomCode(int count) {
+		Set<Integer> set = new HashSet<>();
+		Random random = new Random();
+		while (set.size() < 5) {
+			int num = random.nextInt(count);
+			if(num != 0) {				
+				set.add(num);
+			}
+		}
+		List<Integer> list = new ArrayList<>(set);
+		return list;
+	}
+	public List<Integer> randomCode(int count, int login_code) {
+		Set<Integer> set = new HashSet<>();
+		Random random = new Random();
+		while (set.size() < 5) {
+			int num = random.nextInt(count);
+			System.out.println(num);
+			if(num != 0 & num != login_code) {				
+				set.add(num);
+			}
+		}
+		List<Integer> list = new ArrayList<>(set);
+		return list;
+	}
+
+	// 로그인중 닉네임으로 유저 검색
+	public List<SearchUserVO> SearchUserByNicknameLogin(String user_nickname, int login_code) throws Exception {
+		return stimUserMapper.SearchUserByNicknameLogin(user_nickname, login_code);
+	}
+
+	// 로그인중 공백으로 유저 검색
+	public SearchUserVO SearchUserByCodeLogin(int code, int login_code) throws Exception {
+		return stimUserMapper.SearchUserByCodeLogin(code, login_code);
+	}
+
+	
+	
 }

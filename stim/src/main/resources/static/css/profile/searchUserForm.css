@@ -1,0 +1,64 @@
+@charset "UTF-8";
+
+#container{
+	color: white;
+	
+}
+
+#content{
+	width: 1500px;
+	min-height: 1000px;
+	margin: 0 auto;
+	padding-top: 50px;
+}
+
+.searchUserBox {
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.searchUserBox > h1 {
+	margin-bottom: 20px;
+}
+
+.searchUserBox > form {
+	margin-top: 20px;
+	height: 40px;
+}
+
+#user_nickname {
+	width: 700px;
+	height: 40px;
+	padding-left: 20px;
+	font-size: 1.4em;
+	margin-right: 20px;
+	border-radius: 10px;
+}
+
+#submit {
+	width: 50px;
+	height: 40px;
+	vertical-align: top;
+	border-radius: 10px;
+}
+
+#searchedUser {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.userListBox {
+	padding-left: 40px;
+	padding-top: 10px;
+	background-color: rgba(0, 0, 0, 0.3);
+	margin-top: 30px;
+	height: 100px;
+}
+
+.userListBox > img {
+	height: 80px;
+	width: 80px;
+}
+
+

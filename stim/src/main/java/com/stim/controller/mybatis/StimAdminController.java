@@ -45,18 +45,6 @@ public class StimAdminController {
 		return mav;
 	}
 	
-	// 할인 목록을 뽑기위한 랜덤게임 10개 선정
-	public static List<Integer> randomGame(int count) {
-		Set<Integer> set = new HashSet<>();
-		Random random = new Random();
-		while (set.size() < 10) {
-			int num = random.nextInt(count);
-			set.add(num);
-		}
-		List<Integer> list = new ArrayList<>(set);
-		return list;
-	}
-	
 	// 할인 목록 갱신
 	@GetMapping("/changeDiscountList")
 	public void changeDiscountList(Authentication authentication) {
@@ -65,7 +53,7 @@ public class StimAdminController {
 			if (uVo.getUser_admin().equals("Y")) {
 				try {
 					stimGameListService.discountListRemove();
-					List <Integer> list = randomGame(38);	// 추후 게임 목록 개수로 변경
+					List <Integer> list = stimGameListService.randomGame(38);	// 추후 게임 목록 개수로 변경
 					Random random = new Random();
 					for (int code : list) {
 						int discount = random.nextInt(19) * 5;

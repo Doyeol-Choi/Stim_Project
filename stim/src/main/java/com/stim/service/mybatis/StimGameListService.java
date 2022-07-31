@@ -34,4 +34,6 @@ public interface StimGameListService {
 	// 할인 목록 생성
 	public void createDiscountList(int discount, int code) throws Exception;
 	
+	// 할인 목록을 뽑기위한 랜덤게임 10개 선정
+	public List<Integer> randomGame(int count);
 }
