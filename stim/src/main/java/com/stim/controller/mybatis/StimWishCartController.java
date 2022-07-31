@@ -140,10 +140,9 @@ public class StimWishCartController {
 		stimWishCartService.InsertCartGame(user_code, game_code);  
 	  
 	  }
-	// 결제완료
-	
-	  @GetMapping("/paysuccess/{user_code}") 
-	  public RedirectView PaySuccess(
+	// 장바구니에서 결제완료
+	  @GetMapping("/paysuccessAll/{user_code}") 
+	  public RedirectView PaySuccessAll(
 			  @PathVariable("user_code") int user_code) throws Exception {
 		  
 		  List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
@@ -159,15 +158,37 @@ public class StimWishCartController {
 		  stimWishCartService.DeleteCartAllGame(user_code);  
 		  
 		  String main = "/";
-	//	  String profile = "/profile/"+ user_code;
-	//	  if(page == 1) {
-	//		  return new RedirectView(main);
-	//	  }else if (page == 2 ) {
-	//		  return new RedirectView(profile);
-	//	  }
+
 		  return new RedirectView(main);
 	  
 	  }
+	// 바로 결제완료
+		  @GetMapping("/paysuccessOne/{user_code}") 
+		  public RedirectView PaySuccessOne(
+				  @PathVariable("user_code") int user_code) throws Exception {
+			  
+			  List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
+			  for(int i=0; i<list.size(); ++i){
+				  
+//				 int user_code = list.get(i).getUser_code();
+				 int game_code = list.get(i).getGame_code();
+				 
+				 stimWishCartService.InsertMyGame(user_code, game_code);
+				 stimWishCartService.DeleteWishAllGame(user_code, game_code);
+			  }
+			  
+			  stimWishCartService.DeleteCartAllGame(user_code);  
+			  
+			  String main = "/";
+		//	  String profile = "/profile/"+ user_code;
+		//	  if(page == 1) {
+		//		  return new RedirectView(main);
+		//	  }else if (page == 2 ) {
+		//		  return new RedirectView(profile);
+		//	  }
+			  return new RedirectView(main);
+		  
+		  }
 	
 	
 	
