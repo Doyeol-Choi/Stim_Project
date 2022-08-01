@@ -61,8 +61,8 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	// 결제완료 후 장바구니 목록 삭제
 	@Override
 	@Transactional
-	public void DeleteCartAllGame(int user_code) throws Exception{
-		stimWishCartMapper.DeleteCartAllGame(user_code);
+	public void DeleteCartAllGame(int user_code, int game_code) throws Exception{
+		stimWishCartMapper.DeleteCartAllGame(user_code, game_code);
 	}
 	// 결제완료 후 찜목록 삭제
 	@Override
@@ -73,8 +73,20 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	}
 	// 장바구니 게임 코드 가져오기
 	@Override
-	public List<Integer> SelectCartGameCode(int user_code) throws Exception {
+	public List<Integer> SelectCartGameCode(Integer user_code) throws Exception {
 		return stimWishCartMapper.SelectCartGameCode(user_code);
+	}
+	// 찜목록 게임코드 가져오기
+	public List<Integer> SelectWishGameCode(Integer user_code)throws Exception{
+		return stimWishCartMapper.SelectWishGameCode(user_code);
+	}
+
+	// 게임 상세보기에서 찜목록에 넣기
+	@Override
+	@Transactional
+	public void InsertWishGame(int user_code, int game_code) throws Exception {
+		stimWishCartMapper.InsertWishGame(user_code,game_code);
+		
 	}
 	
 

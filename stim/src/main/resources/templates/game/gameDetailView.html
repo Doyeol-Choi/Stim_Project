@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack 게임 상세 페이지</title>
@@ -8,6 +9,8 @@
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameDetailView.css?after}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/game/gameview.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -60,23 +63,51 @@
 			    				가  격: <span>[[${#numbers.formatInteger(gameInfo.game_price, 0, 'COMMA')}]] 원</span>
 			    			</li>
 			    		</ul>
-			    		<div class="wishCart" id="payNow">
-		    				<button th:onclick="|paybtn(${user_code},${game_code})|">
-		    				<!-- <button th:onclick="|paybtn(${xxx.user_code},${xxx.game_code})|"> -->
-		    					바로 구매하기
-		    				</button>
+			    		<div sec:authorize="isAnonymous()">
+				    		<div class="wishCart" id="payNow">
+			    				<button th:onclick="|location.href='@{/loginForm}'|">
+			    					바로 구매하기
+			    				</button>
+				    		</div>
+				    		<div class="wishCart">
+				    			<button th:onclick="|location.href='@{/loginForm}'|">
+				    				찜하기
+				    			</button>			    		
+				    		</div>
+				    		<div class="wishCart">
+			    				<button th:onclick="|location.href='@{/loginForm}'|">
+			    					장바구니 담기
+			    				</button>
+				    		</div>
 			    		</div>
-			    		<div class="wishCart">
-			    			<button th:onclick="|insertwish(${user_code},${gameInfo.game_code})|">
-			    				<!-- <button th:onclick="|paybtn(${xxx.user_code},${xxx.game_code})|"> -->	
-			    				찜하기
-			    			</button>			    		
-			    		</div>
-			    		<div class="wishCart">
-		    				<button th:onclick="|insertcart(${user_code},${game_code})|">
-		    				<!-- <button th:onclick="|insertcart(${xxx.user_code},${xxx.game_code})|"> -->
-		    					장바구니 담기
-		    				</button>
+			    		<div sec:authorize="isAuthenticated()">
+				    		<div class="wishCart" id="payNow">
+			    				<button th:onclick="|paybtn(${#authentication.principal.user_code},${gameInfo.game_code},${gameInfo.game_price})|">
+			    					바로 구매하기
+			    				</button>
+				    		</div>
+				    		<div class="wishCart">
+				    			<button th:id="|bwish${gameInfo.game_code}|" th:if="${not #lists.contains(game_code_wish, gameInfo.game_code)}" th:onclick="|insertwish(${#authentication.principal.user_code},${gameInfo.game_code})|">
+				    				찜하기
+				    			</button>
+				    			<button th:id="|awish${gameInfo.game_code}|" th:onclick="|location.href='@{/wish/{user_code}(user_code=${#authentication.principal.user_code})}'|" style="display: none;">
+				    				찜목록으로 이동
+				    			</button>
+				    			<button th:if="${#lists.contains(game_code_wish, gameInfo.game_code)}" th:onclick="|location.href='@{/wish/{user_code}(user_code=${#authentication.principal.user_code})}'|">
+				    				찜목록으로 이동
+				    			</button>		    		
+				    		</div>
+				    		<div class="wishCart">
+			    				<button th:id="|bcart${gameInfo.game_code}|" th:if="${not #lists.contains(game_code_cart, gameInfo.game_code)}" th:onclick="|insertcart(${#authentication.principal.user_code},${gameInfo.game_code})|">
+			    					장바구니 담기
+			    				</button>
+			    				<button th:id="|acart${gameInfo.game_code}|" th:onclick="|location.href='@{/cart/{user_code}(user_code=${#authentication.principal.user_code})}'|" style="display: none;">
+									장바구니 이동됨
+								</button>
+								<button th:if="${#lists.contains(game_code_cart, gameInfo.game_code)}"  th:onclick="|location.href='@{/cart/{user_code}(user_code=${#authentication.principal.user_code})}'|">
+									장바구니 이동됨
+								</button>
+				    		</div>
 			    		</div>
 		    		</div>
 	    		</div>
