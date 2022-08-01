@@ -64,7 +64,7 @@
 		       		<!--친구창-->
 						<!-- 로그인 시 보이게 해야함 -->
 						<div class="comment_write">
-							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${user.user_picture}"> </a>
+							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}"> </a>
 							<form id="comment_form" th:action="@{/comment}" method="post">
 								<input type="hidden" name="user_code" th:value="${user.user_code}">
 								<input type="hidden" name="user_id" th:value="${user.user_id}"> 
