@@ -50,4 +50,13 @@ public interface StimUserMapper {
 	// 친구 요청
 	public void AddFriendRequest(int login_code, int user_code);
 
+	// 친구 요청 취소 전 확인
+	public String FriendRequestAcceptCheck(int login_code, int user_code);
+
+	// 친구 요청 취소
+	public void CancleFriendRequset(int login_code, int user_code);
+	
+	// 전체 유저 검색
+	public List<UserVO> SelectUserAll();
+
 }

@@ -15,10 +15,10 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <div id="container">
     	<div id = "mainGame" class = "contain">
-				<h1>이벤트 추천</h1>
-					<div id = "mainGame1">
-						<a href = ""><img  src="" alt=""></a>
-					</div>
+				<h1>인기 추천</h1>
+				<div id = "mainGame1">
+					<a href = ""><img  src="" alt=""></a>
+				</div>
 				<div id="mainGame2" class="subG">
 						<a href = ""><img  src="" alt=""></a>
 				</div>
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 			
-			<div id="newGame" class = "contain">
+			<!-- <div id="newGame" class = "contain">
 				<h1>최신 게임</h1>
 				<div id = "newGame1" class = "newSubG">
 					<a href = ""><img  src="" alt=""></a>
@@ -44,11 +44,21 @@
 					<a href = ""><img  src="" alt=""></a>
 					<p>게임 타이틀</p>
 				</div>
-			</div>
+			</div> -->
+			<div class="swiper mySwiper contain" id="newGame">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide newSubG" th:each="popGame : ${popList}">
+                        <a th:href="|@{/gameDetailView(game_code=${popGame.game_code})}|"><img th:src="@{'/image/game/'+${popGame.game_picture}}"></a>
+                        <p th:text="${popGame.game_name}"></p>
+                        <p th:text="${popGame.game_releaseDate}">
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
 			
 			<div id = "gameTag" class = "contain">
-				<h1 sec:authorize="!isAuthenticated()">추천 장르</h1>
-				<h1 sec:authorize="isAuthenticated()"><span sec:authentication="principal.user_nickname"></span>님을 위한 추천 장르</h1>
+				<h1>추천 장르</h1>
 				<div id = "tag1" class = "gameTags">
 					<a href = "">태그 1</a>
 				</div>

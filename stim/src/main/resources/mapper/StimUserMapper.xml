@@ -83,4 +83,21 @@
     	VALUES(friend_code_seq.nextval, #{login_code}, #{user_code}, 'N')
     </insert>
     
+    <!-- 친구 요청 취소 전 확인 -->
+    <select id="FriendRequestAcceptCheck" resultType="String" parameterType="int">
+    	SELECT friend_accepted FROM friend_tbl
+    	WHERE friend_user1 = #{login_code} and friend_user2 = #{user_code} and friend_accepted = 'N'
+    </select>
+    
+    <!-- 친구 요청 취소 -->
+    <delete id="CancleFriendRequset" parameterType="int">
+    	DELETE FROM friend_tbl
+    	WHERE friend_user1 = #{login_code} and friend_user2 = #{user_code} and friend_accepted = 'N'
+    </delete>
+    
+    <!-- 전체 유저 검색 -->
+    <select id="SelectUserAll" resultType="com.stim.vo.UserVO">
+    	SELECT * FROM user_tbl ORDER BY user_code
+    </select>
+    
 </mapper>

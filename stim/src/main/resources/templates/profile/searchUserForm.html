@@ -9,6 +9,8 @@
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/profile/searchUserForm.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/profile/searchUser.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -25,13 +27,21 @@
     		</div>
     		<div id="searchedUser" th:if="${!#lists.isEmpty(userList)}">
     			<div class="userListBox" th:each="user:${userList}">
-    				<img th:src="|@{/image/profile/user.user_picture}|">
-    				<span th:text="${user.user_nickname}"></span>
-    				<div id="friend_btn" sec:authorize="isAuthenticated()">
-	    				<button th:if="${#strings.isEmpty(user.friend_accepted)}" th:onclick="|location.href='@{/addFriend(user_code=${user.user_code})}'|">친구 요청</button>
+    				<img th:src="@{'/image/profile/' + ${user.user_picture}}" th:onclick="|location.href='/profile/${user.user_code}'|">
+    				<span id="userNick" th:text="${user.user_nickname}" th:onclick="|location.href='/profile/${user.user_code}'|"></span>
+    				<div class="friend_btn" th:id="|beforeAjax${user.user_code}|" sec:authorize="isAuthenticated()">
+	    				<button th:if="${#strings.isEmpty(user.friend_accepted)}" th:onclick="|friendRequset(${user.user_code})|">친구 요청</button>
 	    				<span th:if="${#strings.equals(user.friend_accepted, 'N')}">친구 요청 중...</span>
+	    				<button th:if="${#strings.equals(user.friend_accepted, 'N')}" th:onclick="|friendRequsetCancle(${user.user_code})|">요청 취소</button>
 	    				<span th:if="${#strings.equals(user.friend_accepted, 'Y')}">친구</span>
     				</div>
+    				<div class="friend_btn" th:id="|afterAjax1_${user.user_code}|" sec:authorize="isAuthenticated()" style="display:none">
+	    				<button th:onclick="|friendRequset(${user.user_code})|">친구 요청</button>
+	    			</div>
+	    			<div class="friend_btn" th:id="|afterAjax2_${user.user_code}|" sec:authorize="isAuthenticated()" style="display:none">
+	    				<span>친구 요청 중...</span>
+	    				<button th:onclick="|friendRequsetCancle(${user.user_code})|">요청 취소</button>
+	    			</div>
     			</div>
     		</div>
     	</div>

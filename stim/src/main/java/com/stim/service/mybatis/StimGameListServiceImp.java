@@ -112,11 +112,29 @@ public class StimGameListServiceImp implements StimGameListService {
 		return list;
 	}
 
+	// 최신 게임 목록 출력 (게임 날짜 최신/내림차순) 메인페이지용
+	@Override
+	public List<GameVO> SelectNewestGameListMain() throws Exception {
+		return stimGameListMapper.SelectNewestGameListMain();
+	}
 
+	// 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용
+	@Override
+	public List<GameVO> SelectPopularGameListMain() throws Exception {
+		return stimGameListMapper.SelectPopularGameListMain();
+	}
 
-
-
-
-	
+	// 메인페이지용 랜덤 태그
+	@Override
+	public List<String> RandomTagMain() {
+		List<String> tagList = new ArrayList<>();
+		String[] tags = {"액션", "퍼즐", "오픈 월드", "시뮬레이션", "생존", "좀비", "건설", "협동", "애니메이션", "RPG", "캐주얼", "멀티플레이어"};
+		Random random = new Random();
+		while(tagList.size() < 4) {
+			int num = random.nextInt(12);
+			tagList.add(tags[num]);
+		}
+		return tagList;
+	}
 	
 }

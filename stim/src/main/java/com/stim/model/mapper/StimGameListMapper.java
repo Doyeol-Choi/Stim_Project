@@ -37,4 +37,11 @@ public interface StimGameListMapper {
 
 	// 할인 목록 생성
 	public void createDiscountList(int discount, int code) throws Exception;
+
+	// 최신 게임 목록 출력 (게임 날짜 최신/내림차순) 메인페이지용
+	public List<GameVO> SelectNewestGameListMain() throws Exception;
+
+	// 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용
+	public List<GameVO> SelectPopularGameListMain() throws Exception;
+	
 }

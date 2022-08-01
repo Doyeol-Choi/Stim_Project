@@ -188,11 +188,15 @@ public class StimUserController {
 				}
 			} else {	// 닉네임 입력 없이 검색
 				try {
-					List<Integer> randomList = stimUserService.randomCode(8, login_code);	// 추후 총 유저 수로 변경
+					List<UserVO> uList = stimUserService.SelectUserAll();
+					// 랜덤으로 유저 코드 뽑기
+					List<Integer> randomList = stimUserService.randomCode(uList.size());	// 추후 총 유저 수로 변경
 					List<SearchUserVO> userList = new ArrayList<>();
 					for(int code : randomList) {
 						SearchUserVO randomUser = stimUserService.SearchUserByCodeLogin(code, login_code);
-						userList.add(randomUser);
+						if(randomUser.getUser_code() != login_code) {
+							userList.add(randomUser);							
+						}
 						mav.addObject("userList", userList);
 					} 
 				} catch (Exception e) {
@@ -209,7 +213,9 @@ public class StimUserController {
 				}
 			} else {	// 닉네임 입력 없이 검색
 				try {
-					List<Integer> randomList = stimUserService.randomCode(5);	// 추후 총 유저 수로 변경
+					List<UserVO> uList = stimUserService.SelectUserAll();
+					// 랜덤으로 유저 코드 뽑기
+					List<Integer> randomList = stimUserService.randomCode(uList.size());	// 추후 총 유저 수로 변경
 					List<SearchUserVO> userList = new ArrayList<>();
 					for(int code : randomList) {						
 						SearchUserVO randomUser = stimUserService.SearchUserByCode(code);
@@ -226,16 +232,38 @@ public class StimUserController {
 		return mav;
 	}
 
-	// 친구 추가
+	// 친구 요청
 	@GetMapping("/addFriend")
 	public RedirectView addFriend(@RequestParam("user_code") int user_code, Authentication authentication) {
 		if(authentication != null) { // 로그인
 			UserVO uVo = (UserVO) authentication.getPrincipal();
 			int login_code = uVo.getUser_code();
 			try {
+				// 친구 요청 전 친구 요청 중이거나 이미 친구인지 DB 확인
 				List<Integer> result = stimUserService.FriendRequestCheck(login_code, user_code);
 				if (result.isEmpty()) {
+					// 친구 요청 보내기
 					stimUserService.AddFriendRequest(login_code, user_code);					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return new RedirectView("/searchUser");
+	}
+	
+	// 친구 요청 취소
+	@GetMapping("/friendRequestCancle")
+	public RedirectView friendRequestCancle(@RequestParam("user_code") int user_code, Authentication authentication) {
+		if(authentication != null) { // 로그인
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			int login_code = uVo.getUser_code();
+			try {
+				// 친구 요청 취소 전 친구요청이 있는지 DB 확인
+				String chk = stimUserService.FriendRequestAcceptCheck(login_code, user_code);
+				if (chk.equals("N")) {
+					// 친구 요청 DB삭제
+					stimUserService.CancleFriendRequset(login_code, user_code);	
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
