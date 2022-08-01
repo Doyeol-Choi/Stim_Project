@@ -43,4 +43,11 @@ public interface StimUserMapper {
 
 	// 로그인중 공백으로 유저 검색
 	public SearchUserVO SearchUserByCodeLogin(int code, int login_code);
+
+	// 친구 요청 전 확인
+	public List<Integer> FriendRequestCheck(int login_code, int user_code);
+	
+	// 친구 요청
+	public void AddFriendRequest(int login_code, int user_code);
+
 }

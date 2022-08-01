@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.stim.service.user.StimUserService;
 import com.stim.vo.SearchUserVO;
@@ -186,12 +187,10 @@ public class StimUserController {
 					e.printStackTrace();
 				}
 			} else {	// 닉네임 입력 없이 검색
-				System.out.println("왔지?");
 				try {
 					List<Integer> randomList = stimUserService.randomCode(8, login_code);	// 추후 총 유저 수로 변경
 					List<SearchUserVO> userList = new ArrayList<>();
 					for(int code : randomList) {
-						System.out.println("컨트롤러 : "+code);
 						SearchUserVO randomUser = stimUserService.SearchUserByCodeLogin(code, login_code);
 						userList.add(randomUser);
 						mav.addObject("userList", userList);
@@ -227,4 +226,21 @@ public class StimUserController {
 		return mav;
 	}
 
+	// 친구 추가
+	@GetMapping("/addFriend")
+	public RedirectView addFriend(@RequestParam("user_code") int user_code, Authentication authentication) {
+		if(authentication != null) { // 로그인
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			int login_code = uVo.getUser_code();
+			try {
+				List<Integer> result = stimUserService.FriendRequestCheck(login_code, user_code);
+				if (result.isEmpty()) {
+					stimUserService.AddFriendRequest(login_code, user_code);					
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return new RedirectView("/searchUser");
+	}
 }

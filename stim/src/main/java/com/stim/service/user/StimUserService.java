@@ -120,7 +120,6 @@ public class StimUserService implements UserDetailsService {
 		Random random = new Random();
 		while (set.size() < 5) {
 			int num = random.nextInt(count);
-			System.out.println(num);
 			if(num != 0 & num != login_code) {				
 				set.add(num);
 			}
@@ -139,6 +138,15 @@ public class StimUserService implements UserDetailsService {
 		return stimUserMapper.SearchUserByCodeLogin(code, login_code);
 	}
 
-	
+	// 친구 요청 전 확인
+	public List<Integer> FriendRequestCheck(int login_code, int user_code) throws Exception {
+		return stimUserMapper.FriendRequestCheck(login_code, user_code);
+	}
+
+	// 친구 요청 하기
+	@Transactional
+	public void AddFriendRequest(int login_code, int user_code) throws Exception {
+		stimUserMapper.AddFriendRequest(login_code, user_code);
+	}
 	
 }

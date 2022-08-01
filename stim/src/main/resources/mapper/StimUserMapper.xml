@@ -70,4 +70,17 @@
     	u WHERE u.rownumber = #{code})
     </select>
     
+    <!-- 친구 요청 전 확인 -->
+    <select id="FriendRequestCheck" resultType="Integer" parameterType="int">
+    	SELECT friend_code FROM friend_tbl
+    	WHERE (friend_user1 = #{login_code} and friend_user2 = #{user_code})
+    	or (friend_user1 = #{user_code} and friend_user2 = #{login_code})
+    </select>
+    
+    <!-- 친구 요청 -->
+    <insert id="AddFriendRequest" parameterType="int">
+    	INSERT INTO friend_tbl
+    	VALUES(friend_code_seq.nextval, #{login_code}, #{user_code}, 'N')
+    </insert>
+    
 </mapper>
