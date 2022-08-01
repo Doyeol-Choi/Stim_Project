@@ -33,17 +33,19 @@
     
     <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) -->
     <select id="SelectNewestGameList" resultMap="gameMap">
-        <include refid="selectAll" />
+        SELECT * FROM
+        (<include refid="selectAll" />
+		ORDER BY gm.game_releaseDate DESC)
         WHERE rownum <![CDATA[<=]]> 10
-		ORDER BY gm.game_releaseDate DESC
     </select>
     
     
     <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) -->
     <select id="SelectPopularGameList" resultMap="gameMap">
-     	<include refid="selectAll" />
+		SELECT * FROM
+     	(<include refid="selectAll" />
+		ORDER BY gm.game_salesRate DESC)	
      	WHERE rownum <![CDATA[<=]]> 10
-		ORDER BY gm.game_salesRate DESC	
     </select>
     
     
@@ -106,17 +108,19 @@
     
     <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) 메인페이지용 -->
     <select id="SelectNewestGameListMain" resultMap="gameMap">
-        <include refid="selectAll" />
+		SELECT * FROM
+        (<include refid="selectAll" />
+		ORDER BY gm.game_releaseDate DESC)
         WHERE rownum <![CDATA[<=]]> 6
-		ORDER BY gm.game_releaseDate DESC
     </select>
     
     
     <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용 -->
     <select id="SelectPopularGameListMain" resultMap="gameMap">
-     	<include refid="selectAll" />
+		SELECT * FROM
+     	(<include refid="selectAll" />
+		ORDER BY gm.game_salesRate DESC)	
      	WHERE rownum <![CDATA[<=]]> 3
-		ORDER BY gm.game_salesRate DESC	
     </select>
     
 </mapper>

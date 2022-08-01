@@ -1,7 +1,9 @@
 package com.stim.service.mybatis;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -103,10 +105,8 @@ public class StimGameListServiceImp implements StimGameListService {
 		Set<Integer> set = new HashSet<>();
 		Random random = new Random();
 		while (set.size() < 10) {
-			int num = random.nextInt(count);
-			if(num != 0) {
-				set.add(num);				
-			}
+			int num = random.nextInt(count) + 1;
+			set.add(num);				
 		}
 		List<Integer> list = new ArrayList<>(set);
 		return list;
@@ -129,10 +129,15 @@ public class StimGameListServiceImp implements StimGameListService {
 	public List<String> RandomTagMain() {
 		List<String> tagList = new ArrayList<>();
 		String[] tags = {"액션", "퍼즐", "오픈 월드", "시뮬레이션", "생존", "좀비", "건설", "협동", "애니메이션", "RPG", "캐주얼", "멀티플레이어"};
+		Set<Integer> set = new HashSet<>();
 		Random random = new Random();
-		while(tagList.size() < 4) {
+		while(set.size() < 4) {
 			int num = random.nextInt(12);
-			tagList.add(tags[num]);
+			set.add(num);
+		}
+		Iterator<Integer> iter = set.iterator();
+		while(iter.hasNext()) {
+			tagList.add(tags[iter.next()]);
 		}
 		return tagList;
 	}
