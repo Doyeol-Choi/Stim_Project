@@ -9,24 +9,19 @@ import com.stim.vo.UserVO;
 
 @Mapper
 public interface StimProfileMapper {
-
-	// 유저 프로필 
 	
-	// - 1. 유저 검색 후 프로필 출력
+	// 유저 검색 후 프로필 출력
 	public UserVO SelectById(int user_code) throws Exception;
 
-	// - 2. 유저 정보 업데이트 
+	// 유저 정보 업데이트 
 	public void UpdateUserInfo(UserVO uVo);
-	
-	// - 3. 유저 댓글 삭제
-
 	
 	// 댓글 삽입
 	public void InsertComment(ProFileVO pVo) throws Exception;
 
 	// 댓글 출력
 	public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
-
+ 
 	// 게임 출력
 	public List<ProFileVO> SelectMyGames(int user_code) throws Exception;
 
@@ -37,6 +32,21 @@ public interface StimProfileMapper {
 	public void UpdatePicture(ProFileVO pVo) throws Exception;
 
 	// 프로필 댓글 삭제
-	public void DeleteCommentByCode(int comment_code);
+	public void DeleteCommentByCode(int comment_code) throws Exception;
+
+	// 친구 요청 출력
+	public List<ProFileVO> selectFriendRequest(int user_code) throws Exception;
+
+	// 친구 요청 삭제
+	public void deleteFriendRequest(int friend_code) throws Exception;
+
+	// 친구 요청 수락
+	public void updateFriendRequest(int friend_code) throws Exception;
+	
+	// 프로필 자기소개 수정
+	public void updateProfileContext(ProFileVO pVo) throws Exception;
+
+	// 프로필 자기소개 출력
+	public String selectProfileContext(int user_code) throws Exception;
 	
 }

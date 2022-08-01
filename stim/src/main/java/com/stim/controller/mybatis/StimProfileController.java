@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.security.core.Authentication;
@@ -48,7 +49,9 @@ public class StimProfileController {
 			List<ProFileVO> list = stimProfileService.getCommentInfo(user_code);
 			List<ProFileVO> game_list = stimProfileService.SelectMyGames(user_code);
  			List<ProFileVO> f_list = stimProfileService.SelectMyFriends(user_code);
-			
+			List<ProFileVO> f_request = stimProfileService.selectFriendRequest(user_code);
+			String msg = stimProfileService.selectProfileContext(user_code);
+					
 // 			if(game_list.isEmpty()) {
 // 				game_list= null;
 // 			}
@@ -57,6 +60,8 @@ public class StimProfileController {
 			mav.addObject("user", uVo);
 			mav.addObject("list", list);
 			mav.addObject("f_list",f_list);
+			mav.addObject("f_request",f_request);
+			mav.addObject("msg",msg);
 			
 			mav.setViewName("profile/profile");
 			
@@ -178,6 +183,7 @@ public class StimProfileController {
 		return new RedirectView(url);
 	}
 	
+
 	//댓글 저장 No Ajax
 	@PostMapping("/comment")
 	public RedirectView InsertComment(@RequestParam("user_code") int user_code,
@@ -208,6 +214,51 @@ public class StimProfileController {
 		
 		return new RedirectView(url);
 	}
+	
+	//친추 요청 삭제
+	@GetMapping("/friend/request")
+	@Transactional
+	public RedirectView deleteRequest(@RequestParam("friend_code") int friend_code,
+									  @RequestParam("user_code") int user_code)	throws Exception{
+		
+		System.out.println("친추 삭제 테스트");
+		
+		stimProfileService.deleteFriendRequest(friend_code);
+		String url =  "/profile/" + user_code;
+		
+		return new RedirectView(url);
+	}
+	
+	//친추 요청 승인
+	@Transactional
+	@GetMapping("/friend/approval")
+	public RedirectView approvalRequest(@RequestParam("friend_code") int friend_code,
+										@RequestParam("user_code") int user_code) throws Exception{
+		System.out.println("친추 승인 테스트");
+		
+		stimProfileService.updateFriendRequest(friend_code);
+		String url = "/profile/" + user_code;
+		
+		return new RedirectView(url);
+	}
+	
+	//프로필 할 말 수정
+	@Transactional
+	@PostMapping("/profile/context")
+	public RedirectView fixContext(@RequestParam("user_code") int user_code,
+								   @RequestParam("profile_context") String profile_context )throws Exception{
+		System.out.println("프사 수정 테스트");
+		
+		ProFileVO pVo = new ProFileVO();
+		pVo.setComment_context(profile_context);
+		stimProfileService.updateProfileContext(pVo);
+		
+		String url = "/profile/" + user_code;
+		System.out.println(url);
+		
+		return new RedirectView(url);
+	}
+
 	
 	//댓글 저장 ajax
 //	@PostMapping("/comment")

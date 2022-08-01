@@ -52,6 +52,7 @@ CREATE TABLE profile_comment_tbl(
     user_code number ,
     writer_code number NOT NULL,
     comment_context clob NOT NULL,
+    profile_context clob,
     profile_regdate date NOT NULL               --sysdate
 );
 
@@ -114,6 +115,7 @@ CREATE TABLE persistent_logins (
     token varchar(64),
     last_used timestamp
 );
+
 
 -- 친구 테이블 외래키
 ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user1 FOREIGN KEY(friend_user1) references user_tbl (user_code);

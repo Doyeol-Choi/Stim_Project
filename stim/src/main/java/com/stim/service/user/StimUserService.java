@@ -107,7 +107,7 @@ public class StimUserService implements UserDetailsService {
 		Set<Integer> set = new HashSet<>();
 		Random random = new Random();
 		while (set.size() < 5) {
-			int num = random.nextInt(count);
+			int num = random.nextInt(count)+1;
 			if(num != 0) {				
 				set.add(num);
 			}
@@ -119,8 +119,8 @@ public class StimUserService implements UserDetailsService {
 		Set<Integer> set = new HashSet<>();
 		Random random = new Random();
 		while (set.size() < 5) {
-			int num = random.nextInt(count);
-			if(num != 0 & num != login_code) {				
+			int num = random.nextInt(count)+1;
+			if(num != login_code) {				
 				set.add(num);
 			}
 		}

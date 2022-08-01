@@ -22,5 +22,15 @@ public interface StimProfileService {
 	public void UpdatePicture(ProFileVO pVo) throws Exception;
 
 	public void DeleteCommentByCode(int comment_code) throws Exception;
+	
+	public List<ProFileVO> selectFriendRequest(int user_code) throws Exception;
+	
+	public void deleteFriendRequest(int friend_code) throws Exception;
+	
+	public void updateFriendRequest(int friend_code) throws Exception;
+	
+	public String selectProfileContext(int user_code) throws Exception;
+	
+	public void updateProfileContext(ProFileVO pVo) throws Exception;
 
 }

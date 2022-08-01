@@ -28,13 +28,19 @@
 		                <br>
 		                <p th:text="${user.user_id}"></p>
 		            </div>
-		            <div id="profile_introduce">
-		                테스트입니다
-		            </div>
+		            <div>
+		                <div th:text="${msg}"></div>
+		                <form action="/profile/context" method="post">
+		                	<textarea rows="" cols=""></textarea>
+			                <button type="submit" sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}"
+			                  th:onclick="|location.href= '@{/profile/context(user_code=${user.user_code}, profile_context=${msg})}' | ">코멘트 변경</button>
+		                </form>
+		                
+		            </div> 
 		        </div>
 		        <!--프로필 수정-->
 		        	<div id="profile_update">
-		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"><span>Edit profile</span></a>
+		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"><div>정보 수정</div></a>
 		        	</div>
 		        <!--댓글 페이징-->	        
 		        <div id="comment_paging">
@@ -101,7 +107,18 @@
 					</div>
 		        </div>
 		        <div class="profile_right">
-						<!-- 친구 : num 명 -->
+		        		<!-- 친구 요청 목록 -->
+						<div class="friend_request">
+							<div th:each="request : ${f_request}">
+								<div>					
+									<strong>친구 요청</strong>
+									<img alt="" th:src="@{/image/profile/} + ${request.req_picture}">
+									<span th:text="${request.req_nickname}"></span>
+									<button class="friend_request_approval_btn" th:onclick="|location.href='@{/friend/approval(friend_code = ${request.friend_code}, user_code = ${user.user_code})}'|" > O </button>
+									<button class="friend_request_delete_btn" th:onclick="|location.href='@{/friend/request(friend_code = ${request.friend_code}, user_code = ${user.user_code})}'|">X</button>						
+								</div>
+							</div>	
+						</div>
 						<div class="friends">
 							<a> 친구 : <span th:text="${#lists.size(f_list)}"></span> 명 </a>
 							<br>

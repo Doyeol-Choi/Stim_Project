@@ -209,7 +209,7 @@ public class StimUserController {
 				}
 			} else {	// 닉네임 입력 없이 검색
 				try {
-					List<Integer> randomList = stimUserService.randomCode(5);	// 추후 총 유저 수로 변경
+					List<Integer> randomList = stimUserService.randomCode(8);	// 추후 총 유저 수로 변경
 					List<SearchUserVO> userList = new ArrayList<>();
 					for(int code : randomList) {						
 						SearchUserVO randomUser = stimUserService.SearchUserByCode(code);
@@ -243,4 +243,6 @@ public class StimUserController {
 		}
 		return new RedirectView("/searchUser");
 	}
+	
+	
 }

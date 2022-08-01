@@ -95,7 +95,7 @@ div{
 	text-decoration: none;
 	color: rgb(228, 228, 228);
 }
-#profile_update > a > span{
+#profile_update > a > div{
 	text-align: center;
 	margin-top: 1vh;
 }
@@ -291,4 +291,9 @@ div{
 }
 .comment_context{
 	color: #acb2b8;
+}
+
+.friend_request{
+	background-color: coral;
+	color: white;
 }

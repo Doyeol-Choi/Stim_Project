@@ -47,6 +47,18 @@
 		WHERE g.game_code=m.game_code
 		AND m.user_code = #{user_code}
     </select>
+    
+    <select id="selectProfileContext" parameterType="int" resultType="String">
+    	SELECT profile_context
+    	FROM profile_comment_tbl p, user_tbl u
+    	WHERE p.user_code = #{user_code}
+    </select>
+    
+    <update id="updateProfileContext" parameterType="com.stim.vo.ProFileVO">
+    	SELECT profile_comment_tbl
+    	SET profile_context = #{profile_context}
+    	WHERE user_code = #{user_code}
+    </update>
 
     <update id="UpdatePicture" parameterType="com.stim.vo.ProFileVO">
 		UPDATE user_tbl
@@ -67,5 +79,28 @@
     	DELETE profile_comment_tbl
     	WHERE comment_code = #{comment_code}
     </delete>
+    
+   <select id="selectFriendRequest" parameterType="int" resultType="com.stim.vo.ProFileVO">
+		SELECT friend_code, 
+ 	    friend_user1 AS requester,
+	    (SELECT user_nickname FROM user_tbl WHERE friend_user1 = user_code) AS req_nickname,
+	    (SELECT user_picture FROM user_tbl WHERE friend_user1 = user_code) AS req_picture, 
+	    friend_accepted
+	    FROM friend_tbl, user_tbl u
+	   WHERE u.user_code = #{user_code} AND friend_user2 = #{user_code} AND friend_accepted = 'N' 
+    </select>
+    
+    <delete id="deleteFriendRequest" parameterType="int">
+    	DELETE friend_tbl
+    	WHERE friend_code = #{friend_code}
+    </delete>
+    
+    <update id="updateFriendRequest" parameterType="int">
+    	UPDATE friend_tbl
+    	SET friend_accepted = 'Y'
+    	WHERE friend_code = ${friend_code}
+    </update>
+    
+    
     
 </mapper>

@@ -58,6 +58,33 @@ public class StimProfileServiceImp implements StimProfileService {
 	public void DeleteCommentByCode(int comment_code) throws Exception {
 		stimProfileMapper.DeleteCommentByCode(comment_code);
 	}
+
+	@Override
+	public List<ProFileVO> selectFriendRequest(int user_code) throws Exception {
+		return stimProfileMapper.selectFriendRequest(user_code);
+	}
+
+	@Override
+	public void deleteFriendRequest(int friend_code) throws Exception {
+		stimProfileMapper.deleteFriendRequest(friend_code);
+	}
+
+	@Override
+	public void updateFriendRequest(int friend_code) throws Exception {
+		stimProfileMapper.updateFriendRequest(friend_code);
+	}
+
+	@Override
+	public void updateProfileContext(ProFileVO pVo) throws Exception {
+		stimProfileMapper.updateProfileContext(pVo);
+	}
+
+	@Override
+	public String selectProfileContext(int user_code) throws Exception {
+		return stimProfileMapper.selectProfileContext(user_code);
+	}
+
+	
 	 
 //	public void fileUpload(MultipartFile multipartFile) {
 //		String uploadDir = "";
