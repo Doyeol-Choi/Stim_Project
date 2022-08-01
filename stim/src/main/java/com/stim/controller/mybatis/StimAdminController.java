@@ -1,11 +1,8 @@
 package com.stim.controller.mybatis;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -56,8 +53,16 @@ public class StimAdminController {
 					List <Integer> list = stimGameListService.randomGame(38);	// 추후 게임 목록 개수로 변경
 					Random random = new Random();
 					for (int code : list) {
-						int discount = random.nextInt(19) * 5;
+						
+						int discount = random.nextInt(19);
+						
+						if(discount == 0) {
+							discount = (discount + 1) *5;
+						}else {
+							discount = discount*5;
+						}
 						stimGameListService.createDiscountList(discount, code);
+						
 					}
 				} catch (Exception e) {
 					e.printStackTrace();

@@ -15,11 +15,19 @@
     	<result column="game_context" property="game_context"/>
     	<result column="game_salesRate" property="game_salesRate"/>
     	<result column="game_picture" property="game_picture"/>
+    	<result column="game_discount" property="game_discount"/>
+    	<result column="GAME_FINALPRICE" property="game_finalPrice"/>
     </resultMap>
 	
 	
 	<sql id="selectAll">
-      	SELECT * 
+      	SELECT gm.game_code, gm.game_name, gm.game_price, gm.game_releaseDate, gm.game_developer, gm.game_distribution, 
+		gm.game_context, gm.game_salesRate, gm.game_picture, gm.game_discount,
+		gn.genre_1, gn.genre_2, gn.genre_3,
+		    CASE
+		        WHEN game_discount IS NULL THEN game_price        
+		        ELSE game_price*(1-(game_discount/100))
+		    END as "GAME_FINALPRICE"
 		FROM game_tbl gm INNER JOIN genre_tbl gn
 		ON gm.game_code = gn.game_code
 	</sql>
@@ -61,29 +69,42 @@
    
    <!-- 장르에 검색한 tag가 포함되어 있는 게임 목록 출력  -->
     <select id="SelectGameListByTags" resultMap="gameMap">
-    	SELECT * 
-		FROM game_tbl gm INNER JOIN genre_tbl gn
-		ON gm.game_code = gn.game_code
+    	<include refid="selectAll" />
 		WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
-<!-- 		AND gm.game_price <![CDATA[<=]]> #{price} -->
 		ORDER BY gm.game_code DESC
     </select>
    
-   	<!-- 선택한 값 이하의 게임 목록을 출력 -->
+   	<!-- 가격만 선택하고, 선택한 값 이하의 게임 목록을 출력 -->
     <select id="SelectAllGameListByPrice" resultMap="gameMap" parameterType="int">
        	<include refid="selectAll" />
-       	Where gm.game_price <![CDATA[<=]]> #{price}
+       	<where>
+		    CASE WHEN gm.game_discount IS NULL AND gm.game_price <![CDATA[<=]]> #{price} THEN 1
+		    WHEN gm.game_discount IS NOT NULL AND gm.game_price*(1-(gm.game_discount/100)) <![CDATA[<=]]> #{price} THEN 1
+		    ELSE 0 END = 1
+<!-- 		AND gm.game_price <![CDATA[<=]]> #{price} -->
+		</where>
+		ORDER BY gm.game_name ASC
+    </select> 
+    
+    <!-- 가격을 선택하고, 태그도 직접 입력하여 검색할 때 -->
+     <select id="SelectGameListByTagAndPrice" resultMap="gameMap" parameterType="com.stim.vo.GameVO">
+    	<include refid="selectAll" />
+		<where>
+			(gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
+		    AND(  CASE WHEN gm.game_discount IS NULL AND gm.game_price <![CDATA[<=]]> #{price} THEN 1
+		    WHEN gm.game_discount IS NOT NULL AND gm.game_price*(1-(gm.game_discount/100)) <![CDATA[<=]]> #{price} THEN 1
+		    ELSE 0 END = 1)
+		</where>
 		ORDER BY gm.game_code DESC
     </select>
-   
     
     
     <!-- 할인하는 게임 목록 출력 -->
-    <select id="SelectAllGameListForSale" resultMap="gameMap">
+    <select id="SelectNumForSale" resultMap="gameMap">
     	<include refid="selectAll" />
+		WHERE gm.game_discount IS NOT NULL
 		ORDER BY gm.game_name ASC
     </select>
-    
     
     
     <!-- 게임 상세 페이지 정보 -->
@@ -91,6 +112,7 @@
     	<include refid="selectAll" />
    		WHERE gm.game_code = #{game_code}
     </select>
+    
     
     <!-- 할인 목록 삭제 -->
     <update id="discountListRemove">

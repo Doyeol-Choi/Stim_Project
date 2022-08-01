@@ -19,11 +19,12 @@ public interface StimGameListService {
 	public List<GameVO> SelectGameListByKeyword(String keyword) throws Exception;
 
 	// 태그로 검색된 게임 리스트 조회
-	public List<GameVO> SelectGameListByTags(String tag) throws Exception;
-	public List<GameVO> SelectAllGameListByPrice(int price) throws Exception;
+	public List<GameVO> SelectGameListByTags(String tag) throws Exception; // 체크박스로 검색
+	public List<GameVO> SelectAllGameListByPrice(int price) throws Exception; // 가격으로만 검색
+	public List<GameVO> SelectGameListByTagAndPrice(String tagSearch, int price) throws Exception; // 검색키워드와 가격을 동시에 검색
 	
-	// 할인을 위한 게임 리스트 조회
-	public List<GameVO> SelectAllGameListForSale() throws Exception;
+	// 할인을 위한 게임 리스트 조회	
+	public List<GameVO> SelectNumForSale() throws Exception;
 	
 	// 선택한 게임의 상세 정보를 조회
 	public GameVO SelectGameDetailInfo(int game_code) throws Exception;

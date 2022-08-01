@@ -63,15 +63,20 @@ public class StimGameListServiceImp implements StimGameListService {
 		List<GameVO> tagList = stimGameListMapper.SelectAllGameListByPrice(price);
 		return tagList;
 	}
+	@Override
+	public List<GameVO> SelectGameListByTagAndPrice(String tagSearch, int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListByTagAndPrice(tagSearch, price);
+		return tagList;
+	}
+	
 
 
 	// 할인을 위한 게임 리스트 조회
 	@Override
-	public List<GameVO> SelectAllGameListForSale() throws Exception {
-		List<GameVO> gameListForSale = stimGameListMapper.SelectAllGameListForSale();
+	public List<GameVO> SelectNumForSale() throws Exception {
+		List<GameVO> gameListForSale = stimGameListMapper.SelectNumForSale();
 		return gameListForSale;
 	}
-
 	
 	
 	// 선택한 게임의 상세 정보를 조회
@@ -111,6 +116,9 @@ public class StimGameListServiceImp implements StimGameListService {
 		List<Integer> list = new ArrayList<>(set);
 		return list;
 	}
+
+
+
 
 
 

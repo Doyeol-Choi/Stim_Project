@@ -122,6 +122,15 @@
 	font-size: 11px;
 	color:#aaa;
 }
+#gSetPrice2{
+	padding: 0 20px;
+	font-size: 20px;
+	color: #00AEEF;
+}
+#gSetPrice2 > span{
+	position:relative;
+	top: -28px;
+}
 
 
 
@@ -131,7 +140,7 @@
 #tagSearchBar{
 	float:left;
 	width: 320px;
-	height: 545px;
+	height: 580px;
 	background-color: rgba(0, 0, 0, 0.3);
 	padding: 10px;
 }
@@ -235,4 +244,7 @@
 }
 #priceTag li a:focus{
 	color: #00AEEF;
+}
+#genreTagSearch{
+	height: 240px;
 }

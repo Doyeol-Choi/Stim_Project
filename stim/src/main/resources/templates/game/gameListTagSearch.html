@@ -31,7 +31,14 @@
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}" alt="gameImg"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
-						<td th:text="${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
+						<td th:if="${list.game_finalPrice}==${list.game_price}" th:text="￦+${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
+						<td th:if="${list.game_finalPrice}!=${list.game_price}" id="gSetPrice2">
+						    <span style="color:white; font-size:10px; text-decoration: line-through;">원가 : [[${#numbers.formatInteger(list.game_price, 0, 'COMMA')}]]</span>
+						    <br>
+	    				    <span style="color:white; font-size:12px; background-color: #00AEEF; padding: 2px;">[[${list.game_discount}]]%</span>
+	    				    <br>
+	    				    <span id="salePrice">￦[[${#numbers.formatInteger(list.game_finalPrice, 0, 'COMMA')}]]</span>
+						</td>
 						<td th:inline="text" id="gTags">
 						    [[${list.genre_1}]]
 						    <br><br>
@@ -44,7 +51,14 @@
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
-						<td th:text="${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
+						<td th:if="${list.game_finalPrice}==${list.game_price}" th:text="￦+${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
+						<td th:if="${list.game_finalPrice}!=${list.game_price}" id="gSetPrice2">
+						    <span style="color:white; font-size:10px; text-decoration: line-through;">원가 : [[${#numbers.formatInteger(list.game_price, 0, 'COMMA')}]]</span>
+						    <br>
+	    				    <span style="color:white; font-size:12px; background-color: #00AEEF; padding: 2px;">[[${list.game_discount}]]%</span>
+	    				    <br>
+	    				    <span id="salePrice">￦[[${#numbers.formatInteger(list.game_finalPrice, 0, 'COMMA')}]]</span>
+						</td>
 						<td th:inline="text" id="gTags">
 						    [[${list.genre_1}]]
 						    <br><br>
@@ -122,6 +136,10 @@
 							<li>
 								<input type="checkbox" name="genre[]" value="협동">
 								<span>협동</span>
+							</li>
+							<li>
+								<input type="checkbox" name="genre[]" value="어드벤처">
+								<span>어드벤처</span>
 							</li>
 						</ul>
 					</div>
