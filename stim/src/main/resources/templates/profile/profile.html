@@ -58,12 +58,11 @@
 					<div th:if="${not #lists.isEmpty(game_list)}" >
 						<div th:each="game_list : ${game_list}"class="game_list">
 							<div class="game_picture">
-									<img alt="게임 사진" th:src="@{/image/game/} + ${game.game_picture}">
+									<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
 							</div>
 							<div class="game_content">
-								<span class="game_name" th:text="${game.game_name}"></span>
+								<span class="game_name" th:text="${game_list.game_name}"></span>
 							</div>
-							<p>hello</p>
 						</div>		
 					</div>
 				</div>
@@ -93,7 +92,8 @@
 									<div class="comment_nickname" th:text="${list.comment_nickname}"> <a></a> </div> 
 									<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
 									<div class="comment_context" th:text="${list.comment_context}"></div>
-									<button class="comment_delete" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" >삭제</button>
+									<button class="comment_delete" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" 
+									 th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" >삭제</button>
 								</div>
 							</div>
 						</div>
