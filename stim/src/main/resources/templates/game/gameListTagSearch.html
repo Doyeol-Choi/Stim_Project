@@ -31,7 +31,7 @@
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}" alt="gameImg"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
-						<td th:text="${list.game_price}" id="gSetPrice"></td>
+						<td th:text="${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
 						<td th:inline="text" id="gTags">
 						    [[${list.genre_1}]]
 						    <br><br>
@@ -44,7 +44,7 @@
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
-						<td th:text="${list.game_price}" id="gSetPrice"></td>
+						<td th:text="${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
 						<td th:inline="text" id="gTags">
 						    [[${list.genre_1}]]
 						    <br><br>
