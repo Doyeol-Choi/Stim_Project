@@ -10,8 +10,6 @@ public interface StimProfileService {
 	public UserVO SelectById(int user_code) throws Exception;
 
 	public void UpdateUserInfo(UserVO uVo) throws Exception;
-
-	public void DeleteById(String user_id) throws Exception;
 	
 	public void InsertComment(ProFileVO pVo) throws Exception;
 	
@@ -22,5 +20,7 @@ public interface StimProfileService {
 	public List<ProFileVO> SelectMyFriends(int user_code) throws Exception;
 
 	public void UpdatePicture(ProFileVO pVo) throws Exception;
+	
+	public void DeleteCommentByCode(int comment_code) throws Exception;
 
 }

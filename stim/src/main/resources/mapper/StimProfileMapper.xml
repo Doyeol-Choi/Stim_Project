@@ -62,4 +62,9 @@
 		OR user_code IN(SELECT friend_user2 FROM friend_tbl WHERE friend_user1= #{user_code} AND friend_accepted='Y')	
     </select>
     
+    <delete id="DeleteCommentByCode"  parameterType="int">
+    	DELETE profile_comment_tbl
+    	WHERE comment_code = #{comment_code}
+    </delete>
+    
 </mapper>

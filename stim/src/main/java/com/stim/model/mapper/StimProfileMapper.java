@@ -18,8 +18,7 @@ public interface StimProfileMapper {
 	// - 2. 유저 정보 업데이트 
 	public void UpdateUserInfo(UserVO uVo);
 	
-	// 
-	public void DeleteById(String user_id) throws Exception;
+	// - 3. 유저 댓글 삭제
 
 	
 	// 댓글 삽입
@@ -36,5 +35,8 @@ public interface StimProfileMapper {
 	
 	// 프로필 사진 변경
 	public void UpdatePicture(ProFileVO pVo) throws Exception;
+
+	// 프로필 댓글 삭제
+	public void DeleteCommentByCode(int comment_code);
 	
 }

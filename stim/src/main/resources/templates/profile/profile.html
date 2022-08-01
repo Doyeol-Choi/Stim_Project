@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html lagn="ko"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8" />
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
@@ -20,7 +21,7 @@
 		        <div id="profile">
 		            <div id="profile_avartar"><!-- 프로필 이미지-->
 		                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
-		                <a th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
+		                <a sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
 		            </div>
 		            <div id="profile_id"> <!--프로필 아이디, 출신-->
 		                <h2 th:text="${user.user_nickname}"></h2>
@@ -49,13 +50,21 @@
 				</div>
 				
 				<div class="game_lists">
-		        	<div class="game_list"  th:each="game_list : ${game_list}">
-						<div class="game_picture">
-								<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
-						</div>
-						<div class="game_content">
-							<span class="game_name" th:text="${game_list.game_name}"></span>
-						</div>
+					<!-- 없을 때 -->
+					<div th:if="${#lists.isEmpty(game_list)}" >
+						<p>보유 게임이 없어요</p>
+					</div>
+					<!-- 게임 있을 때 -->
+					<div th:if="${not #lists.isEmpty(game_list)}" >
+						<div th:each="game_list : ${game_list}"class="game_list">
+							<div class="game_picture">
+									<img alt="게임 사진" th:src="@{/image/game/} + ${game.game_picture}">
+							</div>
+							<div class="game_content">
+								<span class="game_name" th:text="${game.game_name}"></span>
+							</div>
+							<p>hello</p>
+						</div>		
 					</div>
 				</div>
 				
@@ -63,7 +72,8 @@
 		        <div class="profile_content">
 		       		<!--친구창-->
 						<!-- 로그인 시 보이게 해야함 -->
-						<div class="comment_write">
+						<div sec:authorize="isAuthenticated()" class="comment_write">
+							<!--<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${user.user_picture}"> </a>  -->
 							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}"> </a>
 							<form id="comment_form" th:action="@{/comment}" method="post">
 								<input type="hidden" name="user_code" th:value="${user.user_code}">
@@ -71,21 +81,20 @@
 								<input type="hidden" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
 								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
 								<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
-								<span id="comment_cont"></span>
 								<input id="comment_submit" type="submit" value="댓글 남기기">
 							</form>
 						</div>
 					<div class="profile_left">
 						<div id="comment_lists">
-							<div id="comment_list" th:each="lists : ${list}" th:id="|mentListBox${lists.comment_code}">
+							<div id="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}">
 								<div class="comment_image">
-									<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${lists.user_picture}"> </a>
+									<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}"> </a>
 								</div>
 								<div class="comment_content">
-									<div class="comment_nickname" th:text="${lists.comment_nickname}"> <a></a> </div> 
-									<span class="comment_regdate" th:text="${#dates.format(lists.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
-									<div class="comment_context" th:text="${lists.comment_context}"></div>
-									
+									<div class="comment_nickname" th:text="${list.comment_nickname}"> <a></a> </div> 
+									<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
+									<div class="comment_context" th:text="${list.comment_context}"></div>
+									<button class="comment_delete" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" >삭제</button>
 								</div>
 							</div>
 						</div>
@@ -115,14 +124,7 @@
     </div>	
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
-    <script>
-		 	// textarea태그값 받아오기
-		    var str = document.getElementById("comment_text").value;
-		    // 값에서 엔터를 <br>태그로 변경하기
-		    str = str.replace(/(?:\r\n|\r|\n)/g, "<br />");
-		    // <br>태그로 변경한 값을 다시 넣어주기
-		    document.getElementById("comment_cont").innerHTML = str;
-    </script>
+
     <!-- 
     <script th:inline="javascript">
     	function insertComment(user_code, user_id, writer_code, comment_text){
