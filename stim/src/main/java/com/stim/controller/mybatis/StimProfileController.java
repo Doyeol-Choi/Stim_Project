@@ -88,11 +88,16 @@ public class StimProfileController {
 		if (errors.hasErrors()) {
 			mav.addObject("user", user);
 			System.out.println(errors);	// 콘솔에서 에러 확인
-			Map<String, String> validatorResult = stimUserService.validateHandling(errors);
-            for (String key : validatorResult.keySet()) {
-            	mav.addObject(key, validatorResult.get(key));
-            	System.out.println("여기오지?");
-            }
+			Map<String, String> validatorResult;
+			try {
+				validatorResult = stimUserService.validateHandling(errors);
+				for (String key : validatorResult.keySet()) {
+					mav.addObject(key, validatorResult.get(key));
+					System.out.println("여기오지?");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			
             mav.setViewName("profile/edit/profileUpdate");
 			return mav;
