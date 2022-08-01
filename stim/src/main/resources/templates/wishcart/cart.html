@@ -10,11 +10,11 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/wishcart/cart.css}">
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+	<script type="text/javascript" th:src="@{/js/wishcart/cart.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
-    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
     <div id="contents">
     <h1>장바구니</h1>
@@ -68,46 +68,6 @@
     
     </div>
     <!-- footer fragment 사용 -->
-    
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
-    
-    <script th:inline="javascript">
-    	
-		function delcart(cart_code, game_price){
-			let id = "#cartListBox" + cart_code
-	         $.ajax({
-	            url: "delete_cart",
-	               type: "POST",
-	               async: true,
-	               data: {
-	                  "cart_code" : cart_code
-	               },
-	               success: function (data) {
-	                  $(id).remove();
-	               }
-	          });
-	      }
-		function paybtn(user_code, total){
-			
-				$.ajax({
-					url:'/kakaopayAll' ,
-					data: { "user_code" : user_code,
-							"total":total
-						   },
-					dataType :'json',
-					success:function(data){
-						var box = data.next_redirect_pc_url;
-						window.open(box);
-					},
-					error:function(error){
-						alert(error);
-					}
-				});
-			};
-				
-		
-		
-	</script>
-    
 </body>
 </html>

@@ -41,4 +41,33 @@
     	WHERE user_id = #{user_id}
     </update>
     
+    <!-- 유저 찾기에서 닉네임으로 유저 목록 검색 -->
+    <select id="SearchUserByNickname" resultType="com.stim.vo.SearchUserVO" parameterType="String">
+    	SELECT user_code, user_nickname, user_picture FROM user_tbl
+    	WHERE user_nickname like '%'||#{user_nickname}||'%'
+    </select>
+    
+    <!-- 유저 찾기에서 코드로 유저 목록 검색 -->
+    <select id="SearchUserByCode" resultType="com.stim.vo.SearchUserVO" parameterType="int">
+    	SELECT user_code, user_nickname, user_picture FROM user_tbl
+    	WHERE user_code = (SELECT u.user_code FROM (SELECT rownum AS rownumber, user_code FROM user_tbl) 
+    	u WHERE u.rownumber = #{code})
+    </select>
+    
+    <!-- 로그인중 닉네임으로 유저 검색 -->
+    <select id="SearchUserByNicknameLogin" resultType="com.stim.vo.SearchUserVO" parameterType="map">
+    	SELECT user_code, user_nickname, user_picture, friend_accepted FROM user_tbl u LEFT OUTER JOIN friend_tbl f
+    	ON ((f.friend_user1 = #{login_code} and f.friend_user2 = u.user_code) 
+    	or (f.friend_user2 = #{login_code} and f.friend_user1 = u.user_code))
+    	WHERE user_nickname like '%'||#{user_nickname}||'%'
+    </select>
+    
+    <!-- 로그인중 공백으로 유저 검색 -->
+    <select id="SearchUserByCodeLogin" resultType="com.stim.vo.SearchUserVO" parameterType="int">
+    	SELECT user_code, user_nickname, user_picture, friend_accepted FROM user_tbl u LEFT OUTER JOIN friend_tbl f
+    	ON ((f.friend_user1 = #{login_code} and f.friend_user2 = u.user_code) or (f.friend_user2 = #{login_code} and f.friend_user1 = u.user_code)) 
+        WHERE user_code = (SELECT u.user_code FROM (SELECT rownum AS rownumber, user_code FROM user_tbl) 
+    	u WHERE u.rownumber = #{code})
+    </select>
+    
 </mapper>

@@ -1,9 +1,14 @@
 package com.stim.service.mybatis;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.stim.model.mapper.StimGameListMapper;
 import com.stim.vo.GameVO;
@@ -76,7 +81,36 @@ public class StimGameListServiceImp implements StimGameListService {
 		return gameDetailInfo;
 	}
 
+	
+	// 할인 목록 갱신을 위해 기존 목록 삭제
+	@Override
+	@Transactional
+	public void discountListRemove() throws Exception {
+		stimGameListMapper.discountListRemove();
+	}
 
+
+	// 할인 목록 생성
+	@Override
+	@Transactional
+	public void createDiscountList(int discount, int code) throws Exception {
+		stimGameListMapper.createDiscountList(discount, code);
+	}
+
+	// 할인 목록을 뽑기위한 랜덤게임 10개 선정
+	@Override
+	public List<Integer> randomGame(int count) {
+		Set<Integer> set = new HashSet<>();
+		Random random = new Random();
+		while (set.size() < 10) {
+			int num = random.nextInt(count);
+			if(num != 0) {
+				set.add(num);				
+			}
+		}
+		List<Integer> list = new ArrayList<>(set);
+		return list;
+	}
 
 
 

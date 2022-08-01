@@ -20,7 +20,7 @@ public interface StimProfileService {
 	public List<ProFileVO> SelectMyFriends(int user_code) throws Exception;
 
 	public void UpdatePicture(ProFileVO pVo) throws Exception;
-	
+
 	public void DeleteCommentByCode(int comment_code) throws Exception;
 
 }

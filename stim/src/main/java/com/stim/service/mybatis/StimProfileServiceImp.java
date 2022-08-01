@@ -53,12 +53,11 @@ public class StimProfileServiceImp implements StimProfileService {
 		stimProfileMapper.UpdatePicture(pVo);
 	}
 
+
 	@Override
 	public void DeleteCommentByCode(int comment_code) throws Exception {
 		stimProfileMapper.DeleteCommentByCode(comment_code);
 	}
-
-
 	 
 //	public void fileUpload(MultipartFile multipartFile) {
 //		String uploadDir = "";

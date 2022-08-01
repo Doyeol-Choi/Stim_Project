@@ -92,5 +92,16 @@
    		WHERE gm.game_code = #{game_code}
     </select>
     
+    <!-- 할인 목록 삭제 -->
+    <update id="discountListRemove">
+    	UPDATE game_tbl SET game_discount = ''
+    </update>
+    
+    <!-- 할인 목록 생성 -->
+    <update id="createDiscountList" parameterType="map">
+    	UPDATE game_tbl SET game_discount = #{discount}
+    	WHERE game_code = (SELECT g.game_code FROM (SELECT rownum AS rownumber, game_code FROM game_tbl) 
+    	g WHERE g.rownumber = #{code})
+    </update>
     
 </mapper>
