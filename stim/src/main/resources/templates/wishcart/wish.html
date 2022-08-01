@@ -15,6 +15,8 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
+    <div id="contents">
+        <h1>찜목록</h1>
     	<div id="wishList">
     	<div class="list_box" th:each="wish : ${wlist}" th:id="|wishListBox${wish.wish_code}|">
 			<div class="game_image">
@@ -26,36 +28,30 @@
 					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(wish.game_price, 3, 'COMMA')}"></span>
 				</div>
 				<div class="content_bottom">
-					
-					<span class="game_releaseDate" th:text="${'출시일: '+ #dates.format(wish.game_releaseDate,'yyyy-MM-dd')}"></span>
+					<span class="game_releaseDate">출시일: </span>[[${#dates.format(wish.game_releaseDate,'yyyy-MM-dd')}]]
 					<div class="genre_box">
-						<span th:text="${wish.genre_1}"></span>
-						<span th:text="${wish.genre_2}"></span>
-						<span th:text="${wish.genre_3}"></span>
+						<span>태그:</span> [[${wish.genre_1}]], [[${wish.genre_2}]], [[${wish.genre_3}]]
 					</div>
 					<!-- <button class="delete_wish_button" th:onclick="|location.href='@{/delete_wish(wish_code=${wish.wish_code},user_code=${wish.user_code})}'|" > -->
 					<button class="delete_wish_button" th:onclick="|delwish(${wish.wish_code})|" >
 						<span class="delete_wish">삭제</span>
 					</button>
-					
-					<!-- <button class="cart_button" th:onclick="|location.href='@{/insert_cart(user_code=${wish.user_code},game_code=${wish.game_code})}'|">
-						<span class="delete_wish">장바구니 추가</span>
-					</button> -->
 					<button th:if="${not #lists.contains(game_code, wish.game_code)}" th:id="|wish${wish.game_code}|" class="cart_button" th:onclick="|insertcart(${wish.user_code},${wish.game_code})|">
 						<span class="delete_wish">장바구니 추가</span>
 					</button>
 					<button th:id="|cart${wish.game_code}|" class="cart_button hideBtn" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
-						<span class="delete_wish">장바구니 이동</span>
+						<span class="delete_wish" id="finish">장바구니 이동됨</span>
 					</button>
 					<button th:if="${#lists.contains(game_code, wish.game_code)}" class="cart_button" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
-						<span class="delete_wish">장바구니 이동</span>
-					</button> -->
+						<span class="delete_wish" id="finish">장바구니 이동됨</span>
+					</button>
 					<!-- <a id="" class="view_cart_button" th:href="@{|/cart/${wish.user_code}|}">							
 						장바구니 보기
 					</a> -->
 				</div>
 			</div>
 		</div>
+    </div>
     </div>
    </div>
     <!-- footer fragment 사용 -->
