@@ -61,17 +61,20 @@
 			    			</li>
 			    		</ul>
 			    		<div class="wishCart" id="payNow">
-		    				<button th:onclick="|paybtn(${user_code},${total})|">
+		    				<button th:onclick="|paybtn(${user_code},${game_code})|">
+		    				<!-- <button th:onclick="|paybtn(${xxx.user_code},${xxx.game_code})|"> -->
 		    					바로 구매하기
 		    				</button>
 			    		</div>
 			    		<div class="wishCart">
 			    			<button th:onclick="|insertwish(${user_code},${gameInfo.game_code})|">
+			    				<!-- <button th:onclick="|paybtn(${xxx.user_code},${xxx.game_code})|"> -->	
 			    				찜하기
 			    			</button>			    		
 			    		</div>
 			    		<div class="wishCart">
 		    				<button th:onclick="|insertcart(${user_code},${game_code})|">
+		    				<!-- <button th:onclick="|insertcart(${xxx.user_code},${xxx.game_code})|"> -->
 		    					장바구니 담기
 		    				</button>
 			    		</div>
