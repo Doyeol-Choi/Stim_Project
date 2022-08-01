@@ -49,9 +49,7 @@ public class StimProfileController {
 			List<ProFileVO> list = stimProfileService.getCommentInfo(user_code);
 			List<ProFileVO> game_list = stimProfileService.SelectMyGames(user_code);
  			List<ProFileVO> f_list = stimProfileService.SelectMyFriends(user_code);
-			List<ProFileVO> f_request = stimProfileService.selectFriendRequest(user_code);
-			String msg = stimProfileService.selectProfileContext(user_code);
-					
+			List<ProFileVO> f_request = stimProfileService.selectFriendRequest(user_code);			
 // 			if(game_list.isEmpty()) {
 // 				game_list= null;
 // 			}
@@ -61,7 +59,6 @@ public class StimProfileController {
 			mav.addObject("list", list);
 			mav.addObject("f_list",f_list);
 			mav.addObject("f_request",f_request);
-			mav.addObject("msg",msg);
 			
 			mav.setViewName("profile/profile");
 			

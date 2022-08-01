@@ -52,7 +52,6 @@ CREATE TABLE profile_comment_tbl(
     user_code number ,
     writer_code number NOT NULL,
     comment_context clob NOT NULL,
-    profile_context clob,
     profile_regdate date NOT NULL               --sysdate
 );
 

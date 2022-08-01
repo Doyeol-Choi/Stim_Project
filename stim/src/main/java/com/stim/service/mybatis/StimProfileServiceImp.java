@@ -79,10 +79,6 @@ public class StimProfileServiceImp implements StimProfileService {
 		stimProfileMapper.updateProfileContext(pVo);
 	}
 
-	@Override
-	public String selectProfileContext(int user_code) throws Exception {
-		return stimProfileMapper.selectProfileContext(user_code);
-	}
 
 	
 	 

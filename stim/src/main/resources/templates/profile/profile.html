@@ -29,12 +29,12 @@
 		                <p th:text="${user.user_id}"></p>
 		            </div>
 		            <div>
-		                <div th:text="${msg}"></div>
-		                <form action="/profile/context" method="post">
+		                <!-- <div th:text="${msg}"></div> -->
+		                <!-- <form action="/profile/context" method="post">
 		                	<textarea rows="" cols=""></textarea>
 			                <button type="submit" sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}"
 			                  th:onclick="|location.href= '@{/profile/context(user_code=${user.user_code}, profile_context=${msg})}' | ">코멘트 변경</button>
-		                </form>
+		                </form> -->
 		                
 		            </div> 
 		        </div>
@@ -55,13 +55,13 @@
 		        	</div>
 				</div>
 				
-				<div class="game_lists">
+				<div >
 					<!-- 없을 때 -->
-					<div th:if="${#lists.isEmpty(game_list)}" >
+					<!-- <div th:if="${#lists.isEmpty(game_list)}" >
 						<p>보유 게임이 없어요</p>
-					</div>
+					</div> -->
 					<!-- 게임 있을 때 -->
-					<div th:if="${not #lists.isEmpty(game_list)}" >
+					<div class="game_lists" th:if="${not #lists.isEmpty(game_list)}" >
 						<div th:each="game_list : ${game_list}"class="game_list">
 							<div class="game_picture">
 									<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
@@ -120,11 +120,11 @@
 							</div>	
 						</div>
 						<div class="friends">
-							<a> 친구 : <span th:text="${#lists.size(f_list)}"></span> 명 </a>
+							<a> 친구 <span class="friend_count" th:text="${#lists.size(f_list)}"></span> 명 </a>
 							<br>
 							<span> <strong>친구 목록</strong> </span>
 							<div class="friend_list" th:each="f: ${f_list}">
-								<div class="friend_picutre">
+								<div class="friend_picture">
 									<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}">
 								</div>
 								<div class="friend_content">

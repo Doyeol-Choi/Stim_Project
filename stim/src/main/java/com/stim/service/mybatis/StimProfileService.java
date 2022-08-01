@@ -29,8 +29,6 @@ public interface StimProfileService {
 	
 	public void updateFriendRequest(int friend_code) throws Exception;
 	
-	public String selectProfileContext(int user_code) throws Exception;
-	
 	public void updateProfileContext(ProFileVO pVo) throws Exception;
 
 }

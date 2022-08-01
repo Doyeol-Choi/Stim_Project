@@ -130,7 +130,7 @@ div{
 	width:420px;
 	height: 215px;
 	float:right;
-	background-color: #363f4c;
+	background-color: #262B2F;
 	left:1200px;
 	top: 400px;
 	overflow-x:hidden;
@@ -159,11 +159,42 @@ div{
 }
 .friends{
 	margin-top: 30px;
-	width: 320px;
-	height: 500px;
-	background-color:gray;
+	width: 370px;
+	background-color: #1B1F22;
+	padding-bottom: 30px;
+	padding-top: 15px;
+	padding-left: 15px;
 }
-
+.friend_count{
+	color: #9b9b9b;
+}
+.friend_list{
+	height: 36px;
+    padding: 4px 0 4px 4px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    line-height: 13px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    position: relative;
+}
+.friend_picture{
+	width: 120px;
+	float: left;
+	padding: 1px;
+    border-radius: 0;
+    border: none;
+}
+.friend_picture > img{
+	width: 32px;
+	height: 32px;
+}
+.friend_content{
+	overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 .comment_footer{
 	margin-top: 6px;
     border-top: 2px solid #363f4c;
@@ -181,7 +212,7 @@ div{
 .profile_right{
 	width:420px;
 	height:98%;
-	background-color: #1B1E21;
+	background-color: #262B2F;
 	float:right;
 	z-index: 1;
 	position:relative;

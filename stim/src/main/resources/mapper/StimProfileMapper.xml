@@ -48,12 +48,6 @@
 		AND m.user_code = #{user_code}
     </select>
     
-    <select id="selectProfileContext" parameterType="int" resultType="String">
-    	SELECT profile_context
-    	FROM profile_comment_tbl p, user_tbl u
-    	WHERE p.user_code = #{user_code}
-    </select>
-    
     <update id="updateProfileContext" parameterType="com.stim.vo.ProFileVO">
     	SELECT profile_comment_tbl
     	SET profile_context = #{profile_context}
