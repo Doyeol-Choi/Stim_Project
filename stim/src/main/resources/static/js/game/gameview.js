@@ -40,19 +40,28 @@ function insertcart(user_code, game_code){
 
 function paybtn(user_code, game_code ,game_price){
 
-	$.ajax({
-		url:'/kakaopayOne' ,
-		data: { "user_code" : user_code,
-				"game_code" : game_code,
-				"game_price": game_price
-			   },
-		dataType :'json',
-		success:function(data){
-			var box = data.next_redirect_pc_url;
-			window.open(box);
-		},
-		error:function(error){
-			alert(error);
-		}
-	});
+		$.ajax({
+			url:'/kakaopayOne' ,
+			data: { "user_code" : user_code,
+					"game_code" : game_code,
+					"game_price": game_price
+				   },
+			dataType :'json',
+			success:function(data){
+				var box = data.next_redirect_pc_url;
+				window.open(box);
+			},
+			error:function(error){
+				alert(error);
+			}
+		});
+			$(beforePayBtn).css('display', 'none');
+	        $(afterPayBtn).css('display', 'inline-block');
+	
 };
+
+
+
+
+
+

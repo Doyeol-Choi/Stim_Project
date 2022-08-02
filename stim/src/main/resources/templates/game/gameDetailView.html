@@ -81,34 +81,42 @@
 				    		</div>
 			    		</div>
 			    		<div sec:authorize="isAuthenticated()">
-				    		<div class="wishCart" id="payNow">
-			    				<button th:onclick="|paybtn(${#authentication.principal.user_code},${gameInfo.game_code},${gameInfo.game_price})|">
-			    					바로 구매하기
-			    				</button>
+			    			<div th:if="${not #lists.contains(game_code_my, gameInfo.game_code)}">
+					    		<div class="wishCart" id="payNow">
+				    				<button th:onclick="|paybtn(${#authentication.principal.user_code},${gameInfo.game_code},${gameInfo.game_price})|">
+				    					바로 구매하기
+				    				</button>
+					    		</div>
+					    		<div class="wishCart">
+					    			<button th:id="|bwish${gameInfo.game_code}|" th:if="${not #lists.contains(game_code_wish, gameInfo.game_code)}" th:onclick="|insertwish(${#authentication.principal.user_code},${gameInfo.game_code})|">
+					    				찜하기
+					    			</button>
+					    			<button th:id="|awish${gameInfo.game_code}|" th:onclick="|location.href='@{/wish/{user_code}(user_code=${#authentication.principal.user_code})}'|" style="display: none;">
+					    				찜목록으로 이동
+					    			</button>
+					    			<button th:if="${#lists.contains(game_code_wish, gameInfo.game_code)}" th:onclick="|location.href='@{/wish/{user_code}(user_code=${#authentication.principal.user_code})}'|">
+					    				찜목록으로 이동
+					    			</button>		    		
+					    		</div>
+					    		<div class="wishCart">
+				    				<button th:id="|bcart${gameInfo.game_code}|" th:if="${not #lists.contains(game_code_cart, gameInfo.game_code)}" th:onclick="|insertcart(${#authentication.principal.user_code},${gameInfo.game_code})|">
+				    					장바구니 담기
+				    				</button>
+				    				<button th:id="|acart${gameInfo.game_code}|" th:onclick="|location.href='@{/cart/{user_code}(user_code=${#authentication.principal.user_code})}'|" style="display: none;">
+										장바구니 이동됨
+									</button>
+									<button th:if="${#lists.contains(game_code_cart, gameInfo.game_code)}"  th:onclick="|location.href='@{/cart/{user_code}(user_code=${#authentication.principal.user_code})}'|">
+										장바구니 이동됨
+									</button>
+					    		</div>
 				    		</div>
-				    		<div class="wishCart">
-				    			<button th:id="|bwish${gameInfo.game_code}|" th:if="${not #lists.contains(game_code_wish, gameInfo.game_code)}" th:onclick="|insertwish(${#authentication.principal.user_code},${gameInfo.game_code})|">
-				    				찜하기
+				    		<div th:if="${#lists.contains(game_code_my, gameInfo.game_code)}" class="wishCart">
+				    			<button th:onclick="|location.href='@{/profile/{user_code}(user_code=${#authentication.principal.user_code})}'|">
+				    				보유중인 게임
 				    			</button>
-				    			<button th:id="|awish${gameInfo.game_code}|" th:onclick="|location.href='@{/wish/{user_code}(user_code=${#authentication.principal.user_code})}'|" style="display: none;">
-				    				찜목록으로 이동
-				    			</button>
-				    			<button th:if="${#lists.contains(game_code_wish, gameInfo.game_code)}" th:onclick="|location.href='@{/wish/{user_code}(user_code=${#authentication.principal.user_code})}'|">
-				    				찜목록으로 이동
-				    			</button>		    		
-				    		</div>
-				    		<div class="wishCart">
-			    				<button th:id="|bcart${gameInfo.game_code}|" th:if="${not #lists.contains(game_code_cart, gameInfo.game_code)}" th:onclick="|insertcart(${#authentication.principal.user_code},${gameInfo.game_code})|">
-			    					장바구니 담기
-			    				</button>
-			    				<button th:id="|acart${gameInfo.game_code}|" th:onclick="|location.href='@{/cart/{user_code}(user_code=${#authentication.principal.user_code})}'|" style="display: none;">
-									장바구니 이동됨
-								</button>
-								<button th:if="${#lists.contains(game_code_cart, gameInfo.game_code)}"  th:onclick="|location.href='@{/cart/{user_code}(user_code=${#authentication.principal.user_code})}'|">
-									장바구니 이동됨
-								</button>
 				    		</div>
 			    		</div>
+			    		
 		    		</div>
 	    		</div>
 	    	</div>	   	

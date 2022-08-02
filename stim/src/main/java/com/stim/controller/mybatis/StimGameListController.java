@@ -206,8 +206,10 @@ public class StimGameListController {
 			if(authentication != null) {
 				UserVO uVo = (UserVO) authentication.getPrincipal();
 				Integer user_code = uVo.getUser_code();
+				
 				List<Integer> game_code_cart = stimWishCartService.SelectCartGameCode(user_code);
 				List<Integer> game_code_wish = stimWishCartService.SelectWishGameCode(user_code);
+				List<Integer> game_code_my = stimWishCartService.SelectMyGameCode(user_code);
 				
 				if(game_code_cart.isEmpty()) {
 					game_code_cart= new ArrayList<>();
@@ -215,8 +217,13 @@ public class StimGameListController {
 				if(game_code_wish.isEmpty()) {
 					game_code_wish=new ArrayList<>();
 				}
+				if(game_code_my.isEmpty()) {
+					game_code_my=new ArrayList<>();
+				}
+				
 				mav.addObject("game_code_cart", game_code_cart);
 				mav.addObject("game_code_wish",game_code_wish);
+				mav.addObject("game_code_my", game_code_my);
 				mav.addObject("gameInfo", gameDetailInfo);
 				mav.setViewName("game/gameDetailView");
 				return mav;

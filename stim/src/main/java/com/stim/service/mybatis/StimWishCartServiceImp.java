@@ -80,6 +80,11 @@ public class StimWishCartServiceImp implements StimWishCartService {
 	public List<Integer> SelectWishGameCode(Integer user_code)throws Exception{
 		return stimWishCartMapper.SelectWishGameCode(user_code);
 	}
+	// 보유게임에서 게임코드 가져오기
+	@Override
+	public List<Integer> SelectMyGameCode(Integer user_code) throws Exception {
+		return stimWishCartMapper.SelectMyGameCode(user_code);
+	}
 
 	// 게임 상세보기에서 찜목록에 넣기
 	@Override
@@ -88,6 +93,7 @@ public class StimWishCartServiceImp implements StimWishCartService {
 		stimWishCartMapper.InsertWishGame(user_code,game_code);
 		
 	}
+	
 	
 
 	

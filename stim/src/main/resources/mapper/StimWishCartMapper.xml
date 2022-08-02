@@ -80,6 +80,11 @@
     	SELECT game_code FROM wish_tbl
     	WHERE user_code = #{user_code}
     </select>
+    <!-- 보유게임에서 게임코드 가져오기 -->
+    <select id="SelectMyGameCode" resultType="Integer" parameterType="Integer">
+    	SELECT game_code FROM mygame_tbl
+    	WHERE user_code = #{user_code}
+    </select>
     
     <!-- 게임 상세보기에서 찜목록에 넣기 -->
     <insert id="InsertWishGame" parameterType="int">
