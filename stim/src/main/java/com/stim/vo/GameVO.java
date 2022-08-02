@@ -16,9 +16,11 @@ public class GameVO {
 	private String game_context;
 	private int game_salesRate;
 	private String game_picture;
-	
+	private int game_discount;
 	private String genre_1;
 	private String genre_2;
 	private String genre_3;
+	
+	private int game_finalPrice;
 	
 }

@@ -59,9 +59,14 @@
 			    			<li class="liText" th:inline="text">
 			    				태  그: <span>[[${gameInfo.genre_1}]], [[${gameInfo.genre_2}]], [[${gameInfo.genre_3}]]</span>
 			    			</li>
-			    			<li class="liText" th:inline="text">
-			    				가  격: <span>[[${#numbers.formatInteger(gameInfo.game_price, 0, 'COMMA')}]] 원</span>
-			    			</li>
+			    			<li th:if="${gameInfo.game_finalPrice}==${gameInfo.game_price}" class="liText" th:inline="text">
+			    				가  격: <span>￦[[${#numbers.formatInteger(gameInfo.game_price, 0, 'COMMA')}]]</span>
+		    				</li>
+		    				<li th:if="${gameInfo.game_finalPrice}!=${gameInfo.game_price}" class="liText" th:inline="text">
+			    				가  격: <span>￦[[${#numbers.formatInteger(gameInfo.game_finalPrice, 0, 'COMMA')}]]</span>
+			    				<span style="background-color:#00AEEF; font-size: 8px; color:white; padding:1px;">[[${#numbers.formatInteger(gameInfo.game_discount, 0, 'COMMA')}]]%</span>
+		    				</li>
+		    				
 			    		</ul>
 			    		<div sec:authorize="isAnonymous()">
 				    		<div class="wishCart" id="payNow">
