@@ -9,7 +9,7 @@
         	<ul>
 	           <li><a href="/gameList">상점</a></li>
 	           <li><a href="/searchUser">유저 찾기</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
-	           <li><a href="#">지원</a></li>
+	           <li><a href="/support">지원</a></li>
 	           <li sec:authorize="isAuthenticated()"><a href="/adminPage" th:if="|${#strings.equals(#authentication.principal.user_admin, 'Y')}|">관리자</a></li>
 	       </ul>
         </nav>
