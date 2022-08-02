@@ -17,7 +17,7 @@ public interface StimProfileMapper {
 	public void UpdateUserInfo(UserVO uVo);
 	
 	// 댓글 삽입
-	public void InsertComment(ProFileVO pVo) throws Exception;
+	public int InsertComment(ProFileVO pVo) throws Exception;
 
 	// 댓글 출력
 	public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
@@ -48,5 +48,5 @@ public interface StimProfileMapper {
 
 	// 프로필 자기소개 출력
 	public String selectProfileContext(int user_code) throws Exception;
-	
+
 }

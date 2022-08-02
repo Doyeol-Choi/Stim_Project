@@ -62,6 +62,7 @@ public class StimProfileController {
 			
 			mav.setViewName("profile/profile");
 			
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -200,30 +201,36 @@ public class StimProfileController {
 		return new RedirectView(url);
 	}
 	
-	//댓글 삭제 
-	@GetMapping("/comment/delete")
-	public RedirectView DeleteComment(@RequestParam("comment_code") int comment_code,
-									  @RequestParam("user_code") int user_code) throws Exception{
-		System.out.println("삭제 테스트");
-		
+	// 댓글 입력 by ajax
+//	@PostMapping("/comment")
+//	public int InsertComment(@RequestParam("user_code") int user_code,
+//									  @RequestParam("comment_text") String comment_text,
+//									  @RequestParam("writer_code") int writer_code,
+//									  @RequestParam("user_id") String user_id) throws Exception {
+//		
+//		System.out.println("인서트 테스트");
+//		ProFileVO pVo = new ProFileVO();
+//		pVo.setUser_code(user_code);
+//		pVo.setComment_context(comment_text);
+//		pVo.setWriter_code(writer_code);
+//		
+//		return stimProfileService.InsertComment(pVo);
+//	}
+	
+	//댓글 삭제
+	@PostMapping("/comment/delete")
+	public void DeleteComment(@RequestParam("comment_code") int comment_code) throws Exception{
 		stimProfileService.DeleteCommentByCode(comment_code);
-		String url = "/profile/" + user_code;
-		
-		return new RedirectView(url);
 	}
 	
 	//친추 요청 삭제
-	@GetMapping("/friend/request")
+	@PostMapping("/friend/request")
 	@Transactional
-	public RedirectView deleteRequest(@RequestParam("friend_code") int friend_code,
-									  @RequestParam("user_code") int user_code)	throws Exception{
+	public void deleteRequest(@RequestParam("friend_code") int friend_code)	throws Exception{
 		
 		System.out.println("친추 삭제 테스트");
 		
 		stimProfileService.deleteFriendRequest(friend_code);
-		String url =  "/profile/" + user_code;
-		
-		return new RedirectView(url);
 	}
 	
 	//친추 요청 승인
@@ -255,27 +262,5 @@ public class StimProfileController {
 		
 		return new RedirectView(url);
 	}
-
-	
-	//댓글 저장 ajax
-//	@PostMapping("/comment")
-//	public void InsertComment(@RequestParam("user_code") int user_code,
-//							  @RequestParam("writer_code") int writer_code,
-//							  @RequestParam("comment_text") String comment_text) throws Exception{
-//		
-//		//테스트 용
-//		System.out.println(user_code);
-//		System.out.println(writer_code);
-//		System.out.println(comment_text);
-//		//
-//		
-//		ProFileVO pVo = new ProFileVO();
-//		pVo.setUser_code(user_code);
-//		pVo.setComment_context(comment_text);
-//		pVo.setWriter_code(writer_code);
-//		
-//		stimProfileService.InsertComment(pVo);
-//	}
-	
 	
 }
