@@ -74,6 +74,7 @@ public class KakaoPayController {
 	@RequestMapping("/kakaopayOne")
 	@ResponseBody
 	public String kakaopayOne(@RequestParam("user_code") int user_code,
+						@RequestParam("game_code") Integer game_code,
 						   @RequestParam("game_price") Integer game_price) {
 		try {
 			URL payUrl = new URL("https://kapi.kakao.com/v1/payment/ready");
@@ -87,8 +88,8 @@ public class KakaoPayController {
 				// 정보 파라미터
 				String pram = "cid=TC0ONETIME&partner_order_id=partner_order_id&"
 						+ "partner_user_id=partner_user_id&item_name=game&quantity=1&total_amount="+game_price+"&"
-						+ "tax_free_amount=0&approval_url=http://localhost:4860/paysuccessOne/"+user_code+"&fail_url=http://localhost:4860/cart/"+user_code+"&"
-						+ "cancel_url=http://localhost:4860/cart/"+user_code;
+						+ "tax_free_amount=0&approval_url=http://localhost:4860/paysuccessOne/"+user_code+","+game_code +"&fail_url=http://localhost:4860/gameDetailView?game_code="+game_code+"&"
+						+ "cancel_url=http://localhost:4860/gameDetailView?game_code="+game_code;
 				OutputStream out = server.getOutputStream();	// 주는애
 				DataOutputStream dataOut = new DataOutputStream(out);	//데이터 주는놈
 				dataOut.writeBytes(pram);	// 바이트형식으로 데이터를 주고 받는다.

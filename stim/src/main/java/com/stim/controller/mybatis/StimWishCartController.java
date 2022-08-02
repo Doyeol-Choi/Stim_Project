@@ -128,18 +128,34 @@ public class StimWishCartController {
 //	  }
 	
 	
+	// ajax 사용 상세보기에서 찜목록 넣기
+	@PostMapping("/insert_wish") 
+	  public RedirectView InsertWishGame(
+			  	@RequestParam("game_code") int game_code,
+			  	@RequestParam("user_code") int user_code) throws Exception {
+		
+			stimWishCartService.InsertWishGame(user_code, game_code);  
+			
+			String url = "/gameDetailView?game_code="+game_code;
+			
+			return new RedirectView(url);
+		}
 	
-	// ajax 사용 찜목록에서 장바구니 넣기
+		
+
+	// ajax 사용 찜목록, 게임 상세보기에서 장바구니 넣기
 	@PostMapping("/insert_cart") 
-	  public void InsertCartGame(
+	  public RedirectView InsertCartGame(
 			  @RequestParam("user_code") int user_code,
 			  @RequestParam("game_code") int game_code) throws Exception {
 		
-		System.out.println(user_code);
-		System.out.println(game_code);
 		stimWishCartService.InsertCartGame(user_code, game_code);  
-	  
+		
+		String url = "/gameDetailView?game_code="+game_code;
+		return new RedirectView(url);
 	  }
+	
+	
 	// 장바구니에서 결제완료
 	  @GetMapping("/paysuccessAll/{user_code}") 
 	  public RedirectView PaySuccessAll(
@@ -153,9 +169,9 @@ public class StimWishCartController {
 			 
 			 stimWishCartService.InsertMyGame(user_code, game_code);
 			 stimWishCartService.DeleteWishAllGame(user_code, game_code);
+			 stimWishCartService.DeleteCartAllGame(user_code, game_code); 
 		  }
-		  
-		  stimWishCartService.DeleteCartAllGame(user_code);  
+		  	 
 		  
 		  String main = "/";
 
@@ -163,29 +179,20 @@ public class StimWishCartController {
 	  
 	  }
 	// 바로 결제완료
-		  @GetMapping("/paysuccessOne/{user_code}") 
+		  @GetMapping("/paysuccessOne/{user_code},{game_code}") 
 		  public RedirectView PaySuccessOne(
-				  @PathVariable("user_code") int user_code) throws Exception {
+				  @PathVariable("user_code") int user_code,
+				  @PathVariable("game_code") int game_code) throws Exception {
 			  
-			  List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
-			  for(int i=0; i<list.size(); ++i){
-				  
-//				 int user_code = list.get(i).getUser_code();
-				 int game_code = list.get(i).getGame_code();
 				 
 				 stimWishCartService.InsertMyGame(user_code, game_code);
 				 stimWishCartService.DeleteWishAllGame(user_code, game_code);
-			  }
 			  
-			  stimWishCartService.DeleteCartAllGame(user_code);  
+			  
+				 stimWishCartService.DeleteCartAllGame(user_code, game_code);  
 			  
 			  String main = "/";
-		//	  String profile = "/profile/"+ user_code;
-		//	  if(page == 1) {
-		//		  return new RedirectView(main);
-		//	  }else if (page == 2 ) {
-		//		  return new RedirectView(profile);
-		//	  }
+
 			  return new RedirectView(main);
 		  
 		  }

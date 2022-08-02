@@ -1,4 +1,4 @@
-function delcart(cart_code, game_price){
+function delcart(cart_code){
 	let id = "#cartListBox" + cart_code
 	$.ajax({
 		url: "delete_cart",
@@ -7,7 +7,7 @@ function delcart(cart_code, game_price){
 		data: {
 			"cart_code" : cart_code
 		},
-		success: function (data) {
+		success: function () {
 			$(id).remove();
 		}
 	});
@@ -15,7 +15,7 @@ function delcart(cart_code, game_price){
 function paybtn(user_code, total){
 
 	$.ajax({
-		url:'/kakaopay' ,
+		url:'/kakaopayAll' ,
 		data: { "user_code" : user_code,
 				"total":total
 			   },

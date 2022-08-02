@@ -1,19 +1,20 @@
 package com.stim.controller.mybatis;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimGameListService;
+import com.stim.service.mybatis.StimWishCartService;
 import com.stim.vo.GameVO;
-import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
 
 @RestController
@@ -21,7 +22,8 @@ public class StimGameListController {
 
 	@Resource
 	private StimGameListService stimGameListService;
-
+	@Resource
+	private StimWishCartService stimWishCartService;
 		
 	
 	/* 상점 페이지 이동 */
@@ -195,11 +197,38 @@ public class StimGameListController {
 	////////////////////////////////////////////////////
 	/* 게임 상세 페이지 이동 */
 	@GetMapping("/gameDetailView")
-	public ModelAndView gameDetailViewPage(@RequestParam(value="game_code") int game_code) throws Exception {
+	public ModelAndView gameDetailViewPage(@RequestParam(value="game_code") int game_code, Authentication authentication) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("받은 게임 코드: " + game_code);
 			GameVO gameDetailInfo = stimGameListService.SelectGameDetailInfo(game_code);
+			
+			if(authentication != null) {
+				UserVO uVo = (UserVO) authentication.getPrincipal();
+				Integer user_code = uVo.getUser_code();
+				
+				List<Integer> game_code_cart = stimWishCartService.SelectCartGameCode(user_code);
+				List<Integer> game_code_wish = stimWishCartService.SelectWishGameCode(user_code);
+				List<Integer> game_code_my = stimWishCartService.SelectMyGameCode(user_code);
+				
+				if(game_code_cart.isEmpty()) {
+					game_code_cart= new ArrayList<>();
+				}
+				if(game_code_wish.isEmpty()) {
+					game_code_wish=new ArrayList<>();
+				}
+				if(game_code_my.isEmpty()) {
+					game_code_my=new ArrayList<>();
+				}
+				
+				mav.addObject("game_code_cart", game_code_cart);
+				mav.addObject("game_code_wish",game_code_wish);
+				mav.addObject("game_code_my", game_code_my);
+				mav.addObject("gameInfo", gameDetailInfo);
+				mav.setViewName("game/gameDetailView");
+				return mav;
+			}
+			
 			mav.addObject("gameInfo", gameDetailInfo);
 
 			mav.setViewName("game/gameDetailView");

@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/wishcart/wish.css}">
+	<script type="text/javascript" th:src="@{/js/wishcart/wish.js}"></script>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -39,10 +40,10 @@
 					<button th:if="${not #lists.contains(game_code, wish.game_code)}" th:id="|wish${wish.game_code}|" class="cart_button" th:onclick="|insertcart(${wish.user_code},${wish.game_code})|">
 						<span class="delete_wish">장바구니 추가</span>
 					</button>
-					<button th:id="|cart${wish.game_code}|" class="cart_button hideBtn" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
+					<button th:id="|cart${wish.game_code}|" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
 						<span class="delete_wish" id="finish">장바구니 이동됨</span>
 					</button>
-					<button th:if="${#lists.contains(game_code, wish.game_code)}" class="cart_button" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
+					<button th:if="${#lists.contains(game_code, wish.game_code)}"  th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
 						<span class="delete_wish" id="finish">장바구니 이동됨</span>
 					</button>
 					<!-- <a id="" class="view_cart_button" th:href="@{|/cart/${wish.user_code}|}">							
@@ -57,49 +58,6 @@
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
 
-	<script th:inline="javascript">
-		function delwish(wish_code){
-			let id = "#wishListBox" + wish_code
-	         $.ajax({
-	            url: "delete_wish",
-	               type: "POST",
-	               async: true,
-	               data: {
-	                  "wish_code" : wish_code
-	               },
-	               success: function (data) {
-	                  $(id).remove();
-	               }
-	          });
-	      }
-		
-		 function insertcart(user_code, game_code){
-			let wishBtn = "#wish"+game_code;
-			let cartBtn = "#cart"+game_code;
-	    	$.ajax({
-				url: "/insert_cart",
-	            type: "POST",
-	            async: true,
-	            data: {
-	            		"user_code" : user_code,
-	            		"game_code" : game_code
-	            	//"insertCart":JSON.stringify()
-	            	//"command": command
-	            },
-	            success: function (data) {
-	            	alert("장바구니 넣기 성공");
-	            	
-	           		}
-	            //error: function (error){
-	           	//        alert("에러");
-	            //	    } 
-	            });
-	    	$(wishBtn).css('display', 'none');
-        	$(cartBtn).css('display', 'inline-block');
-			}
-		 
-	
-	</script>
 
 </body>
 </html>

@@ -20,6 +20,7 @@ public interface StimGameListService {
 
 	// 태그로 검색된 게임 리스트 조회
 	public List<GameVO> SelectGameListByTags(String tag) throws Exception;
+	
 	public List<GameVO> SelectAllGameListByPrice(int price) throws Exception;
 	
 	// 할인을 위한 게임 리스트 조회

@@ -32,12 +32,33 @@ public interface StimWishCartMapper {
 	public void InsertMyGame(int user_code, int game_code) throws Exception;
 	
 	// 결제완료 후 장바구니 목록 삭제
-	public void DeleteCartAllGame(int user_code) throws Exception;
+	public void DeleteCartAllGame(int user_code, int game_code) throws Exception;
 
 	// 결제완료 후 찜목록 목록 삭제
 	public void DeleteWishAllGame(int user_code, int game_code) throws Exception;
 
 	// 장바구니 게임코드 가져오기
-	public List<Integer> SelectCartGameCode(int user_code) throws Exception;
+	public List<Integer> SelectCartGameCode(Integer user_code) throws Exception;
+	
+	// 찜목록 게임코드 가져오기
+	public List<Integer> SelectWishGameCode(Integer user_code) throws Exception;
+	
+	// 보유게임에서 게임코드 가져오기
+	public List<Integer> SelectMyGameCode(Integer user_code) throws Exception;
+	
+	// 게임 상세보기에서 찜목록으로 넣기
+	public void InsertWishGame(int user_code, int game_code) throws Exception;
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
