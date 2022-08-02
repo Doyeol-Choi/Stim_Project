@@ -1,11 +1,14 @@
-var swiper = new swiper(".mySwiper", {
-    slidesPerView: 'auto',
-    centeredSlides: true,
-    spaceBetween: 200,
-    loop: true,
-    loopAdditionalSlides : 1,
-    navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-    },
+$(function() {
+	var swiper = new Swiper("#newGame", {
+	    slidesPerView: 'auto',
+	    centeredSlides: true,
+	    spaceBetween: 25,
+	    loop: true,
+	    observer: true,
+	  	observeParents: true,
+	    navigation: {
+	        nextEl: ".swiper-button-next",
+	        prevEl: ".swiper-button-prev",
+	    },
+	})
 });

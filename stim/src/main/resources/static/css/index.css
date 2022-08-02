@@ -52,7 +52,8 @@
 #newGame{
 	float: both;
 	height: 470px;
-	padding-left: 35px;
+	padding-right: 25px;
+	padding-top: 40px;
 }
 #newGame h1{
 	padding: 20px 0 15px 30px;

@@ -10,9 +10,9 @@
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
-	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script type="text/javascript" th:src="@{/js/index.js}"></script>
+   	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -29,7 +29,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="swiper mySwiper contain" id="newGame">
+			<div class="swiper contain" id="newGame">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide newSubG" th:each="newGame : ${newList}">
                         <a th:href="|@{/gameDetailView(game_code=${newGame.game_code})}|"><img th:src="@{'/image/game/'+${newGame.game_picture}}"></a>
