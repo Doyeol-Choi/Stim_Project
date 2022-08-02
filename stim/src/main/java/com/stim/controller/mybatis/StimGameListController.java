@@ -15,10 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.service.mybatis.StimWishCartService;
 import com.stim.vo.GameVO;
-<<<<<<< HEAD
 import com.stim.vo.UserVO;
-=======
->>>>>>> origin/minji
+
 
 @RestController
 public class StimGameListController {

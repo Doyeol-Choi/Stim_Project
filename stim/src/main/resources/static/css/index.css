@@ -9,7 +9,7 @@
 	max-width: 1560px;
 }
 
-/* 이벤트 메인 */
+/* 인기 메인 */
 #mainGame{
 	padding-left: 38px;
 	height: 680px;
@@ -18,7 +18,8 @@
 	width: 100%;
 	height: 100%;
 	border: none;
-	border-radius: 40px
+	border-radius: 40px;
+	opacity: 0.8;
 }
 #mainGame h1{
 	padding: 30px 0 15px 30px;
@@ -36,14 +37,29 @@
 	float:left;
 	width: 320px;
 	height: 173px;
-	background-color: rgba(0, 0, 0, 0.3);
+	opacity: 0.3;
 	margin-left: 20px;
 	margin-bottom: 20px;
 	border-radius: 30px;
+	position: relative;
 }
 .subG:hover{
     transition-duration: 0.8s;
-	background-color: rgba(0, 0, 0, 0.7);
+	opacity: 0.7;
+}
+.subG_Bar {
+	position: absolute;
+	left: 10%;
+	bottom: 0;
+ 	width: 0%;
+  	height: 2%;
+  	border-radius: 30px;
+  	background-color: #00AEEF;
+  	opacity: 0.8;
+  	z-index: 10;
+}
+.subG > a > img {
+	background-size: cover;
 }
 
 
@@ -70,7 +86,7 @@
 }
 .newSubG:hover{
     transition-duration: 0.8s;
-	background-color: rgba(0, 0, 0, 0.7);
+	background-color: rgba(0, 0, 0, 0.8);
 }
 .newSubG img{
 	margin: 10px 25px ;
@@ -86,7 +102,17 @@
 	font-size: 18px;
 	font-weight: bold;
 }
+.swiper-button-next, .swiper-button-prev {
+	color: #00AEEF;
+}
 
+.swiper-button-prev {
+	left: 0;
+}
+
+.swiper-button-next {
+	right: 0;	
+}
 
 /* 게임 태그 */
 #gameTag{

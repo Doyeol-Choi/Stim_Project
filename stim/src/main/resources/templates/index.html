@@ -20,13 +20,12 @@
     <div id="container">
     	<div id = "mainGame" class = "contain">
 				<h1>인기 추천</h1>
-				<div id = "mainGame1">
-					<a href = ""><img  src="" alt=""></a>
+				<div id = "mainGame1" class="mainSlides" th:each="popGame : ${popList}">
+					<a th:href="|@{/gameDetailView(game_code=${popGame.game_code})}|"><img th:src="@{'/image/game/' + ${popGame.game_picture}}"></a>
 				</div>
-				<div th:each="popGame : ${popList}">
-					<div class="subG">
-						<a th:href="|@{/gameDetailView(game_code=${popGame.game_code})}|"><img th:src="@{'/image/game/' + ${popGame.game_picture}}"></a>
-					</div>
+				<div class="subG" th:each="popGame : ${popList}">
+					<div class="subG_Bar" th:id="|bar${popGameStat.count}|"></div>
+					<a href=" javascript:void(0);" th:onclick="|changeMain(${popGameStat.count})|"><img th:style="'background-image: url('+@{'/image/game/' + ${popGame.game_picture}} + ');'"></a>
 				</div>
 			</div>
 			<div class="swiper contain" id="newGame">
@@ -43,8 +42,10 @@
 			
 			<div id = "gameTag" class = "contain">
 				<h1>추천 장르</h1>
-				<div class = "gameTags" th:each="tag : ${tagList}">
-					<a href = ""><span th:text="${tag}"></span></a>
+				<div th:each="tag : ${tagList}">
+					<div class = "gameTags" th:id="tagBox + ${tagStat.count}">
+						<a href = ""><span th:text="${tag}"></span></a>
+					</div>
 				</div>
 			</div>
     </div>
