@@ -216,8 +216,14 @@
 	padding: 10px 15px;
 	border-radius: 5px;
 }
+#priceTag li input{
+	accent-color: #00AEEF;
+}
 #genreTag{
 	padding: 10px 25px;
+}
+#genreTag li input{
+	accent-color: #00AEEF;
 }
 #priceTag li a:link, a:visited{
 	color: #ccc;

@@ -81,9 +81,8 @@
 		    CASE WHEN gm.game_discount IS NULL AND gm.game_price <![CDATA[<=]]> #{price} THEN 1
 		    WHEN gm.game_discount IS NOT NULL AND gm.game_price*(1-(gm.game_discount/100)) <![CDATA[<=]]> #{price} THEN 1
 		    ELSE 0 END = 1
-<!-- 		AND gm.game_price <![CDATA[<=]]> #{price} -->
 		</where>
-		ORDER BY gm.game_name ASC
+		ORDER BY gm.game_code DESC
     </select> 
     
     <!-- 가격을 선택하고, 태그도 직접 입력하여 검색할 때 -->
@@ -103,7 +102,7 @@
     <select id="SelectNumForSale" resultMap="gameMap">
     	<include refid="selectAll" />
 		WHERE gm.game_discount IS NOT NULL
-		ORDER BY gm.game_name ASC
+		ORDER BY gm.game_code DESC
     </select>
     
     

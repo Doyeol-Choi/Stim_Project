@@ -66,6 +66,12 @@
     height: 80px;
     padding: 20px;
 }
+.content_top a{
+	color:white;
+}
+.content_top a:hover{
+	color:#00AEEF;
+}
 .game_name{
 	font-size: 25px;
 }

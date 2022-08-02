@@ -24,7 +24,8 @@
 			</div>
 			<div class="game_content">
 				<div class="content_top">
-					<span class="game_name" th:text="${wish.game_name}"></span>
+					<a th:href="@{/gameDetailView(game_code = ${wish.game_code})}">
+					<span class="game_name" th:text="${wish.game_name}"></span></a>
 					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(wish.game_price, 3, 'COMMA')}"></span>
 				</div>
 				<div class="content_bottom">
