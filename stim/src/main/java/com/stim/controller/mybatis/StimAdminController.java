@@ -56,7 +56,7 @@ public class StimAdminController {
 					List <Integer> list = stimGameListService.randomGame(38);	// 추후 게임 목록 개수로 변경
 					Random random = new Random();
 					for (int code : list) {
-						int discount = random.nextInt(19) * 5;
+						int discount = (random.nextInt(19)+1) * 5;
 						stimGameListService.createDiscountList(discount, code);
 					}
 				} catch (Exception e) {

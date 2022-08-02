@@ -1,7 +1,9 @@
 package com.stim.service.mybatis;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -103,20 +105,41 @@ public class StimGameListServiceImp implements StimGameListService {
 		Set<Integer> set = new HashSet<>();
 		Random random = new Random();
 		while (set.size() < 10) {
-			int num = random.nextInt(count);
-			if(num != 0) {
-				set.add(num);				
-			}
+			int num = random.nextInt(count) + 1;
+			set.add(num);				
 		}
 		List<Integer> list = new ArrayList<>(set);
 		return list;
 	}
 
+	// 최신 게임 목록 출력 (게임 날짜 최신/내림차순) 메인페이지용
+	@Override
+	public List<GameVO> SelectNewestGameListMain() throws Exception {
+		return stimGameListMapper.SelectNewestGameListMain();
+	}
 
+	// 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용
+	@Override
+	public List<GameVO> SelectPopularGameListMain() throws Exception {
+		return stimGameListMapper.SelectPopularGameListMain();
+	}
 
-
-
-
-	
+	// 메인페이지용 랜덤 태그
+	@Override
+	public List<String> RandomTagMain() {
+		List<String> tagList = new ArrayList<>();
+		String[] tags = {"액션", "퍼즐", "오픈 월드", "시뮬레이션", "생존", "좀비", "건설", "협동", "애니메이션", "RPG", "캐주얼", "멀티플레이어"};
+		Set<Integer> set = new HashSet<>();
+		Random random = new Random();
+		while(set.size() < 4) {
+			int num = random.nextInt(12);
+			set.add(num);
+		}
+		Iterator<Integer> iter = set.iterator();
+		while(iter.hasNext()) {
+			tagList.add(tags[iter.next()]);
+		}
+		return tagList;
+	}
 	
 }

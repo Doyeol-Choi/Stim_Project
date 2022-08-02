@@ -7,59 +7,44 @@
 	<title>Stim Pack</title>
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+   	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script type="text/javascript" th:src="@{/js/index.js}"></script>
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <div id="container">
     	<div id = "mainGame" class = "contain">
-				<h1>이벤트 추천</h1>
-					<div id = "mainGame1">
-						<a href = ""><img  src="" alt=""></a>
+				<h1>인기 추천</h1>
+				<div id = "mainGame1">
+					<a href = ""><img  src="" alt=""></a>
+				</div>
+				<div th:each="popGame : ${popList}">
+					<div class="subG">
+						<a th:href="|@{/gameDetailView(game_code=${popGame.game_code})}|"><img th:src="@{'/image/game/' + ${popGame.game_picture}}"></a>
 					</div>
-				<div id="mainGame2" class="subG">
-						<a href = ""><img  src="" alt=""></a>
-				</div>
-				<div id="mainGame3" class="subG">
-						<a href = ""><img  src="" alt=""></a>
-				</div>
-				<div id="mainGame4" class="subG">
-						<a href = ""><img  src="" alt=""></a>
 				</div>
 			</div>
-			
-			<div id="newGame" class = "contain">
-				<h1>최신 게임</h1>
-				<div id = "newGame1" class = "newSubG">
-					<a href = ""><img  src="" alt=""></a>
-					<p>게임 타이틀</p>
-				</div>
-				<div id = "newGame2" class = "newSubG">
-					<a href = ""><img  src="" alt=""></a>
-					<p>게임 타이틀</p>
-				</div>
-				<div id = "newGame3" class = "newSubG">
-					<a href = ""><img  src="" alt=""></a>
-					<p>게임 타이틀</p>
-				</div>
-			</div>
+			<div class="swiper contain" id="newGame">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide newSubG" th:each="newGame : ${newList}">
+                        <a th:href="|@{/gameDetailView(game_code=${newGame.game_code})}|"><img th:src="@{'/image/game/'+${newGame.game_picture}}"></a>
+                        <p th:text="${newGame.game_name}"></p>
+                        <p th:text="${#dates.format(newGame.game_releaseDate, 'yyyy-MM-dd')}">
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
 			
 			<div id = "gameTag" class = "contain">
-				<h1 sec:authorize="!isAuthenticated()">추천 장르</h1>
-				<h1 sec:authorize="isAuthenticated()"><span sec:authentication="principal.user_nickname"></span>님을 위한 추천 장르</h1>
-				<div id = "tag1" class = "gameTags">
-					<a href = "">태그 1</a>
-				</div>
-				<div id = "tag2" class = "gameTags">
-					<a href = "">태그 2</a>
-				</div>
-				<div id = "tag3" class = "gameTags">
-					<a href = "">태그 3</a>
-				</div>
-				<div id = "tag4" class = "gameTags">
-					<a href = "">태그 4</a>
+				<h1>추천 장르</h1>
+				<div class = "gameTags" th:each="tag : ${tagList}">
+					<a href = ""><span th:text="${tag}"></span></a>
 				</div>
 			</div>
     </div>

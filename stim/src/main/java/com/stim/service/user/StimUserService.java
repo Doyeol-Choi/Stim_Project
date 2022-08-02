@@ -107,22 +107,8 @@ public class StimUserService implements UserDetailsService {
 		Set<Integer> set = new HashSet<>();
 		Random random = new Random();
 		while (set.size() < 5) {
-			int num = random.nextInt(count)+1;
-			if(num != 0) {				
-				set.add(num);
-			}
-		}
-		List<Integer> list = new ArrayList<>(set);
-		return list;
-	}
-	public List<Integer> randomCode(int count, int login_code) {
-		Set<Integer> set = new HashSet<>();
-		Random random = new Random();
-		while (set.size() < 5) {
-			int num = random.nextInt(count)+1;
-			if(num != login_code) {				
-				set.add(num);
-			}
+			int num = random.nextInt(count)+1;			
+			set.add(num);
 		}
 		List<Integer> list = new ArrayList<>(set);
 		return list;
@@ -147,6 +133,22 @@ public class StimUserService implements UserDetailsService {
 	@Transactional
 	public void AddFriendRequest(int login_code, int user_code) throws Exception {
 		stimUserMapper.AddFriendRequest(login_code, user_code);
+	}
+	
+	// 친구 요청 취소 전 확인
+	public String FriendRequestAcceptCheck(int login_code, int user_code) throws Exception {
+		return stimUserMapper.FriendRequestAcceptCheck(login_code, user_code);
+	}
+
+	// 친구 요청 취소
+	@Transactional
+	public void CancleFriendRequset(int login_code, int user_code) throws Exception {
+		stimUserMapper.CancleFriendRequset(login_code, user_code);
+	}
+	
+	// 전체 유저 검색
+	public List<UserVO> SelectUserAll() throws Exception {
+		return stimUserMapper.SelectUserAll();
 	}
 	
 }

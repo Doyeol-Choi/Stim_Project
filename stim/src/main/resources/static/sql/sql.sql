@@ -223,13 +223,13 @@ INSERT INTO game_tbl VALUES
 
 -- 장르테이블 샘플데이터
 INSERT INTO genre_tbl VALUES 
-(genre_code_seq.nextval,1,'오픈월드','액션','범죄');
+(genre_code_seq.nextval,1,'오픈 월드','액션','범죄');
 INSERT INTO genre_tbl VALUES 
 (genre_code_seq.nextval,2,'탐험','생존','샌드박스');
 INSERT INTO genre_tbl VALUES 
 (genre_code_seq.nextval,3,'생존','협동','건설');
 INSERT INTO genre_tbl VALUES 
-(genre_code_seq.nextval,4,'RPG','판타지','오픈월드');
+(genre_code_seq.nextval,4,'RPG','판타지','오픈 월드');
 INSERT INTO genre_tbl VALUES 
 (genre_code_seq.nextval,5,'RPG','농업','픽셀그래픽');
 INSERT INTO genre_tbl VALUES 
@@ -257,7 +257,7 @@ INSERT INTO genre_tbl VALUES
 INSERT INTO genre_tbl VALUES
 (genre_code_seq.nextval,17,'어드벤처','인디','음악');
 INSERT INTO genre_tbl VALUES
-(genre_code_seq.nextval,18,'탐험','포스트아포칼립스','오픈월드');
+(genre_code_seq.nextval,18,'탐험','포스트아포칼립스','오픈 월드');
 INSERT INTO genre_tbl VALUES
 (genre_code_seq.nextval,19,'분할 화면','퍼즐','어드벤처');
 INSERT INTO genre_tbl VALUES
