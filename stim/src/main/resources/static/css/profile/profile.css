@@ -169,7 +169,7 @@ div{
 	color: #9b9b9b;
 }
 .friend_list{
-	height: 36px;
+	margin-top: 10px;
     padding: 4px 0 4px 4px;
     margin-bottom: 4px;
     font-size: 11px;
@@ -179,8 +179,9 @@ div{
     text-overflow: ellipsis;
     position: relative;
 }
+
 .friend_picture{
-	width: 120px;
+	width: 50px;
 	float: left;
 	padding: 1px;
     border-radius: 0;
@@ -194,6 +195,9 @@ div{
 	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+}
+.friend_nickname{
+	color: white;
 }
 .comment_footer{
 	margin-top: 6px;
@@ -284,9 +288,13 @@ div{
 }
 #comment_submit{
 	float: right;
-	margin-right: 35px;
+	margin-right: 20px;
+	border: none;
 	background-color: rgb(74, 79, 88);
 	color: rgb(228, 228, 228);
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: center;
 }
 .comment_lists{
 	background-color: #262B2F;
@@ -322,6 +330,18 @@ div{
 }
 .comment_context{
 	color: #acb2b8;
+	padding-top: 10px;
+	width: 300px;
+}
+.comment_deletebtn{
+	float:right;
+	outline: 0;
+	font-weight: 600;
+	min-width: 40px;
+	background-color: #376695;
+	border: none;
+	cursor: pointer;
+	
 }
 
 .friend_request{

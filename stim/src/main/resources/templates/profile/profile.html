@@ -29,13 +29,7 @@
 		                <p th:text="${user.user_id}"></p>
 		            </div>
 		            <div>
-		                <!-- <div th:text="${msg}"></div> -->
-		                <!-- <form action="/profile/context" method="post">
-		                	<textarea rows="" cols=""></textarea>
-			                <button type="submit" sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}"
-			                  th:onclick="|location.href= '@{/profile/context(user_code=${user.user_code}, profile_context=${msg})}' | ">코멘트 변경</button>
-		                </form> -->
-		                
+		             
 		            </div> 
 		        </div>
 		        <!--프로필 수정-->
@@ -98,7 +92,7 @@
 									<div class="comment_nickname" th:text="${list.comment_nickname}"> <a></a> </div> 
 									<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
 									<div class="comment_context" th:text="${list.comment_context}"></div>
-									<button class="comment_delete" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" 
+									<button class="comment_deletebtn" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" 
 									 th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" >삭제</button>
 								</div>
 							</div>
@@ -122,7 +116,6 @@
 						<div class="friends">
 							<a> 친구 <span class="friend_count" th:text="${#lists.size(f_list)}"></span> 명 </a>
 							<br>
-							<span> <strong>친구 목록</strong> </span>
 							<div class="friend_list" th:each="f: ${f_list}">
 								<div class="friend_picture">
 									<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}">

@@ -78,26 +78,5 @@ public class StimProfileServiceImp implements StimProfileService {
 	public void updateProfileContext(ProFileVO pVo) throws Exception {
 		stimProfileMapper.updateProfileContext(pVo);
 	}
-
-
-	
-	 
-//	public void fileUpload(MultipartFile multipartFile) {
-//		String uploadDir = "";
-//		Path serverPath = Paths.get(
-//                uploadDir +
-//                        File.separator +
-//                        StringUtils.cleanPath(multipartFile.getOriginalFilename()));
-//
-//        try {
-//            Files.copy(multipartFile.getInputStream(), serverPath, StandardCopyOption.REPLACE_EXISTING);
-//        } catch (IOException e) {
-//            log.error("fail to store file : name={}, exception={}",
-//                      multipartFile.getOriginalFilename(),
-//                      e.getMessage());
-//            throw new FileStorageException("fail to store file");
-//        }
-//    }
-
 	
 }
