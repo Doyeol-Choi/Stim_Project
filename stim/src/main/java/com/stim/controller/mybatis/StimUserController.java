@@ -252,9 +252,6 @@ public class StimUserController {
 		return new RedirectView("/searchUser");
 	}
 	
-<<<<<<< HEAD
-	
-=======
 	// 친구 요청 취소
 	@GetMapping("/friendRequestCancle")
 	public RedirectView friendRequestCancle(@RequestParam("user_code") int user_code, Authentication authentication) {
@@ -274,5 +271,5 @@ public class StimUserController {
 		}
 		return new RedirectView("/searchUser");
 	}
->>>>>>> origin/doyeol
+
 }

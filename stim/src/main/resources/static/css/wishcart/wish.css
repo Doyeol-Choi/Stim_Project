@@ -86,7 +86,13 @@
     height: 80px;
     padding-left: 20px;
 }
-
+.content_bottom button{
+	float:right;
+	background-color: transparent;
+}
+.content_bottom button:hover{
+	cursor: pointer;
+}
 .game_releaseDate{
 	font-size: 12px;
 	color: #ccc;

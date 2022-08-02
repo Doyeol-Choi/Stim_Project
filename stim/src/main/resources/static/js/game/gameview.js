@@ -64,4 +64,3 @@ function paybtn(user_code, game_code ,game_price){
 
 
 
-

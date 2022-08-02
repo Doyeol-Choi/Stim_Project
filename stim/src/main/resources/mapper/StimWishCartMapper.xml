@@ -4,22 +4,38 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.stim.model.mapper.StimWishCartMapper">
- 
+ 	
+ 	<resultMap type="com.stim.vo.WishVO" id="wishMap">
+ 		<result column="GAME_FINALPRICE" property="game_finalPrice"/>
+ 	</resultMap>
+ 	<resultMap type="com.stim.vo.CartVO" id="cartMap">
+ 		<result column="GAME_FINALPRICE" property="game_finalPrice"/>
+ 	</resultMap>
+ 	
+ 	
  	<!-- 찜목록 리스트 -->
-    <select id="SelectWishGame" resultType="com.stim.vo.WishVO" parameterType="int">
+    <select id="SelectWishGame" resultMap="wishMap" parameterType="int">
         SELECT wish_code,w.user_code AS user_code, w.game_code AS game_code, ga.game_name AS game_name, game_price,
 		ge.genre_1 AS genre_1, ge.genre_2 AS genre_2, ge.genre_3 AS genre_3, ga.game_releaseDate AS game_releaseDate, 
-		ga.game_picture AS game_picture 
+		ga.game_picture AS game_picture,
+			CASE
+		        WHEN game_discount IS NULL THEN game_price        
+		        ELSE game_price*(1-(game_discount/100))
+		    END as "GAME_FINALPRICE"
 		FROM wish_tbl w, game_tbl ga, genre_tbl ge 
 		WHERE w.user_code = #{user_code}
 		AND w.game_code = ge.game_code
 		AND w.game_code = ga.game_code
     </select>
     <!-- 장바구니 리스트 -->
- 	<select id="SelectCartGame" resultType="com.stim.vo.CartVO" parameterType="int">
+ 	<select id="SelectCartGame" resultMap="cartMap" parameterType="int">
        	SELECT cart_code, c.user_code AS user_code, c.game_code AS game_code, ga.game_name AS game_name, game_price,
 		ge.genre_1 AS genre_1, ge.genre_2 AS genre_2, ge.genre_3 AS genre_3, ga.game_releaseDate AS game_releaseDate, 
-		ga.game_picture AS game_picture 
+		ga.game_picture AS game_picture,
+			CASE
+		        WHEN game_discount IS NULL THEN game_price        
+		        ELSE game_price*(1-(game_discount/100))
+		    END as "GAME_FINALPRICE"
 		FROM cart_tbl c, game_tbl ga, genre_tbl ge 
 		WHERE c.user_code = #{user_code}
 		AND c.game_code = ge.game_code
@@ -45,10 +61,14 @@
     
     <!-- 장바구니 총금액 -->
     <select id="TotalPriceGame" resultType="Integer" parameterType="int">
-    	SELECT SUM(ga.game_price) AS total_price FROM cart_tbl c, game_tbl ga
-		WHERE c.user_code = #{user_code} 
+    	SELECT 
+		    SUM(CASE
+		        WHEN game_discount IS NULL THEN game_price        
+		        ELSE game_price*(1-(game_discount/100))
+		    END) as "GAME_FINALPRICE"
+		FROM cart_tbl c, game_tbl ga
+		WHERE c.user_code = #{user_code}
 		and c.game_code = ga.game_code
-		group by c.user_code
     </select>
     
     <!-- 결제 완료후 보유게임테이블에 넣기 -->

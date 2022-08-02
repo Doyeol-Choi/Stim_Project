@@ -17,4 +17,6 @@ public class WishVO {
 	private String genre_3;
 	private String game_picture;
 	private Date game_releaseDate ;
+	private String game_finalPrice;
+	
 }

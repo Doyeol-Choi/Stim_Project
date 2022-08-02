@@ -27,7 +27,10 @@
 				<div class="content_top">
 					<a th:href="@{/gameDetailView(game_code = ${wish.game_code})}">
 					<span class="game_name" th:text="${wish.game_name}"></span></a>
-					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(wish.game_price, 3, 'COMMA')}"></span>
+					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(wish.game_finalPrice, 3, 'COMMA')}"></span>
+					<th:block th:if="${wish.game_finalPrice}!=${wish.game_price}">
+					<p class="game_price" th:text="${'₩'+ #numbers.formatInteger(wish.game_price, 3, 'COMMA')}" style="font-size: 11px;color:#aaa;padding-right: 5px;text-decoration:line-through;"></p>
+					</th:block>
 				</div>
 				<div class="content_bottom">
 					<span class="game_releaseDate">출시일: </span>[[${#dates.format(wish.game_releaseDate,'yyyy-MM-dd')}]]
@@ -41,7 +44,7 @@
 					<button th:if="${not #lists.contains(game_code, wish.game_code)}" th:id="|wish${wish.game_code}|" class="cart_button" th:onclick="|insertcart(${wish.user_code},${wish.game_code})|">
 						<span class="delete_wish">장바구니 추가</span>
 					</button>
-					<button th:id="|cart${wish.game_code}|" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">
+					<button th:id="|cart${wish.game_code}|" th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|" class="hideBtn">
 						<span class="delete_wish" id="finish">장바구니 이동됨</span>
 					</button>
 					<button th:if="${#lists.contains(game_code, wish.game_code)}"  th:onclick="|location.href='@{/cart/{user_code}(user_code=${wish.user_code})}'|">

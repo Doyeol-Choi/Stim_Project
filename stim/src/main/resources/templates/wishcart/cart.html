@@ -28,7 +28,10 @@
 					<a th:href="@{/gameDetailView(game_code = ${cart.game_code})}">
 					<span class="game_name" th:text="${cart.game_name}"></span>
 					</a>
-					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(cart.game_price, 3, 'COMMA')}"></span>
+					<span class="game_price" th:text="${'₩'+ #numbers.formatInteger(cart.game_finalPrice, 3, 'COMMA')}"></span>
+					<th:block th:if="${cart.game_finalPrice}!=${cart.game_price}">
+					<p class="game_price" th:text="${'₩'+ #numbers.formatInteger(cart.game_price, 3, 'COMMA')}" style="font-size: 11px;color:#aaa;padding-right:5px;text-decoration:line-through;"></p>
+					</th:block>
 				</div>
 				<div class="content_bottom">
 					

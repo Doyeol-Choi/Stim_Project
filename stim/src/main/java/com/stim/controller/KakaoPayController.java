@@ -36,7 +36,8 @@ public class KakaoPayController {
 				// 정보 파라미터
 				String pram = "cid=TC0ONETIME&partner_order_id=partner_order_id&"
 						+ "partner_user_id=partner_user_id&item_name=game&quantity=1&total_amount="+total+"&"
-						+ "tax_free_amount=0&approval_url=http://localhost:4860/paysuccessAll/"+user_code+"&fail_url=http://localhost:4860/cart/"+user_code+"&"
+						+ "tax_free_amount=0&approval_url=http://localhost:4860/paysuccessAll/"+user_code
+						+ "&fail_url=http://localhost:4860/cart/"+user_code+"&"
 						+ "cancel_url=http://localhost:4860/cart/"+user_code;
 				OutputStream out = server.getOutputStream();	// 주는애
 				DataOutputStream dataOut = new DataOutputStream(out);	//데이터 주는놈
@@ -88,7 +89,8 @@ public class KakaoPayController {
 				// 정보 파라미터
 				String pram = "cid=TC0ONETIME&partner_order_id=partner_order_id&"
 						+ "partner_user_id=partner_user_id&item_name=game&quantity=1&total_amount="+game_price+"&"
-						+ "tax_free_amount=0&approval_url=http://localhost:4860/paysuccessOne/"+user_code+","+game_code +"&fail_url=http://localhost:4860/gameDetailView?game_code="+game_code+"&"
+						+ "tax_free_amount=0&approval_url=http://localhost:4860/paysuccessOne/"+user_code+","+game_code 
+						+ "&fail_url=http://localhost:4860/gameDetailView?game_code="+game_code+"&"
 						+ "cancel_url=http://localhost:4860/gameDetailView?game_code="+game_code;
 				OutputStream out = server.getOutputStream();	// 주는애
 				DataOutputStream dataOut = new DataOutputStream(out);	//데이터 주는놈

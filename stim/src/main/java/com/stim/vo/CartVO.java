@@ -20,5 +20,6 @@ public class CartVO {
 	private Date game_releaseDate ;
 	private int total_price;
 	
+	private String game_finalPrice;
 	
 }

@@ -88,7 +88,7 @@
 			    		<div sec:authorize="isAuthenticated()">
 			    			<div th:if="${not #lists.contains(game_code_my, gameInfo.game_code)}">
 					    		<div class="wishCart" id="payNow">
-				    				<button th:onclick="|paybtn(${#authentication.principal.user_code},${gameInfo.game_code},${gameInfo.game_price})|">
+				    				<button th:onclick="|paybtn(${#authentication.principal.user_code},${gameInfo.game_code},${gameInfo.game_finalPrice})|">
 				    					바로 구매하기
 				    				</button>
 					    		</div>
