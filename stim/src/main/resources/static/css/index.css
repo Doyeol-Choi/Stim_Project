@@ -32,6 +32,7 @@
 	background-color: gray;
 	margin-left: 25px;
 	border-radius: 40px;
+	display: none;
 }
 .subG{
 	float:left;
@@ -42,6 +43,7 @@
 	margin-bottom: 20px;
 	border-radius: 30px;
 	position: relative;
+	overflow: hidden;
 }
 .subG:hover{
     transition-duration: 0.8s;
@@ -49,13 +51,10 @@
 }
 .subG_Bar {
 	position: absolute;
-	left: 10%;
-	bottom: 0;
- 	width: 0%;
-  	height: 2%;
-  	border-radius: 30px;
-  	background-color: #00AEEF;
-  	opacity: 0.8;
+	right: 0;
+ 	width: 100%;
+  	height: 100%;
+  	background-color: rgba(0,0,0,0.5);
   	z-index: 10;
 }
 .subG > a > img {
@@ -133,4 +132,7 @@
 	margin: 10px 27px;
 	border-radius: 50px;
 	text-align: center;
+}
+.gameTags > a > span {
+	font-size: 1.2em;
 }

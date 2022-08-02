@@ -24,8 +24,10 @@
 					<a th:href="|@{/gameDetailView(game_code=${popGame.game_code})}|"><img th:src="@{'/image/game/' + ${popGame.game_picture}}"></a>
 				</div>
 				<div class="subG" th:each="popGame : ${popList}">
-					<div class="subG_Bar" th:id="|bar${popGameStat.count}|"></div>
-					<a href=" javascript:void(0);" th:onclick="|changeMain(${popGameStat.count})|"><img th:style="'background-image: url('+@{'/image/game/' + ${popGame.game_picture}} + ');'"></a>
+					<a href=" javascript:void(0);" th:onclick="|changeMain(${popGameStat.count})|">
+						<span class="subG_Bar" th:id="|bar${popGameStat.count}|"></span>
+						<img th:style="'background-image: url('+@{'/image/game/' + ${popGame.game_picture}} + ');'">
+					</a>
 				</div>
 			</div>
 			<div class="swiper contain" id="newGame">
@@ -44,7 +46,7 @@
 				<h1>추천 장르</h1>
 				<div th:each="tag : ${tagList}">
 					<div class = "gameTags" th:id="tagBox + ${tagStat.count}">
-						<a href = ""><span th:text="${tag}"></span></a>
+						<a th:href="@{|/gameListTagSearch?tagSearch=${tag}&price=100000|}"><span th:text="${tag}"></span></a>
 					</div>
 				</div>
 			</div>

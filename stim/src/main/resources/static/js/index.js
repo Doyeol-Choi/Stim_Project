@@ -18,18 +18,21 @@ $(function() {
 
 function changeMain(n) {
 	clearTimeout(timeId);
+	clearInterval(id);
     mainView(n);
 }
 
 function mainView(n) {
     var x = document.getElementsByClassName("mainSlides");
-    var y = document.getElementsByClassName("subG")
+    var y = document.getElementsByClassName("subG");
+    var z = document.getElementsByClassName("subG_Bar");
     index = n;
     if (n > x.length) {index = 1}
     if (n < 1) {index = x.length};
     for (let i = 0; i < x.length; i++) {
         x[i].style.display = "none";
         y[i].style.opacity = 0.3;
+        z[i].style.width = '0%';
     }
     x[index-1].style.display = "block";
     y[index-1].style.opacity = 0.8;
@@ -41,14 +44,13 @@ function mainView(n) {
 function move(idx) {
 	var name = "bar"+idx;
   	var bar = document.getElementById(name);
-  	var width = 1;
-  	var id = setInterval(frame, 62.5);
+  	var width = 100;
+  	id = setInterval(frame, 50);
 	function frame() {
-    	if (width >= 80) {
+    	if (bar.style.width == '1%') {
       		clearInterval(id);
-      		bar.style.width = '0%';
     	} else {
-      	width++; 
+      	width--; 
       	bar.style.width = width + '%'; 
 		}
 	}
