@@ -47,64 +47,7 @@ function deleteRequest(friend_code){
 	});
 }
 
-/*function inputComment(){
-//	var pVo = $('#comment_form').serialize();
-	let user_code = $("#user_code").val();
-	let user_id = $("#user_id").val();
-	let writer_code = $("#writer_code").val();
-	let comment_text = $("#comment_text").val();
-	
-	$.ajax({
-		url : "/comment",
-		data : {
-			"user_code":user_code,
-			"user_id":user_id,
-			"writer_code":writer_code,
-			"comment_text":comment_text
-		},
-		type : "POST",
-		cache: false,
-		error : function(){
-			alert('추가 실패');
-		}	
-		}).done( function(fragment){
-			$("#comment_lists").replaceWith(fragment)
-		});
 
-}*/
-
-/*$('#comment_submit').click(function(){
-	
-	let commentInfo = {
-		
-		"user_code" : $('#user_code').val(),
-		"user_id" : $('user_id').val(),
-		"writer_code" : $('writer_code').val(),
-		"comment_text" : $('comment_text').val()
-	};
-	
-	$.ajax({
-		
-		url: "/comment", // 매핑된 요청 url
-		type: "POST",
-		async: true,
-		data: {
-			"comment": JSON.stringify(commentInfo)
-		},
-		datatype : "json",
-		success : function (data){
-			let comment = JSON.parse(data);
-			let html = "";
-			html += 
-			
-			
-			$('#comment_list').append(html);
-		}
-	});
-	
-	
-})
-*/
 
 
 

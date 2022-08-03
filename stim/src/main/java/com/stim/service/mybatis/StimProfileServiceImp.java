@@ -84,11 +84,6 @@ public class StimProfileServiceImp implements StimProfileService {
 	public void updateFriendRequest(int friend_code) throws Exception {
 		stimProfileMapper.updateFriendRequest(friend_code);
 	}
-
-	// 프로필 할 말 수정
-	@Override
-	public void updateProfileContext(ProFileVO pVo) throws Exception {
-		stimProfileMapper.updateProfileContext(pVo);
-	}
+	
 
 }

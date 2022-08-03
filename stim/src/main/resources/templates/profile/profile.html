@@ -79,7 +79,7 @@
 								<input type="hidden" id="writer_code" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
 								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
 								<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
-								<input id="comment_submit" name="comment_InsertBtn" type="submit" value="댓글 남기기">
+								<input id="comment_submit" name="comment_InsertBtn" type="submit" value="댓글 남기기" onclick="dataSend()">
 							</form>
 						</div>
 					<div class="profile_left">
