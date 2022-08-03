@@ -65,6 +65,12 @@ public class StimController {
 	@GetMapping("/registerS3")
 	public String registerFormStep3Get() {
         return "index";
-    }	
+    }
+	
+	// 지원 페이지 이동
+	@GetMapping("/support")
+	public String supportPage() {
+        return "support";
+    }
 
 }
