@@ -49,4 +49,5 @@ public interface StimProfileMapper {
 	// 프로필 자기소개 출력
 	public String selectProfileContext(int user_code) throws Exception;
 
+
 }

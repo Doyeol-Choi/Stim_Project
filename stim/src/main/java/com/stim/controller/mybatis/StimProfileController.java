@@ -181,7 +181,6 @@ public class StimProfileController {
 		return new RedirectView(url);
 	}
 	
-
 	//댓글 저장 No Ajax
 	@PostMapping("/comment")
 	public RedirectView InsertComment(@RequestParam("user_code") int user_code,
@@ -201,21 +200,6 @@ public class StimProfileController {
 		return new RedirectView(url);
 	}
 	
-	// 댓글 입력 by ajax
-//	@PostMapping("/comment")
-//	public int InsertComment(@RequestParam("user_code") int user_code,
-//									  @RequestParam("comment_text") String comment_text,
-//									  @RequestParam("writer_code") int writer_code,
-//									  @RequestParam("user_id") String user_id) throws Exception {
-//		
-//		System.out.println("인서트 테스트");
-//		ProFileVO pVo = new ProFileVO();
-//		pVo.setUser_code(user_code);
-//		pVo.setComment_context(comment_text);
-//		pVo.setWriter_code(writer_code);
-//		
-//		return stimProfileService.InsertComment(pVo);
-//	}
 	
 	//댓글 삭제
 	@PostMapping("/comment/delete")
@@ -246,21 +230,5 @@ public class StimProfileController {
 		return new RedirectView(url);
 	}
 	
-	//프로필 할 말 수정
-	@Transactional
-	@PostMapping("/profile/context")
-	public RedirectView fixContext(@RequestParam("user_code") int user_code,
-								   @RequestParam("profile_context") String profile_context )throws Exception{
-		System.out.println("프사 수정 테스트");
-		
-		ProFileVO pVo = new ProFileVO();
-		pVo.setComment_context(profile_context);
-		stimProfileService.updateProfileContext(pVo);
-		
-		String url = "/profile/" + user_code;
-		System.out.println(url);
-		
-		return new RedirectView(url);
-	}
 	
 }

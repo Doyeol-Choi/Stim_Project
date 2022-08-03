@@ -90,4 +90,6 @@
     	WHERE friend_code = ${friend_code}
     </update>
     
+    
+    
 </mapper>

@@ -2,6 +2,7 @@ package com.stim.service.mybatis;
 
 import java.util.List;
 
+
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
 
@@ -39,9 +40,6 @@ public interface StimProfileService {
 	
 	// 친구 추가 요청 승인
 	public void updateFriendRequest(int friend_code) throws Exception;
-	
-	// 프로필 할 말 수정
-	public void updateProfileContext(ProFileVO pVo) throws Exception;
 	
 
 }
