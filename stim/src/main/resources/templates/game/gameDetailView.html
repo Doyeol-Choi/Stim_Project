@@ -9,6 +9,7 @@
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameDetailView.css?after}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gam.Reply.css}">
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" th:src="@{/js/game/gameview.js}"></script>
 </head>
@@ -30,12 +31,20 @@
 	    				</article>
 					</section>
 					<div id="gameGrade">
+						<div th:each="reply : ${gameReply}">
+						
+						</div>
+						
 						<div>
-	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
-	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
-	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
-	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
-	    					댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란 댓글란
+	    					<form id="comment_form" th:action="@{/comment}" method="post">
+								<input type="hidden" id="user_code" name="user_code" th:value="${#authentication.principal.user_code}">
+								<input type="hidden" id="game_code" name="game_code" th:value="${gameInfo.game_code}"> 
+								<input type="hidden" id="writer_code" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
+								<textarea id="grade_context" name="grade_context" rows="5" cols="20"></textarea>
+								<input type="radio" id="grade_rate" name="grade_rate" value="G">
+								<input type="radio" id="grade_rate" name="grade_rate" value="B">
+								<input id="comment_submit" name="comment_InsertBtn" type="submit" value="댓글 남기기">
+							</form>
 	    				</div>
 					</div>
     			</div>

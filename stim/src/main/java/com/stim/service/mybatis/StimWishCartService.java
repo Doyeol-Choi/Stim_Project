@@ -44,7 +44,4 @@ public interface StimWishCartService {
 	
 	
 
-	
-	// 바로 결제완료 후 장바구니에 해당게임 삭제
-
 }

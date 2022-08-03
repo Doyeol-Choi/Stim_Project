@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+
 import com.stim.vo.GameVO;
 
 @Mapper
@@ -44,5 +45,6 @@ public interface StimGameListMapper {
 
 	// 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용
 	public List<GameVO> SelectPopularGameListMain() throws Exception;
+	
 	
 }
