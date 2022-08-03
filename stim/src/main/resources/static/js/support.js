@@ -13,10 +13,10 @@ function show2() {
     document.querySelector('#box2').style.display = 'block';
     document.querySelector('#upBtn2').style.display = 'block';
 }
-function hide3() {
-    document.querySelector('#downBtn3').style.display = 'block';
-    document.querySelector('#box3').style.display = 'none';
-    document.querySelector('#upBtn3').style.display = 'none';
+function hide2() {
+    document.querySelector('#downBtn2').style.display = 'block';
+    document.querySelector('#box2').style.display = 'none';
+    document.querySelector('#upBtn2').style.display = 'none';
 }
 function show3() {
     document.querySelector('#downBtn3').style.display = 'none';
