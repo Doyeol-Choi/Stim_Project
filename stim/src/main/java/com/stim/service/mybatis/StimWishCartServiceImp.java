@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.stim.model.mapper.StimWishCartMapper;
 import com.stim.vo.CartVO;
+import com.stim.vo.ProFileVO;
 import com.stim.vo.WishVO;
 
 @Service
@@ -93,8 +94,5 @@ public class StimWishCartServiceImp implements StimWishCartService {
 		stimWishCartMapper.InsertWishGame(user_code,game_code);
 		
 	}
-	
-	
-
 	
 }

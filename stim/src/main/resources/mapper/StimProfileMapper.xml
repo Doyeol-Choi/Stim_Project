@@ -90,4 +90,20 @@
     	WHERE friend_code = ${friend_code}
     </update>
     
+    <select id="selectLastComment" resultType="com.stim.vo.ProFileVO" parameterType="int">
+    	SELECT * FROM
+    	(SELECT comment_code, 
+	       c.user_code AS user_code,  
+	       u.user_nickname AS comment_nickname,
+	       comment_context, 
+	       profile_regdate,
+	       user_picture, 
+	       writer_code
+		   FROM user_tbl u, profile_comment_tbl c
+	       WHERE u.user_code = c.writer_code
+	       AND c.user_code = (SELECT user_code FROM user_tbl WHERE user_code = #{user_code})
+	       ORDER BY profile_regdate desc)
+    	WHERE rownum <![CDATA[<=]]> 1
+    </select>
+    
 </mapper>

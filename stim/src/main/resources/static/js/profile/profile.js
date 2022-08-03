@@ -47,13 +47,12 @@ function deleteRequest(friend_code){
 	});
 }
 
-/*function inputComment(){
-//	var pVo = $('#comment_form').serialize();
+function inputComment(){
 	let user_code = $("#user_code").val();
 	let user_id = $("#user_id").val();
 	let writer_code = $("#writer_code").val();
 	let comment_text = $("#comment_text").val();
-	
+		
 	$.ajax({
 		url : "/comment",
 		data : {
@@ -63,48 +62,34 @@ function deleteRequest(friend_code){
 			"comment_text":comment_text
 		},
 		type : "POST",
-		cache: false,
+		success : function(data) {
+			html = "<div class='comment_list' id='mentListBox"+data.comment_code+"'>";
+			html += "<div class='comment_image'>";
+			html += "<a> <img alt='프로필 사진' src='/image/profile/" + data.user_picture+"'> </a>";
+			html += "</div>";
+			html += "<div class='comment_content'>";
+			html += "<div class='comment_nickname' >"+data.comment_nickname+"</div>";
+			html += "<span class='comment_regdate' >"+dateFormat()+"</span>";
+			html += "<div class='comment_context'>"+data.comment_context+"</div>";
+			html += "<button class='comment_deletebtn' th:if='${"+data.user_code+" == #authentication.principal.user_code} or ${"+data.writer_code+" == #authentication.principal.user_code}' onclick='deleteComment("+data.comment_code+")' >삭제</button>";
+			html += "</div>";
+			html += "</div>";
+			
+			$("#comment_lists").prepend(html);
+		},
 		error : function(){
 			alert('추가 실패');
 		}	
-		}).done( function(fragment){
-			$("#comment_lists").replaceWith(fragment)
-		});
-
-}*/
-
-/*$('#comment_submit').click(function(){
-	
-	let commentInfo = {
-		
-		"user_code" : $('#user_code').val(),
-		"user_id" : $('user_id').val(),
-		"writer_code" : $('writer_code').val(),
-		"comment_text" : $('comment_text').val()
-	};
-	
-	$.ajax({
-		
-		url: "/comment", // 매핑된 요청 url
-		type: "POST",
-		async: true,
-		data: {
-			"comment": JSON.stringify(commentInfo)
-		},
-		datatype : "json",
-		success : function (data){
-			let comment = JSON.parse(data);
-			let html = "";
-			html += 
-			
-			
-			$('#comment_list').append(html);
-		}
 	});
-	
-	
-})
-*/
+	$("#comment_text").val("");
+
+}
+
+function dateFormat(){
+	let date = new Date();
+    return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분 ";
+ 
+}
 
 
 

@@ -56,6 +56,7 @@ public class StimProfileServiceImp implements StimProfileService {
 	
 	// 프로필 사진 업데이트
 	@Override
+	@Transactional
 	public void UpdatePicture(ProFileVO pVo) throws Exception {
 		stimProfileMapper.UpdatePicture(pVo);
 	}
@@ -63,6 +64,7 @@ public class StimProfileServiceImp implements StimProfileService {
 
 	// 댓글 삭제
 	@Override
+	@Transactional
 	public void DeleteCommentByCode(int comment_code) throws Exception {
 		stimProfileMapper.DeleteCommentByCode(comment_code);
 	}
@@ -75,20 +77,29 @@ public class StimProfileServiceImp implements StimProfileService {
 
 	// 친구 추가 요청 거절
 	@Override
+	@Transactional
 	public void deleteFriendRequest(int friend_code) throws Exception {
 		stimProfileMapper.deleteFriendRequest(friend_code);
 	}
 
 	// 친구 추가 요청 승인
 	@Override
+	@Transactional
 	public void updateFriendRequest(int friend_code) throws Exception {
 		stimProfileMapper.updateFriendRequest(friend_code);
 	}
 
 	// 프로필 할 말 수정
 	@Override
+	@Transactional
 	public void updateProfileContext(ProFileVO pVo) throws Exception {
 		stimProfileMapper.updateProfileContext(pVo);
+	}
+
+	// 해당 프로필에 가장 최근 작성된 댓글 가져오기
+	@Override
+	public ProFileVO selectLastComment(int user_code) throws Exception {
+		return stimProfileMapper.selectLastComment(user_code);
 	}
 
 }

@@ -2,13 +2,19 @@ package com.stim.controller;
 
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.stim.service.mybatis.StimProfileService;
+import com.stim.vo.ProFileVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -72,5 +78,24 @@ public class StimController {
 	public String supportPage() {
         return "support";
     }
+	
+	@PostMapping("/comment")
+	@ResponseBody
+	public ProFileVO InsertComment( 
+							  @RequestParam("user_code") int user_code,
+							  @RequestParam("comment_text") String comment_text,
+							  @RequestParam("writer_code") int writer_code,
+							  @RequestParam("user_id") String user_id) throws Exception {
+		ProFileVO pVo = new ProFileVO();
+		pVo.setUser_code(user_code);
+		pVo.setComment_context(comment_text);
+		pVo.setWriter_code(writer_code);
+		// 댓글 DB 저장
+		stimProfileService.InsertComment(pVo);
+		// 저장된 댓글의 모든 정보 불러오기
+		pVo = stimProfileService.selectLastComment(user_code);
+		return pVo;
+		
+	}
 
 }
