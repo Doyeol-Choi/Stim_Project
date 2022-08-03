@@ -345,6 +345,41 @@ div{
 }
 
 .friend_request{
-	background-color: coral;
 	color: white;
+}
+.friend_req{
+	display: inline-block;
+	width: 350px;
+}
+.friend_request_picture{
+	margin-top: 10px;
+	display: inline-block;
+}
+.friend_req > img{
+	width: 80px;
+	height: 80px;
+}
+.friend_req_nickname{
+	margin-left: 20px;
+	margin-top: 30px;
+	position: absolute;
+	font-size: 30px;
+	font-weight: 700;
+	width: 64px;
+	height: 64px;
+	display: inline-block;
+}
+.friend_request_btn{
+	margin-top: 35px;
+	width: 80px;
+	height: 80px;
+	float: right;
+}
+.friend_request_approval_btn{
+	width: 35px;
+	height: 35px;
+}
+.friend_request_delete_btn{
+	width: 35px;
+	height: 35px;
 }
