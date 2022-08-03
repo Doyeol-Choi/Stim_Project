@@ -19,40 +19,39 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <div id="container">
     	<div id = "mainGame" class = "contain">
-				<h1>인기 추천</h1>
-				<div id = "mainGame1" class="mainSlides" th:each="popGame : ${popList}">
-					<a th:href="|@{/gameDetailView(game_code=${popGame.game_code})}|"><img th:src="@{'/image/game/' + ${popGame.game_picture}}"></a>
-				</div>
-				<div class="subG" th:each="popGame : ${popList}">
-					<a href=" javascript:void(0);" th:onclick="|changeMain(${popGameStat.count})|">
-						<span class="subG_Bar" th:id="|bar${popGameStat.count}|"></span>
-						<img th:style="'background-image: url('+@{'/image/game/' + ${popGame.game_picture}} + ');'">
-					</a>
-				</div>
+			<h1>인기 추천</h1>
+			<div id = "mainGame1" class="mainSlides" th:each="popGame : ${popList}">
+				<a th:href="|@{/gameDetailView(game_code=${popGame.game_code})}|"><img th:src="@{'/image/game/' + ${popGame.game_picture}}"></a>
 			</div>
-			<div class="swiper contain" id="newGame">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide newSubG" th:each="newGame : ${newList}">
-                        <a th:href="|@{/gameDetailView(game_code=${newGame.game_code})}|"><img th:src="@{'/image/game/'+${newGame.game_picture}}"></a>
-                        <p th:text="${newGame.game_name}"></p>
-                        <p th:text="${#dates.format(newGame.game_releaseDate, 'yyyy-MM-dd')}">
-                    </div>
+			<div class="subG" th:each="popGame : ${popList}">
+				<a href=" javascript:void(0);" th:onclick="|changeMain(${popGameStat.count})|">
+					<span class="subG_Bar" th:id="|bar${popGameStat.count}|"></span>
+					<img th:style="'background-image: url('+@{'/image/game/' + ${popGame.game_picture}} + ');'">
+				</a>
+			</div>
+		</div>
+		<div class="swiper contain" id="newGame">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide newSubG" th:each="newGame : ${newList}">
+                    <a th:href="|@{/gameDetailView(game_code=${newGame.game_code})}|"><img th:src="@{'/image/game/'+${newGame.game_picture}}"></a>
+                    <p th:text="${newGame.game_name}"></p>
+                    <p th:text="${#dates.format(newGame.game_releaseDate, 'yyyy-MM-dd')}">
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
             </div>
-			
-			<div id = "gameTag" class = "contain">
-				<h1>추천 장르</h1>
-				<div th:each="tag : ${tagList}">
-					<div class = "gameTags" th:id="tagBox + ${tagStat.count}">
-						<a th:href="@{|/gameListTagSearch?tagSearch=${tag}&price=100000|}">
-							<span th:text="${tag}"></span>
-						</a>
-					</div>
-				</div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+		<div id = "gameTag" class = "contain">
+			<h1>추천 장르</h1>
+			<div th:each="tag : ${tagList}">
+				<a th:href="@{|/gameListTagSearch?tagSearch=${tag}&price=100000|}">
+					<span class = "gameTags" th:style="'background-image: url('+@{'/image/tagImg' + ${tagStat.count} + '.jpg'}+');'">
+						<span th:text="${tag}"></span>
+					</span>
+				</a>
 			</div>
-    </div>
+		</div>
+   	</div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
 </body>

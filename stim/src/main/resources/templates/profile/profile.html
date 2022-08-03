@@ -17,123 +17,122 @@
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
     <div id="container">
     	<div id="content">
-		        <!--프로필, 프로필 수정-->
-		        <div id="profile">
-		            <div id="profile_avartar"><!-- 프로필 이미지-->
-		                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
-		                <a sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
-		            </div>
-		            <div id="profile_id"> <!--프로필 아이디, 출신-->
-		                <h2 th:text="${user.user_nickname}"></h2>
-		                <br>
-		                <p th:text="${user.user_id}"></p>
-		            </div>
-		            <div>
-		             
-		            </div> 
-		        </div>
-		        <!--프로필 수정-->
-		        	<div id="profile_update">
-		        		<a th:href="@{'/profile/edit/'+${user.user_code}}"><div>정보 수정</div></a>
-		        	</div>
-		        <!--댓글 페이징-->	        
-		        <div id="comment_paging">
-		        	<div>
-		        		<div id="comment_page1"><h3>댓글</h3></div>
-		        		<div class="comment_page">
-		        			<div >
-		        				<a> <span th:text="${#lists.size(list)}"></span> 개의 모든 댓글 보기</a>
-		        			</div>
-			        		
+	        <!--프로필, 프로필 수정-->
+	        <div id="profile">
+	            <div id="profile_avartar"><!-- 프로필 이미지-->
+	                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
+	                <a sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
+	            </div>
+	            <div id="profile_id"> <!--프로필 아이디, 출신-->
+	                <h2 th:text="${user.user_nickname}"></h2>
+	                <p th:text="${user.user_id}"></p>
+	            </div>
+	            <div id="profile_introduce">
+	             
+	            </div> 
+	        </div>
+	        <!--프로필 수정-->
+	        	<button id="profile_update" th:onclick="|location.href='@{'/profile/edit/'+${user.user_code}}'|">
+	        		<span>정보 수정</span>
+	        	</button>
+	        <!--댓글 페이징-->	        
+	        <div id="comment_paging">
+	        	<div>
+	        		<div id="comment_page1"><h3>댓글</h3></div>
+	        		<div class="comment_page">
+	        			<div >
+	        				<a> <span th:text="${#lists.size(list)}"></span> 개의 모든 댓글 보기</a>
+	        			</div>
+		        		
+					</div>
+	        	</div>
+			</div>
+			
+			<div>
+				<!-- 없을 때 -->
+				<!-- <div th:if="${#lists.isEmpty(game_list)}">
+					<p>보유 게임이 없어요</p>
+				</div> -->
+				<!-- 게임 있을 때 -->
+				<div class="game_lists" th:if="${not #lists.isEmpty(game_list)}">
+					<div th:each="game_list : ${game_list}"class="game_list">
+						<div class="game_picture">
+							<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
 						</div>
-		        	</div>
+						<div class="game_content">
+							<span class="game_name" th:text="${game_list.game_name}"></span>
+						</div>
+					</div>		
 				</div>
-				
-				<div >
-					<!-- 없을 때 -->
-					<!-- <div th:if="${#lists.isEmpty(game_list)}" >
-						<p>보유 게임이 없어요</p>
-					</div> -->
-					<!-- 게임 있을 때 -->
-					<div class="game_lists" th:if="${not #lists.isEmpty(game_list)}" >
-						<div th:each="game_list : ${game_list}"class="game_list">
-							<div class="game_picture">
-									<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
-							</div>
-							<div class="game_content">
-								<span class="game_name" th:text="${game_list.game_name}"></span>
-							</div>
-						</div>		
+			</div>
+			
+	        <!-- 댓글,친구창 -->
+	        <div class="profile_content">
+	       		<!--친구창-->
+					<!-- 로그인 시 보이게 해야함 -->
+					<div sec:authorize="isAuthenticated()" class="comment_write">
+						<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}"> </a>
+						<form id="comment_form" th:action="@{/comment}" method="post">
+							<input type="hidden" id="user_code" name="user_code" th:value="${user.user_code}">
+							<input type="hidden" id="user_id" name="user_id" th:value="${user.user_id}"> 
+							<input type="hidden" id="writer_code" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
+							<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
+							<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
+							<input id="comment_submit" name="comment_InsertBtn" type="button" value="댓글 남기기" onclick="inputComment()">
+						</form>
 					</div>
+				<div class="profile_left">
+					<div id="comment_lists">
+						<div class="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}|">
+							<div class="comment_image">
+								<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}"> </a>
+							</div>
+							<div class="comment_content">
+								<div class="comment_nickname" th:text="${list.comment_nickname}"></div> 
+								<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
+								<div class="comment_context" th:text="${list.comment_context}"></div>
+								<!-- <button class="comment_deletebtn" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" 
+								 th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" >삭제</button> -->
+								<button class="comment_deletebtn" th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" th:onclick="|deleteComment(${list.comment_code})|" 
+								>삭제</button>								  
+							</div>
+						</div>
+					</div>
+					
 				</div>
-				
-		        <!-- 댓글,친구창 -->
-		        <div class="profile_content">
-		       		<!--친구창-->
-						<!-- 로그인 시 보이게 해야함 -->
-						<div sec:authorize="isAuthenticated()" class="comment_write">
-							<a id="comment_write_a"> <img alt="프로필 사진" th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}"> </a>
-							<form id="comment_form" th:action="@{/comment}" method="post">
-								<input type="hidden" id="user_code" name="user_code" th:value="${user.user_code}">
-								<input type="hidden" id="user_id" name="user_id" th:value="${user.user_id}"> 
-								<input type="hidden" id="writer_code" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
-								<textarea id="comment_text" name="comment_text" rows="5" cols="20" placeholder="댓글 써줘요" ></textarea>
-								<!-- <input type="submit" value="댓글 남기기" th:onclick="|insertComment(${user.user_code},2,comment_text)|" > --> <!-- 2 바꿔야함 writer_code임 -->
-								<input id="comment_submit" name="comment_InsertBtn" type="submit" value="댓글 남기기" onclick="dataSend()">
-							</form>
-						</div>
-					<div class="profile_left">
-						<div id="comment_lists">
-							<div class="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}|">
-								<div class="comment_image">
-									<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}"> </a>
-								</div>
-								<div class="comment_content">
-									<div class="comment_nickname" th:text="${list.comment_nickname}"></div> 
-									<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
-									<div class="comment_context" th:text="${list.comment_context}"></div>
-									<!-- <button class="comment_deletebtn" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" 
-									 th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" >삭제</button> -->
-									<button class="comment_deletebtn" th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" th:onclick="|deleteComment(${list.comment_code})|" 
-									>삭제</button>								  
-								</div>
+	        </div>
+	        <div class="profile_right">
+	        		<!-- 친구 요청 목록 -->
+					<div class="friend_request">	
+						<div th:each="request : ${f_request}" th:id="|reqList${request.friend_code}|">
+							<span><strong>친구 요청</strong></span>
+							<div class="friend_req">			
+								<img class="friend_request_picture" alt="req_profile" th:src="@{/image/profile/} + ${request.req_picture}">
+								<div class="friend_req_nickname"><span th:text="${request.req_nickname}"></span></div>
+								<div class="friend_request_btn">
+									<button class="friend_request_approval_btn" th:onclick="|location.href='@{/friend/approval(friend_code = ${request.friend_code}, user_code = ${user.user_code})}'|" > O </button>
+									<button class="friend_request_delete_btn" th:onclick="|deleteRequest(${request.friend_code})|">X</button>		
+								</div>					
+							</div>
+						</div>	
+					</div>
+					<div class="friends">
+						<a> 친구 <span class="friend_count" th:text="${#lists.size(f_list)}"></span> 명 </a>
+						<br>
+						<div class="friend_list" th:each="f: ${f_list}" >
+							<div class="friend_picture">
+								<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}">
+							</div>
+							<div class="friend_content">
+								<span class="friend_nickname" th:text="${f.friend_nickname}"></span>
 							</div>
 						</div>
-						
 					</div>
-		        </div>
-		        <div class="profile_right">
-		        		<!-- 친구 요청 목록 -->
-						<div class="friend_request">	
-							<div th:each="request : ${f_request}" th:id="|reqList${request.friend_code}|">
-								<span><strong>친구 요청</strong></span>
-								<div class="friend_req">			
-									<img class="friend_request_picture" alt="req_profile" th:src="@{/image/profile/} + ${request.req_picture}">
-									<div class="friend_req_nickname"><span th:text="${request.req_nickname}"></span></div>
-									<div class="friend_request_btn">
-										<button class="friend_request_approval_btn" th:onclick="|location.href='@{/friend/approval(friend_code = ${request.friend_code}, user_code = ${user.user_code})}'|" > O </button>
-										<button class="friend_request_delete_btn" th:onclick="|deleteRequest(${request.friend_code})|">X</button>		
-									</div>					
-								</div>
-							</div>	
-						</div>
-						<div class="friends">
-							<a> 친구 <span class="friend_count" th:text="${#lists.size(f_list)}"></span> 명 </a>
-							<br>
-							<div class="friend_list" th:each="f: ${f_list}" >
-								<div class="friend_picture">
-									<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}">
-								</div>
-								<div class="friend_content">
-									<span class="friend_nickname" th:text="${f.friend_nickname}"></span>
-								</div>
-							</div>
-						</div>
-						<!-- 친구 목록 -->
-					</div>
-		        <div class="comment_footer">
-		        </div>
-		    </div>
+					<!-- 친구 목록 -->
+				</div>
+	        <div class="comment_footer">
+	        </div>
+	    </div>
     </div>	
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

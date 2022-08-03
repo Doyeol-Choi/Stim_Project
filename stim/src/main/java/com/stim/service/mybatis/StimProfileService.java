@@ -41,5 +41,10 @@ public interface StimProfileService {
 	// 친구 추가 요청 승인
 	public void updateFriendRequest(int friend_code) throws Exception;
 	
+	// 프로필 할 말 수정
+	public void updateProfileContext(ProFileVO pVo) throws Exception;
+	
+	// 해당 프로필에 가장 최근 작성된 댓글 가져오기
+	public ProFileVO selectLastComment(int user_code) throws Exception;
 
 }

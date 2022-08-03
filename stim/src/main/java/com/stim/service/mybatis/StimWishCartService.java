@@ -38,10 +38,8 @@ public interface StimWishCartService {
 	// 보유게임에서 게임코드 가져오기
 	public List<Integer> SelectMyGameCode(Integer user_code)throws Exception;
 	
-	
 	// 게임 상세보기에서 찜목록에 넣기
 	public void InsertWishGame(int user_code, int game_code) throws Exception;
-	
 	
 
 }
