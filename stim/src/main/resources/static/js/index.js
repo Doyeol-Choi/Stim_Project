@@ -45,12 +45,12 @@ function move(idx) {
 	var name = "bar"+idx;
   	var bar = document.getElementById(name);
   	var width = 100;
-  	id = setInterval(frame, 50);
+  	id = setInterval(frame, 5);
 	function frame() {
     	if (bar.style.width == '1%') {
       		clearInterval(id);
     	} else {
-      	width--; 
+      	width -= 0.1; 
       	bar.style.width = width + '%'; 
 		}
 	}
