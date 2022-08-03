@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack 고객 지원</title>
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/support.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/support.js}"></script>
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
+    <div id="container">
+    	<div id="supportPage">
+    		<h1>Stim Pack 고객 지원</h1>
+    		<p>무엇을 도와드릴까요?</p>
+    		<h4>자주 묻는 질문</h4>
+    		<div id="listWrap">
+    			<ul>
+    				<li>
+    					<div class="question">
+    						<h3>질문1</h3>
+    						<button onclick="show1()" id="downBtn1" class="downBtn">▼</button>
+    						<button onclick="hide1()" id="upBtn1" class="upBtn">▲</button>
+    					</div>
+    					<div class="answer" id="box1">
+    						<p>답변1</p>
+    					</div>
+    				</li>
+    				<li>
+    					<div class="question">
+    						<h3>질문2</h3>
+    						<button onclick="show2()" id="downBtn2" class="downBtn">▼</button>
+    						<button onclick="hide2()" id="upBtn2" class="upBtn">▲</button>
+    					</div>
+    					<div class="answer" id="box2">
+    						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor 
+    						incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud 
+    						exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute 
+    						irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla 
+    						pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia 
+    						deserunt mollit anim id est laborum.</p>
+    					</div>
+    				</li>
+    				<li>
+    					<div class="question">
+    						<h3>질문3</h3>
+    						<button onclick="show3()" id="downBtn3" class="downBtn">▼</button>
+    						<button onclick="hide3()" id="upBtn3" class="upBtn">▲</button>
+    					</div>
+    					<div class="answer" id="box3">
+    						<p>Nor again is there anyone who loves or pursues or desires to obtain pain of itself, 
+    						because it is pain, but because occasionally circumstances occur in which toil and pain 
+    						can procure him some great pleasure. To take a trivial example, which of us ever 
+    						undertakes laborious physical exercise, except to obtain some advantage from it? 
+    						But who has any right to find fault with a man who chooses to enjoy a pleasure that has 
+    						no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</p>
+    					</div>
+    				</li>
+    				<li>
+    					<div class="question">
+    						<h3>질문4</h3>
+    						<button onclick="show4()" id="downBtn4" class="downBtn">▼</button>
+    						<button onclick="hide4()" id="upBtn4" class="upBtn">▲</button>
+    					</div>
+    					<div class="answer" id="box4">
+    						<p>Nor again is there anyone who loves or pursues or desires to obtain pain of itself, 
+    						because it is pain, but because occasionally circumstances occur in which toil and pain 
+    						can procure him some great pleasure. To take a trivial example, which of us ever 
+    						undertakes laborious physical exercise, except to obtain some advantage from it? 
+    						But who has any right to find fault with a man who chooses to enjoy a pleasure that has 
+    						no annoying consequences, or one who avoids a pain that produces no resultant pleasure?</p>
+    					</div>
+    				</li>
+    				<li>
+    					<div class="question">
+    						<h3>질문5</h3>
+    						<button onclick="show5()" id="downBtn5" class="downBtn">▼</button>
+    						<button onclick="hide5()" id="upBtn5" class="upBtn">▲</button>
+    					</div>
+    					<div class="answer" id="box5">
+    						<p>자동으로 안에 있는 요소들에 따라 크기를 변경하기 위해서는 height를 auto로 하고,
+							overflow를 hidden으로 하면 자동으로 안에 있는 요소들이 늘어나도 자동으로 화면이 조정된다.</p>
+    					</div>
+    				</li>
+    			</ul>
+    		</div>
+    	</div>
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>

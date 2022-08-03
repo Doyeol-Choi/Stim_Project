@@ -271,5 +271,5 @@ public class StimUserController {
 		}
 		return new RedirectView("/searchUser");
 	}
-
+	
 }

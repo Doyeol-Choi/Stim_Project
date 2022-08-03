@@ -182,7 +182,7 @@ public class StimGameListController {
 								
 
 				// 콘솔 확인 용:: 콘솔에 선택한 태그와 가격, 검색된 리스트의 수를 출력한다.
-				System.out.println("태그: "+test);	
+				System.out.println("\n태그: "+test);	
 				System.out.println("가격: "+price);
 				System.out.println("검색된 태그의 게임 리스트 수: " + searchedByTag.size() +"\n");
 				
