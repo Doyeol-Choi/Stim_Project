@@ -35,25 +35,27 @@
 								<input type="hidden" id="user_code" name="user_code" th:value="${#authentication.principal.user_code}">
 								<input type="hidden" id="game_code" name="user_id" th:value="${gameInfo.game_code}"> 
 								<input type="hidden" id="" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
-								<textarea id="grade_context" name="grade_context" rows="5" cols="20" placeholder="댓글과 평점을 남겨주세요" ></textarea>
-								<input type="radio" id="grade_rate" name="grade_rate" value="g">good
-								<input type="radio" id="grade_rate" name="grade_rate" value="b">bad
-								<input id="reply_submit" name="reply_InsertBtn" type="button" value="댓글 남기기" th:onclick="inputReply()">
+								<textarea id="grade_context" name="grade_context" placeholder="댓글과 평점을 남겨주세요" ></textarea>
+								<input id="reply_submit" type="button" value="댓글 남기기" th:onclick="inputReply()">
+								<label><input type="radio" id="grade_b" name="grade_rate" value="b">Bad</label>
+								<label><input type="radio" id="grade_g" name="grade_rate" value="g">Good</label>
 							</form>
 						</div>
 					</div>
 		    		<div id="reply_lists">
 						<div class="reply_list" th:each="reply : ${reply}" th:id="|mentListBox${reply.grade_code}|">
-							<div class="reply_image">
-								<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${reply.user_picture}"> </a>
-							</div>
+							<a th:href="@{|/profile/${reply.user_code}|}">
+								<img id="reply_picture" alt="프로필 사진" th:src="@{/image/profile/} + ${reply.user_picture}">
+							</a>
 							<div class="reply_content">
-								<div class="user_nickname" th:text="${reply.user_nickname}"></div> 
-								<span class="grade_regdate" th:text="${#dates.format(reply.grade_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
-								<div class="grade_context" th:text="${reply.grade_context}"></div>
-								<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
-								th:if="${reply.user_code == #authentication.principal.user_code}" th:onclick="deleteReply(${reply.grade_code})">삭제</button> 
+								<span class="user_nickname" th:text="${reply.user_nickname}"></span> 
+								<span id="grade_rateG" th:if="${#strings.equals(reply.grade_rate, 'g')}">Good</span>
+								<span id="grade_rateB" th:if="${#strings.equals(reply.grade_rate, 'b')}">Bad</span>
+								<span class="grade_regdate" th:text="${#dates.format(reply.grade_regdate,'yyyy년 MM월 dd일 HH시 mm분')}"></span>
+								<p class="grade_context" th:text="${reply.grade_context}"></p>
 							</div>
+							<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
+							th:if="${reply.user_code == #authentication.principal.user_code}" th:onclick="deleteReply(${reply.grade_code})">삭제</button> 
 						</div>
 					</div>
     			</div>
@@ -84,7 +86,6 @@
 			    				가  격: <span>￦[[${#numbers.formatInteger(gameInfo.game_finalPrice, 0, 'COMMA')}]]</span>
 			    				<span style="background-color:#00AEEF; font-size: 8px; color:white; padding:1px;">[[${#numbers.formatInteger(gameInfo.game_discount, 0, 'COMMA')}]]%</span>
 		    				</li>
-		    				
 			    		</ul>
 			    		<div sec:authorize="isAnonymous()">
 				    		<div class="wishCart" id="payNow">
@@ -139,12 +140,10 @@
 				    			</button>
 				    		</div>
 			    		</div>
-			    		
 		    		</div>
 	    		</div>
 	    	</div>	   	
     	</div>
-    	
     </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>

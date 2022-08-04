@@ -1,24 +1,25 @@
 @charset "UTF-8";
 #container{
+	display: inline-block;
 	width: 100%;
-	height: 100%;
+	height: auto;
     background-color: #0E1B49;
     min-width: 1500px;
 }
 #contents{
+	display:table;
 	width: 80%;
 	margin: 0 auto;
 	max-width: 1560px;
 	padding-left: 90px;
-	height: 1400px;
+	min-height: 1400px;
+	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
 }
 #contents h1{
 	color: white;
 	padding: 30px 0 15px;
 }
-
-
 
 /* contents */
 .gameInformation{
@@ -28,7 +29,8 @@
 }
 #gameImg{
 	width: 1050px;
-	height: 1310px;
+	min-height: 1310px;
+	height: auto;
 	background-color: rgba(0, 0, 0, 0.3);
 }
 #gameMain{
@@ -40,60 +42,126 @@
 #aboutGame{
 	color: white;
 	padding: 20px 10px 20px 20px;
-	height: 810px;
+	min-height: 810px;
+	height: auto;
 }
 #gameSection{
 	height: 100px;
 }
 #gameGrade{
 	width: 1020px;
-	height: 680px;
+	height: 180px;
 	background-color: rgba(0, 0, 0, 0.3);
 	padding: 20px;
 }
 
-
-#reply_form{
-	width: 100%;
-	height: 90px;
+#reply_form > label{
+	margin-top: 10px;
+	margin-right: 10px;
+	float: right;
 }
-#reply_form input[type=radio]{
 
+#grade_g, #grade_b {
+	margin-right: 10px;
 }
+
 #grade_context{
-	width: 80%;
-	height: 90px;
+	width: 980px;
+	height: 100px;
 	resize: none;
 	padding: 10px 20px;
 	background-color: rgba(0, 0, 0, 0);
 	border: 1px solid white;
 	color: white;
 }
-#reply_lists img{
+
+#reply_submit {
+	padding: 5px 10px;
+	border-radius: 10px;
+	margin-top: 5px;
+	float: right;
+	cursor: pointer;
+}	
+
+.reply_list{
+	margin-top: 10px;
+	width: 1020px;
+	min-height: 120px;
+	height: auto;
+	background-color: rgba(0, 0, 0, 0.3);
+	margin-top: 10px;
+	display: flex;
+}
+
+#reply_picture {
 	width: 100px;
 	height: 100px;
-}
-.reply_list{
-	display: flex;
 	margin-top: 10px;
-	border-top: 1px solid rgba(0, 0, 0, 0.1);
+	margin-left: 20px;
+	float: left;
 }
-.grade_content{
-	padding-left: 20px;
+
+.reply_content {
+	padding: 10px 0px 20px 20px;
+	width: 810px;
+	min-height: 100px;
+	height: auto;
+	float: left;
+}
+
+.user_nickname {
+	font-size: 1.2em;
+	font-weight: 600;
+}
+
+.grade_regdate {
+	float: right;
+}
+
+#grade_rateG, #grade_rateB {
+	margin-left: 40px;	
+}
+
+#grade_rateG {
+	color: #00AEEF;
+}
+
+#grade_rateB {
+	color: red;
+}
+
+.grade_context{
+	padding-left: 40px;
+	padding-top: 10px;
+}
+
+.reply_deletebtn {
+	float: right;
+	width: 50px;
+	height: 30px;
+	padding: 2px 5px;
+	border-radius: 10px;
+	margin: 10px;	
+	cursor: pointer;
 }
 
 
 /* 바 */
 #gameInfo{
+	display: inline-block;
 	width: 320px;
-	height: 1310px;
+	min-height: 1310px;
+	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
 	color: #ccc;
 	right: 0;
 }
+
 #barBackground{
+	display: inline-block;
 	width: 320px;
-	height: 1310px;
+	min-height: 1310px;
+	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
 }
 #barText{
