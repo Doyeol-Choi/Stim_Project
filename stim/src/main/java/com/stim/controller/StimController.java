@@ -2,7 +2,6 @@ package com.stim.controller;
 
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -12,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
+import com.stim.service.mybatis.StimGameListService;
 import com.stim.service.mybatis.StimProfileService;
+import com.stim.vo.GameReplyVO;
 import com.stim.vo.ProFileVO;
 
 import lombok.RequiredArgsConstructor;
@@ -24,6 +24,9 @@ public class StimController {
 	
 	@Resource
 	private StimProfileService stimProfileService;
+	
+	@Resource
+	private StimGameListService stimGameListService;
 	
 	// 로그인 폼으로 접속
 	@GetMapping("/loginForm")
@@ -95,6 +98,32 @@ public class StimController {
 		// 저장된 댓글의 모든 정보 불러오기
 		pVo = stimProfileService.selectLastComment(user_code);
 		return pVo;
+		
+	}
+	
+	@PostMapping("/gamereply")
+	@ResponseBody
+	public GameReplyVO InsertReply( 
+							  @RequestParam("user_code") int user_code,
+							  @RequestParam("game_code")  int game_code,
+							  @RequestParam("grade_context") String grade_context,
+							  @RequestParam("grade_rate") String grade_rate) throws Exception {
+		System.out.println(user_code);
+		System.out.println(game_code);
+		System.out.println(grade_context);
+		System.out.println(grade_rate);
+		
+		GameReplyVO rVo = new GameReplyVO();
+		rVo.setUser_code(user_code);
+		rVo.setGame_code(game_code);
+		rVo.setGrade_context(grade_context);
+		rVo.setGrade_rate(grade_rate);
+		
+		// 댓글 DB 저장
+		stimGameListService.InsertReply(rVo);
+		// 저장된 댓글의 모든 정보 불러오기
+		rVo = stimGameListService.SelectLastReply(game_code);
+		return rVo;
 		
 	}
 

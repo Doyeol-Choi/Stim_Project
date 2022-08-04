@@ -167,6 +167,7 @@ public class StimWishCartController {
 //			 int user_code = list.get(i).getUser_code();
 			 int game_code = list.get(i).getGame_code();
 			 
+			 stimWishCartService.UpdateSalesRate(game_code);
 			 stimWishCartService.InsertMyGame(user_code, game_code);
 			 stimWishCartService.DeleteWishAllGame(user_code, game_code);
 			 stimWishCartService.DeleteCartAllGame(user_code, game_code); 
@@ -184,7 +185,7 @@ public class StimWishCartController {
 				  @PathVariable("user_code") int user_code,
 				  @PathVariable("game_code") int game_code) throws Exception {
 			  
-				 
+			  	 stimWishCartService.UpdateSalesRate(game_code);
 				 stimWishCartService.InsertMyGame(user_code, game_code);
 				 stimWishCartService.DeleteWishAllGame(user_code, game_code);
 			  

@@ -75,7 +75,7 @@ function inputComment(){
 			html += "</div>";
 			html += "</div>";
 			
-			$("#comment_lists").prepend(html);
+			$("#reply_lists").prepend(html);
 		},
 		error : function(){
 			alert('추가 실패');
