@@ -1,29 +1,31 @@
 <!DOCTYPE HTML>
-<html lang="ko"
-      xmlns:th="http://www.thymeleaf.org">
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 	<meta charset="UTF-8" />
 	<title>Stim Pack</title>
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	<!-- <link rel="stylesheet" type="text/css" th:href="@{/css/wishcart/wish.css}"> -->
-	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/regFormStep3.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/header :: headerFragment"></th:block>
-    <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
-    	
-    	<a th:href="@{/paysuccess(user_code = ${#authentication.principal.user_code}, page = 1)}">메인으로로 이동</a>
-    	<a th:href="@{/paysuccess(user_code = ${#authentication.principal.user_code}, page = 2)}">프로필로 이동</a>
-   </div>
-   
-   
+    	<div id="content">
+    		<h1>결제 완료</h1>
+    		
+    		<button id="home_btn" onclick="location.href='/'">
+		    		<span>메인페이지 이동</span>
+		    </button>
+		    <button id="home_btn" th:onclick="|location.href='@{/profile/{user_code}(user_code=${#authentication.principal.user_code})}'|">
+		    		<span>프로필로 이동</span>
+		    </button>
+    	</div>
+    </div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
-
-
 </body>
 </html>

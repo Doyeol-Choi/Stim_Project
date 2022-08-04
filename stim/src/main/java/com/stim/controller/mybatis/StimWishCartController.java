@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -158,7 +159,7 @@ public class StimWishCartController {
 	
 	// 장바구니에서 결제완료
 	  @GetMapping("/paysuccessAll/{user_code}") 
-	  public RedirectView PaySuccessAll(
+	  public ModelAndView PaySuccessAll(
 			  @PathVariable("user_code") int user_code) throws Exception {
 		  
 		  List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
@@ -167,40 +168,48 @@ public class StimWishCartController {
 //			 int user_code = list.get(i).getUser_code();
 			 int game_code = list.get(i).getGame_code();
 			 
-			 stimWishCartService.UpdateSalesRate(game_code);
 			 stimWishCartService.InsertMyGame(user_code, game_code);
+			 stimWishCartService.UpdateSalesRate(game_code);
 			 stimWishCartService.DeleteWishAllGame(user_code, game_code);
 			 stimWishCartService.DeleteCartAllGame(user_code, game_code); 
 		  }
 		  	 
 		  
-		  String main = "/";
-
-		  return new RedirectView(main);
+		  	 ModelAndView mav = new ModelAndView();
+		  	 mav.addObject("user_code",user_code);
+			 mav.setViewName("wishcart/kakaopay");
+			 
+			 return mav;
 	  
 	  }
-	// 바로 결제완료
-		  @GetMapping("/paysuccessOne/{user_code},{game_code}") 
-		  public RedirectView PaySuccessOne(
-				  @PathVariable("user_code") int user_code,
-				  @PathVariable("game_code") int game_code) throws Exception {
+	  		// 바로 결제완료
+		@GetMapping("/paysuccessOne/{user_code},{game_code}") 
+		public ModelAndView PaySuccessOne(
+				@PathVariable("user_code") int user_code,
+				@PathVariable("game_code") int game_code) throws Exception {
+			  		
+			  	 
+				stimWishCartService.InsertMyGame(user_code, game_code);
+				stimWishCartService.UpdateSalesRate(game_code);
+				stimWishCartService.DeleteWishAllGame(user_code, game_code);
+				stimWishCartService.DeleteCartAllGame(user_code, game_code);  
 			  
-			  	 stimWishCartService.UpdateSalesRate(game_code);
-				 stimWishCartService.InsertMyGame(user_code, game_code);
-				 stimWishCartService.DeleteWishAllGame(user_code, game_code);
-			  
-			  
-				 stimWishCartService.DeleteCartAllGame(user_code, game_code);  
-			  
-			  String main = "/";
-
-			  return new RedirectView(main);
+				ModelAndView mav = new ModelAndView();
+				mav.addObject("user_code",user_code);
+				mav.setViewName("wishcart/kakaopay");
+				
+				return mav;
 		  
 		  }
-	
-	
-	
-	
+		@GetMapping("/paysuccess")
+		public ModelAndView successPage() throws Exception{
+			  
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("wishcart/PaySuccess");
+			 
+			return mav;
+		  }
 	
 }
 

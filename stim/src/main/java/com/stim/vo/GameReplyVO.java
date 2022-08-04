@@ -12,7 +12,7 @@ public class GameReplyVO {
 	private String user_nickname;
 	private int game_code;
 	private String grade_context;
-	private Date grade_regDate;
+	private Date grade_regdate;
 	private String grade_rate;
 	private String user_picture;
 	

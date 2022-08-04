@@ -42,7 +42,18 @@
 							</form>
 		    			</div>
 		    		<div id="reply_lists">
-						
+						<div class="reply_list" th:each="reply : ${reply}" th:id="|mentListBox${reply.grade_code}|">
+							<div class="reply_image">
+								<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${reply.user_picture}"> </a>
+							</div>
+							<div class="reply_content">
+								<div class="user_nickname" th:text="${reply.user_nickname}"></div> 
+								<span class="grade_regdate" th:text="${#dates.format(reply.grade_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
+								<div class="grade_context" th:text="${reply.grade_context}"></div>
+								<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
+								th:if="${reply.user_code == #authentication.principal.user_code}" th:onclick="deleteReply(${reply.grade_code})">삭제</button> 
+							</div>
+						</div>
 					</div>
 					</div>
     			</div>

@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.service.mybatis.StimWishCartService;
+import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 import com.stim.vo.UserVO;
 
@@ -215,6 +216,7 @@ public class StimGameListController {
 				List<Integer> game_code_cart = stimWishCartService.SelectCartGameCode(user_code);
 				List<Integer> game_code_wish = stimWishCartService.SelectWishGameCode(user_code);
 				List<Integer> game_code_my = stimWishCartService.SelectMyGameCode(user_code);
+				List<GameReplyVO> reply = stimGameListService.SelectALLReply(game_code);
 				
 				if(game_code_cart.isEmpty()) {
 					game_code_cart= new ArrayList<>();
@@ -226,6 +228,8 @@ public class StimGameListController {
 					game_code_my=new ArrayList<>();
 				}
 				
+				
+				mav.addObject("reply", reply);
 				mav.addObject("game_code_cart", game_code_cart);
 				mav.addObject("game_code_wish",game_code_wish);
 				mav.addObject("game_code_my", game_code_my);
