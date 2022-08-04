@@ -23,7 +23,7 @@ div{
 }
 /* 프로필 정보 부분 */
 #profile{
-    width: 960px;
+    width: 1200px;
     height: 250px;
     background-color: #262B2F;
     position: relative;
@@ -71,16 +71,67 @@ div{
     margin-top: 10px;
     background-color: #262B2F;
     color: rgb(228, 228, 228);
+    font-size: 25px;
     padding-left:10px;
+}
+#profile_textarea{
+	margin-top : 20px;
+	float: left;
+	width: 600px;
+	height: 120px;
+	display: none;
+}
+
+
+#profile_textarea > form > textarea{
+	resize: none;
+	width: 600px;
+	height: 120px;
+	background-color : transparent;
+	border-color : #00AEEF;
+	color : rgb(228, 228, 228);
+	font-size: 1.5em;
+}
+
+#profile_textarea > form > button {
+	float: right;
+	margin-top: 5px;
+	padding : 5px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+
+.profile_fix{
+	width: 150px;
+	margin-right: 30px;
+	position: absolute;
+	top : 80px;
+	right: 30px;
+}
+
+#profile_contextUpdate:hover{
+	outline: 2px solid skyblue;
+	transition-duration: initial;
+	color : skyblue;
+	cursor: pointer;
+}
+
+#profile_contextUpdate{
+	margin-top: 30px;
+	width: 150px;
+    height: 40px;
+    line-height: 40px;
+    background-color: rgb(74, 79, 88);
+    border: none;
+    font-size: 100%;
+    color: rgb(228, 228, 228);
+    cursor: pointer;
 }
 /* 프로필 닉네임 */
 #profile_update{
-    float: right;
     width: 150px;
     height: 40px;
     line-height: 40px;
-    margin-top: 30px;
-    margin-right: 30px;
     background-color: rgb(74, 79, 88);
     border: none;
     font-size: 100%;
@@ -376,6 +427,8 @@ div{
 	width: 35px;
 	height: 35px;
 }
+
 .friend_delete{
 	float: right;
 }
+

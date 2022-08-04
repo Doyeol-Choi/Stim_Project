@@ -99,8 +99,8 @@ public class StimProfileServiceImp implements StimProfileService {
 	// 프로필 할 말 수정
 	@Override
 	@Transactional
-	public void updateProfileContext(ProFileVO pVo) throws Exception {
-		stimProfileMapper.updateProfileContext(pVo);
+	public void updateProfileContext(int user_code, String profile_context) throws Exception {
+		stimProfileMapper.updateProfileContext(user_code, profile_context);
 	}
 
 	// 해당 프로필에 가장 최근 작성된 댓글 가져오기
@@ -108,5 +108,18 @@ public class StimProfileServiceImp implements StimProfileService {
 	public ProFileVO selectLastComment(int user_code) throws Exception {
 		return stimProfileMapper.selectLastComment(user_code);
 	}
+
+	@Override
+	public String SelectProfileContext(int user_code) throws Exception {
+		return stimProfileMapper.SelectProfileContext(user_code);
+	}
+
+	@Override
+	@Transactional
+	public void insertProfileContext(int user_code, String profile_context) throws Exception {
+		stimProfileMapper.insertProfileContext(user_code, profile_context);
+		
+	}
+
 
 }

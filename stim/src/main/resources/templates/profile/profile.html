@@ -19,6 +19,7 @@
     	<div id="content">
 	        <!--프로필, 프로필 수정-->
 	        <div id="profile">
+	        	<input type="hidden">
 	            <div id="profile_avartar"><!-- 프로필 이미지-->
 	                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
 	                <a sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
@@ -27,14 +28,25 @@
 	                <h2 th:text="${user.user_nickname}"></h2>
 	                <p th:text="${user.user_id}"></p>
 	            </div>
-	            <div id="profile_introduce">
-	             
-	            </div> 
+	            <div id="profile_introduce" th:text="${context}"></div> 
+	            <div id="profile_textarea">
+	            	<form action="">
+	            		<input id="profileUser_code" name="user_code" type="hidden" th:value="${user.user_code}">
+	            		<textarea id="profile_context" name="profile_context"></textarea>
+	            		<button type="button" th:onclick="edit_context()">작성</button>
+	            	</form>
+	            </div>
+	            <!--프로필 수정-->
+		        <div class="profile_fix" sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}">
+		        	<button id="profile_update" th:onclick="|location.href='@{'/profile/edit/'+${user.user_code}}'|">
+		        		<span>정보 수정</span>
+		        	</button>
+		        	<button id="profile_contextUpdate" onclick="changeMessage()">
+		        		<span>메시지 수정</span>
+		        	</button>
+		        </div>  
 	        </div>
-	        <!--프로필 수정-->
-	        	<button id="profile_update" th:onclick="|location.href='@{'/profile/edit/'+${user.user_code}}'|">
-	        		<span>정보 수정</span>
-	        	</button>
+	         	
 	        <!--댓글 페이징-->	        
 	        <div id="comment_paging">
 	        	<div>

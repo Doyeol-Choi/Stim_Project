@@ -2,17 +2,16 @@ package com.stim.controller;
 
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.stim.service.mybatis.StimProfileService;
 import com.stim.vo.ProFileVO;
 
@@ -98,4 +97,22 @@ public class StimController {
 		
 	}
 
+	//프로필 메시지 등록	
+	@PostMapping("/updateContext")
+	@Transactional
+	@ResponseBody
+	public void updateContext(@RequestParam("user_code") int user_code,
+								@RequestParam("profile_context") String profile_context) throws Exception {
+		
+		String context = stimProfileService.SelectProfileContext(user_code);
+		
+		if(context == null ) {
+			stimProfileService.insertProfileContext(user_code, profile_context);
+		}
+		else {
+			stimProfileService.updateProfileContext(user_code, profile_context);
+		}
+
+	}
+	
 }
