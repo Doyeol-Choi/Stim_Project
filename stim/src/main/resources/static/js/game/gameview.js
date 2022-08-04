@@ -49,7 +49,10 @@ function paybtn(user_code, game_code ,game_price){
 			dataType :'json',
 			success:function(data){
 				var box = data.next_redirect_pc_url;
-				window.open(box);
+				var _left = Math.ceil(( window.screen.width - 400 )/2);
+			    var _top = Math.ceil(( window.screen.height - 600 )/2)
+				window.open(box,"kakaopay","width=400, height=700, left="+_left+", top="+_top);
+				
 			},
 			error:function(error){
 				alert(error);

@@ -159,9 +159,11 @@
 	       u.user_nickname AS user_nickname,
 	       grade_context, 
 	       grade_regdate,
+	       grade_rate,
 	       u.user_picture AS user_picture 
 		   FROM user_tbl u, grade_tbl g
-	       WHERE game_code = #{game_code} 
+	       WHERE game_code = #{game_code}
+	       AND u.user_code = g.user_code
 	       ORDER BY grade_regdate DESC)
     	   WHERE rownum <![CDATA[<=]]> 1
     </select>
@@ -172,4 +174,18 @@
     	WHERE grade_code = #{grade_code}
     </delete>
     
+     <!-- 게임상세페이지 댓글 가져오기 -->
+    <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
+    	SELECT grade_code, 
+	    g.user_code AS user_code,  
+	    u.user_nickname AS user_nickname,
+	    grade_context, 
+	    grade_regdate,
+	    grade_rate,
+	    u.user_picture AS user_picture 
+		FROM user_tbl u, grade_tbl g
+	    WHERE game_code = #{game_code}
+	    AND u.user_code = g.user_code
+	    ORDER BY grade_regdate DESC
+    </select>
 </mapper>
