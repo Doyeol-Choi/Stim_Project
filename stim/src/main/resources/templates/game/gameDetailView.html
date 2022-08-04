@@ -9,7 +9,6 @@
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameDetailView.css?after}">
-	
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" th:src="@{/js/game/gameview.js}"></script>
 </head>
@@ -22,7 +21,7 @@
 	    	<div id="gameImg" class="gameInformation">
 	    		<div style="width: 1020px; height: 500px; margin-left: 20px; background-color: black; padding-left: 45px;">
 
-		    		<img alt="gameImg" th:src="@{/image/game/} + ${gameInfo.game_picture}">
+		    		<img id="gameMain" alt="gameImg" th:src="@{/image/game/} + ${gameInfo.game_picture}">
 	    		</div>
 	    		<div id="aboutGame" class="gameInformation">
 	    			<section id="gameSection">
@@ -30,20 +29,21 @@
 	    					[[${gameInfo.game_context}]]
 	    				</article>
 					</section>
+					<div id="gameGrade">
 						<div sec:authorize="isAuthenticated()">
 							<form id="reply_form" th:action="@{/gamereply}" method="post">
 								<input type="hidden" id="user_code" name="user_code" th:value="${#authentication.principal.user_code}">
 								<input type="hidden" id="game_code" name="user_id" th:value="${gameInfo.game_code}"> 
 								<input type="hidden" id="" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
-								<textarea id="grade_context" name="grade_context" rows="5" cols="20" placeholder="댓글과 평점을 남겨주쇼" ></textarea>
+								<textarea id="grade_context" name="grade_context" rows="5" cols="20" placeholder="댓글과 평점을 남겨주세요" ></textarea>
 								<input type="radio" id="grade_rate" name="grade_rate" value="g">good
 								<input type="radio" id="grade_rate" name="grade_rate" value="b">bad
 								<input id="reply_submit" name="reply_InsertBtn" type="button" value="댓글 남기기" th:onclick="inputReply()">
 							</form>
 		    			</div>
-		    		<div id="reply_lists">
-						
-					</div>
+			    		<div id="reply_lists">
+							
+						</div>
 					</div>
     			</div>
 	    	</div>
@@ -95,7 +95,7 @@
 			    		<div sec:authorize="isAuthenticated()">
 			    			<div th:if="${not #lists.contains(game_code_my, gameInfo.game_code)}">
 					    		<div class="wishCart" id="payNow">
-				    				<button th:onclick="|paybtn(${#authentication.principal.user_code},${gameInfo.game_code},${gameInfo.game_finalPrice})|">
+				    				<button th:onclick="|paybtn(${#authentication.principal.user_code},${gameInfo.game_code},${gameInfo.game_price})|">
 				    					바로 구매하기
 				    				</button>
 					    		</div>
