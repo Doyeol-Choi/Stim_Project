@@ -150,5 +150,11 @@ public class StimUserService implements UserDetailsService {
 	public List<UserVO> SelectUserAll() throws Exception {
 		return stimUserMapper.SelectUserAll();
 	}
+
+	// 회원 탈퇴
+	@Transactional
+	public void deleteUser(int user_code) throws Exception {
+		stimUserMapper.deleteUser(user_code);
+	}
 	
 }

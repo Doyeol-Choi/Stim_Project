@@ -91,7 +91,7 @@ function inputComment(){
 			html += "<div class='comment_nickname' >"+data.comment_nickname+"</div>";
 			html += "<span class='comment_regdate' >"+dateFormat()+"</span>";
 			html += "<div class='comment_context'>"+data.comment_context+"</div>";
-			html += "<button class='comment_deletebtn' th:if='${"+data.user_code+" == #authentication.principal.user_code} or ${"+data.writer_code+" == #authentication.principal.user_code}' onclick='deleteComment("+data.comment_code+")' >삭제</button>";
+			html += "<button sec:authorize='isAuthenticated()' class='comment_deletebtn' th:if='${"+data.user_code+" == #authentication.principal.user_code} or ${"+data.writer_code+" == #authentication.principal.user_code}' onclick='deleteComment("+data.comment_code+")' >삭제</button>";
 			html += "</div>";
 			html += "</div>";
 			
@@ -109,6 +109,12 @@ function dateFormat(){
 	let date = new Date();
     return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분 ";
  
+}
+
+function pwdCheck(user_code) {
+	let url = "/pwdCheck?user_code="+user_code;
+	
+	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbar=yes, resizeable=no, width=400, height=200");
 }
 
 

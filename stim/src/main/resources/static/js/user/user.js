@@ -24,17 +24,6 @@ function checkReg() {
 		document.getElementById('user_id').focus();
 		return false;
 	}
-	/*
-	if(document.getElementById('user_password').value != document.getElementById('password_confirm').value){
-		alert("비밀번호가 일치하지 않습니다.");
-		
-		document.getElementById('user_password').value = "";
-		document.getElementById('password_confirm').value = "";
-		
-		document.getElementById('user_password').focus();
-		return false;
-	}
-	*/
 	checkPw();
 }
 
@@ -59,3 +48,33 @@ function checkPw() {
 		return false;
 	}
 }
+
+function cancle() {
+	self.close();
+}
+
+function delUser() {
+	
+	$.ajax({
+		url : "/deleteUser",
+			type: "POST",
+			async: true,
+			data:{
+				"user_code" : $("#user_code").val(),
+				"user_password" : $("#user_password").val()
+			},
+			success: function (data) {
+				if(data == 1) {
+					$("#user_password").val("");
+					$(".checkText").text("비밀번호가 맞지 않습니다.");
+				} else if(data == -1) {
+					alert("탈퇴되었습니다.");
+					opener.parent.location = "/";
+					self.close();
+				}
+			}, error: function() {
+				alert("에러");
+			}
+	});
+}
+

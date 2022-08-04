@@ -100,4 +100,9 @@
     	SELECT * FROM user_tbl ORDER BY user_code
     </select>
     
+    <!-- 회원 탈퇴 -->
+    <delete id="deleteUser" parameterType="int">
+    	DELETE FROM user_tbl WHERE user_code = #{user_code}
+    </delete>
+    
 </mapper>

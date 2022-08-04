@@ -271,5 +271,21 @@ public class StimUserController {
 		}
 		return new RedirectView("/searchUser");
 	}
+	
+	// 비밀번호 체크 페이지
+	@GetMapping("/pwdCheck")
+	public ModelAndView pwdCheck(@RequestParam("user_code") int user_code, Authentication authentication) {
+		ModelAndView mav = new ModelAndView();
+		if(authentication != null) { // 로그인
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			if(user_code == uVo.getUser_code()) {
+				mav.addObject("user_code", user_code);
+				mav.setViewName("user/checkPwd");
+				return mav;
+			}
+		}
+		mav.setViewName("redirect:/loginForm");
+		return mav;
+	}
 
 }

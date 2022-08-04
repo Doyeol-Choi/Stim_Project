@@ -112,13 +112,16 @@
 }
 
 /* 게임 태그 */
-#gameTag{
+#gameTag {
 	width: 1500px;
 	height: 280px;
 	background-color: rgba(0, 0, 0, 0.3);
 }
-#gameTag h1{
+#gameTag h1 {
 	padding: 20px 0 15px 30px;
+	color: white;
+}
+#gameTag a {
 	color: white;
 }
 .gameTags{
@@ -129,18 +132,14 @@
 	margin: 10px 27px;
 	border: 1px solid rgba(0, 0, 0, 0);
 	border-radius: 10px;
-	padding: 10px;
+	line-height: 150px;
+	text-align: center;
 }
 .gameTags:hover{
 	border: 1px solid white;
 }
-.gameTags > a{
-	color: white;
-}
-.gameTags > a:hover{
-	color: white;
-}
-.gameTags > a > span {
-	font-size: 1.2em;
-	font-weight: 600;
+
+.gameTags > span {
+	font-size: 1.8em;
+	font-weight: 900;
 }

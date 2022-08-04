@@ -17,14 +17,14 @@
     <div id="container">
     	<div id="content">
     		<div class="small_header">
-		   		<div><img th:src="@{/image/profile/} + ${#authentication.principal.user_picture}" alt="userPicture"></div>
-		   		<div><strong th:text="${#authentication.principal.user_nickname}"/></strong></div>
-		   		<div>>>프로필 수정</div>
+		   		<img th:src="@{/image/profile/} + ${#authentication.principal.user_picture}" alt="userPicture">
+		   		<p><strong th:text="|${#authentication.principal.user_nickname} 님|"/></strong>유저정보 수정</p>
+		    	<button type="button" th:onclick="|pwdCheck(${#authentication.principal.user_code})|">회원 탈퇴</button>
 		   	</div>
     		<form th:action="@{/profile/edit/update}" method="post" th:object="${user}" id="update_form" enctype="multipart/form-data">
-    			<input type="hidden" name="user_code" th:value="${user.user_code}">
+    			<input type="hidden" name="user_code" id="user_code" th:value="${user.user_code}">
     			<label th:for="user_id">
-    				<span class="userUpdate_text">아이디</span>
+    				<span class="userUpdate_text">아이디 (아이디 변경 불가)</span>
     			</label>
     			<input type="text" name="user_id" id="user_id" th:value="${user.user_id}" readonly>
     			<label th:for="user_nickname">
