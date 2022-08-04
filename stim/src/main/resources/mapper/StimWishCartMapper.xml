@@ -100,6 +100,7 @@
     	SELECT game_code FROM wish_tbl
     	WHERE user_code = #{user_code}
     </select>
+    
     <!-- 보유게임에서 게임코드 가져오기 -->
     <select id="SelectMyGameCode" resultType="Integer" parameterType="Integer">
     	SELECT game_code FROM mygame_tbl
@@ -112,4 +113,11 @@
     	SELECT wish_code_seq.nextval, #{user_code},#{game_code} FROM dual
     	WHERE NOT EXISTS (SELECT wish_code FROM wish_tbl WHERE game_code = #{game_code})
     </insert>
+    
+    <update id="UpdateSalesRate" parameterType="int">
+	    UPDATE game_tbl
+		SET game_salesRate =
+        (SELECT game_salesRate +1 FROM game_tbl WHERE game_code = #{game_code})
+		WHERE game_code = #{game_code}
+    </update>
 </mapper>

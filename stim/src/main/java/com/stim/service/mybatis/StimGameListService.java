@@ -2,7 +2,9 @@ package com.stim.service.mybatis;
 
 import java.util.List;
 
+import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
+import com.stim.vo.ProFileVO;
 
 public interface StimGameListService {
 
@@ -46,4 +48,16 @@ public interface StimGameListService {
     
     // 메인페이지용 랜덤 태그
     public List<String> RandomTagMain();
+
+    // 게임상세보기 페이지에 댓글 입력
+    public int InsertReply(GameReplyVO rVo) throws Exception;
+    
+    // 해당 게임상세보기에 가장 최근 작성된 댓글 가져오기
+    public GameReplyVO SelectLastReply(int game_code) throws Exception;
+    
+    // 게임상세페이지 댓글 삭제
+	public void DeleteReplyByCode(int grade_code) throws Exception;
+
+ 	
+ 	
 }

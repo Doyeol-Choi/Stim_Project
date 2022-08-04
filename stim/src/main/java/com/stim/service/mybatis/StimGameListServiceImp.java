@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stim.model.mapper.StimGameListMapper;
+import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 
 @Service
@@ -146,5 +147,29 @@ public class StimGameListServiceImp implements StimGameListService {
 		}
 		return tagList;
 	}
+
+	// 게임 상세보기에 댓글 입력
+	@Override
+	@Transactional
+	public int InsertReply(GameReplyVO rVo) throws Exception {
+		// TODO Auto-generated method stub
+		return stimGameListMapper.InsertReply(rVo);
+	}
+
+	// 해당 게임 상세페이지에 가장 최근 작성된 댓글 가져오기
+	@Override
+	public GameReplyVO SelectLastReply(int game_code) throws Exception {
+		return stimGameListMapper.SelectLastReply(game_code);
+	}
+
+	// 게임상세페이지 댓글 삭제
+	@Override
+	@Transactional
+	public void DeleteReplyByCode(int grade_code) throws Exception {
+		stimGameListMapper.DeleteReplyByCode(grade_code);
+		
+	}
+	
+	
 	
 }

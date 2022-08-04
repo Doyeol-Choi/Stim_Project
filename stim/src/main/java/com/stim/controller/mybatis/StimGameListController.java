@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -242,6 +243,11 @@ public class StimGameListController {
 		return mav;
 	}
 	
+	// 게임상세페이지 댓글 삭제
+	@PostMapping("/reply/delete")
+	public void DeleteReply(@RequestParam("grade_code") int grade_code) throws Exception{
+		stimGameListService.DeleteReplyByCode(grade_code);
+	}
 	
 	
 

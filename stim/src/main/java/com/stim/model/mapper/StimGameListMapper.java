@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-
+import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 
 @Mapper
@@ -45,6 +45,17 @@ public interface StimGameListMapper {
 
 	// 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용
 	public List<GameVO> SelectPopularGameListMain() throws Exception;
+	
+	// 해당 게임상세페이지에 댓글 입력
+	public int InsertReply(GameReplyVO rVo) throws Exception;
+	
+	// 해당 게임상세페이지에 가장 최근 작성된 댓글 가져오기
+	public GameReplyVO SelectLastReply(int game_code) throws Exception;
+	
+	// 게임 상세페이지 댓글 삭제
+	public void DeleteReplyByCode(int grade_code) throws Exception;
+
+	
 	
 	
 }

@@ -41,5 +41,8 @@ public interface StimWishCartService {
 	// 게임 상세보기에서 찜목록에 넣기
 	public void InsertWishGame(int user_code, int game_code) throws Exception;
 	
+	// 결제완료 후 판매량 증가
+	public void UpdateSalesRate(int game_code) throws Exception;
+	
 
 }
