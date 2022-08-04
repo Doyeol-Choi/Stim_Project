@@ -14,7 +14,6 @@ public class ProFileVO {
 	private String comment_nickname;
 	private String comment_context;
 	private Date profile_regdate;
-	private String profile_context;
 	private int writer_code;
 	private String user_picture;
 	
@@ -33,6 +32,9 @@ public class ProFileVO {
 	private String req_picture;
 	
 	private char friend_accepted;
+	
+	//할 말
+	private String profile_context;
 	
 	//Lombok은 파라미터 다 채운 생성자만 만들어 줌
 	public ProFileVO() {

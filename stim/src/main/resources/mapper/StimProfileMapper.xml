@@ -42,12 +42,6 @@
 		WHERE g.game_code=m.game_code
 		AND m.user_code = #{user_code}
     </select>
-    
-    <update id="updateProfileContext" parameterType="com.stim.vo.ProFileVO">
-    	SELECT profile_comment_tbl
-    	SET profile_context = #{profile_context}
-    	WHERE user_code = #{user_code}
-    </update>
 
     <update id="UpdatePicture" parameterType="com.stim.vo.ProFileVO">
 		UPDATE user_tbl
@@ -113,5 +107,22 @@
 	       ORDER BY profile_regdate desc)
     	WHERE rownum <![CDATA[<=]]> 1
     </select>
+    
+    <select id="SelectProfileContext" resultType="String" parameterType="int">
+    	SELECT profile_context 
+    	FROM profile_tbl
+    	WHERE user_code = #{user_code}
+    </select>
+    
+    <insert id="insertProfileContext" parameterType="Map">
+    	INSERT INTO profile_tbl
+    	VALUES (profile_code_seq.nextval, #{user_code}, #{profile_context})
+    </insert>
+    
+    <update id="updateProfileContext" parameterType="Map">
+    	UPDATE profile_tbl
+    	SET profile_context = #{profile_context}
+    	WHERE user_code = #{user_code}
+    </update>
     
 </mapper>

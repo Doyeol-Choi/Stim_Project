@@ -44,9 +44,14 @@ public interface StimProfileService {
 	// 친구 목록 삭제
 	public void deleteMyFriend(int friend_code) throws Exception;
 	
+	public String SelectProfileContext(int user_code) throws Exception;
+	
 	// 프로필 할 말 수정
-	public void updateProfileContext(ProFileVO pVo) throws Exception;
+	public void updateProfileContext(int user_code, String profile_context) throws Exception;
 	
 	// 해당 프로필에 가장 최근 작성된 댓글 가져오기
 	public ProFileVO selectLastComment(int user_code) throws Exception;
+	
+	public void insertProfileContext(int user_code, String profile_context) throws Exception;
+	
 }

@@ -44,15 +44,20 @@ public interface StimProfileMapper {
 	public void updateFriendRequest(int friend_code) throws Exception;
 	
 	// 프로필 자기소개 수정
-	public void updateProfileContext(ProFileVO pVo) throws Exception;
+	public void updateProfileContext(int user_code, String profile_context);
 
 	// 프로필 자기소개 출력
-	public String selectProfileContext(int user_code) throws Exception;
+	public String SelectProfileContext(int user_code) throws Exception;
 
 	// 친구 삭제
 	public void deleteMyFriend(int friend_code) throws Exception;
 
 	// 해당 프로필에 가장 최근 작성된 댓글 가져오기
 	public ProFileVO selectLastComment(int user_code) throws Exception;
+
+	// 할말 삽입
+	public void insertProfileContext(int user_code, String profile_context);
+
+	
 
 }

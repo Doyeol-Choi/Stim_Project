@@ -4,6 +4,7 @@ function changPicture(user_code) {
 	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbar=yes, resizeable=no, width=450, height=300");
 }
 
+
 function updateCancle() {
 	self.close();
 }
@@ -117,5 +118,33 @@ function pwdCheck(user_code) {
 	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbar=yes, resizeable=no, width=400, height=200");
 }
 
+function changeMessage(){
+	
+	if($('#profile_textarea').css('display')=='block'){
+		alert('수정 중 입니다');
+	}
+	$('#profile_introduce').css('display','none');
+	$('#profile_textarea').css('display','block');
+	
+}
 
+function edit_context(){
+	let user_code = $('#profileUser_code').val();
+	let profile_context = $('#profile_context').val();
+	
+	$.ajax({
+		url : "/updateContext",
+		data : {
+			"user_code" : user_code,
+			"profile_context" : profile_context
+		},
+		async : true,
+		type : "POST",
+		success: function(){
+			$('#profile_introduce').css('display','block');
+			$('#profile_textarea').css('display','none');
+			$('#profile_introduce').text(profile_context);
+		}
+	});
+}
 
