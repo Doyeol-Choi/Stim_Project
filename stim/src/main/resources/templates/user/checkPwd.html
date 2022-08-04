@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lagn="ko"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>비밀번호 확인</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/user/checkPwd.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/user/user.js}"></script>
+</head>
+<body>
+	<h2>비밀번호 확인</h2>
+	<form action="deleteUser" method="post">
+		<input type="hidden" name="user_code" id="user_code" th:value="${user_code}">
+		<input type="password" name="user_password" id="user_password">
+		<button type="button" value="탈퇴" onclick="delUser()">삭제</button>
+		<button type="button" onclick="cancle()">취소</button>	
+		<!-- 비밀번호 틀림 -->
+		<span class="checkText"></span>
+	</form>
+</body>
+</html>

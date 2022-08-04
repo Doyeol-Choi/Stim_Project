@@ -32,7 +32,7 @@
 	            </div> 
 	        </div>
 	        <!--프로필 수정-->
-	        	<button id="profile_update" th:onclick="|location.href='@{'/profile/edit/'+${user.user_code}}'|">
+	        	<button sec:authorize="isAuthenticated()" id="profile_update" th:onclick="|location.href='@{'/profile/edit/'+${user.user_code}}'|">
 	        		<span>정보 수정</span>
 	        	</button>
 	        <!--댓글 페이징-->	        
@@ -93,7 +93,7 @@
 								<div class="comment_context" th:text="${list.comment_context}"></div>
 								<!-- <button class="comment_deletebtn" th:onclick="|location.href='@{/comment/delete(user_code=${user.user_code},comment_code=${list.comment_code})}'|" 
 								 th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" >삭제</button> -->
-								<button class="comment_deletebtn" th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" th:onclick="|deleteComment(${list.comment_code})|" 
+								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" th:onclick="|deleteComment(${list.comment_code})|" 
 								>삭제</button>								  
 							</div>
 						</div>

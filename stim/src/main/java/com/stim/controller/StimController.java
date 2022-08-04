@@ -2,9 +2,11 @@ package com.stim.controller;
 
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,9 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.gson.Gson;
 import com.stim.service.mybatis.StimProfileService;
+import com.stim.service.user.StimUserService;
 import com.stim.vo.ProFileVO;
+import com.stim.vo.UserVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,13 +28,19 @@ public class StimController {
 	@Resource
 	private StimProfileService stimProfileService;
 	
+	@Resource
+	private final StimUserService stimUserService;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
 	// 로그인 폼으로 접속
 	@GetMapping("/loginForm")
 	public String loginForm(Authentication authentication) {
         if(authentication == null) {
         	return "user/loginForm";
         }
-        return "index";
+        return "redirect:/";
     }
 	
 	// 비밀번호 찾기 폼으로
@@ -40,7 +49,7 @@ public class StimController {
         if(authentication == null) {
         	return "user/findPwForm";
         }
-        return "index";
+        return "redirect:/";
     }
 	
 	// 아이디 찾기 폼으로
@@ -49,7 +58,7 @@ public class StimController {
         if(authentication == null) {
         	return "user/findIdForm";
         }
-        return "index";
+        return "redirect:/";
     }
 	
 	// 회원가입 step1 이동
@@ -58,7 +67,7 @@ public class StimController {
         if(authentication == null) {
         	return "user/regFormStep1";
         }
-        return "index";
+        return "redirect:/";
     }
 	
 	// 회원가입 step2 Get으로 이동시 step1 이동
@@ -70,7 +79,7 @@ public class StimController {
 	// step3 Get방식으로 접근시 메인페이지로 이동
 	@GetMapping("/registerS3")
 	public String registerFormStep3Get() {
-        return "index";
+        return "redirect:/";
     }
 	
 	// 지원 페이지 이동
@@ -79,6 +88,7 @@ public class StimController {
         return "support";
     }
 	
+	// 프로필 댓글 작성 ajax
 	@PostMapping("/comment")
 	@ResponseBody
 	public ProFileVO InsertComment( 
@@ -96,6 +106,31 @@ public class StimController {
 		pVo = stimProfileService.selectLastComment(user_code);
 		return pVo;
 		
+	}
+	
+	// 회원 탈퇴
+	@PostMapping("/deleteUser")
+	@ResponseBody
+	public String deleteUser(@RequestParam("user_code") int user_code,
+							@RequestParam("user_password") String user_password,
+							Authentication authentication) {
+		String result = "1";
+		if(authentication != null) { // 로그인
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			if(user_code == uVo.getUser_code()) {
+				if(encoder.matches(user_password, uVo.getUser_password())) {
+					try {
+						stimUserService.deleteUser(user_code);
+						SecurityContextHolder.clearContext();
+						result = "-1";
+						return result;
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}			    
+			}
+		}
+		return result;
 	}
 
 }

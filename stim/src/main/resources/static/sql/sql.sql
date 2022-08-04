@@ -118,30 +118,30 @@ CREATE TABLE persistent_logins (
 
 
 -- 친구 테이블 외래키
-ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user1 FOREIGN KEY(friend_user1) references user_tbl (user_code);
-ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user2 FOREIGN KEY(friend_user2) references user_tbl (user_code);
+ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user1 FOREIGN KEY(friend_user1) references user_tbl (user_code) on delete cascade;
+ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user2 FOREIGN KEY(friend_user2) references user_tbl (user_code) on delete cascade;
 
 -- 찜목록 테이블 외래키
-ALTER TABLE wish_tbl ADD CONSTRAINT fk_user_code_wish FOREIGN KEY(user_code) references user_tbl (user_code);
-ALTER TABLE wish_tbl ADD CONSTRAINT fk_game_code_wish FOREIGN KEY(game_code) references game_tbl (game_code);
+ALTER TABLE wish_tbl ADD CONSTRAINT fk_user_code_wish FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
+ALTER TABLE wish_tbl ADD CONSTRAINT fk_game_code_wish FOREIGN KEY(game_code) references game_tbl (game_code) on delete cascade;
 
 -- 장바구니 테이블 외래키
-ALTER TABLE cart_tbl ADD CONSTRAINT fk_user_code_cart FOREIGN KEY(user_code) references user_tbl (user_code);
-ALTER TABLE cart_tbl ADD CONSTRAINT fk_game_code_cart FOREIGN KEY(game_code) references game_tbl (game_code);
+ALTER TABLE cart_tbl ADD CONSTRAINT fk_user_code_cart FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
+ALTER TABLE cart_tbl ADD CONSTRAINT fk_game_code_cart FOREIGN KEY(game_code) references game_tbl (game_code) on delete cascade;
 
 -- 프로필 댓글 테이블 외래키
-ALTER TABLE profile_comment_tbl ADD CONSTRAINT fk_user_code_profile FOREIGN KEY(user_code) references user_tbl (user_code);
+ALTER TABLE profile_comment_tbl ADD CONSTRAINT fk_user_code_profile FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
 
 -- 보유게임 테이블 외래키
-ALTER TABLE mygame_tbl ADD CONSTRAINT fk_user_code_mygame FOREIGN KEY(user_code) references user_tbl (user_code);
-ALTER TABLE mygame_tbl ADD CONSTRAINT fk_game_code_mygame FOREIGN KEY(game_code) references game_tbl (game_code);
+ALTER TABLE mygame_tbl ADD CONSTRAINT fk_user_code_mygame FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
+ALTER TABLE mygame_tbl ADD CONSTRAINT fk_game_code_mygame FOREIGN KEY(game_code) references game_tbl (game_code) on delete cascade;
 
 -- 장르 테이블 외래키
-ALTER TABLE genre_tbl ADD CONSTRAINT fk_game_code_genre FOREIGN KEY(game_code) references game_tbl (game_code);
+ALTER TABLE genre_tbl ADD CONSTRAINT fk_game_code_genre FOREIGN KEY(game_code) references game_tbl (game_code) on delete cascade;
 
 -- 게임평점 테이블 외래키
-ALTER TABLE grade_tbl ADD CONSTRAINT fk_user_code_grade FOREIGN KEY(user_code) references user_tbl (user_code);
-ALTER TABLE grade_tbl ADD CONSTRAINT fk_game_code_grade FOREIGN KEY(game_code) references game_tbl (game_code);
+ALTER TABLE grade_tbl ADD CONSTRAINT fk_user_code_grade FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
+ALTER TABLE grade_tbl ADD CONSTRAINT fk_game_code_grade FOREIGN KEY(game_code) references game_tbl (game_code) on delete cascade;
 
 -- 게임테이블 샘플데이터
 INSERT INTO game_tbl VALUES 

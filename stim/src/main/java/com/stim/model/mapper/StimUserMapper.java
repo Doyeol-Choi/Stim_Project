@@ -59,4 +59,7 @@ public interface StimUserMapper {
 	// 전체 유저 검색
 	public List<UserVO> SelectUserAll();
 
+	// 회원 탈퇴
+	public void deleteUser(int user_code);
+
 }
