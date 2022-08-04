@@ -56,12 +56,15 @@
     </update>
     
     <select id="SelectMyFriends" parameterType="int" resultType="com.stim.vo.ProFileVO">
-    	SELECT user_code, 
-    		   user_picture AS friend_picture, 
-    		   user_nickname AS friend_nickname 
-		FROM user_tbl 
-		WHERE user_code IN(SELECT friend_user1 FROM friend_tbl WHERE friend_user2 = #{user_code} AND friend_accepted='Y') 
-		OR user_code IN(SELECT friend_user2 FROM friend_tbl WHERE friend_user1= #{user_code} AND friend_accepted='Y')	
+		SELECT
+        user_code,
+        user_picture AS friend_picture,
+        user_nickname AS friend_nickname,
+        friend_code
+		FROM user_tbl u, friend_tbl f 
+		WHERE ((u.user_code IN (SELECT friend_user2 FROM friend_tbl WHERE friend_user1 = #{user_code})AND f.friend_user1 = #{user_code} AND f.friend_user2 = u.user_code)
+		OR (u.user_code IN (SELECT friend_user1 FROM friend_tbl WHERE friend_user2 = #{user_code}) AND f.friend_user2 = #{user_code} AND f.friend_user1 = u.user_code))
+		AND friend_accepted='Y'
     </select>
     
     <delete id="DeleteCommentByCode"  parameterType="int">
@@ -94,5 +97,21 @@
     	DELETE friend_tbl
     	WHERE friend_code = #{friend_code}
     </delete>
+    
+    <select id="selectLastComment" resultType="com.stim.vo.ProFileVO" parameterType="int">
+    	SELECT * FROM
+    	(SELECT comment_code, 
+	       c.user_code AS user_code,  
+	       u.user_nickname AS comment_nickname,
+	       comment_context, 
+	       profile_regdate,
+	       user_picture, 
+	       writer_code
+		   FROM user_tbl u, profile_comment_tbl c
+	       WHERE u.user_code = c.writer_code
+	       AND c.user_code = (SELECT user_code FROM user_tbl WHERE user_code = #{user_code})
+	       ORDER BY profile_regdate desc)
+    	WHERE rownum <![CDATA[<=]]> 1
+    </select>
     
 </mapper>
