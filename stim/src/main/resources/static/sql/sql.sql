@@ -11,13 +11,9 @@ CREATE TABLE user_tbl(
     user_admin char(1) NOT NULL,        -- Y/N
     user_nickname varchar2(60) NOT NULL
     );
---ALTER TABLE user_tbl ADD user_nickname varchar2(20) DEFAULT '테스트' NOT NULL;
---ALTER TABLE user_tbl MODIFY user_password varchar2(200);
---ALTER TABLE user_tbl MODIFY user_nickname varchar2(40);
+
 CREATE SEQUENCE user_code_seq NOCACHE;
---SELECT * FROM user_tbl;
---UPDATE user_tbl SET user_admin = 'Y' WHERE user_id = 'admin';
---commit;
+
 -- 친구테이블
 CREATE TABLE friend_tbl(
     friend_code number PRIMARY KEY,
@@ -46,6 +42,15 @@ CREATE TABLE cart_tbl(
 
 CREATE SEQUENCE cart_code_seq NOCACHE;
 
+-- 프로필 테이블
+CREATE TABLE profile_tbl(
+    profile_code number PRIMARY KEY,
+    user_code number,
+    profile_context clob
+);
+
+CREATE SEQUENCE profile_code_seq NOCACHE;
+
 -- 프로필-댓글 테이블
 CREATE TABLE profile_comment_tbl(
     comment_code number PRIMARY KEY,
@@ -54,7 +59,7 @@ CREATE TABLE profile_comment_tbl(
     profile_regdate date NOT NULL,               --sysdate
     writer_code number NOT NULL
 );
---SELECT * FROM profile_comment_tbl;
+
 CREATE SEQUENCE comment_code_seq NOCACHE;
 
 -- 보유게임 테이블
@@ -80,11 +85,8 @@ CREATE TABLE game_tbl(
     game_discount number DEFAULT ''     --default=""
     );
 
---SELECT * FROM game_tbl;
-
 CREATE SEQUENCE game_code_seq NOCACHE;
---UPDATE game_tbl SET game_discount = 30
---    	WHERE game_code = (SELECT g.game_code FROM (SELECT rownum AS rownumber, game_code FROM game_tbl) g WHERE g.rownumber = 3);
+
 --장르 테이블
 CREATE TABLE genre_tbl(
     genre_code number PRIMARY KEY,
@@ -116,7 +118,6 @@ CREATE TABLE persistent_logins (
     last_used timestamp
 );
 
-
 -- 친구 테이블 외래키
 ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user1 FOREIGN KEY(friend_user1) references user_tbl (user_code) on delete cascade;
 ALTER TABLE friend_tbl ADD CONSTRAINT fk_friend_user2 FOREIGN KEY(friend_user2) references user_tbl (user_code) on delete cascade;
@@ -129,8 +130,11 @@ ALTER TABLE wish_tbl ADD CONSTRAINT fk_game_code_wish FOREIGN KEY(game_code) ref
 ALTER TABLE cart_tbl ADD CONSTRAINT fk_user_code_cart FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
 ALTER TABLE cart_tbl ADD CONSTRAINT fk_game_code_cart FOREIGN KEY(game_code) references game_tbl (game_code) on delete cascade;
 
+-- 프로필 테이블 외래키
+ALTER TABLE profile_tbl ADD CONSTRAINT fk_user_code_profile FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
+
 -- 프로필 댓글 테이블 외래키
-ALTER TABLE profile_comment_tbl ADD CONSTRAINT fk_user_code_profile FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
+ALTER TABLE profile_comment_tbl ADD CONSTRAINT fk_user_code_profile_comment FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
 
 -- 보유게임 테이블 외래키
 ALTER TABLE mygame_tbl ADD CONSTRAINT fk_user_code_mygame FOREIGN KEY(user_code) references user_tbl (user_code) on delete cascade;
@@ -301,10 +305,3 @@ INSERT INTO genre_tbl VALUES
 (genre_code_seq.nextval, 38, '생존', '좀비', '오픈 월드');
 
 commit;
---친구목록 코드26 기준
---SELECT user_picture, user_nickname FROM user_tbl 
---WHERE user_code IN (SELECT friend_user2 FROM friend_tbl WHERE friend_user1 = 26 AND friend_accepted='Y')
---or user_code IN (SELECT friend_user1 FROM friend_tbl WHERE friend_user2 = 26 AND friend_accepted='Y');
--- 친구요청 코드 26 기준
---SELECT user_picture, user_nickname FROM user_tbl 
---WHERE user_code IN (SELECT friend_user1 FROM friend_tbl WHERE friend_user2 = 26 AND friend_accepted='N');

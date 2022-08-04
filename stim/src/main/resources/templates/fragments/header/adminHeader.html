@@ -6,18 +6,10 @@
         <a href="/"><img id="stim_logo" th:src="@{/image/Stim_logo_white.png}"></a>
         <nav id="headerNav">
         	<ul>
-	           <li><a href="/gameList">상점</a></li>
-	           <li><a th:href="@{/profile/Doyeol} ">정보</a></li> <!-- th:href="@{/profile/${user.user_id}}  -->
-	           <li><a href="/support">지원</a></li>
+	           <li><a href="/">홈으로</a></li>
 	           <li sec:authorize="isAuthenticated()"><a href="/adminPage" th:if="|${#strings.equals(#authentication.principal.user_admin, 'Y')}|">관리자</a></li>
 	       </ul>
         </nav>
-        <!-- 로그인 전 -->
-        <div sec:authorize="!isAuthenticated()" id="loginBox">
-	        <button onclick="location.href='/registerS1'" id="register">회원가입</button>
-    	    <button onclick="location.href='/loginForm'" id="login">로그인</button>
-        </div>
-        <!-- 로그인 후 -->
         <div sec:authorize="isAuthenticated()" id="loginBox_2">
         	<div id="headUserInfo">
 	        	<h3 id="userNickName"><span sec:authentication="principal.user_nickname"></span>님</h3>
@@ -34,9 +26,9 @@
     	<div id="gameNavBox">
 			<section>
 				<ul>
-				<li><a href="/gameListPopular">인기 게임</a></li>
-				<li><a href="/gameListNew">최신 게임</a></li>
-				<li><a href="/gameListSale">할인 게임</a></li>
+				<li><a href="/gameListPopular">유저 관리</a></li>
+				<li><a href="/gameListNew">게임 관리</a></li>
+				<li><a href="/gameListSale">문의 내역</a></li>
 				</ul>
 			</section>
 			<form id="serch" action="/gameListSearch">
