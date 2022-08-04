@@ -90,6 +90,9 @@
     	WHERE friend_code = ${friend_code}
     </update>
     
-    
+    <delete id="deleteMyFriend" parameterType="int">
+    	DELETE friend_tbl
+    	WHERE friend_code = #{friend_code}
+    </delete>
     
 </mapper>

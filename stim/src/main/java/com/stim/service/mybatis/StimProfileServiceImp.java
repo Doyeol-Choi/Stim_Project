@@ -84,6 +84,12 @@ public class StimProfileServiceImp implements StimProfileService {
 	public void updateFriendRequest(int friend_code) throws Exception {
 		stimProfileMapper.updateFriendRequest(friend_code);
 	}
+
+	@Override
+	public void deleteMyFriend(int friend_code) throws Exception {
+		stimProfileMapper.deleteMyFriend(friend_code);
+		
+	}
 	
 
 }

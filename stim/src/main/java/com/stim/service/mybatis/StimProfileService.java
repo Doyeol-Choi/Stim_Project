@@ -41,5 +41,6 @@ public interface StimProfileService {
 	// 친구 추가 요청 승인
 	public void updateFriendRequest(int friend_code) throws Exception;
 	
-
+	// 친구 목록 삭제
+	public void deleteMyFriend(int friend_code) throws Exception;
 }
