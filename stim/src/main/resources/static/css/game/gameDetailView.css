@@ -31,13 +31,12 @@
 	height: 1310px;
 	background-color: rgba(0, 0, 0, 0.3);
 }
-#gameImg img{
+#gameMain{
 	margin-left: 20px;
 	width: 890px;
 	height: 500px;
 	background-color: #eee;
 }
-
 #aboutGame{
 	color: white;
 	padding: 20px 10px 20px 20px;
@@ -49,9 +48,39 @@
 #gameGrade{
 	width: 1020px;
 	height: 680px;
-	background-color: #00AEEF;
+	background-color: rgba(0, 0, 0, 0.3);
+	padding: 20px;
 }
 
+
+#reply_form{
+	width: 100%;
+	height: 90px;
+}
+#reply_form input[type=radio]{
+
+}
+#grade_context{
+	width: 80%;
+	height: 90px;
+	resize: none;
+	padding: 10px 20px;
+	background-color: rgba(0, 0, 0, 0);
+	border: 1px solid white;
+	color: white;
+}
+#reply_lists img{
+	width: 100px;
+	height: 100px;
+}
+.reply_list{
+	display: flex;
+	margin-top: 10px;
+	border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.grade_content{
+	padding-left: 20px;
+}
 
 
 /* 바 */
