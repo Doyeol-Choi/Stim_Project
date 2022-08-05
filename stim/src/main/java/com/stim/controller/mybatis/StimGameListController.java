@@ -15,8 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.service.mybatis.StimWishCartService;
+import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
+import com.stim.vo.PageVO;
 import com.stim.vo.UserVO;
 
 
@@ -31,7 +33,7 @@ public class StimGameListController {
 	
 	/* 상점 페이지 이동 */
 	@GetMapping("/gameList")
-	public ModelAndView gameList() {
+	public ModelAndView gameList() {	
 		ModelAndView mav = new ModelAndView();
 		try {
 			
@@ -203,14 +205,18 @@ public class StimGameListController {
 	////////////////////////////////////////////////////
 	/* 게임 상세 페이지 이동 */
 	@GetMapping("/gameDetailView")
-	public ModelAndView gameDetailViewPage(@RequestParam(value="game_code") int game_code, Authentication authentication) throws Exception {
+	public ModelAndView gameDetailViewPage(@RequestParam(value="game_code") int game_code,
+							Authentication authentication ,Criteria criteria) throws Exception {
+							
 		ModelAndView mav = new ModelAndView();
 		try {
 			System.out.println("받은 게임 코드: " + game_code);
 			GameVO gameDetailInfo = stimGameListService.SelectGameDetailInfo(game_code);
-			List<GameReplyVO> reply = stimGameListService.SelectALLReply(game_code);
+			List<GameReplyVO> reply = stimGameListService.SelectALLReply(game_code, criteria);
+			
 			
 			mav.addObject("reply", reply);
+			mav.addObject("pageMaker", new PageVO(stimGameListService.CountAllReply(game_code),10,criteria));
 			
 			if(authentication != null) {
 				UserVO uVo = (UserVO) authentication.getPrincipal();
