@@ -2,6 +2,7 @@ package com.stim.service.mybatis;
 
 import java.util.List;
 
+import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 import com.stim.vo.ProFileVO;
@@ -59,10 +60,14 @@ public interface StimGameListService {
 	public void DeleteReplyByCode(int grade_code) throws Exception;
 
 	// 게임상세페이지 댓글 가져오기
-	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception;
+	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception;
 
 	// 게임 상세페이지에서 평점 댓글 비율 보기
 	public List<GameReplyVO> SelectGradeRatebyGameCode(int game_code) throws Exception;
+
+	// 게임상세페이지 댓글 총 갯수
+	public int CountAllReply(int game_code)throws Exception;
+
  	
  	
 }

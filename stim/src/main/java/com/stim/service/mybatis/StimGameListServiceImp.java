@@ -1,7 +1,6 @@
 package com.stim.service.mybatis;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stim.model.mapper.StimGameListMapper;
+import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 
@@ -171,9 +171,15 @@ public class StimGameListServiceImp implements StimGameListService {
 
 	// 게임 상세페이지 댓글 가져오기
 	@Override
-	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception {
+	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception {
 		
-		return stimGameListMapper.SelectALLReply(game_code);
+		return stimGameListMapper.SelectALLReply(game_code, criteria);
+	}
+
+	// 게임상세페이지 댓글 총 갯수
+	@Override
+	public int CountAllReply(int game_code) throws Exception {
+		return stimGameListMapper.CountAllReply(game_code);
 	}
 
 	

@@ -223,11 +223,7 @@
 }
 #priceTag li{
 	padding: 10px 15px;
-	border-radius: 5px;
-	border: 1px solid rgba(0, 0, 0, 0);
-}
-#priceTag li:last-child{
-	display: none;
+	border-radius: 5px;ㅏㅁ
 }
 #genreTag{
 	padding: 10px 25px;

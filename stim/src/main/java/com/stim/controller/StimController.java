@@ -1,6 +1,8 @@
 package com.stim.controller;
 
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.stim.service.mybatis.StimProfileService;
-import com.stim.service.user.StimUserService;
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.service.mybatis.StimProfileService;
+import com.stim.service.user.StimUserService;
+import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
@@ -140,7 +142,7 @@ public class StimController {
 		return result;
 	}
 
-	// 게임 상세페이지 평점댓글
+	// 게임 상세페이지 평점댓글 입력
 	@PostMapping("/gamereply")
 	@ResponseBody
 	public GameReplyVO InsertReply( 
@@ -163,6 +165,7 @@ public class StimController {
 		stimGameListService.InsertReply(rVo);
 		// 저장된 댓글의 모든 정보 불러오기
 		rVo = stimGameListService.SelectLastReply(game_code);
+		
 		return rVo;
 
 	}

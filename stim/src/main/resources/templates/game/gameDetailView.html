@@ -41,6 +41,7 @@
 							</th:block>
 		    			</div>
 					</section>
+				<div>
 					<div id="gameGrade">
 						<div sec:authorize="isAuthenticated()">
 							<form id="reply_form" th:action="@{/gamereply}" method="post">
@@ -75,8 +76,28 @@
 							th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteReply(${reply.grade_code})|">삭제</button>
 						</div>
 					</div>
+					<div th:object="${pageMaker}">
+                    <div class="big-width" style="text-align: center">
+                        <a class="changePage" th:if="*{prev}" th:href="*{startPage - 1}"><code>&lt;</code></a>
+                        <th:block th:each="num : ${#numbers.sequence(pageMaker.getStartPage(), pageMaker.getEndPage())}">
+                            <code th:if="${pageMaker.criteria.getPageNum() == num}" th:text="${num}"></code>
+                            <a class="changePage" th:unless="${pageMaker.criteria.getPageNum() == num}" th:href="${num}"><code th:text="${num}"></code></a>
+                        </th:block>
+                        <a class="changePage" th:if="*{next}" th:href="*{endPage + 1}"><code>&gt;</code></a>
+                    </div>
+                    <div class="small-width" style="text-align: center">
+                        <a class="changePage" th:if="*{criteria.pageNum > 1}" th:href="*{criteria.pageNum - 1}"><code>&lt;</code></a>
+                        <code th:text="*{criteria.pageNum}"></code>
+                        <a class="changePage" th:if="*{criteria.pageNum < realEnd}" th:href="*{criteria.pageNum + 1}"><code>&gt;</code></a>
+                    </div>
+                    <form action="/gameDetailView" th:object="${criteria}" name="pageForm">
+                        <input type="hidden" name="pageNum" th:field="*{pageNum}">
+                        <input type="hidden" name="amount" th:field="*{amount}">
+                    </form>
+                </div>
     			</div>
 	    	</div>
+	    	</div>	
 	    	<div id="gameInfo" class="gameInformation">
 	    		<div id="barBackground">
 		    		<div id="barText">
