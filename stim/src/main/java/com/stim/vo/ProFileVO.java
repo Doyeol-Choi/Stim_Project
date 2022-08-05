@@ -28,6 +28,7 @@ public class ProFileVO {
 	private String friend_nickname;
 	
 	//친구 요청
+	private int requester;
 	private String req_nickname;
 	private String req_picture;
 	

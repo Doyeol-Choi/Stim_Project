@@ -183,7 +183,7 @@ div{
     
 }
 .game_picture img{
-	width:410px;
+	width:200px;
 }
 .game_content{
 	color: rgb(228, 228, 228);
@@ -339,6 +339,7 @@ div{
 	padding-left: 10px;
 	padding-right: 10px;
 	text-align: center;
+	cursor: pointer;
 }
 .comment_lists{
 	background-color: #262B2F;
@@ -352,6 +353,7 @@ div{
 .comment_image > a > img{
 	width: 64px;
 	height: 64px;
+	cursor: pointer;
 }
 .comment_content{
 	width: 600px;
@@ -366,6 +368,7 @@ div{
 	width: 100px;
 	display: inline-block;
 	color: #ebebeb;
+	cursor: pointer;
 }
 .comment_regdate{
 	width: 300px;
@@ -380,12 +383,11 @@ div{
 .comment_deletebtn{
 	float:right;
 	outline: 0;
-	font-weight: 600;
 	min-width: 40px;
-	background-color: #376695;
+	background-color: rgb(74, 79, 88);
+	color: rgb(228, 228, 228);
 	border: none;
-	cursor: pointer;
-	
+	cursor: pointer;	
 }
 
 .friend_request{
@@ -393,7 +395,7 @@ div{
 }
 .friend_req{
 	display: inline-block;
-	width: 350px;
+	width: 400px;
 }
 .friend_request_picture{
 	margin-top: 10px;
@@ -409,7 +411,7 @@ div{
 	position: absolute;
 	font-size: 30px;
 	font-weight: 700;
-	width: 64px;
+	width: 200px;
 	height: 64px;
 	display: inline-block;
 }
