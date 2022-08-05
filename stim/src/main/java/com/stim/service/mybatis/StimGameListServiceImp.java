@@ -176,6 +176,14 @@ public class StimGameListServiceImp implements StimGameListService {
 		
 		return stimGameListMapper.SelectALLReply(game_code);
 	}
+
+
+	// 게임 삭제 => 관리자
+	@Override
+	@Transactional
+	public void deleteGame(int game_code) throws Exception {
+		stimGameListMapper.deleteGame(game_code);
+	}
 	
 	
 	

@@ -9,7 +9,7 @@ function updateCancle() {
 	self.close();
 }
 
-function popupClose(user_code) {
+function popupClose() {
 	$("#pictureForm").submit();
 	$("#textBox").css("display", "block");
 	setTimeout(function() {   

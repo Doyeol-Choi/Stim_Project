@@ -188,4 +188,9 @@
 	    AND u.user_code = g.user_code
 	    ORDER BY grade_regdate DESC
     </select>
+    
+    <!-- 관리자가 게임 삭제 -->
+    <delete id="deleteGame" parameterType="int">
+    	DELETE FROM game_tbl WHERE game_code = #{game_code} 
+    </delete>
 </mapper>

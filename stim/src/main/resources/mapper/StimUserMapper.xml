@@ -97,12 +97,22 @@
     
     <!-- 전체 유저 검색 -->
     <select id="SelectUserAll" resultType="com.stim.vo.UserVO">
-    	SELECT * FROM user_tbl ORDER BY user_code
+    	SELECT * FROM user_tbl ORDER BY user_nickname
     </select>
     
     <!-- 회원 탈퇴 -->
     <delete id="deleteUser" parameterType="int">
     	DELETE FROM user_tbl WHERE user_code = #{user_code}
     </delete>
+    
+    <!-- 유저 코드로 유저 검색 -->
+    <select id="selectUserByUserCode" parameterType="int" resultType="com.stim.vo.UserVO">
+    	SELECT * FROM user_tbl WHERE user_code = #{user_code}
+    </select>
+    
+    <!-- 기본 프로필 사진으로 변경 -->
+    <update id="profilePictureRe" parameterType="int">
+    	UPDATE user_tbl SET user_picture = 'noimage.jpg' WHERE user_code = #{user_code}
+    </update>
     
 </mapper>

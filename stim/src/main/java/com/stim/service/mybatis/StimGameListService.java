@@ -61,6 +61,9 @@ public interface StimGameListService {
 	// 게임상세페이지 댓글 가져오기
 	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception;
 
+	// 게임 삭제 => 관리자
+	public void deleteGame(int game_code) throws Exception;
+
  	
  	
 }

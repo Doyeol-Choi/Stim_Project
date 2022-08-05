@@ -15,21 +15,19 @@
 	        	<h3 id="userNickName"><span sec:authentication="principal.user_nickname"></span>님</h3>
 	    	    <button onclick="location.href='/logout'" id="headLogout">로그아웃</button><br>
         	</div>
-        	<img th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}" alt="profilePicture" id="profilePicture">
+        	<a th:href="@{|/profile/${#authentication.principal.user_code}|}">
+        		<img th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}" alt="profilePicture" id="profilePicture">
+        	</a>
         </div>
     </div>
     <nav id="gameNav">
     	<div id="gameNavBox">
 			<section>
 				<ul>
-				<li><a href="/gameListPopular">게임 관리</a></li>
-				<li><a href="/gameListNew">유저 관리</a></li>
+				<li><a href="/adminPage">게임 관리</a></li>
+				<li><a href="/adminUser">유저 관리</a></li>
 				</ul>
 			</section>
-			<form id="serch" action="/gameListSearch">
-				<input type="text" name="keyword" id="keyword" placeholder="제목/내용/개발사 검색">
-				<input type="submit" value="검색">
-			</form>
 		</div>
     </nav>
 </header>

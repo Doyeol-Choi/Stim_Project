@@ -16,10 +16,45 @@
     <!-- header fragment 사용 -->
     <th:block th:replace="fragments/header/adminHeader :: headerFragment"></th:block>
     <div id="container">
-    	<div id="content">
-    		<button th:onclick="changeDiscount()">세일목록생성</button>
-    	</div>
-    </div>
+	    <div id = "gameLists">
+	    	<div id="headLine">
+		   		<h1>게임 목록 => 관리자 모드</h1>
+		   		<form id="serchA" action="/gameListSearchAdmin" method="post">
+					<input type="text" name="keyword" id="keyword" placeholder="제목/내용/개발사 검색">
+					<input type="submit" value="검색">
+				</form>
+		   		<button id="discount_btn" th:onclick="changeDiscount()">세일목록생성</button>
+		   		<button id="insertGame_btn" th:onclick="location.href='/addGameForm'">게임 등록</button>			
+	    	</div>
+	   		<div id="gameList" class="games">
+				<table id="gameListTable">
+					<tr>
+						<th>게임 이미지</th>
+						<th>이름</th>
+						<th>출시일</th>
+						<th>가격</th>
+						<th>삭제</th>
+					</tr>
+					<tr th:each="list: ${gameList}" id="gtable">
+						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
+						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
+						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
+						<td th:if="${list.game_finalPrice}==${list.game_price}" th:text="￦+${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
+						<td th:if="${list.game_finalPrice}!=${list.game_price}" id="gSetPrice2">
+						    <span style="color:white; font-size:10px; text-decoration: line-through;">원가 : [[${#numbers.formatInteger(list.game_price, 0, 'COMMA')}]]</span>
+						    <br>
+	    				    <span style="color:white; font-size:12px; background-color: #00AEEF; padding: 2px;">[[${list.game_discount}]]%</span>
+	    				    <br>
+	    				    <span id="salePrice">￦[[${#numbers.formatInteger(list.game_finalPrice, 0, 'COMMA')}]]</span>
+						</td>
+						<td th:inline="text" id="deltd">
+						    <button id="del_btn" th:onclick="|deleteGame(${list.game_code})|">삭제</button>
+						</td>
+					</tr>
+				</table>
+			</div>		
+		</div>    	
+	</div>
     <!-- footer fragment 사용 -->
     <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
 </body>
