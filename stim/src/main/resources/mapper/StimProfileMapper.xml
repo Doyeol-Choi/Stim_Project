@@ -41,6 +41,7 @@
 		FROM mygame_tbl m, game_tbl g
 		WHERE g.game_code=m.game_code
 		AND m.user_code = #{user_code}
+		ORDER BY mygame_code DESC
     </select>
 
     <update id="UpdatePicture" parameterType="com.stim.vo.ProFileVO">

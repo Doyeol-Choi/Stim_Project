@@ -96,7 +96,7 @@ function inputComment(){
 			html += "</div>";
 			html += "</div>";
 			
-			$("#reply_lists").prepend(html);
+			$("#comment_lists").prepend(html);
 		},
 		error : function(){
 			alert('추가 실패');
@@ -148,3 +148,21 @@ function edit_context(){
 	});
 }
 
+$(document).ready(function(){
+	$('#comment_text').keyup(function(e){
+		let content = $(this).val();
+		
+		// 글자수 세기
+	    if (content.length == 0 || content == '') {
+	    	$('.textCount').text('0');
+	    } else {
+	    	$('.textCount').text(content.length);
+	    }
+	    
+	    // 글자수 제한
+	    if (content.length > 230) {
+	    	// 230자 부터는 타이핑 되지 않도록
+	        $(this).val($(this).val().substring(0, 230));
+	    }	
+	})
+})
