@@ -73,7 +73,10 @@ function deleteReply(grade_code){
 	          "grade_code" : grade_code
 	       },
 	       success: function () {
+	          let height = $(id).css("height").slice(0,-2);
 	          $(id).remove();
+	          
+			  changeHeight(height);
 	       }
 	});
 }
@@ -97,23 +100,31 @@ function inputReply(){
 			success : function(data) {
 				html = "<div class='reply_list' id='mentListBox"+data.grade_code+"'>";
 				html += "<a href='/profile/'"+user_code+"><img id='reply_picture' alt='프로필 사진' src='/image/profile/"+data.user_picture+"'></a>";
-				html += "<div class='grade_content'>";
+				html += "<div class='reply_content'>";
 				html += "<span class='user_nickname' >"+data.user_nickname+"</span>";
 				html += "<span class='grade_regdate' >"+dateFormat()+"</span>";
-				html += "<span id=''grade_rateG' th:if='${#strings.equals("+data.grade_rate+", \'g\')}'>Good</span>";
-				html += "<span id=''grade_rateB' th:if='${#strings.equals("+data.grade_rate+", \'b\')}'>Bad</span>";
+					if(data.grade_rate == 'g'){
+						html += "<span id='grade_rateG'>Good</span>";
+					}else if(data.grade_rate == 'b'){
+						html += "<span id='grade_rateB'>Bad</span>";
+					}
+
 				html += "<div class='grade_context'>"+data.grade_context+"</div>";
-				html += "<button class='grade_deletebtn' th:if='${"+data.user_code+" == #authentication.principal.user_code}' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
 				html += "</div>";
+				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
 				html += "</div>";
 				
 				$("#reply_lists").prepend(html);
+				
+				changeHeight();
 			},
 			error : function(){
 				alert('추가 실패');
 			}	
 		});
-		$("#reply_text").val("");	
+		$("#grade_context").val("");
+		$("input[name='grade_rate']").prop("checked", false);
+		$('.textCount').text('0');
 	} else {
 		alert("평점을 체크해주세요.");
 	}
@@ -125,6 +136,40 @@ function dateFormat(){
     return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분 ";
  
 }
+
+function changeHeight(height) {
+	if (height == null) {
+		height = $("#contents").css("height").slice(0, -2);
+		height = (height-90)+"px";		
+	} else {
+		let heightA = $("#contents").css("height").slice(0, -2);
+		height = (heightA-height-90)+"px";
+	}
+	$("#gameInfo").css("height", height);
+	$("#barBackground").css("height", height);
+}
+
+$(document).ready(function() {
+	$('#grade_context').keyup(function (e) {
+		let content = $(this).val();
+	    
+	    // 글자수 세기
+	    if (content.length == 0 || content == '') {
+	    	$('.textCount').text('0');
+	    } else {
+	    	$('.textCount').text(content.length);
+	    }
+	    
+	    // 글자수 제한
+	    if (content.length > 230) {
+	    	// 230자 부터는 타이핑 되지 않도록
+	        $(this).val($(this).val().substring(0, 230));
+	    }
+	})
+	changeHeight();
+	
+})
+
 
 
 

@@ -234,6 +234,12 @@
 #genreTag{
 	padding: 10px 25px;
 }
+#priceTag li input{
+	accent-color: #00AEEF;
+}
+#genreTag li input{
+	accent-color: #00AEEF;
+}
 #priceTag li a:link, a:visited{
 	color: #ccc;
 }

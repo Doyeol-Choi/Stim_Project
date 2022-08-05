@@ -107,6 +107,8 @@
 	min-height: 100px;
 	height: auto;
 	float: left;
+	word-break:break-all;
+	word-wrap:break-word;
 }
 
 .user_nickname {
@@ -116,6 +118,9 @@
 
 .grade_regdate {
 	float: right;
+}
+#comment_area{
+	max-width: 790px;
 }
 
 #grade_rateG, #grade_rateB {
@@ -133,6 +138,9 @@
 .grade_context{
 	padding-left: 40px;
 	padding-top: 10px;
+}
+.textCount, .textTotal {
+	float: left;
 }
 
 .reply_deletebtn {

@@ -208,6 +208,9 @@ public class StimGameListController {
 		try {
 			System.out.println("받은 게임 코드: " + game_code);
 			GameVO gameDetailInfo = stimGameListService.SelectGameDetailInfo(game_code);
+			List<GameReplyVO> reply = stimGameListService.SelectALLReply(game_code);
+			
+			mav.addObject("reply", reply);
 			
 			if(authentication != null) {
 				UserVO uVo = (UserVO) authentication.getPrincipal();
@@ -216,7 +219,6 @@ public class StimGameListController {
 				List<Integer> game_code_cart = stimWishCartService.SelectCartGameCode(user_code);
 				List<Integer> game_code_wish = stimWishCartService.SelectWishGameCode(user_code);
 				List<Integer> game_code_my = stimWishCartService.SelectMyGameCode(user_code);
-				List<GameReplyVO> reply = stimGameListService.SelectALLReply(game_code);
 				
 				if(game_code_cart.isEmpty()) {
 					game_code_cart= new ArrayList<>();
@@ -228,8 +230,6 @@ public class StimGameListController {
 					game_code_my=new ArrayList<>();
 				}
 				
-				
-				mav.addObject("reply", reply);
 				mav.addObject("game_code_cart", game_code_cart);
 				mav.addObject("game_code_wish",game_code_wish);
 				mav.addObject("game_code_my", game_code_my);
@@ -239,7 +239,6 @@ public class StimGameListController {
 			}
 			
 			mav.addObject("gameInfo", gameDetailInfo);
-
 			mav.setViewName("game/gameDetailView");
 		}catch(Exception e) {
 			e.printStackTrace();

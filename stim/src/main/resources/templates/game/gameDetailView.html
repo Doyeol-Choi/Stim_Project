@@ -36,6 +36,8 @@
 								<input type="hidden" id="game_code" name="user_id" th:value="${gameInfo.game_code}"> 
 								<input type="hidden" id="" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
 								<textarea id="grade_context" name="grade_context" placeholder="댓글과 평점을 남겨주세요" ></textarea>
+								<span class="textCount">0</span>
+    							<span class="textTotal">/230</span>
 								<input id="reply_submit" type="button" value="댓글 남기기" th:onclick="inputReply()">
 								<label><input type="radio" id="grade_b" name="grade_rate" value="b">Bad</label>
 								<label><input type="radio" id="grade_g" name="grade_rate" value="g">Good</label>
@@ -52,10 +54,12 @@
 								<span id="grade_rateG" th:if="${#strings.equals(reply.grade_rate, 'g')}">Good</span>
 								<span id="grade_rateB" th:if="${#strings.equals(reply.grade_rate, 'b')}">Bad</span>
 								<span class="grade_regdate" th:text="${#dates.format(reply.grade_regdate,'yyyy년 MM월 dd일 HH시 mm분')}"></span>
-								<p class="grade_context" th:text="${reply.grade_context}"></p>
+								<p id="comment_area" class="grade_context" th:text="${reply.grade_context}"></p>
 							</div>
 							<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
-							th:if="${reply.user_code == #authentication.principal.user_code}" th:onclick="deleteReply(${reply.grade_code})">삭제</button> 
+							th:if="${(reply.user_code == #authentication.principal.user_code) AND #strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteReply(${reply.grade_code})|">삭제</button> 
+							<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
+							th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteReply(${reply.grade_code})|">삭제</button>
 						</div>
 					</div>
     			</div>
