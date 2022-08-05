@@ -16,19 +16,14 @@
 	    	    <button onclick="location.href='/logout'" id="headLogout">로그아웃</button><br>
         	</div>
         	<img th:src="@{'/image/profile/'+${#authentication.principal.user_picture}}" alt="profilePicture" id="profilePicture">
-    	    <div id="wishcartTag">
-    	    	<a th:href="@{'/wish/'+${#authentication.principal.user_code}}"><span id="wishTag">찜 목록</span></a>
-    	    	<a th:href="@{'/cart/'+${#authentication.principal.user_code}}"><span id="cartTag">장바구니</span></a>
-    	    </div>
         </div>
     </div>
     <nav id="gameNav">
     	<div id="gameNavBox">
 			<section>
 				<ul>
-				<li><a href="/gameListPopular">유저 관리</a></li>
-				<li><a href="/gameListNew">게임 관리</a></li>
-				<li><a href="/gameListSale">문의 내역</a></li>
+				<li><a href="/gameListPopular">게임 관리</a></li>
+				<li><a href="/gameListNew">유저 관리</a></li>
 				</ul>
 			</section>
 			<form id="serch" action="/gameListSearch">

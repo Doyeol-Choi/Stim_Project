@@ -125,9 +125,9 @@ public class StimUserController {
 		return mav;
 	}
 	
-	// 비밀번호 찾기로 비밀번호 변경
+	// 비밀번호 변경
 	@PostMapping("/findPwChange")
-	public ModelAndView findPwChange(@RequestParam("user_id") String user_id, @RequestParam("user_password") String user_password) {
+	public ModelAndView findPwChange(@RequestParam("user_id") String user_id, @RequestParam("user_password") String user_password, Authentication authentication) {
 		ModelAndView mav = new ModelAndView();
 		
 		try {
@@ -135,7 +135,12 @@ public class StimUserController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		mav.setViewName("user/loginForm");
+		if (authentication != null) {
+			int code = ((UserVO) authentication.getPrincipal()).getUser_code();
+			mav.setViewName("redirect:/profile/" + code);
+		} else {			
+			mav.setViewName("user/loginForm");
+		}
 		
 		return mav;
 	}

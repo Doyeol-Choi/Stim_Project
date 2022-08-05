@@ -103,8 +103,8 @@ function inputReply(){
 				html += "<span id=''grade_rateG' th:if='${#strings.equals("+data.grade_rate+", \'g\')}'>Good</span>";
 				html += "<span id=''grade_rateB' th:if='${#strings.equals("+data.grade_rate+", \'b\')}'>Bad</span>";
 				html += "<div class='grade_context'>"+data.grade_context+"</div>";
-				html += "<button class='grade_deletebtn' th:if='${"+data.user_code+" == #authentication.principal.user_code}' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
 				html += "</div>";
+				html += "<button class='grade_deletebtn' th:if='${"+data.user_code+" == #authentication.principal.user_code}' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
 				html += "</div>";
 				
 				$("#reply_lists").prepend(html);
@@ -122,7 +122,7 @@ function inputReply(){
 
 function dateFormat(){
 	let date = new Date();
-    return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분 ";
+    return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분";
  
 }
 
