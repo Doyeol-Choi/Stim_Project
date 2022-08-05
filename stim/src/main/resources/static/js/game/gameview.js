@@ -108,7 +108,6 @@ function inputReply(){
 					}else if(data.grade_rate == 'b'){
 						html += "<span id='grade_rateB'>Bad</span>";
 					}
-
 				html += "<div class='grade_context'>"+data.grade_context+"</div>";
 				html += "</div>";
 				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
@@ -133,7 +132,7 @@ function inputReply(){
 
 function dateFormat(){
 	let date = new Date();
-    return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분 ";
+    return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분";
  
 }
 
