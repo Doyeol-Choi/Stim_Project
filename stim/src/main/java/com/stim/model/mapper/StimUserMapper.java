@@ -61,5 +61,11 @@ public interface StimUserMapper {
 
 	// 회원 탈퇴
 	public void deleteUser(int user_code);
+	
+	// 유저코드로 유저정보 받기
+	public UserVO selectUserByUserCode(int user_code);
+	
+	// 기본 프로필 사진으로 변경
+	public void profilePictureRe(int user_code);
 
 }

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lagn="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8" />
+	<title>Stim Pack</title>
+	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
+	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminUser.css}">
+	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/admin/admin.js}"></script>
+</head>
+<body>
+    <!-- header fragment 사용 -->
+    <th:block th:replace="fragments/header/adminHeader :: headerFragment"></th:block>
+    <div id="container">
+    	<div id="content">
+    		<div class="searchUserBox">
+    			<h1>유저 목록</h1>
+    			<span>닉네임으로 사용자 검색하기</span>
+    			<form action="searchUserAdmin" method="post">
+	    			<input type="text" name="user_nickname" id="user_nickname" placeholder="미입력시 유저를 랜덤검색 합니다.">
+	    			<input type="submit" id="submit" value="검색">
+    			</form>
+    		</div>
+    		<div id="searchedUser" th:if="${!#lists.isEmpty(userList)}">
+    			<div class="userListBox" th:each="user:${userList}">
+    				<img th:src="@{'/image/profile/' + ${user.user_picture}}">
+    				<span id="userNick" th:text="${user.user_nickname}" th:onclick="|location.href='/profile/${user.user_code}'|"></span>
+					<div class="btn">
+						<button id="profilePicture_btn" th:onclick="|rePicture(${user.user_code})|">프로필 사진 초기화</button>    				
+    					<button id="userDelete" th:onclick="|userDelete(${user.user_code})|">유저 삭제</button>
+					</div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+    <!-- footer fragment 사용 -->
+    <th:block th:replace="fragments/footer/footer :: footerFragment"></th:block>
+</body>
+</html>

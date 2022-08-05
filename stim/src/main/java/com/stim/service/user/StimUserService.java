@@ -157,4 +157,15 @@ public class StimUserService implements UserDetailsService {
 		stimUserMapper.deleteUser(user_code);
 	}
 	
+	// 유저코드로 유저정보 받기
+	public UserVO selectUserByUserCode(int user_code) throws Exception {
+		return stimUserMapper.selectUserByUserCode(user_code);
+	}
+	
+	// 기본 프로필 사진으로 변경
+	@Transactional
+	public void profilePictureRe(int user_code) throws Exception {
+		stimUserMapper.profilePictureRe(user_code);
+	}
+	
 }

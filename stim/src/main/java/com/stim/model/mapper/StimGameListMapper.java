@@ -59,6 +59,9 @@ public interface StimGameListMapper {
 	// 게임 상세페이지 댓글 가져오기
 	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria)throws Exception;
 
+	// 게임 삭제 => 관리자
+	public void deleteGame(int game_code) throws Exception;
+
 	// 게임상세페이지 댓글 총 갯수
 	public int CountAllReply(int game_code)throws Exception;
 

@@ -188,6 +188,14 @@ public class StimGameListServiceImp implements StimGameListService {
 	public List<GameReplyVO> SelectGradeRatebyGameCode(int game_code) throws Exception {
 		return stimGameListMapper.SelectGradeRatebyGameCode(game_code);
 	}
+
+
+	// 게임 삭제 => 관리자
+	@Override
+	@Transactional
+	public void deleteGame(int game_code) throws Exception {
+		stimGameListMapper.deleteGame(game_code);
+	}
 	
 	
 	

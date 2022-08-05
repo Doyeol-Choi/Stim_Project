@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+#container {
+	min-height: 900px;
+}
+
+#content {
+	min-width: 600px;
+	width: 50%;
+	margin: 0 auto;
+	padding-top: 80px;
+	text-align: center;
+	color: white;
+	font-size: 1.6em;
+}
+
+#headline {
+	margin-bottom: 20px;
+}
+
+form {
+	width: 400px;
+	margin: 0 auto;
+	text-align: left;
+}
+
+.label_text {
+	display: block;
+	font-size:20px;
+	color: rgba(255,255,255,0.4);
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+
+#game_name, #game_price, #game_developer, #user_phone, #game_distribution {
+	width: 100%;
+	height: 40px;
+	background: #0E1B49;
+    border-radius: 3px;
+    color: #E9E9E9;
+    font-size: 0.8em;
+    padding: 4px 20px;
+    display: block;
+    box-shadow: none;
+    transition: border ease-in-out .5s;
+    border: 1px solid white;
+    outline: none;
+}
+
+#game_releaseDate {
+	width: 50%;
+	height: 40px;
+}
+
+#btn {
+	width: 150px;
+	margin: 30px auto;
+	font-size: 0.8em;
+	border-radius: 2px;
+    border: none;
+    padding: 1px;
+    display: inline-block;
+    cursor: pointer;
+    color: #c3e1f8;
+    background: transparent;
+    text-shadow: 1px 1px 0px rgb(0 0 0 / 30%);
+    margin-bottom: 20px;
+}
+
+#btn > span {
+	width: 150px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	border-radius: 2px;
+    display: block;
+	background: linear-gradient( to right, #47bfff 5%, #1a44c2 60%);
+    box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+    background-position: 25%;
+    background-size: 330% 100%;
+}

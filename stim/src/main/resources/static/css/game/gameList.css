@@ -70,7 +70,7 @@
 #gtable > td:last-child{
 	border-right: none;
 }
-#gameListTable > tr > td > a:visited, a:link{
+#gn:visited, #gn:link {
 	color: white;
 }
 

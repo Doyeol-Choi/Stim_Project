@@ -1,7 +1,6 @@
 package com.stim.controller;
 
-
-import java.util.List;
+import java.io.File;
 
 import javax.annotation.Resource;
 
@@ -172,7 +171,6 @@ public class StimController {
 
 	//프로필 메시지 등록	
 	@PostMapping("/updateContext")
-	@Transactional
 	@ResponseBody
 	public void updateContext(@RequestParam("user_code") int user_code,
 								@RequestParam("profile_context") String profile_context) throws Exception {
@@ -186,6 +184,43 @@ public class StimController {
 			stimProfileService.updateProfileContext(user_code, profile_context);
 		}
 
+	}
+	
+	// 프로필 사진 초기화 => 관리자
+	@PostMapping("/userPictureRe")
+	public void userPictureRe(@RequestParam("user_code") int user_code) {
+		try {
+			UserVO uVo = stimUserService.selectUserByUserCode(user_code);
+			String originPicture = uVo.getUser_picture();
+			if(!originPicture.equals("noimage.jpg")) {
+				stimUserService.profilePictureRe(user_code);
+				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/profile/");
+				File deletePic = new File(path + "/" + originPicture);
+				deletePic.delete();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 유저 삭제 => 관리자
+	@PostMapping("/userDelete")
+	public void userDelete(@RequestParam("user_code") int user_code) {
+		try {
+			stimUserService.deleteUser(user_code);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	// 게임 삭제 => 관리자
+	@PostMapping("/deleteGame")
+	public void deleteGame(@RequestParam("game_code") int game_code) {
+		try {
+			stimGameListService.deleteGame(game_code);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

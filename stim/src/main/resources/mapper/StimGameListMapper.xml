@@ -202,7 +202,7 @@
 	    WHERE R> (#{pageNum}-1) * #{amount}
 	    ]]>
     </select>
-    
+
     <!-- 게임상세페이지에서 게임 평점 비율 보기 -->
     <select id="SelectGradeRatebyGameCode" resultType="com.stim.vo.GameReplyVO" parameterType="int">
 	    SELECT grade_rate 
@@ -228,5 +228,10 @@
 	<select id="CountAllReply" resultType="com.stim.vo.PageVO" parameterType="int">
 		SELECT count(*)AS total FROM grade_tbl WHERE game_code #{game_code}
 	</select>
+
+    <!-- 관리자가 게임 삭제 -->
+    <delete id="deleteGame" parameterType="int">
+    	DELETE FROM game_tbl WHERE game_code = #{game_code} 
+    </delete>
 
 </mapper>
