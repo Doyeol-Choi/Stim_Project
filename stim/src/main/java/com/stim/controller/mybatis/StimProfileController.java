@@ -53,7 +53,7 @@ public class StimProfileController {
 			List<ProFileVO> game_list = stimProfileService.SelectMyGames(user_code);
  			List<ProFileVO> f_list = stimProfileService.SelectMyFriends(user_code);
 			List<ProFileVO> request = stimProfileService.selectFriendRequest(user_code);	
-			String context = stimProfileService.SelectProfileContext(user_code);
+			String context = stimProfileService.SelectProfileContext(user_code);  
 // 			if(game_list.isEmpty()) {
 // 				game_list= null;
 // 			}

@@ -52,7 +52,7 @@
 	        		<div id="comment_page1"><h3>댓글</h3></div>
 	        		<div class="comment_page">
 	        			<div >
-	        				<a> <span th:text="${#lists.size(list)}"></span> 개의 모든 댓글 보기</a>
+	        				<a> <span th:text="${#lists.size(list)}"></span> 개의 댓글 </a>
 	        			</div>
 		        		
 					</div>
@@ -96,10 +96,10 @@
 					<div id="comment_lists">
 						<div class="comment_list" th:each="list : ${list}" th:id="|mentListBox${list.comment_code}|">
 							<div class="comment_image">
-								<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}"> </a>
+								<a> <img alt="프로필 사진" th:src="@{/image/profile/} + ${list.user_picture}" th:onclick="|location.href='/profile/${list.writer_code}'|"> </a>
 							</div>
 							<div class="comment_content">
-								<div class="comment_nickname" th:text="${list.comment_nickname}"></div> 
+								<div class="comment_nickname" th:text="${list.comment_nickname}" th:onclick="|location.href='/profile/${list.writer_code}'|"></div> 
 								<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
 								<div class="comment_context" th:text="${list.comment_context}"></div>
 								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button> 
@@ -111,8 +111,8 @@
 	        <div class="profile_right" sec:authorize="isAuthenticated()">
 	        		<!-- 친구 요청 목록 -->
 					<div class="friend_request">	
-						<div th:each="request : ${request}" th:id="|reqList${request.friend_code}|">
-							<span><strong>친구 요청</strong></span>
+						<span><strong>친구 요청</strong></span>
+						<div th:each="request : ${request}" th:id="|reqList${request.friend_code}|">		
 							<div class="friend_req">			
 								<img class="friend_request_picture" alt="req_profile" th:src="@{/image/profile/} + ${request.req_picture}">
 								<div class="friend_req_nickname"><span th:text="${request.req_nickname}"></span></div>
@@ -128,12 +128,12 @@
 						<br>
 						<div class="friend_list" th:each="f: ${f_list}" th:id="|friend_List${f.friend_code}|">
 							<div class="friend_picture">
-								<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}">
+								<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}" >
 							</div>
 							<div class="friend_content">
 								<span class="friend_nickname" th:text="${f.friend_nickname}"></span>
 							</div>
-							<button class="friend_delete" th:onclick="|deleteMyFriend(${f.friend_code})|" >X</button>
+							<button sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" class="friend_delete" th:onclick="|deleteMyFriend(${f.friend_code})|" >X</button>
 						</div>
 					</div>
 					<!-- 친구 목록 -->
