@@ -152,7 +152,6 @@ public class StimGameListServiceImp implements StimGameListService {
 	@Override
 	@Transactional
 	public int InsertReply(GameReplyVO rVo) throws Exception {
-		// TODO Auto-generated method stub
 		return stimGameListMapper.InsertReply(rVo);
 	}
 
@@ -175,6 +174,13 @@ public class StimGameListServiceImp implements StimGameListService {
 	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception {
 		
 		return stimGameListMapper.SelectALLReply(game_code);
+	}
+
+	
+	// 게임 상세 페이지에서 평점 댓글 비율 읽기
+	@Override
+	public List<GameReplyVO> SelectGradeRatebyGameCode(int game_code) throws Exception {
+		return stimGameListMapper.SelectGradeRatebyGameCode(game_code);
 	}
 	
 	

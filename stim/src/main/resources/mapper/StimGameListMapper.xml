@@ -188,4 +188,12 @@
 	    AND u.user_code = g.user_code
 	    ORDER BY grade_regdate DESC
     </select>
+    
+    <!-- 게임상세페이지에서 게임 평점 비율 보기 -->
+    <select id="SelectGradeRatebyGameCode" resultType="com.stim.vo.GameReplyVO" parameterType="int">
+	    SELECT grade_rate 
+		FROM grade_tbl
+		where game_code = #{game_code}
+    </select>
+    
 </mapper>

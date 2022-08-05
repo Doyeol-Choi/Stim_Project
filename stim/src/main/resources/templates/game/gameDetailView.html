@@ -28,6 +28,18 @@
     					<article id="gameContext" th:inline="text" >
 	    					[[${gameInfo.game_context}]]
 	    				</article>
+	    				<p>반영은 최소 5개부터</p>
+	    				<div id="gameGradeSection">
+		    				<th:block th:if="${Grade}=='G'">
+		    					<img th:src="@{/image/GradeGood.png}">
+		    				</th:block>
+		    				<th:block th:if="${Grade}=='B'">
+								<img th:src="@{/image/GradeBad.png}">
+							</th:block>
+		    				<th:block th:if="${Grade}=='N'">
+								<img th:src="@{/image/GradeNone.png}">
+							</th:block>
+		    			</div>
 					</section>
 					<div id="gameGrade">
 						<div sec:authorize="isAuthenticated()">
@@ -53,6 +65,7 @@
 								<span class="user_nickname" th:text="${reply.user_nickname}"></span> 
 								<span id="grade_rateG" th:if="${#strings.equals(reply.grade_rate, 'g')}">Good</span>
 								<span id="grade_rateB" th:if="${#strings.equals(reply.grade_rate, 'b')}">Bad</span>
+								
 								<span class="grade_regdate" th:text="${#dates.format(reply.grade_regdate,'yyyy년 MM월 dd일 HH시 mm분')}"></span>
 								<p id="comment_area" class="grade_context" th:text="${reply.grade_context}"></p>
 							</div>

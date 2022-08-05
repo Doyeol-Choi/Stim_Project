@@ -48,3 +48,23 @@ function hide5() {
     document.querySelector('#box5').style.display = 'none';
     document.querySelector('#upBtn5').style.display = 'none';
 }
+function show6() {
+    document.querySelector('#downBtn6').style.display = 'none';
+    document.querySelector('#box6').style.display = 'block';
+    document.querySelector('#upBtn6').style.display = 'block';
+}
+function hide6() {
+    document.querySelector('#downBtn6').style.display = 'block';
+    document.querySelector('#box6').style.display = 'none';
+    document.querySelector('#upBtn6').style.display = 'none';
+}
+function show7() {
+    document.querySelector('#downBtn7').style.display = 'none';
+    document.querySelector('#box7').style.display = 'block';
+    document.querySelector('#upBtn7').style.display = 'block';
+}
+function hide7() {
+    document.querySelector('#downBtn7').style.display = 'block';
+    document.querySelector('#box7').style.display = 'none';
+    document.querySelector('#upBtn7').style.display = 'none';
+}

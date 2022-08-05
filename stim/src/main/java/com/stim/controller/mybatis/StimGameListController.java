@@ -209,6 +209,25 @@ public class StimGameListController {
 			System.out.println("받은 게임 코드: " + game_code);
 			GameVO gameDetailInfo = stimGameListService.SelectGameDetailInfo(game_code);
 			List<GameReplyVO> reply = stimGameListService.SelectALLReply(game_code);
+			List<GameReplyVO> gameGrade = stimGameListService.SelectGradeRatebyGameCode(game_code);
+			
+			/* 평점 댓글 Good/Bad 계산하기 */
+			int goodGradeCount = 0;
+			int badGradeCount = 0;
+			for(int i=0; i<=gameGrade.size()-1; i++) {
+				if(gameGrade.get(i).getGrade_rate().equals("g")) {
+					goodGradeCount++;
+				}else {	badGradeCount++;}
+			}
+			String Grade = ""; // 반영하기 위한 최소 댓글 개수: 5
+			if(gameGrade.size()>=5 && goodGradeCount >= badGradeCount) {
+				Grade = "G";
+			}else if(gameGrade.size()>=5 && goodGradeCount < badGradeCount){
+				Grade = "B";
+			}else {
+				Grade = "N";
+			}
+			mav.addObject("Grade", Grade);
 			
 			mav.addObject("reply", reply);
 			
@@ -253,5 +272,4 @@ public class StimGameListController {
 	}
 	
 	
-
 }

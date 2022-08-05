@@ -61,6 +61,8 @@ public interface StimGameListService {
 	// 게임상세페이지 댓글 가져오기
 	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception;
 
+	// 게임 상세페이지에서 평점 댓글 비율 보기
+	public List<GameReplyVO> SelectGradeRatebyGameCode(int game_code) throws Exception;
  	
  	
 }

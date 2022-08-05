@@ -46,7 +46,26 @@
 	height: auto;
 }
 #gameSection{
+	width: 1020px;
+	height: 130px;
+}
+#gameSection p{
+	font-size: 7px;
+	float: right;
+	padding-right: 5px;
+	padding-bottom: 7px;
+	color: #aaa;
+}
+#gameContext{
+	width: 920px;
+	float:left;
+	padding: 0 5px 0 25px;
+}
+#gameGradeSection{
+	width: 100px;
 	height: 100px;
+	float:left;
+	overflow: hidden;
 }
 #gameGrade{
 	width: 1020px;

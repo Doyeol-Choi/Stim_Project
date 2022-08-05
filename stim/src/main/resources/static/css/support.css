@@ -11,7 +11,7 @@
 	max-width: 1560px;
 	height: 100%;
 	background-color: rgba(0, 0, 0, 0.3);
-	padding-bottom: 50px;
+	padding-bottom: 120px;
 }
 #supportPage > h1{
 	color: white;
@@ -114,28 +114,3 @@
 	padding-left: 20px;
 }
 
-
-#QNA{
-	margin: 10px auto 0;
-	width: 85%;
-	height: auto;
-	background-color: transparent;
-	border-top: 2px solid white;
-	text-align: center;
-}
-#QNA h1{
-	color: white;
-	padding: 10px;
-}
-#QNA p{
-	color: white;
-}
-#QNA input[type=text]{
-	width: 400px;
-	height: 50px;
-	padding: 5px 20px;
-	margin: 20px;
-	border-radius: 5px;
-	border: 1px solid rgba(0, 0, 0, 0);
-	background-color: rgba(255, 255, 255, 0.9);
-}
