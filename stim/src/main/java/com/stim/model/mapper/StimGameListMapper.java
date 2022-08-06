@@ -57,7 +57,8 @@ public interface StimGameListMapper {
 	public void DeleteReplyByCode(int grade_code) throws Exception;
 
 	// 게임 상세페이지 댓글 가져오기
-	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria)throws Exception;
+//	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria)throws Exception;
+	public List<GameReplyVO> SelectALLReply(int game_code)throws Exception;
 
 	// 게임 삭제 => 관리자
 	public void deleteGame(int game_code) throws Exception;
@@ -68,5 +69,16 @@ public interface StimGameListMapper {
 	// 게임 상세페이지에서 평점 댓글 비율 보기
 	public List<GameReplyVO> SelectGradeRatebyGameCode(int game_code) throws Exception;
 	
+	// 게임 등록 => 관리자
+	public void insertGame(GameVO gVo) throws Exception;
+	
+	// 게임 수정 => 관리자
+	public void updateGame(GameVO gVo) throws Exception;
+
+	// 게임 장르 등록 => 관리자
+	public void insertGenre(GameVO gVo) throws Exception;
+
+	// 게임 장르 설정 => 관리자
+	public void updateGenre(GameVO gVo) throws Exception;
 	
 }

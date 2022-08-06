@@ -170,10 +170,17 @@ public class StimGameListServiceImp implements StimGameListService {
 	}
 
 	// 게임 상세페이지 댓글 가져오기
+//	@Override
+//	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception {
+//		
+//		return stimGameListMapper.SelectALLReply(game_code, criteria);
+//	}
+	
+	// 게임 상세페이지 댓글 가져오기
 	@Override
-	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception {
+	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception {
 		
-		return stimGameListMapper.SelectALLReply(game_code, criteria);
+		return stimGameListMapper.SelectALLReply(game_code);
 	}
 
 	// 게임상세페이지 댓글 총 갯수
@@ -195,6 +202,35 @@ public class StimGameListServiceImp implements StimGameListService {
 	@Transactional
 	public void deleteGame(int game_code) throws Exception {
 		stimGameListMapper.deleteGame(game_code);
+	}
+
+	// 게임 등록 => 관리자
+	@Override
+	@Transactional
+	public void insertGame(GameVO gVo) throws Exception {
+		stimGameListMapper.insertGame(gVo);
+		
+	}
+
+	// 게임 수정 => 관리자
+	@Override
+	@Transactional
+	public void updateGame(GameVO gVo) throws Exception {
+		stimGameListMapper.updateGame(gVo);
+	}
+
+	// 게임 장르 등록 => 관리자
+	@Override
+	@Transactional
+	public void insertGenre(GameVO gVo) throws Exception {
+		stimGameListMapper.insertGenre(gVo);
+	}
+
+	// 게임 장르 수정 => 관리자
+	@Override
+	@Transactional
+	public void updateGenre(GameVO gVo) throws Exception {
+		stimGameListMapper.updateGenre(gVo);
 	}
 	
 	

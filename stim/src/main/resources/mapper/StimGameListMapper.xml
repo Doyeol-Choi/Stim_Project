@@ -174,9 +174,8 @@
     	WHERE grade_code = #{grade_code}
     </delete>
     
-     <!-- 게임상세페이지 댓글 가져오기 -->
+    <!-- 게임상세페이지 댓글 가져오기 -->
     <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
-    	<![CDATA[
     	SELECT grade_code, 
 	    g.user_code AS user_code,  
 	    u.user_nickname AS user_nickname,
@@ -184,23 +183,10 @@
 	    grade_regdate,
 	    grade_rate,
 	    u.user_picture AS user_picture 
-		FROM 
-		(
-			SELECT /*+ INDEX_DESC(grade_tbl grade_code)*/
-			ROWNUM R,  grade_code, 
-		    g.user_code AS user_code,  
-		    u.user_nickname AS user_nickname,
-		    grade_context, 
-		    grade_regdate,
-		    grade_rate,
-		    u.user_picture AS user_picture
-		    FROM user_tbl u, grade_tbl g
-		    WHERE game_code = #{game_code}
-		    AND u.user_code = g.user_code
-		    AND ROWNUM <=#{pageNum} * #{amount}
-	    )
-	    WHERE R> (#{pageNum}-1) * #{amount}
-	    ]]>
+		FROM user_tbl u, grade_tbl g
+	    WHERE game_code = #{game_code}
+	    AND u.user_code = g.user_code
+	    ORDER BY grade_regdate DESC
     </select>
 
     <!-- 게임상세페이지에서 게임 평점 비율 보기 -->
@@ -209,21 +195,6 @@
 		FROM grade_tbl
 		where game_code = #{game_code}
     </select>
-
-<!--     <![CDATA[
-        SELECT BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
-        FROM
-        (
-            /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM 절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
-            SELECT /*+ INDEX_DESC(TBL_BOARD PK_BOARD) */
-            ROWNUM R, BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
-            FROM TBL_BOARD
-            WHERE ROWNUM <= #{pageNum} * #{amount}
-        )
-           WHERE R> (#{pageNum}-1) * #{amount}
-        ]]>
-    
-     -->
      
 	<select id="CountAllReply" resultType="com.stim.vo.PageVO" parameterType="int">
 		SELECT count(*)AS total FROM grade_tbl WHERE game_code #{game_code}
@@ -233,5 +204,31 @@
     <delete id="deleteGame" parameterType="int">
     	DELETE FROM game_tbl WHERE game_code = #{game_code} 
     </delete>
+    
+    <!-- 관리자가 게임 등록 -->
+    <insert id="insertGame" parameterType="com.stim.vo.GameVO">
+    	INSERT INTO game_tbl
+    	VALUES(game_code_seq.nextval, #{game_name}, #{game_price}, #{game_releaseDate}, #{game_developer}, #{game_distribution}, #{game_context}, 0, #{game_picture}, '')
+    </insert>
+    
+    <!-- 게임 장르 등록 -->
+    <insert id="insertGenre" parameterType="com.stim.vo.GameVO">
+    	INSERT INTO genre_tbl(genre_code, genre_1, genre_2, genre_3, game_code)
+    	SELECT genre_code_seq.nextval, #{genre_1}, #{genre_2}, #{genre_3},
+    	game_code FROM game_tbl WHERE game_name = #{game_name}
+    </insert>
+    
+    <!-- 관리자가 게임 정보 수정 -->
+    <update id="updateGame" parameterType="com.stim.vo.GameVO">
+		UPDATE game_tbl SET game_name=#{game_name}, game_price=#{game_price}, game_releaseDate=#{game_releaseDate},
+		game_developer=#{game_developer}, game_distribution=#{game_distribution}, game_context=#{game_context},
+		game_picture=#{game_picture} WHERE game_code = #{game_code}
+    </update>
+    
+    <!-- 게임 장르 수정 -->
+    <update id="updateGenre" parameterType="com.stim.vo.GameVO">
+    	UPDATE genre_tbl SET genre_1 = #{genre_1}, genre_2 = #{genre_2}, genre_3 = #{genre_3}
+    	WHERE game_code = #{game_code}
+    </update>
 
 </mapper>

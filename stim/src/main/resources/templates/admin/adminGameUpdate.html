@@ -8,7 +8,7 @@
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminGame.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/admin/adminGameUpdate.css}">
 	<script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" th:src="@{/js/admin/admin.js}"></script>
 </head>
@@ -18,51 +18,53 @@
     <div id="container">
     	<div id="content">
     		<div id="headline">
-		    	<h1>게임 등록</h1>
+		    	<h1>게임 정보 수정</h1>
     		</div>
-    		<form action="addGame" method="post" enctype="multipart/form-data">
+    		<form action="updateGame" method="post" enctype="multipart/form-data">
+    			<input type="hidden" name="game_code" th:value="${game.game_code}">
+    			<input type="hidden" name="originPic" th:value="${game.game_picture}">
     			<label>
     				<span class="label_text">게임 이름</span>
-    				<input type="text" name="game_name" id="game_name" required>
+    				<input type="text" name="game_name" id="game_name" th:value="${game.game_name}" required>
     			</label>
     			<label>
     				<span class="label_text">가격</span>
-	    			<input type="text" name="game_price" id="game_price" required>
+	    			<input type="text" name="game_price" id="game_price" th:value="${game.game_price}" required>
     			</label>
     			<label>
     				<span class="label_text">출시일</span>
-    				<input type="date" name="releaseDate" id="game_releaseDate" required>
+    				<input type="date" name="releaseDate" id="game_releaseDate" th:value="${#dates.format(game.game_releaseDate, 'yyyy-MM-dd')}">
     			</label>
     			<label>
     				<span class="label_text">개발사</span>
-	    			<input type="text" name="game_developer" id="game_developer" required>
+	    			<input type="text" name="game_developer" id="game_developer" th:value="${game.game_developer}" required>
     			</label>
     			<label>
     				<span class="label_text">배급사</span>
-	    			<input type="text" name="game_distribution" id="game_distribution" required>
+	    			<input type="text" name="game_distribution" id="game_distribution" th:value="${game.game_distribution}" required>
     			</label>
     			<label>
     				<span class="label_text">장르1</span>
-	    			<input type="text" name="genre_1" id="genre_1" required>
+	    			<input type="text" name="genre_1" id="genre_1" th:value="${game.genre_1}" required>
     			</label>
     			<label>
     				<span class="label_text">장르2</span>
-	    			<input type="text" name="genre_2" id="genre_2" required>
+	    			<input type="text" name="genre_2" id="genre_2" th:value="${game.genre_2}" required>
     			</label>
     			<label>
     				<span class="label_text">장르3</span>
-	    			<input type="text" name="genre_3" id="genre_3" required>
+	    			<input type="text" name="genre_3" id="genre_3" th:value="${game.genre_3}" required>
     			</label>
     			<label>
     				<span class="label_text">게임 설명</span>
-	    			<textarea name="game_context" id="game_context"></textarea>
+	    			<textarea name="game_context" id="game_context" th:text="${game.game_context}"></textarea>
     			</label>
     			<label>
-    				<span class="label_text">게임 사진</span>
-    				<input type="file" name="picture" id="game_picture" required>
+    				<span class="label_text">게임 사진 (사진은 변경시에만 등록)</span>
+    				<input type="file" name="picture" id="game_picture">
     			</label>
 		    	<button id="btn" type="submit">
-		    		<span>등록하기</span>
+		    		<span>수정하기</span>
 		    	</button>
     		</form>
     	</div>
