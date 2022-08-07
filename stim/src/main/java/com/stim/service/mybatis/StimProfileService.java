@@ -2,6 +2,8 @@ package com.stim.service.mybatis;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
@@ -52,6 +54,8 @@ public interface StimProfileService {
 	// 해당 프로필에 가장 최근 작성된 댓글 가져오기
 	public ProFileVO selectLastComment(int user_code) throws Exception;
 	
+	// 프로필 할 말 입력
 	public void insertProfileContext(int user_code, String profile_context) throws Exception;
+	
 	
 }

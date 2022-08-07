@@ -3,6 +3,8 @@ package com.stim.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
@@ -58,6 +60,5 @@ public interface StimProfileMapper {
 	// 할말 삽입
 	public void insertProfileContext(int user_code, String profile_context);
 
-	
 
 }
