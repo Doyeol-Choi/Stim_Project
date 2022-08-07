@@ -30,14 +30,13 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StimController {
 	
-	@Resource
-	private StimProfileService stimProfileService;
-	
-	@Resource
-	private final StimUserService stimUserService;
-	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
+	private final StimUserService stimUserService;
+
+	@Resource
+	private StimProfileService stimProfileService;
 
 	@Resource
 	private StimGameListService stimGameListService;

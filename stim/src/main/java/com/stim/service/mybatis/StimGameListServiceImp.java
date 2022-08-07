@@ -15,6 +15,7 @@ import com.stim.model.mapper.StimGameListMapper;
 import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
+import com.stim.vo.Pagination;
 
 @Service
 public class StimGameListServiceImp implements StimGameListService {
@@ -182,6 +183,11 @@ public class StimGameListServiceImp implements StimGameListService {
 		
 		return stimGameListMapper.SelectALLReply(game_code);
 	}
+	
+	@Override
+	public List<GameReplyVO> SelectALLReply(int game_code, int firstRecordIndex , int lastRecordIndex) throws Exception {
+		return stimGameListMapper.SelectALLReply(game_code, firstRecordIndex, lastRecordIndex);
+	}
 
 	// 게임상세페이지 댓글 총 갯수
 	@Override
@@ -232,7 +238,5 @@ public class StimGameListServiceImp implements StimGameListService {
 	public void updateGenre(GameVO gVo) throws Exception {
 		stimGameListMapper.updateGenre(gVo);
 	}
-	
-	
 	
 }

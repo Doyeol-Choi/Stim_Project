@@ -33,8 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class StimAdminController {
-	
-	@Resource
+
 	private final StimUserService stimUserService;
 	
 	@Resource

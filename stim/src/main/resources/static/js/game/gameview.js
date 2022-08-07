@@ -121,6 +121,9 @@ function inputReply(){
 				alert('추가 실패');
 			}	
 		});
+		if($("#reply_lists").children().length >= 5) {
+			$("#reply_lists").children().last().remove();
+		}
 		$("#grade_context").val("");
 		$("input[name='grade_rate']").prop("checked", false);
 		$('.textCount').text('0');
@@ -168,6 +171,18 @@ $(document).ready(function() {
 	changeHeight();
 	
 })
+
+//페이지 이동
+function movePage(game_code,currentPage, cntPerPage, pageSize){
+    
+    var url = "/gameDetailView";
+    url = url + "?game_code="+game_code;
+    url = url + "&currentPage="+currentPage;
+    url = url + "&cntPerPage="+cntPerPage;
+    url = url + "&pageSize="+pageSize;
+    
+    location.href=url;
+}
 
 
 

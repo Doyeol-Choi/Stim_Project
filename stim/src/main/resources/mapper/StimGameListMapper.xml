@@ -175,7 +175,7 @@
     </delete>
     
     <!-- 게임상세페이지 댓글 가져오기 -->
-    <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
+    <!-- <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
     	SELECT grade_code, 
 	    g.user_code AS user_code,  
 	    u.user_nickname AS user_nickname,
@@ -187,7 +187,29 @@
 	    WHERE game_code = #{game_code}
 	    AND u.user_code = g.user_code
 	    ORDER BY grade_regdate DESC
+    </select> -->
+    
+    <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO">
+    	SELECT * FROM
+    	(SELECT ROW_NUMBER() OVER(ORDER by grade_regdate DESC) AS row_num,
+    	grade_code, 
+	    g.user_code AS user_code,  
+	    u.user_nickname AS user_nickname,
+	    grade_context, 
+	    grade_regdate,
+	    grade_rate,
+	    u.user_picture AS user_picture 
+		FROM user_tbl u, grade_tbl g
+	    WHERE game_code = #{game_code}
+	    AND u.user_code = g.user_code)
+        WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+	    ORDER BY grade_regdate DESC
     </select>
+    
+    <!-- 해당 게임 댓글 개수 -->
+    <select id="CountAllReply" resultType="int" parameterType="int">
+		SELECT count(*) FROM grade_tbl WHERE game_code = #{game_code} GROUP BY game_code
+	</select>
 
     <!-- 게임상세페이지에서 게임 평점 비율 보기 -->
     <select id="SelectGradeRatebyGameCode" resultType="com.stim.vo.GameReplyVO" parameterType="int">
@@ -195,10 +217,6 @@
 		FROM grade_tbl
 		where game_code = #{game_code}
     </select>
-     
-	<select id="CountAllReply" resultType="com.stim.vo.PageVO" parameterType="int">
-		SELECT count(*)AS total FROM grade_tbl WHERE game_code #{game_code}
-	</select>
 
     <!-- 관리자가 게임 삭제 -->
     <delete id="deleteGame" parameterType="int">
