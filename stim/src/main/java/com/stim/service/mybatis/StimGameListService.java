@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
+import com.stim.vo.Pagination;
 
 public interface StimGameListService {
 

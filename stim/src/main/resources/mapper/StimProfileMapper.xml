@@ -110,7 +110,7 @@
     </select>
     
     <select id="SelectProfileContext" resultType="String" parameterType="int">
-    	SELECT profile_context 
+    	SELECT profile_context
     	FROM profile_tbl
     	WHERE user_code = #{user_code}
     </select>

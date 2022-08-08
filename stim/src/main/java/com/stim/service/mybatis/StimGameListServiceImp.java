@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.stim.model.mapper.StimGameListMapper;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
+import com.stim.vo.Pagination;
 
 @Service
 public class StimGameListServiceImp implements StimGameListService {
@@ -218,13 +219,6 @@ public class StimGameListServiceImp implements StimGameListService {
 		stimGameListMapper.DeleteReplyByCode(grade_code);
 		
 	}
-
-	// 게임 상세페이지 댓글 가져오기
-//	@Override
-//	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception {
-//		
-//		return stimGameListMapper.SelectALLReply(game_code, criteria);
-//	}
 	
 	// 게임 상세페이지 댓글 가져오기
 	@Override
@@ -287,11 +281,5 @@ public class StimGameListServiceImp implements StimGameListService {
 	public void updateGenre(GameVO gVo) throws Exception {
 		stimGameListMapper.updateGenre(gVo);
 	}
-
-
-
-
-
-
 	
 }

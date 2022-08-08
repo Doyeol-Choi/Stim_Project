@@ -119,9 +119,10 @@ function pwdCheck(user_code) {
 }
 
 function changeMessage(){
-	
 	if($('#profile_textarea').css('display')=='block'){
 		alert('수정 중 입니다');
+	} else {
+		$('#profile_context').val($('#profile_introduce').text());
 	}
 	$('#profile_introduce').css('display','none');
 	$('#profile_textarea').css('display','block');
@@ -131,21 +132,30 @@ function changeMessage(){
 function edit_context(){
 	let user_code = $('#profileUser_code').val();
 	let profile_context = $('#profile_context').val();
-	
-	$.ajax({
-		url : "/updateContext",
-		data : {
-			"user_code" : user_code,
-			"profile_context" : profile_context
-		},
-		async : true,
-		type : "POST",
-		success: function(){
-			$('#profile_introduce').css('display','block');
-			$('#profile_textarea').css('display','none');
-			$('#profile_introduce').text(profile_context);
-		}
-	});
+	if (profile_context.replace(/\s|　/gi, "").length == 0) {
+    	alert("내용을 입력해주세요.");
+    	$("#profile_context").focus();
+ 	} else {
+		$.ajax({
+			url : "/updateContext",
+			data : {
+				"user_code" : user_code,
+				"profile_context" : profile_context
+			},
+			async : true,
+			type : "POST",
+			success: function(){
+				$('#profile_introduce').css('display','block');
+				$('#profile_textarea').css('display','none');
+				$('#profile_introduce').text(profile_context);
+			}
+		});
+	}
+}
+
+function cancelMessage() {
+	$('#profile_introduce').css('display','block');
+	$('#profile_textarea').css('display','none');
 }
 
 $(document).ready(function(){

@@ -277,24 +277,7 @@
     	DELETE grade_tbl
     	WHERE grade_code = #{grade_code}
     </delete>
-    
-    
-    <!-- 게임상세페이지 댓글 가져오기 -->
-    <!-- <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
-    	SELECT grade_code, 
-	    g.user_code AS user_code,  
-	    u.user_nickname AS user_nickname,
-	    grade_context, 
-	    grade_regdate,
-	    grade_rate,
-	    u.user_picture AS user_picture 
-		FROM user_tbl u, grade_tbl g
-	    WHERE game_code = #{game_code}
-	    AND u.user_code = g.user_code
-	    ORDER BY grade_regdate DESC
-    </select> -->
-    
-    
+
     <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO">
     	SELECT * FROM
     	(SELECT ROW_NUMBER() OVER(ORDER by grade_regdate DESC) AS row_num,
@@ -311,52 +294,46 @@
         WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
 	    ORDER BY grade_regdate DESC
     </select>
-    
-    
-    	<!-- 해당 게임 댓글 개수 -->
+
+    <!-- 해당 게임 댓글 개수 -->
     <select id="CountAllReply" resultType="int" parameterType="int">
-		SELECT count(*) FROM grade_tbl WHERE game_code = #{game_code} GROUP BY game_code
+		SELECT count(*) FROM grade_tbl WHERE game_code = #{game_code}
 	</select>
 
 
-    	<!-- 게임상세페이지에서 게임 평점 비율 보기 -->
+    <!-- 게임상세페이지에서 게임 평점 비율 보기 -->
     <select id="SelectGradeRatebyGameCode" resultType="com.stim.vo.GameReplyVO" parameterType="int">
 	    SELECT grade_rate 
 		FROM grade_tbl
 		where game_code = #{game_code}
     </select>
 
-
-    	<!-- 관리자가 게임 삭제 -->
+    <!-- 관리자가 게임 삭제 -->
     <delete id="deleteGame" parameterType="int">
     	DELETE FROM game_tbl WHERE game_code = #{game_code} 
     </delete>
-    
-    
-    	<!-- 관리자가 게임 등록 -->
+
+    <!-- 관리자가 게임 등록 -->
     <insert id="insertGame" parameterType="com.stim.vo.GameVO">
     	INSERT INTO game_tbl
     	VALUES(game_code_seq.nextval, #{game_name}, #{game_price}, #{game_releaseDate}, #{game_developer}, #{game_distribution}, #{game_context}, 0, #{game_picture}, '')
     </insert>
-    
-    
-    	<!-- 게임 장르 등록 -->
+
+    <!-- 게임 장르 등록 -->
     <insert id="insertGenre" parameterType="com.stim.vo.GameVO">
     	INSERT INTO genre_tbl(genre_code, genre_1, genre_2, genre_3, game_code)
     	SELECT genre_code_seq.nextval, #{genre_1}, #{genre_2}, #{genre_3},
     	game_code FROM game_tbl WHERE game_name = #{game_name}
     </insert>
     
-    
-    	<!-- 관리자가 게임 정보 수정 -->
+    <!-- 관리자가 게임 정보 수정 -->
     <update id="updateGame" parameterType="com.stim.vo.GameVO">
 		UPDATE game_tbl SET game_name=#{game_name}, game_price=#{game_price}, game_releaseDate=#{game_releaseDate},
 		game_developer=#{game_developer}, game_distribution=#{game_distribution}, game_context=#{game_context},
 		game_picture=#{game_picture} WHERE game_code = #{game_code}
     </update>
-    
-    
-    	<!-- 게임 장르 수정 -->
+
+    <!-- 게임 장르 수정 -->
     <update id="updateGenre" parameterType="com.stim.vo.GameVO">
     	UPDATE genre_tbl SET genre_1 = #{genre_1}, genre_2 = #{genre_2}, genre_3 = #{genre_3}
     	WHERE game_code = #{game_code}

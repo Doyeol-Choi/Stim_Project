@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
+import com.stim.vo.Pagination;
 
 @Mapper
 public interface StimGameListMapper {

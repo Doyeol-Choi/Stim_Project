@@ -81,7 +81,7 @@ function deleteReply(grade_code){
 	});
 }
 
-function inputReply(){
+function inputReply(currentPage){
 	let user_code = $("#user_code").val();
 	let game_code = $("#game_code").val();
 	let grade_context = $("#grade_context").val();
@@ -113,17 +113,18 @@ function inputReply(){
 				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
 				html += "</div>";
 				
-				$("#reply_lists").prepend(html);
-				
+				if(currentPage==1) {
+					$("#reply_lists").prepend(html);
+					if($("#reply_lists").children().length >= 5) {
+						$("#reply_lists").children().last().remove();
+					}	
+				}
 				changeHeight();
 			},
 			error : function(){
 				alert('추가 실패');
 			}	
 		});
-		if($("#reply_lists").children().length >= 5) {
-			$("#reply_lists").children().last().remove();
-		}
 		$("#grade_context").val("");
 		$("input[name='grade_rate']").prop("checked", false);
 		$('.textCount').text('0');
