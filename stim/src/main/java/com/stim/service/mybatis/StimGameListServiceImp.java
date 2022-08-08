@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stim.model.mapper.StimGameListMapper;
-import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 
@@ -69,6 +68,57 @@ public class StimGameListServiceImp implements StimGameListService {
 	@Override
 	public List<GameVO> SelectGameListByTagAndPrice(String tagSearch, int price) throws Exception {
 		List<GameVO> tagList = stimGameListMapper.SelectGameListByTagAndPrice(tagSearch, price);
+		return tagList;
+	}
+	
+	// 인기 게임 중에서 태그로 검색하기
+	@Override
+	public List<GameVO> SelectGameListPopByTags(String tag) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListPopByTags(tag);
+		return tagList;
+	}
+	@Override
+	public List<GameVO> SelectGameListPopByPrice(int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListPopByPrice(price);
+		return tagList;
+	}
+	@Override
+	public List<GameVO> SelectGameListPopByTagsAndPrice(String tagSearch, int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListPopByTagsAndPrice(tagSearch, price);
+		return tagList;
+	}
+	
+	// 최신 게임 중에서 태그로 검색하기
+	@Override
+	public List<GameVO> SelectGameListNewByTags(String tag) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListNewByTags(tag);
+		return tagList;
+	}
+	@Override
+	public List<GameVO> SelectGameListNewByPrice(int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListNewByPrice(price);
+		return tagList;
+	}
+	@Override
+	public List<GameVO> SelectGameListNewByTagsAndPrice(String tagSearch, int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListNewByTagsAndPrice(tagSearch, price);
+		return tagList;
+	}
+	
+	// 할인 게임 중에서 태그로 검색하기
+	@Override
+	public List<GameVO> SelectGameListSaleByTags(String tag) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListSaleByTags(tag);
+		return tagList;
+	}
+	@Override
+	public List<GameVO> SelectGameListSaleByPrice(int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListSaleByPrice(price);
+		return tagList;
+	}
+	@Override
+	public List<GameVO> SelectGameListSaleByTagsAndPrice(String tagSearch, int price) throws Exception {
+		List<GameVO> tagList = stimGameListMapper.SelectGameListSaleByTagsAndPrice(tagSearch, price);
 		return tagList;
 	}
 	
@@ -170,10 +220,22 @@ public class StimGameListServiceImp implements StimGameListService {
 	}
 
 	// 게임 상세페이지 댓글 가져오기
+//	@Override
+//	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception {
+//		
+//		return stimGameListMapper.SelectALLReply(game_code, criteria);
+//	}
+	
+	// 게임 상세페이지 댓글 가져오기
 	@Override
-	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception {
+	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception {
 		
-		return stimGameListMapper.SelectALLReply(game_code, criteria);
+		return stimGameListMapper.SelectALLReply(game_code);
+	}
+	
+	@Override
+	public List<GameReplyVO> SelectALLReply(int game_code, int firstRecordIndex , int lastRecordIndex) throws Exception {
+		return stimGameListMapper.SelectALLReply(game_code, firstRecordIndex, lastRecordIndex);
 	}
 
 	// 게임상세페이지 댓글 총 갯수
@@ -196,7 +258,40 @@ public class StimGameListServiceImp implements StimGameListService {
 	public void deleteGame(int game_code) throws Exception {
 		stimGameListMapper.deleteGame(game_code);
 	}
-	
-	
+
+	// 게임 등록 => 관리자
+	@Override
+	@Transactional
+	public void insertGame(GameVO gVo) throws Exception {
+		stimGameListMapper.insertGame(gVo);
+		
+	}
+
+	// 게임 수정 => 관리자
+	@Override
+	@Transactional
+	public void updateGame(GameVO gVo) throws Exception {
+		stimGameListMapper.updateGame(gVo);
+	}
+
+	// 게임 장르 등록 => 관리자
+	@Override
+	@Transactional
+	public void insertGenre(GameVO gVo) throws Exception {
+		stimGameListMapper.insertGenre(gVo);
+	}
+
+	// 게임 장르 수정 => 관리자
+	@Override
+	@Transactional
+	public void updateGenre(GameVO gVo) throws Exception {
+		stimGameListMapper.updateGenre(gVo);
+	}
+
+
+
+
+
+
 	
 }

@@ -29,7 +29,7 @@
     			<div class="userListBox" th:each="user:${userList}">
     				<img th:src="@{'/image/profile/' + ${user.user_picture}}" th:onclick="|location.href='/profile/${user.user_code}'|">
     				<span id="userNick" th:text="${user.user_nickname}" th:onclick="|location.href='/profile/${user.user_code}'|"></span>
-    				<div class="friend_btn" th:id="|beforeAjax${user.user_code}|" sec:authorize="isAuthenticated()">
+    				<div class="friend_btn" th:id="|beforeAjax${user.user_code}|" sec:authorize="isAuthenticated()" th:if="${user.user_code != #authentication.principal.user_code}">
 	    				<button th:if="${#strings.isEmpty(user.friend_accepted)}" th:onclick="|friendRequset(${user.user_code})|">친구 요청</button>
 	    				<span th:if="${#strings.equals(user.friend_accepted, 'N')}">친구 요청 중...</span>
 	    				<button th:if="${#strings.equals(user.friend_accepted, 'N')}" th:onclick="|friendRequsetCancle(${user.user_code})|">요청 취소</button>

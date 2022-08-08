@@ -26,7 +26,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class StimUserController {
 
-	@Resource
 	private final StimUserService stimUserService;
 	
 	// 약관동의 후 올때만 step2로 이동
@@ -199,9 +198,8 @@ public class StimUserController {
 					List<SearchUserVO> userList = new ArrayList<>();
 					for(int code : randomList) {
 						SearchUserVO randomUser = stimUserService.SearchUserByCodeLogin(code, login_code);
-						if(randomUser.getUser_code() != login_code) {
-							userList.add(randomUser);							
-						}
+						userList.add(randomUser);							
+						
 						mav.addObject("userList", userList);
 					} 
 				} catch (Exception e) {

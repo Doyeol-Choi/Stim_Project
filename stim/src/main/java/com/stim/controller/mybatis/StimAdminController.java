@@ -1,17 +1,25 @@
 package com.stim.controller.mybatis;
 
 
-import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stim.service.mybatis.StimGameListService;
@@ -25,8 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 public class StimAdminController {
-	
-	@Resource
+
 	private final StimUserService stimUserService;
 	
 	@Resource
@@ -163,4 +170,105 @@ public class StimAdminController {
 		return mav;
 	}
 
+	
+	// 게임 등록
+	@PostMapping("/addGame")
+	public ModelAndView addGame(@RequestParam("picture") MultipartFile file, 
+								@RequestParam("releaseDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date releaseDate,
+								GameVO gVo, Authentication authentication) {
+		ModelAndView mav = new ModelAndView();
+		if(authentication != null) {
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			if (uVo.getUser_admin().equals("Y")) {
+				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
+				String uuid = UUID.randomUUID().toString();
+				String picName = uuid + "_" + file.getOriginalFilename();
+				File savePic = new File(path + "/" + picName);
+				gVo.setGame_picture(picName);
+				try {
+					file.transferTo(savePic);
+				} catch (IllegalStateException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				try {
+					gVo.setGame_releaseDate(releaseDate);
+					stimGameListService.insertGame(gVo);
+					stimGameListService.insertGenre(gVo);
+					mav.setViewName("redirect:/adminPage");
+					return mav; 
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		mav.setViewName("redirect:/");
+		return mav;
+	}
+	
+	// 게임 수정 폼으로 이동
+	@GetMapping("/updateGameForm")
+	public ModelAndView updateGameForm(@RequestParam("game_code") int game_code, Authentication authentication) {
+		ModelAndView mav = new ModelAndView();
+		if(authentication != null) {
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			if (uVo.getUser_admin().equals("Y")) {
+				try {
+					GameVO gVo = stimGameListService.SelectGameDetailInfo(game_code);
+					mav.addObject("game", gVo);
+					mav.setViewName("/admin/adminGameUpdate");
+					return mav; 
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		mav.setViewName("redirect:/");
+		return mav;
+	}
+	
+	// 게임 수정 => 관리자
+	@PostMapping("/updateGame")
+	public ModelAndView updateGame(@RequestPart(value="picture",required = false) MultipartFile file, 
+									@RequestParam("originPic") String originPic,
+									@RequestParam("releaseDate")@DateTimeFormat(pattern = "yyyy-MM-dd") Date releaseDate,
+									GameVO gVo, Authentication authentication) {
+		ModelAndView mav = new ModelAndView();
+		if(authentication != null) {
+			UserVO uVo = (UserVO) authentication.getPrincipal();
+			if (uVo.getUser_admin().equals("Y")) {
+				if(!file.isEmpty()) {
+					String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
+					String uuid = UUID.randomUUID().toString();
+					String picName = uuid + "_" + file.getOriginalFilename();
+					File savePic = new File(path + "/" + picName);
+					try {
+						file.transferTo(savePic);
+					} catch (IllegalStateException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+					gVo.setGame_picture(picName);
+					File deletePic = new File(path + "/" + originPic);
+					deletePic.delete();
+				} else {
+					gVo.setGame_picture(originPic);
+				}
+				try {
+					gVo.setGame_releaseDate(releaseDate);
+					stimGameListService.updateGame(gVo);
+					stimGameListService.updateGenre(gVo);
+					mav.setViewName("redirect:/adminPage");
+					return mav; 
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		mav.setViewName("redirect:/");
+		return mav;
+	}
+	
 }

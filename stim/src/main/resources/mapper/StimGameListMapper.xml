@@ -32,14 +32,14 @@
 		ON gm.game_code = gn.game_code
 	</sql>
 	
-	<!-- 게임 상점 목록 출력 (게임 코드 내림차순) -->
+	
+		<!-- [헤더] 게임 상점 목록 출력 (게임 코드 내림차순) -->
     <select id="SelectAllGameList" resultMap="gameMap">
        <include refid="selectAll" />
 		ORDER BY gm.game_code DESC
     </select>
     
-    
-    <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) -->
+    	<!-- [네비게이션] 최신 top 10 게임 목록 출력 (게임 날짜 최신/내림차순) -->
     <select id="SelectNewestGameList" resultMap="gameMap">
         SELECT * FROM
         (<include refid="selectAll" />
@@ -47,8 +47,7 @@
         WHERE rownum <![CDATA[<=]]> 10
     </select>
     
-    
-    <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) -->
+    	<!-- [네비게이션] 인기 top 10 게임 목록 출력 (게임 판매량 내림차순) -->
     <select id="SelectPopularGameList" resultMap="gameMap">
 		SELECT * FROM
      	(<include refid="selectAll" />
@@ -56,8 +55,15 @@
      	WHERE rownum <![CDATA[<=]]> 10
     </select>
     
+    	<!-- [네비게이션] 할인하는 게임 10개 목록 출력 -->
+    <select id="SelectNumForSale" resultMap="gameMap">
+    	<include refid="selectAll" />
+		WHERE gm.game_discount IS NOT NULL
+		ORDER BY gm.game_code DESC
+    </select>
     
-    <!-- 특정 키워드에 따라 검색된 게임 목록 출력 -->
+    
+    	<!-- [네비게이션] 특정 키워드에 따라 검색된 게임 목록 출력 -->
     <select id="SelectGameListByKeyword" resultMap="gameMap" parameterType="String">
     	<include refid="selectAll" />
 		<if test="keyword != null">
@@ -69,14 +75,13 @@
     </select>
 
    
-   <!-- 장르에 검색한 tag가 포함되어 있는 게임 목록 출력  -->
+   		<!-- [전체 검색] 장르에 검색한 tag가 포함되어 있는 게임 목록 출력  -->
     <select id="SelectGameListByTags" resultMap="gameMap">
     	<include refid="selectAll" />
 		WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
 		ORDER BY gm.game_code DESC
     </select>
-   
-   	<!-- 가격만 선택하고, 선택한 값 이하의 게임 목록을 출력 -->
+   		<!-- [전체 검색] 가격만 선택하고, 선택한 값 이하의 게임 목록을 출력 -->
     <select id="SelectAllGameListByPrice" resultMap="gameMap" parameterType="int">
        	<include refid="selectAll" />
        	<where>
@@ -86,8 +91,7 @@
 		</where>
 		ORDER BY gm.game_code DESC
     </select> 
-    
-    <!-- 가격을 선택하고, 태그도 직접 입력하여 검색할 때 -->
+    	<!-- [전체 검색] 가격을 선택하고, 태그도 직접 입력하여 검색할 때 -->
      <select id="SelectGameListByTagAndPrice" resultMap="gameMap" parameterType="com.stim.vo.GameVO">
     	<include refid="selectAll" />
 		<where>
@@ -100,34 +104,131 @@
     </select>
     
     
-    <!-- 할인하는 게임 목록 출력 -->
-    <select id="SelectNumForSale" resultMap="gameMap">
-    	<include refid="selectAll" />
-		WHERE gm.game_discount IS NOT NULL
-		ORDER BY gm.game_code DESC
+    	<!-- [인기 검색] 장르에 검색한 tag가 포함되어 있는 게임 목록 출력 -->
+    <select id="SelectGameListPopByTags" resultMap="gameMap">
+    	SELECT * FROM
+		     	(<include refid="selectAll" />
+				ORDER BY gm.game_salesRate DESC)
+		WHERE rownum <![CDATA[<=]]> 10
+		AND game_salesrate <![CDATA[>=]]> (SELECT MIN(game_salesrate) 
+		                        FROM (SELECT * FROM game_tbl ORDER BY game_salesRate DESC)
+		                        WHERE rownum <![CDATA[<=]]> 10)
+		AND (genre_1 = #{tagSearch} OR genre_2 = #{tagSearch} OR genre_3 = #{tagSearch})
+    </select>
+       <!-- [인기 검색] 가격만 선택하고, 선택한 값 이하의 게임 목록 출력 -->
+    <select id="SelectGameListPopByPrice" resultMap="gameMap">
+    	SELECT * FROM
+		     	(<include refid="selectAll" />
+				ORDER BY gm.game_salesRate DESC)
+		WHERE rownum <![CDATA[<=]]> 10
+		AND game_salesrate <![CDATA[>=]]> (SELECT MIN(game_salesrate) 
+		                        FROM (SELECT * FROM game_tbl ORDER BY game_salesRate DESC)
+		                        WHERE rownum <![CDATA[<=]]> 10)
+		AND GAME_FINALPRICE <![CDATA[<=]]> #{price}
+    </select>
+    	<!-- [인기 검색] 가격을 선택하고, 태그도 직접 입력하여 검색할 때 -->
+    <select id="SelectGameListPopByTagsAndPrice" resultMap="gameMap" parameterType="com.stim.vo.GameVO">
+    	SELECT * FROM
+		     	(<include refid="selectAll" />
+				ORDER BY gm.game_salesRate DESC)
+		WHERE rownum <![CDATA[<=]]> 10
+		AND game_salesrate <![CDATA[>=]]> (SELECT MIN(game_salesrate) 
+		                        FROM (SELECT * FROM game_tbl ORDER BY game_salesRate DESC)
+		                        WHERE rownum <![CDATA[<=]]> 10)
+		AND (genre_1 = #{tagSearch} OR genre_2 = #{tagSearch} OR genre_3 = #{tagSearch})
+		AND GAME_FINALPRICE <![CDATA[<=]]> #{price}
+    </select>
+       
+    
+        <!-- [최신 검색] 장르에 검색한 tag가 포함되어 있는 게임 목록 출력 -->
+    <select id="SelectGameListNewByTags" resultMap="gameMap">
+    	SELECT * FROM
+		     	(<include refid="selectAll" />
+				ORDER BY gm.game_releaseDate DESC)
+		WHERE rownum <![CDATA[<=]]> 10
+		AND game_releaseDate <![CDATA[>=]]> (SELECT MIN(game_releaseDate) 
+		                        FROM (SELECT * FROM game_tbl ORDER BY game_releaseDate DESC)
+		                        WHERE rownum <![CDATA[<=]]> 10)
+		AND (genre_1 = #{tagSearch} OR genre_2 = #{tagSearch} OR genre_3 = #{tagSearch})
+    </select>
+       <!-- [최신 검색] 가격만 선택하고, 선택한 값 이하의 게임 목록 출력 -->
+    <select id="SelectGameListNewByPrice" resultMap="gameMap">
+    	SELECT * FROM
+		     	(<include refid="selectAll" />
+				ORDER BY gm.game_releaseDate DESC)
+		WHERE rownum <![CDATA[<=]]> 10
+		AND game_releaseDate <![CDATA[>=]]> (SELECT MIN(game_releaseDate) 
+		                        FROM (SELECT * FROM game_tbl ORDER BY game_releaseDate DESC)
+		                        WHERE rownum <![CDATA[<=]]> 10)
+		AND GAME_FINALPRICE <![CDATA[<=]]> #{price}
+    </select>
+    	<!-- [최신 검색] 가격을 선택하고, 태그도 직접 입력하여 검색할 때 -->
+    <select id="SelectGameListNewByTagsAndPrice" resultMap="gameMap" parameterType="com.stim.vo.GameVO">
+    	SELECT * FROM
+		     	(<include refid="selectAll" />
+				ORDER BY gm.game_releaseDate DESC)
+		WHERE rownum <![CDATA[<=]]> 10
+		AND game_releaseDate <![CDATA[>=]]> (SELECT MIN(game_releaseDate) 
+		                        FROM (SELECT * FROM game_tbl ORDER BY game_releaseDate DESC)
+		                        WHERE rownum <![CDATA[<=]]> 10)
+		AND (genre_1 = #{tagSearch} OR genre_2 = #{tagSearch} OR genre_3 = #{tagSearch})
+		AND GAME_FINALPRICE <![CDATA[<=]]> #{price}
     </select>
     
     
-    <!-- 게임 상세 페이지 정보 -->
+    	<!-- [할인 검색] 장르에 검색한 tag가 포함되어 있는 게임 목록 출력 -->
+    <select id="SelectGameListSaleByTags" resultMap="gameMap" parameterType="com.stim.vo.GameVO">
+    	<include refid="selectAll" />
+		WHERE (gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch})
+		AND gm.game_discount IS NOT NULL
+    </select>
+    	<!-- [할인 검색] 가격만 선택하고, 선택한 값 이하의 게임 목록 출력 -->
+    <select id="SelectGameListSaleByPrice" resultMap="gameMap">
+    	<include refid="selectAll" />
+       	<where>
+		    CASE WHEN gm.game_discount IS NULL AND gm.game_price <![CDATA[<=]]> #{price} THEN 0
+		    WHEN gm.game_discount IS NOT NULL AND gm.game_price*(1-(gm.game_discount/100)) <![CDATA[<=]]> #{price} THEN 1
+		    ELSE 0 END = 1
+		</where>
+		ORDER BY gm.game_code DESC
+    </select>
+    	<!-- [할인 검색] 가격을 선택하고, 태그도 직접 입력하여 검색할 때 -->
+    <select id="SelectGameListSaleByTagsAndPrice" resultMap="gameMap" parameterType="com.stim.vo.GameVO">
+    	<include refid="selectAll" />
+       	<where>
+       		(gn.genre_1=#{tagSearch} OR gn.genre_2=#{tagSearch} OR gn.genre_3=#{tagSearch}) 
+			AND
+		    CASE WHEN gm.game_discount IS NULL AND gm.game_price <![CDATA[<=]]> #{price} THEN 0
+		    WHEN gm.game_discount IS NOT NULL AND gm.game_price*(1-(gm.game_discount/100)) <![CDATA[<=]]> #{price} THEN 1
+		    ELSE 0 END = 1
+		</where>
+		ORDER BY gm.game_code DESC
+    </select>
+
+    
+    
+    	<!-- 게임 상세 페이지 정보 -->
     <select id="SelectGameDetailInfo" resultMap="gameMap">
     	<include refid="selectAll" />
    		WHERE gm.game_code = #{game_code}
     </select>
     
     
-    <!-- 할인 목록 삭제 -->
+    	<!-- 할인 목록 삭제 -->
     <update id="discountListRemove">
     	UPDATE game_tbl SET game_discount = ''
     </update>
     
-    <!-- 할인 목록 생성 -->
+    
+    	<!-- 할인 목록 생성 -->
     <update id="createDiscountList" parameterType="map">
     	UPDATE game_tbl SET game_discount = #{discount}
     	WHERE game_code = (SELECT g.game_code FROM (SELECT rownum AS rownumber, game_code FROM game_tbl) 
     	g WHERE g.rownumber = #{code})
     </update>
     
-    <!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) 메인페이지용 -->
+    
+    	<!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) 메인페이지용 -->
     <select id="SelectNewestGameListMain" resultMap="gameMap">
 		SELECT * FROM
         (<include refid="selectAll" />
@@ -136,7 +237,7 @@
     </select>
     
     
-    <!-- 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용 -->
+    	<!-- 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용 -->
     <select id="SelectPopularGameListMain" resultMap="gameMap">
 		SELECT * FROM
      	(<include refid="selectAll" />
@@ -144,14 +245,16 @@
      	WHERE rownum <![CDATA[<=]]> 3
     </select>
     
-    <!-- 게임상세페이지에 댓글 입력-->
+    
+    	<!-- 게임상세페이지에 댓글 입력-->
     <insert id="InsertReply" parameterType="com.stim.vo.GameReplyVO">
     	INSERT INTO grade_tbl
     	VALUES (grade_code_seq.nextval, #{user_code},
     	 #{game_code}, #{grade_context}, sysdate, #{grade_rate})
     </insert>
     
-    <!-- 해당 게임 상세페이지에 가장 마지막 작성된 댓글 가져오기 -->
+    
+    	<!-- 해당 게임 상세페이지에 가장 마지막 작성된 댓글 가져오기 -->
     <select id="SelectLastReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
     	SELECT * FROM
     	(SELECT grade_code, 
@@ -168,15 +271,16 @@
     	   WHERE rownum <![CDATA[<=]]> 1
     </select>
     
-    <!-- 게임 상세페이지 댓글 삭제 -->
+    
+    	<!-- 게임 상세페이지 댓글 삭제 -->
     <delete id="DeleteReplyByCode" parameterType="int">
     	DELETE grade_tbl
     	WHERE grade_code = #{grade_code}
     </delete>
     
-     <!-- 게임상세페이지 댓글 가져오기 -->
-    <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
-    	<![CDATA[
+    
+    <!-- 게임상세페이지 댓글 가져오기 -->
+    <!-- <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
     	SELECT grade_code, 
 	    g.user_code AS user_code,  
 	    u.user_nickname AS user_nickname,
@@ -184,54 +288,78 @@
 	    grade_regdate,
 	    grade_rate,
 	    u.user_picture AS user_picture 
-		FROM 
-		(
-			SELECT /*+ INDEX_DESC(grade_tbl grade_code)*/
-			ROWNUM R,  grade_code, 
-		    g.user_code AS user_code,  
-		    u.user_nickname AS user_nickname,
-		    grade_context, 
-		    grade_regdate,
-		    grade_rate,
-		    u.user_picture AS user_picture
-		    FROM user_tbl u, grade_tbl g
-		    WHERE game_code = #{game_code}
-		    AND u.user_code = g.user_code
-		    AND ROWNUM <=#{pageNum} * #{amount}
-	    )
-	    WHERE R> (#{pageNum}-1) * #{amount}
-	    ]]>
+		FROM user_tbl u, grade_tbl g
+	    WHERE game_code = #{game_code}
+	    AND u.user_code = g.user_code
+	    ORDER BY grade_regdate DESC
+    </select> -->
+    
+    
+    <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO">
+    	SELECT * FROM
+    	(SELECT ROW_NUMBER() OVER(ORDER by grade_regdate DESC) AS row_num,
+    	grade_code, 
+	    g.user_code AS user_code,  
+	    u.user_nickname AS user_nickname,
+	    grade_context, 
+	    grade_regdate,
+	    grade_rate,
+	    u.user_picture AS user_picture 
+		FROM user_tbl u, grade_tbl g
+	    WHERE game_code = #{game_code}
+	    AND u.user_code = g.user_code)
+        WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+	    ORDER BY grade_regdate DESC
     </select>
+    
+    
+    	<!-- 해당 게임 댓글 개수 -->
+    <select id="CountAllReply" resultType="int" parameterType="int">
+		SELECT count(*) FROM grade_tbl WHERE game_code = #{game_code} GROUP BY game_code
+	</select>
 
-    <!-- 게임상세페이지에서 게임 평점 비율 보기 -->
+
+    	<!-- 게임상세페이지에서 게임 평점 비율 보기 -->
     <select id="SelectGradeRatebyGameCode" resultType="com.stim.vo.GameReplyVO" parameterType="int">
 	    SELECT grade_rate 
 		FROM grade_tbl
 		where game_code = #{game_code}
     </select>
 
-<!--     <![CDATA[
-        SELECT BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
-        FROM
-        (
-            /*알리아스를 붙인 컬럼에 WHERE절에서 접근할 때에는 FROM 절에 작성된 테이블의 컬럼과 동일한 이름으로만 사용이 가능하다.*/
-            SELECT /*+ INDEX_DESC(TBL_BOARD PK_BOARD) */
-            ROWNUM R, BNO, TITLE, CONTENT, WRITER, REGDATE, UPDATEDATE
-            FROM TBL_BOARD
-            WHERE ROWNUM <= #{pageNum} * #{amount}
-        )
-           WHERE R> (#{pageNum}-1) * #{amount}
-        ]]>
-    
-     -->
-     
-	<select id="CountAllReply" resultType="com.stim.vo.PageVO" parameterType="int">
-		SELECT count(*)AS total FROM grade_tbl WHERE game_code #{game_code}
-	</select>
 
-    <!-- 관리자가 게임 삭제 -->
+    	<!-- 관리자가 게임 삭제 -->
     <delete id="deleteGame" parameterType="int">
     	DELETE FROM game_tbl WHERE game_code = #{game_code} 
     </delete>
+    
+    
+    	<!-- 관리자가 게임 등록 -->
+    <insert id="insertGame" parameterType="com.stim.vo.GameVO">
+    	INSERT INTO game_tbl
+    	VALUES(game_code_seq.nextval, #{game_name}, #{game_price}, #{game_releaseDate}, #{game_developer}, #{game_distribution}, #{game_context}, 0, #{game_picture}, '')
+    </insert>
+    
+    
+    	<!-- 게임 장르 등록 -->
+    <insert id="insertGenre" parameterType="com.stim.vo.GameVO">
+    	INSERT INTO genre_tbl(genre_code, genre_1, genre_2, genre_3, game_code)
+    	SELECT genre_code_seq.nextval, #{genre_1}, #{genre_2}, #{genre_3},
+    	game_code FROM game_tbl WHERE game_name = #{game_name}
+    </insert>
+    
+    
+    	<!-- 관리자가 게임 정보 수정 -->
+    <update id="updateGame" parameterType="com.stim.vo.GameVO">
+		UPDATE game_tbl SET game_name=#{game_name}, game_price=#{game_price}, game_releaseDate=#{game_releaseDate},
+		game_developer=#{game_developer}, game_distribution=#{game_distribution}, game_context=#{game_context},
+		game_picture=#{game_picture} WHERE game_code = #{game_code}
+    </update>
+    
+    
+    	<!-- 게임 장르 수정 -->
+    <update id="updateGenre" parameterType="com.stim.vo.GameVO">
+    	UPDATE genre_tbl SET genre_1 = #{genre_1}, genre_2 = #{genre_2}, genre_3 = #{genre_3}
+    	WHERE game_code = #{game_code}
+    </update>
 
 </mapper>

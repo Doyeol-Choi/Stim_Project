@@ -7,7 +7,8 @@
 	<link rel="shortcut icon" th:href="@{/image/favicon.ico}">
 	<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/css/game/gameList.css?after}">
+	<link th:if="${#strings.isEmpty(tag)}" rel="stylesheet" type="text/css" th:href="@{/css/game/gameSearch.css?after}">
+	<link th:if="${not #strings.isEmpty(tag)}" rel="stylesheet" type="text/css" th:href="@{/css/game/gameTagSearch.css}">
 </head>
 <body>
     <!-- header fragment 사용 -->
@@ -15,7 +16,9 @@
     <!-- <th:block th:if="" th:replace="fragments/header/headerLogin :: headerFragment"></th:block> 로그인시 띄울 헤더 -->
     <div id="container">
 	    <div id = "gameLists">
-	   		<h1>인기 top 10</h1>			
+	   		<h1>인기 top 10</h1>
+	   		<p th:text="${gameList.size} + '개의 항목이 검색되었습니다.'" id = "searchNum"/>
+			<p th:if="${not #strings.isEmpty(tag)}" th:text="'선택한 태그 항목: ' + ${tag}" id="selectWhat" />
 	   		<div id="gameList" class="games">
 				<table id="gameListTable">
 					<tr>
@@ -25,8 +28,8 @@
 						<th>가격</th>
 						<th>장르</th>
 					</tr>
-					<tr th:each="list: ${gameList}" id="gtable">
-						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
+					<tr th:if="${#strings.isEmpty(tag)}" th:each="list: ${gameList}" id="gtable">
+						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}" alt="gameImg"></td>
 						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
 						<td th:if="${list.game_finalPrice}==${list.game_price}" th:text="￦+${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
@@ -45,13 +48,34 @@
 						    [[${list.genre_3}]]
 						</td>
 					</tr>
+					<tr th:if="${not #strings.isEmpty(tag)}" th:each="list: ${gameList}" id="gtable">
+						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
+						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
+						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
+						<td th:if="${list.game_finalPrice}==${list.game_price}" th:text="￦+${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
+						<td th:if="${list.game_finalPrice}!=${list.game_price}" id="gSetPrice2">
+						    <span style="color:white; font-size:10px; text-decoration: line-through;">원가 : [[${#numbers.formatInteger(list.game_price, 0, 'COMMA')}]]</span>
+						    <br>
+	    				    <span style="color:white; font-size:12px; background-color: #00AEEF; padding: 2px;">[[${list.game_discount}]]%</span>
+	    				    <br>
+	    				    <span id="salePrice">￦[[${#numbers.formatInteger(list.game_finalPrice, 0, 'COMMA')}]]</span>
+						</td>
+						<td th:inline="text" id="gTags">
+						    [[${list.genre_1}]]
+						    <br><br>
+						    [[${list.genre_2}]]
+						    <br><br>
+						    [[${list.genre_3}]]
+						</td>
+						</th:block>
+					</tr>
 				</table>
 			</div>
 			<div id="tagSearchBar" class="games">
 				<h3>필터</h3>
 				<input type="button" id="reset" onclick="location.href='/gameList'" value="초기화">
 				
-				<form action="gameListTagSearch">
+				<form action="gameListPopularTagSearch">
 					<input type="text" name="tagSearch" id="tagSearch" placeholder="기타 태그 검색">
 					<input type="submit" id="button" value="검색">
 					<div id="priceTagSearch" class="tagSearches">

@@ -172,6 +172,28 @@
 	cursor: pointer;
 }
 
+.paginate {
+	margin: 10px;
+	text-align: center;
+}
+
+.prevBtn, .nextBtn {
+	display: inline-block;
+	margin: 0 10px;
+}
+
+.naviText {
+	color: white;
+}
+
+.naviTextB {
+	color: rgba(0,0,0,0.3);
+}
+
+.pageText {
+	color: white;
+}
+
 
 /* 바 */
 #gameInfo{

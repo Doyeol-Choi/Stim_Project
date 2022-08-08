@@ -37,7 +37,7 @@
 					</tr>
 					<tr th:each="list: ${gameList}" id="gtable">
 						<td id="gImage"><img th:src="@{/image/game/} + ${list.game_picture}"></td>
-						<td><a th:href="@{/gameDetailView(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
+						<td><a th:href="@{/updateGameForm(game_code = ${list.game_code})}" th:text="${list.game_name}" id="gn"></a></td>
 						<td th:text="${#dates.format(list.game_releaseDate, 'yyyy-MM-dd')}" id= "gReleaseDate"></td>
 						<td th:if="${list.game_finalPrice}==${list.game_price}" th:text="￦+${#numbers.formatInteger(list.game_price, 0, 'COMMA')}" id="gSetPrice"></td>
 						<td th:if="${list.game_finalPrice}!=${list.game_price}" id="gSetPrice2">
