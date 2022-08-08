@@ -208,7 +208,7 @@
     
     <!-- 해당 게임 댓글 개수 -->
     <select id="CountAllReply" resultType="int" parameterType="int">
-		SELECT count(*) FROM grade_tbl WHERE game_code = #{game_code} GROUP BY game_code
+		SELECT count(*) FROM grade_tbl WHERE game_code = #{game_code}
 	</select>
 
     <!-- 게임상세페이지에서 게임 평점 비율 보기 -->

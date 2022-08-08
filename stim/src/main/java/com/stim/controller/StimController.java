@@ -176,7 +176,7 @@ public class StimController {
 		
 		String context = stimProfileService.SelectProfileContext(user_code);
 		
-		if(context == null ) {
+		if(context==null) {
 			stimProfileService.insertProfileContext(user_code, profile_context);
 		}
 		else {

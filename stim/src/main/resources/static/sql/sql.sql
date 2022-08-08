@@ -45,8 +45,8 @@ CREATE SEQUENCE cart_code_seq NOCACHE;
 -- 프로필 테이블
 CREATE TABLE profile_tbl(
     profile_code number PRIMARY KEY,
-    user_code number,
-    profile_context clob
+    user_code number unique,
+    profile_context clob not null
 );
 
 CREATE SEQUENCE profile_code_seq NOCACHE;

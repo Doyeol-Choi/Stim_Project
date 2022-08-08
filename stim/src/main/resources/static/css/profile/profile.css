@@ -94,6 +94,7 @@ div{
 	resize: none;
 	width: 600px;
 	height: 120px;
+	padding: 5px 10px;
 	background-color : transparent;
 	border-color : #00AEEF;
 	color : rgb(228, 228, 228);

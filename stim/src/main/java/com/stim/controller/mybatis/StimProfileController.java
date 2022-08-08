@@ -99,7 +99,6 @@ public class StimProfileController {
 				validatorResult = stimUserService.validateHandling(errors);
 				for (String key : validatorResult.keySet()) {
 					mav.addObject(key, validatorResult.get(key));
-					System.out.println("여기오지?");
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

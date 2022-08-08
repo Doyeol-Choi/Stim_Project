@@ -50,7 +50,7 @@
 								<textarea id="grade_context" name="grade_context" placeholder="댓글과 평점을 남겨주세요" ></textarea>
 								<span class="textCount">0</span>
     							<span class="textTotal">/230</span>
-								<input id="reply_submit" type="button" value="댓글 남기기" th:onclick="inputReply()">
+								<input id="reply_submit" type="button" value="댓글 남기기" th:onclick="|inputReply(${pagination.currentPage})|">
 								<label><input type="radio" id="grade_b" name="grade_rate" value="b">Bad</label>
 								<label><input type="radio" id="grade_g" name="grade_rate" value="g">Good</label>
 							</form>

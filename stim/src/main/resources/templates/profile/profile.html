@@ -33,7 +33,8 @@
 	            	<form action="">
 	            		<input id="profileUser_code" name="user_code" type="hidden" th:value="${user.user_code}">
 	            		<textarea id="profile_context" name="profile_context"></textarea>
-	            		<button type="button" th:onclick="edit_context()">작성</button>
+	            		<button type="button" onclick="cancelMessage()">취소</button>
+	            		<button type="button" onclick="edit_context()">작성</button>
 	            	</form>
 	            </div>
 	            <!--프로필 수정-->
