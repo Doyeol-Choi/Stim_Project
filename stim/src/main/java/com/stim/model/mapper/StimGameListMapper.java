@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 import com.stim.vo.Pagination;
@@ -58,7 +57,6 @@ public interface StimGameListMapper {
 	public void DeleteReplyByCode(int grade_code) throws Exception;
 
 	// 게임 상세페이지 댓글 가져오기
-//	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria)throws Exception;
 	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception;
 
 	public List<GameReplyVO> SelectALLReply(int game_code, int firstRecordIndex , int lastRecordIndex) throws Exception;

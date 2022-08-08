@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+#container {
+	min-height: 600px;
+	height:750px;
+}
+
+#content {
+	min-width: 600px;
+	width: 50%;
+	margin: 0 auto;
+	padding-top: 100px;
+	text-align: center;
+	color: white;
+	font-size: 1.6em;
+}
+
+#regText {
+	margin-top: 50px;
+	display: block;
+}
+
+#home_btn {
+	margin-top: 50px;
+	border-radius: 2px;
+    border: none;
+    padding: 1px;
+    display: inline-block;
+    cursor: pointer;
+    color: #c3e1f8;
+    background: transparent;
+    text-shadow: 1px 1px 0px rgb(0 0 0 / 30%);
+    margin-bottom: 20px;
+}
+
+#home_btn > span {
+	width: 150px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 20px;
+	border-radius: 2px;
+    display: block;
+	background: linear-gradient( to right, #47bfff 5%, #1a44c2 60%);
+    box-shadow: 2px 2px 5px rgb(0 0 0 / 20%);
+    background-position: 25%;
+    background-size: 330% 100%;
+}

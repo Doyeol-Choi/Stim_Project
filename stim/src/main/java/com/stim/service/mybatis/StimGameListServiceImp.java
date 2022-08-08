@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stim.model.mapper.StimGameListMapper;
-import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.GameVO;
 import com.stim.vo.Pagination;
@@ -170,13 +169,6 @@ public class StimGameListServiceImp implements StimGameListService {
 		
 	}
 
-	// 게임 상세페이지 댓글 가져오기
-//	@Override
-//	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria) throws Exception {
-//		
-//		return stimGameListMapper.SelectALLReply(game_code, criteria);
-//	}
-	
 	// 게임 상세페이지 댓글 가져오기
 	@Override
 	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception {
