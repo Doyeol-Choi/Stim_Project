@@ -219,7 +219,7 @@ public class StimGameListServiceImp implements StimGameListService {
 		stimGameListMapper.DeleteReplyByCode(grade_code);
 		
 	}
-	
+
 	// 게임 상세페이지 댓글 가져오기
 	@Override
 	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception {

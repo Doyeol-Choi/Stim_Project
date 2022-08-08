@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.service.mybatis.StimProfileService;
 import com.stim.service.user.StimUserService;
-import com.stim.vo.Criteria;
 import com.stim.vo.GameReplyVO;
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;

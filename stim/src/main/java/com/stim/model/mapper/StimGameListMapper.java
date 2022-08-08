@@ -73,7 +73,6 @@ public interface StimGameListMapper {
 	public void DeleteReplyByCode(int grade_code) throws Exception;
 
 	// 게임 상세페이지 댓글 가져오기
-//	public List<GameReplyVO> SelectALLReply(int game_code, Criteria criteria)throws Exception;
 	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception;
 
 	public List<GameReplyVO> SelectALLReply(int game_code, int firstRecordIndex , int lastRecordIndex) throws Exception;

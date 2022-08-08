@@ -51,6 +51,7 @@ public class StimWishCartController {
 		mav.setViewName("redirect:/loginForm");
 		return mav;
 	}
+	
 
 	// 장바구니 목록
 	@GetMapping("/cart/{user_code}")
@@ -74,17 +75,6 @@ public class StimWishCartController {
 		return mav;
 	}
 	
-	//찜목록 삭제	
-//	  @GetMapping("/delete_wish") 
-//	  public RedirectView DeleteWishGame(
-//			  @RequestParam("wish_code")int wish_code,
-//			  @RequestParam(value="user_code")int user_code) throws Exception {
-//	  stimWishCartService.DeleteWishGame(wish_code);  
-//	  
-//	  String asd = "/wish/"+ user_code;
-//	  
-//	  return new RedirectView(asd);
-//	  }
 	
 	//장바구니 삭제	
 	  @GetMapping("/delete_cart") 
@@ -107,27 +97,6 @@ public class StimWishCartController {
 		
 	  }
 	
-	 // ajax 사용 장바구니 삭제
-//	@PostMapping("/cart/delete_cart") 
-//	  public void DeleteCartGame(@RequestParam("cart_code") int cart_code) throws Exception {
-//
-//		stimWishCartService.DeleteCartGame(cart_code);  
-//		
-//	  }
-	
-	  // 찜목록에서 장바구니 넣기
-//	  @GetMapping("/insert_cart") 
-//	  public RedirectView InsertCartGame(
-//			  @RequestParam("user_code") int user_code,
-//			  @RequestParam("game_code") int game_code) throws Exception {
-//	  
-//		  stimWishCartService.InsertCartGame(user_code, game_code);  
-//  
-//		  String url = "/wish/"+ user_code;
-//		  
-//		  return new RedirectView(url);
-//	  }
-	
 	
 	// ajax 사용 상세보기에서 찜목록 넣기
 	@PostMapping("/insert_wish") 
@@ -142,8 +111,7 @@ public class StimWishCartController {
 			return new RedirectView(url);
 		}
 	
-		
-
+	
 	// ajax 사용 찜목록, 게임 상세보기에서 장바구니 넣기
 	@PostMapping("/insert_cart") 
 	  public RedirectView InsertCartGame(
@@ -165,7 +133,6 @@ public class StimWishCartController {
 		  List<CartVO> list = stimWishCartService.SelectCartGame(user_code);
 		  for(int i=0; i<list.size(); ++i){
 			  
-//			 int user_code = list.get(i).getUser_code();
 			 int game_code = list.get(i).getGame_code();
 			 
 			 stimWishCartService.InsertMyGame(user_code, game_code);
@@ -174,15 +141,15 @@ public class StimWishCartController {
 			 stimWishCartService.DeleteCartAllGame(user_code, game_code); 
 		  }
 		  	 
-		  
 		  	 ModelAndView mav = new ModelAndView();
 		  	 mav.addObject("user_code",user_code);
 			 mav.setViewName("wishcart/kakaopay");
 			 
 			 return mav;
-	  
 	  }
-	  		// 바로 결제완료
+	  
+	  
+	  	// 바로 결제완료
 		@GetMapping("/paysuccessOne/{user_code},{game_code}") 
 		public ModelAndView PaySuccessOne(
 				@PathVariable("user_code") int user_code,
@@ -200,7 +167,8 @@ public class StimWishCartController {
 				
 				return mav;
 		  
-		  }
+		}
+		// 결제 성공시 페이지 이동
 		@GetMapping("/paysuccess")
 		public ModelAndView successPage() throws Exception{
 			  
