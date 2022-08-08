@@ -19,7 +19,7 @@
     
     <insert id="InsertComment" parameterType="com.stim.vo.ProFileVO">
     	INSERT INTO profile_comment_tbl
-    	VALUES (comment_code_seq.nextval, #{user_code}, #{comment_context}, sysdate, #{writer_code})
+    	VALUES (comment_code_seq.nextval, #{user_code}, #{comment_context}, current_date, #{writer_code})
     </insert>
     
     <select id="CountAllComment" resultType="int" parameterType="int">

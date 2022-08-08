@@ -106,9 +106,16 @@ public class StimUserService implements UserDetailsService {
 	public List<Integer> randomCode(int count) {
 		Set<Integer> set = new HashSet<>();
 		Random random = new Random();
-		while (set.size() < 5) {
-			int num = random.nextInt(count)+1;			
-			set.add(num);
+		if(count < 5) {
+			while (set.size() < count) {
+				int num = random.nextInt(count)+1;			
+				set.add(num);
+			}
+		} else {			
+			while (set.size() < 5) {
+				int num = random.nextInt(count)+1;			
+				set.add(num);
+			}
 		}
 		List<Integer> list = new ArrayList<>(set);
 		return list;
