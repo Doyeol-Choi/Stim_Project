@@ -24,6 +24,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.stim.service.mybatis.StimProfileService;
 import com.stim.service.user.StimUserService;
+import com.stim.vo.Pagination;
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
 
@@ -40,20 +41,31 @@ public class StimProfileController {
 
 	// 프로필
 	@GetMapping("/profile/{user_code}")
-	public ModelAndView profileList(@PathVariable("user_code") int user_code){
+	public ModelAndView profileList(@PathVariable("user_code") int user_code,
+									@RequestParam(value = "currentPage", required = false, defaultValue = "1") int currentPage,
+									@RequestParam(value = "cntPerPage", required = false, defaultValue = "5") int cntPerPage,
+						            @RequestParam(value = "pageSize", required = false, defaultValue = "10") int pageSize){
+		
 		ModelAndView mav = new ModelAndView();
 		
 		try {
 			UserVO uVo = stimProfileService.SelectById(user_code);
 			
-			//Page<ProFileVO> paging = this.stimProfileService.getList(page);
-			List<ProFileVO> list = stimProfileService.getCommentInfo(user_code);
+			int commentCnt = stimProfileService.CountAllComment(user_code);
+			//System.out.println("댓글 갯수 : " + commentCnt);
+			Pagination pagination = new Pagination(currentPage, cntPerPage, pageSize);
+			pagination.setTotalRecordCount(commentCnt);
+			//System.out.println(pagination.getFirstRecordIndex());
+			
+			
+			//Page<ProFileVO> paging = this.stimProfileService.findAll(pageable);
+			List<ProFileVO> list = stimProfileService.getCommentInfo(user_code, pagination.getFirstRecordIndex(), pagination.getLastRecordIndex());
 			List<ProFileVO> game_list = stimProfileService.SelectMyGames(user_code);
  			List<ProFileVO> f_list = stimProfileService.SelectMyFriends(user_code);
 			List<ProFileVO> request = stimProfileService.selectFriendRequest(user_code);	
 			String context = stimProfileService.SelectProfileContext(user_code);
  			
-			
+			mav.addObject("pagination",pagination);
 			mav.addObject("game_list",game_list);
 			mav.addObject("user", uVo);
 			mav.addObject("list", list);
@@ -185,6 +197,7 @@ public class StimProfileController {
 	//댓글 삭제
 	@PostMapping("/comment/delete")
 	public void DeleteComment(@RequestParam("comment_code") int comment_code) throws Exception{
+		System.out.println(comment_code);
 		stimProfileService.DeleteCommentByCode(comment_code);
 	}
 	
@@ -199,7 +212,6 @@ public class StimProfileController {
 	}
 	
 	//친추 요청 승인
-	@Transactional
 	@GetMapping("/friend/approval")
 	public RedirectView approvalRequest(@RequestParam("friend_code") int friend_code,
 										@RequestParam("user_code") int user_code) throws Exception{

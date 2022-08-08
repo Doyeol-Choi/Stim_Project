@@ -41,8 +41,8 @@ public class StimProfileServiceImp implements StimProfileService {
 
 	// 프로필 댓글 목록 출력
 	@Override
-	public List<ProFileVO> getCommentInfo(int user_code) throws Exception {
-		return stimProfileMapper.getCommentInfo(user_code);
+	public List<ProFileVO> getCommentInfo(int user_code, int firstRecordIndex, int lastRecordIndex) throws Exception {
+		return stimProfileMapper.getCommentInfo(user_code, firstRecordIndex, lastRecordIndex);
 	}
 
 	// 보유 게임 목록 출력
@@ -123,6 +123,15 @@ public class StimProfileServiceImp implements StimProfileService {
 		stimProfileMapper.insertProfileContext(user_code, profile_context);
 		
 	}
+
+	// 프로필 댓글 총 갯수
+	@Override
+	public int CountAllComment(int user_code) throws Exception {
+		
+		return stimProfileMapper.CountAllComment(user_code);
+	}
+
+	
 
 	
 

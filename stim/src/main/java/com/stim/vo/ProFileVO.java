@@ -18,7 +18,7 @@ public class ProFileVO {
 	private String user_picture;
 	
 	//보유 게임 목록
-	//private int game_code;
+	private int game_code;
 	private String game_name;
 	private String game_picture;
 	

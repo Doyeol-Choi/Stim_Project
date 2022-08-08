@@ -22,7 +22,9 @@ public interface StimProfileMapper {
 	public int InsertComment(ProFileVO pVo) throws Exception;
 
 	// 댓글 출력
-	public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
+	public List<ProFileVO> getCommentInfo(int user_code, int firstRecordIndex, int lastRecordIndex);
+	
+	//public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
  
 	// 게임 출력
 	public List<ProFileVO> SelectMyGames(int user_code) throws Exception;
@@ -60,5 +62,9 @@ public interface StimProfileMapper {
 	// 할말 삽입
 	public void insertProfileContext(int user_code, String profile_context);
 
+	// 프로필 댓글 총 갯수
+	public int CountAllComment(int user_code);
+
+	
 
 }

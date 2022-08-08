@@ -20,7 +20,7 @@ public interface StimProfileService {
 	public int InsertComment(ProFileVO pVo) throws Exception;
 	
 	// 프로필 댓글 목록 출력
-	public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
+	public List<ProFileVO> getCommentInfo(int user_code, int firstRecordIndex, int lastRecordIndex) throws Exception;
 
 	// 보유 게임 목록 출력
 	public List<ProFileVO> SelectMyGames(int user_code) throws Exception;
@@ -57,5 +57,7 @@ public interface StimProfileService {
 	// 프로필 할 말 입력
 	public void insertProfileContext(int user_code, String profile_context) throws Exception;
 	
+	// 프로필 댓글 총 갯수
+	public int CountAllComment(int user_code) throws Exception; 
 	
 }
