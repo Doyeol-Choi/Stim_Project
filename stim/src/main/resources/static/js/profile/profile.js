@@ -68,12 +68,12 @@ function deleteMyFriend(friend_code){
 	});
 }
 
-function inputComment(){
+function inputComment(currentPage){
 	let user_code = $("#user_code").val();
 	let user_id = $("#user_id").val();
 	let writer_code = $("#writer_code").val();
 	let comment_text = $("#comment_text").val();
-		
+	
 	$.ajax({
 		url : "/comment",
 		data : {
@@ -96,12 +96,18 @@ function inputComment(){
 			html += "</div>";
 			html += "</div>";
 			
-			$("#comment_lists").prepend(html);
+			if(currentPage == 1){
+				$("#comment_lists").prepend(html);
+				if($("#comment_lists").children().length >= 5) {
+					$("#comment_lists").children().last().remove();
+				}
+			}	
 		},
 		error : function(){
 			alert('추가 실패');
 		}	
 	});
+	
 	$("#comment_text").val("");
 
 }
@@ -176,3 +182,16 @@ $(document).ready(function(){
 	    }	
 	})
 })
+
+//페이지 이동
+function movePage(user_code,currentPage, cntPerPage, pageSize){
+    
+    var url = "/profile";
+    url = url + "/"+user_code;
+    url = url + "?currentPage="+currentPage;
+    url = url + "&cntPerPage="+cntPerPage;
+    url = url + "&pageSize="+pageSize;
+    
+    location.href=url;
+}
+

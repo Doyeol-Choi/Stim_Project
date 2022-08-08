@@ -182,6 +182,25 @@ div{
 	width: 730px;
 	height: auto;
 }
+.paginate {
+	width: 730px;
+	height: 50px;
+	margin: 10px;
+	text-align: center;
+}
+.prevBtn, .nextBtn {
+	display: inline-block;
+	margin: 0 10px;
+}
+.naviText {
+	color: white;
+}
+.naviTextB {
+	color: rgba(0,0,0,0.3);
+}
+.pageText {
+	color: white;
+}
 
 .game_lists{
 	width:420px;
@@ -249,12 +268,11 @@ div{
     border-radius: 0;
     border: none;
 }
-.friend_picture > img{
-	width: 32px;
-	height: 32px;
+.friend_picture > a > img{
+	width: 40px;
+	height: 40px;
 }
 .friend_content{
-	overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     width: 50px;
@@ -265,6 +283,7 @@ div{
 }
 .friend_nickname{
 	color: white;
+	font-size: 15px;
 }
 .comment_footer{
 	margin-top: 6px;
@@ -480,3 +499,4 @@ div{
 	right: 30px;
 	top: 10px;
 }
+

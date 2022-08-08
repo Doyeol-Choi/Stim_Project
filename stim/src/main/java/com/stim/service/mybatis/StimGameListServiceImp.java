@@ -222,12 +222,6 @@ public class StimGameListServiceImp implements StimGameListService {
 
 	// 게임 상세페이지 댓글 가져오기
 	@Override
-	public List<GameReplyVO> SelectALLReply(int game_code) throws Exception {
-		
-		return stimGameListMapper.SelectALLReply(game_code);
-	}
-	
-	@Override
 	public List<GameReplyVO> SelectALLReply(int game_code, int firstRecordIndex , int lastRecordIndex) throws Exception {
 		return stimGameListMapper.SelectALLReply(game_code, firstRecordIndex, lastRecordIndex);
 	}

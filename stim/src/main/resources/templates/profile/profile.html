@@ -65,7 +65,7 @@
 							<input type="hidden" id="user_id" name="user_id" th:value="${user.user_id}"> 
 							<input type="hidden" id="writer_code" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
 							<textarea id="comment_text" rows="5" cols="60" name="comment_text" placeholder="댓글 써줘요" wrap="soft" ></textarea>
-							<input id="comment_submit" name="comment_InsertBtn" type="button" value="댓글 남기기" onclick="inputComment()">	
+							<input id="comment_submit" name="comment_InsertBtn" type="button" value="댓글 남기기" th:onclick="|inputComment(${pagination.currentPage})|">	
 								<span class="textTotal">/230</span>
 								<span class="textCount">0</span>	
 						</form>
@@ -85,7 +85,36 @@
 								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
 							</div>
 						</div>
+						
 					</div>	
+					<div class="paginate">
+				    	<div class="paging">
+				    		<div class="prevBtn" th:if="${pagination.currentPage != 1}">
+				        		<a class="direction prev" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},1,${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt;&lt; </span></a>
+				        		<a class="direction prev" th:if="${pagination.hasPreviousPage != true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
+				        		<a class="direction prev" th:if="${pagination.hasPreviousPage == true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
+				        	</div>
+				        	<div class="prevBtn" th:if="${pagination.currentPage == 1}">
+				        		<span class="naviTextB"> &lt;&lt; </span>
+				        		<span class="naviTextB"> &lt; </span>
+				        	</div>
+				        	<th:block th:Each="idx : ${#numbers.sequence(pagination.firstPage, pagination.lastPage)}">
+				            	<a href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${idx},${pagination.cntPerPage},${pagination.pageSize})|">
+				                	<span class="pageText" th:if="${pagination.currentPage == idx}" style="color:#00AEEF; font-size:1.5em;" th:text="${idx}"></span>
+									<span class="pageText" th:if="${pagination.currentPage != idx}" th:text="${idx}"></span>
+								</a>
+							</th:block>
+							<div class="nextBtn" th:if="${pagination.currentPage != pagination.lastPage}">
+								<a class="direction next" th:if="${pagination.hasNextPage != true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
+								<a class="direction next" th:if="${pagination.hasNextPage == true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage+1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
+								<a class="direction next" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.totalRecordCount},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt;&gt; </span></a>
+							</div>
+							<div class="nextBtn" th:if="${pagination.currentPage == pagination.lastPage}">
+								<span class="naviTextB"> &gt; </span>
+								<span class="naviTextB"> &gt;&gt; </span>
+							</div>
+				        </div>
+				    </div>
 				</div>
 			</div>
 	        
@@ -97,7 +126,7 @@
 							<span>게임 목록</span>
 							<div th:each="game_list : ${game_list}"class="game_list">
 								<div class="game_picture">
-									<img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}">
+									<a th:href="@{|/gameDetailView?game_code=${game_list.game_code}|}"> <img alt="게임 사진" th:src="@{/image/game/} + ${game_list.game_picture}"> </a>		
 								</div>
 								<div class="game_content">
 									<span class="game_name" th:text="${game_list.game_name}"></span>
@@ -126,10 +155,10 @@
 						<div class="friend_lists">
 							<div class="friend_list" th:each="f: ${f_list}" th:id="|friend_List${f.friend_code}|">
 								<div class="friend_picture">
-									<img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}" >
+									<a th:href="@{|/profile/${f.user_code}|}"> <img alt="프로필 사진" th:src="@{/image/profile/} + ${f.friend_picture}" ></a> 
 								</div>
 								<div class="friend_content">
-									<span class="friend_nickname" th:text="${f.friend_nickname}"></span>
+								    <a th:href="@{|/profile/${f.user_code}|}"><span class="friend_nickname" th:text="${f.friend_nickname}"></span></a>	
 								</div>
 								<div class="friend_btn">
 									<button sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" class="friend_delete" th:onclick="|deleteMyFriend(${f.friend_code})|" >X</button>

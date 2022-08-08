@@ -3,6 +3,8 @@ package com.stim.model.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import com.stim.vo.ProFileVO;
 import com.stim.vo.UserVO;
@@ -20,7 +22,9 @@ public interface StimProfileMapper {
 	public int InsertComment(ProFileVO pVo) throws Exception;
 
 	// 댓글 출력
-	public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
+	public List<ProFileVO> getCommentInfo(int user_code, int firstRecordIndex, int lastRecordIndex);
+	
+	//public List<ProFileVO> getCommentInfo(int user_code) throws Exception;
  
 	// 게임 출력
 	public List<ProFileVO> SelectMyGames(int user_code) throws Exception;
@@ -57,6 +61,9 @@ public interface StimProfileMapper {
 
 	// 할말 삽입
 	public void insertProfileContext(int user_code, String profile_context);
+
+	// 프로필 댓글 총 갯수
+	public int CountAllComment(int user_code);
 
 	
 

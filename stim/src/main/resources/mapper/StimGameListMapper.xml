@@ -205,20 +205,16 @@
 		ORDER BY gm.game_code DESC
     </select>
 
-    
-    
     	<!-- 게임 상세 페이지 정보 -->
     <select id="SelectGameDetailInfo" resultMap="gameMap">
     	<include refid="selectAll" />
    		WHERE gm.game_code = #{game_code}
     </select>
     
-    
     	<!-- 할인 목록 삭제 -->
     <update id="discountListRemove">
     	UPDATE game_tbl SET game_discount = ''
     </update>
-    
     
     	<!-- 할인 목록 생성 -->
     <update id="createDiscountList" parameterType="map">
@@ -226,7 +222,6 @@
     	WHERE game_code = (SELECT g.game_code FROM (SELECT rownum AS rownumber, game_code FROM game_tbl) 
     	g WHERE g.rownumber = #{code})
     </update>
-    
     
     	<!-- 최신 게임 목록 출력 (게임 날짜 최신/내림차순) 메인페이지용 -->
     <select id="SelectNewestGameListMain" resultMap="gameMap">
@@ -236,7 +231,6 @@
         WHERE rownum <![CDATA[<=]]> 6
     </select>
     
-    
     	<!-- 인기 게임 목록 출력 (게임 판매량 내림차순) 메인페이지용 -->
     <select id="SelectPopularGameListMain" resultMap="gameMap">
 		SELECT * FROM
@@ -245,14 +239,12 @@
      	WHERE rownum <![CDATA[<=]]> 3
     </select>
     
-    
     	<!-- 게임상세페이지에 댓글 입력-->
     <insert id="InsertReply" parameterType="com.stim.vo.GameReplyVO">
     	INSERT INTO grade_tbl
     	VALUES (grade_code_seq.nextval, #{user_code},
     	 #{game_code}, #{grade_context}, sysdate, #{grade_rate})
     </insert>
-    
     
     	<!-- 해당 게임 상세페이지에 가장 마지막 작성된 댓글 가져오기 -->
     <select id="SelectLastReply" resultType="com.stim.vo.GameReplyVO" parameterType="int">
@@ -271,13 +263,13 @@
     	   WHERE rownum <![CDATA[<=]]> 1
     </select>
     
-    
     	<!-- 게임 상세페이지 댓글 삭제 -->
     <delete id="DeleteReplyByCode" parameterType="int">
     	DELETE grade_tbl
     	WHERE grade_code = #{grade_code}
     </delete>
 
+    <!-- 게임상세페이지 댓글 가져오기 -->
     <select id="SelectALLReply" resultType="com.stim.vo.GameReplyVO">
     	SELECT * FROM
     	(SELECT ROW_NUMBER() OVER(ORDER by grade_regdate DESC) AS row_num,

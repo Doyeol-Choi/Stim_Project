@@ -22,22 +22,29 @@
     	VALUES (comment_code_seq.nextval, #{user_code}, #{comment_context}, sysdate, #{writer_code})
     </insert>
     
-    <select id="getCommentInfo" parameterType="int" resultType="com.stim.vo.ProFileVO">
-       SELECT comment_code, 
-       c.user_code AS user_code,  
+    <select id="CountAllComment" resultType="int" parameterType="int">
+    	SELECT count(*) FROM profile_comment_tbl WHERE user_code = #{user_code}    	
+    </select>
+    
+    <select id="getCommentInfo" resultType="com.stim.vo.ProFileVO">
+	   SELECT * FROM
+	   (SELECT ROW_NUMBER() OVER(ORDER BY profile_regdate desc) AS row_num,
+	   c.user_code AS user_code,  
        u.user_nickname AS comment_nickname,
+       comment_code,
        comment_context, 
        profile_regdate,
        user_picture, 
        writer_code
 	   FROM user_tbl u, profile_comment_tbl c
        WHERE u.user_code = c.writer_code
-       AND c.user_code = (SELECT user_code FROM user_tbl WHERE user_code = #{user_code})
-       ORDER BY profile_regdate desc
+       AND c.user_code = (SELECT user_code FROM user_tbl WHERE user_code = #{user_code}))
+       WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+       ORDER BY profile_regdate DESC
     </select>
     
     <select id="SelectMyGames" parameterType="int" resultType="com.stim.vo.ProFileVO">		
-    	SELECT g.game_name AS game_name, g.game_picture AS game_picture 
+    	SELECT g.game_name AS game_name, g.game_picture AS game_picture, m.game_code AS game_code 
 		FROM mygame_tbl m, game_tbl g
 		WHERE g.game_code=m.game_code
 		AND m.user_code = #{user_code}

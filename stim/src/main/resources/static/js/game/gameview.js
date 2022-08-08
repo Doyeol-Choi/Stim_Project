@@ -112,7 +112,7 @@ function inputReply(currentPage){
 				html += "</div>";
 				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
 				html += "</div>";
-				
+
 				if(currentPage==1) {
 					$("#reply_lists").prepend(html);
 					if($("#reply_lists").children().length >= 5) {
@@ -125,6 +125,7 @@ function inputReply(currentPage){
 				alert('추가 실패');
 			}	
 		});
+
 		$("#grade_context").val("");
 		$("input[name='grade_rate']").prop("checked", false);
 		$('.textCount').text('0');
