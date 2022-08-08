@@ -89,7 +89,7 @@
 	padding: 0px;
 	width: 280px;
 }
-#gImage > img{
+#gImage > a > img{
 	margin: 0px;
 	width: 280px;
 	height: 100%;
@@ -223,7 +223,7 @@
 }
 #priceTag li{
 	padding: 10px 15px;
-	border-radius: 5px;ㅏㅁ
+	border-radius: 5px;
 }
 #genreTag{
 	padding: 10px 25px;

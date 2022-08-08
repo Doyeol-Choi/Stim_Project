@@ -64,7 +64,7 @@
 							<input type="hidden" id="user_code" name="user_code" th:value="${user.user_code}">
 							<input type="hidden" id="user_id" name="user_id" th:value="${user.user_id}"> 
 							<input type="hidden" id="writer_code" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
-							<textarea id="comment_text" rows="5" cols="60" name="comment_text" placeholder="댓글 써줘요" wrap="soft" ></textarea>
+							<textarea id="comment_text" rows="5" cols="60" name="comment_text" placeholder="댓글을 남겨주세요." wrap="soft" ></textarea>
 							<input id="comment_submit" name="comment_InsertBtn" type="button" value="댓글 남기기" th:onclick="|inputComment(${pagination.currentPage})|">	
 								<span class="textTotal">/230</span>
 								<span class="textCount">0</span>	

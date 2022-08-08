@@ -80,7 +80,7 @@
 	padding: 0px;
 	width: 280px;
 }
-#gImage > img{
+#gImage > a>  img{
 	margin: 0px;
 	width: 280px;
 	height: 100%;

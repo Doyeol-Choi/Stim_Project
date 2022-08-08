@@ -3,6 +3,7 @@
 /* 화면 전체 크기 */
 div{
 	display:block;
+	margin-left: 2px;
 }
 *{	
 	padding : 0;
@@ -152,14 +153,14 @@ div{
 	cursor: pointer;
 }
 #comment_paging{
-	width: 730px;
-	height: 5%;
-	background-color:#131517;
-	margin-left : 1.8%;
-	margin-top: 15px;
-	border-radius: 7px;
-	color: rgb(228, 228, 228);
-	display: inline-block;
+	width: 716px;
+    height: 48px;
+    background-color: #131517;
+    margin-left: 39px;
+    margin-top: 15px;
+    border-radius: 7px;
+    color: rgb(228, 228, 228);
+    display: inline-block;
 }
 #comment_paging > div{
 	line-height: 5vh;
@@ -256,7 +257,6 @@ div{
     font-size: 11px;
     line-height: 13px;
     overflow: hidden;
-    white-space: nowrap;
     text-overflow: ellipsis;
     position: relative;
 }
@@ -357,24 +357,28 @@ div{
 #comment_text{
 	display: inline-block;
 	height: 80px;
-	width: 600px;
+	width: 620px;
 	resize: none;  
 	color: rgb(228, 228, 228);
-	background-color: rgb(74, 79, 88);
+	background-color: transparent;
+	border: 1px solid white;
+	border-radius: 5px;
 }
 #comment_text:focus{
 	outline: 2px solid;
 	outline-color: gray;
+	padding : 10px 15px;
 }
 #comment_text::placeholder{
 	position:absolute;
-	top: 20px;
-	left: 20px;
-	color: white;
-	font-size: 30px;
+	padding : 10px 15px;
+	color: rgba(255, 255, 255, 0.3);
+	font-size: 12px;
 	font-weight: 700px;
 }
-
+#comment_text:focus::-webkit-input-placeholder{
+   color : transparent;
+} 
 .textCount{
 	float:right;
 	color: white;
@@ -385,7 +389,6 @@ div{
 }
 #comment_submit{
 	float: right;
-	margin-right: 20px;
 	border: none;
 	background-color: rgb(74, 79, 88);
 	color: rgb(228, 228, 228);
@@ -399,10 +402,12 @@ div{
 	background-color: #262B2F;
 }
 .comment_image {
-	width: 80px;
-	height: 84px;
-	margin: 15px;
-	display:inline-block;
+    width: 80px;
+    height: 84px;
+    margin: 0 19px 15px 26px;
+    padding-left: 10px;
+    display: inline-block;
+    text-align: center;
 }
 .comment_image > a > img{
 	width: 64px;
@@ -410,7 +415,7 @@ div{
 	cursor: pointer;
 }
 .comment_content{
-	width: 600px;
+    width: 615px;
 	height : 80px;
 	display: inline-block;
 	position: absolute;
@@ -439,13 +444,12 @@ div{
 	word-wrap:break-word;
 }
 .comment_deletebtn{
-	position: absolute;
-	outline: 0;
-	min-width: 40px;
-	background-color: rgb(74, 79, 88);
-	color: rgb(228, 228, 228);
-	border: none;
-	cursor: pointer;	
+    min-width: 40px;
+    background-color: rgb(74, 79, 88);
+    color: rgb(228, 228, 228);
+    border: none;
+    float: right;
+    cursor: pointer;	
 }
 
 .friend_request{
@@ -453,7 +457,7 @@ div{
 }
 .friend_req{
 	display: inline-block;
-	width: 400px;
+	width: 370px;
 }
 .friend_request_picture{
 	margin-top: 10px;
@@ -482,16 +486,43 @@ div{
 .friend_request_approval_btn{
 	width: 35px;
 	height: 35px;
+	background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.friend_request_approval_btn:hover{
+	cursor: pointer;	
+	background-color: rgba(255, 255, 255, 0.3);
 }
 .friend_request_delete_btn{
 	width: 35px;
 	height: 35px;
+	background: transparent;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
 }
-
+.friend_request_delete_btn:hover{
+	cursor: pointer;	
+	background-color: rgba(255, 255, 255, 0.3);
+}
 .friend_delete{
 	display: inline-block;
+	color: white;
+    background: transparent;
+    border: 1px solid white;
+    padding: 8px;
+    border-radius: 5px;
+    position: absolute;
+    top: -2px;
+    width: 34px;
+    left: -20px;
 }
-
+.friend_delete:hover{
+	cursor: pointer;	
+	background-color: rgba(255, 255, 255, 0.3);
+}
 .friend_btn{
 	display: inline-block;
 	height: 35px;
