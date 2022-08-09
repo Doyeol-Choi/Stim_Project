@@ -116,7 +116,7 @@ function inputComment(currentPage){
 			
 			if(currentPage == 1){
 				$("#comment_lists").prepend(html);
-				if($("#comment_lists").children().length >= 5) {
+				if($("#comment_lists").children().length >= 6) {
 					$("#comment_lists").children().last().remove();
 				}
 			}	
