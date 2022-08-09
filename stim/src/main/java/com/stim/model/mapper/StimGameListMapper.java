@@ -69,6 +69,9 @@ public interface StimGameListMapper {
 	// 해당 게임상세페이지에 가장 최근 작성된 댓글 가져오기
 	public GameReplyVO SelectLastReply(int game_code) throws Exception;
 	
+	// 게임 상세페이지 가장 최근작성된 댓글 가져오기
+	public void UpdateReplyByCode(int grade_code) throws Exception;
+	
 	// 게임 상세페이지 댓글 삭제
 	public void DeleteReplyByCode(int grade_code) throws Exception;
 
@@ -97,6 +100,8 @@ public interface StimGameListMapper {
 
 	// 게임 장르 설정 => 관리자
 	public void updateGenre(GameVO gVo) throws Exception;
+
+	
 
 	
 }

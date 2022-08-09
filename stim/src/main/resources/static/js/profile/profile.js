@@ -18,18 +18,21 @@ function popupClose() {
     }, 2400);
 }
 
-function deleteComment(comment_code){
+function deleteComment(comment_code, game_code, currentPage, cntPerPage, pageSize){
 	let id = "#mentListBox" + comment_code 
 	$.ajax({
 	    url: "/comment/delete",
-	       type: "POST",
-	       async: true,
-	       data: {
-	          "comment_code" : comment_code
-	       },
-	       success: function () {
-	          $(id).remove();
-	       }
+		type: "POST",
+		async: true,
+		data: {
+			"comment_code" : comment_code
+		},
+		success: function () {
+			$(id).remove();
+			if($("#comment_lists").children().length == 0) {
+				movePage(game_code, currentPage, cntPerPage, pageSize);
+			}
+		}
 	});
 }
 
@@ -61,6 +64,7 @@ function deleteMyFriend(friend_code){
 		},
 		success : function(){
 			$(id).remove();
+			
 		},
 		error : function(){
 			alert('친구 삭제 실패');
