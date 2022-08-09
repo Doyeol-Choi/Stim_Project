@@ -213,8 +213,9 @@ public class StimGameListServiceImp implements StimGameListService {
 	}
 
 	@Override
-	public void UpdateReplyByCode(int grade_code) throws Exception {
-		stimGameListMapper.UpdateReplyByCode(grade_code);
+	@Transactional
+	public void UpdateReplyByCode(GameReplyVO rVo) throws Exception {
+		stimGameListMapper.UpdateReplyByCode(rVo);
 	}
 	
 	// 게임상세페이지 댓글 삭제

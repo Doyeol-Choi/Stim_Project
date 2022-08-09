@@ -129,7 +129,30 @@
 	word-break:break-all;
 	word-wrap:break-word;
 }
-
+.reply_update {
+	margin-top: 10px;
+	margin-left: 40px;
+	display: none;
+}
+.update_context {
+	width: 100%;
+	height: 80px;
+	resize: none;
+	padding: 5px 10px;
+	font-size: 18px;
+	background-color: transparent;
+	border: 1px solid white;
+	color: white;
+	display: block;
+}
+.reply_update > form > button {
+	margin-top: 5px;
+	margin-right: 10px;
+	float: right;
+	padding: 5px 10px;
+	border-radius: 10px;
+	cursor: pointer;
+}
 .user_nickname {
 	font-size: 1.2em;
 	font-weight: 600;
@@ -137,9 +160,6 @@
 
 .grade_regdate {
 	float: right;
-}
-#comment_area{
-	max-width: 790px;
 }
 
 #grade_rateG, #grade_rateB {
@@ -155,6 +175,7 @@
 }
 
 .grade_context{
+	max-width: 790px;
 	padding-left: 40px;
 	padding-top: 10px;
 }

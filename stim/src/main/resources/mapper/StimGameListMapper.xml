@@ -263,6 +263,13 @@
     	   WHERE rownum <![CDATA[<=]]> 1
     </select>
     
+    <!-- 게임상세 페이지 댓글 수정 -->
+    <update id="UpdateReplyByCode" parameterType="com.stim.vo.GameReplyVO">
+    	UPDATE grade_tbl
+		SET grade_context = #{grade_context}
+		WHERE grade_code = #{grade_code}
+    </update>
+    
     	<!-- 게임 상세페이지 댓글 삭제 -->
     <delete id="DeleteReplyByCode" parameterType="int">
     	DELETE grade_tbl
