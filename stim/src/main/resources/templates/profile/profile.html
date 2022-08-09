@@ -24,7 +24,7 @@
 	                <img th:src="@{/image/profile/} + ${user.user_picture}" alt="프사">
 	                <a sec:authorize="isAuthenticated()" th:if="${user.user_code == #authentication.principal.user_code}" th:href="|javascript:changPicture(${user.user_code})|"><span>&lt;프로필 사진 변경&gt;</span></a>
 	            </div>
-	            <div id="profile_id"> <!--프로필 아이디, 출신-->
+	            <div id="profile_id"> 
 	                <h2 th:text="${user.user_nickname}"></h2>
 	                <p th:text="${user.user_id}"></p>
 	            </div>
@@ -53,7 +53,7 @@
 		        		<div id="comment_page1"><h3>댓글</h3></div>
 		        		<div class="comment_page">
 		        			<div >
-		        				<a> <span th:text="${#lists.size(list)}"></span> 개의 댓글 </a>
+		        				<a> <span th:text="${commentCnt}"></span> 개의 댓글이 있습니다 </a>
 		        			</div>
 						</div>
 				</div>
@@ -80,8 +80,18 @@
 							<div class="comment_content">
 								<div class="comment_nickname" th:text="${list.comment_nickname}" th:onclick="|location.href='/profile/${list.writer_code}'|"></div> 
 								<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
-								<div class="comment_context" th:text="${list.comment_context}"></div>
-								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="(${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}) and ${#strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
+								<div class="comment_context" th:text="${list.comment_context}"></div>								
+								<!-- <div class="comment_fix">
+									<form action="">
+					            		<input id="profileUser_code" name="user_code" type="hidden" th:value="${user.user_code}">
+					            		<textarea id="comment_fixContext" name="profile_fixContext"></textarea>
+					            		<button type="button" onclick="edit_comment()">작성</button>
+					            	</form>	
+																	
+								</div>
+								<button type="button" sec:authorize="isAuthenticated()" class="comment_updatebtn" th:if="${user.user_code == #authentication.principal.user_code}" th:onclick="changeComment()"> 수정 </button>
+								 -->
+								 <button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="(${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}) and ${#strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
 								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
 							</div>
 						</div>
@@ -135,7 +145,7 @@
 						</div>
 					</div>
 	        		<!-- 친구 요청 목록 -->
-					<div class="friend_request">	
+					<div class="friend_request" th:if="${user.user_code == #authentication.principal.user_code}">	
 						<span th:if="${not #lists.isEmpty(request)}"><strong>친구 요청</strong></span>
 						<div th:each="request : ${request}" th:id="|reqList${request.friend_code}|">		
 							<div class="friend_req">			

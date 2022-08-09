@@ -52,7 +52,7 @@ public class StimProfileController {
 			UserVO uVo = stimProfileService.SelectById(user_code);
 			
 			int commentCnt = stimProfileService.CountAllComment(user_code);
-			//System.out.println("댓글 갯수 : " + commentCnt);
+			System.out.println("댓글 갯수 : " + commentCnt);
 			Pagination pagination = new Pagination(currentPage, cntPerPage, pageSize);
 			pagination.setTotalRecordCount(commentCnt);
 			//System.out.println(pagination.getFirstRecordIndex());
@@ -65,6 +65,7 @@ public class StimProfileController {
 			List<ProFileVO> request = stimProfileService.selectFriendRequest(user_code);	
 			String context = stimProfileService.SelectProfileContext(user_code);
  			
+			mav.addObject("commentCnt",commentCnt);
 			mav.addObject("pagination",pagination);
 			mav.addObject("game_list",game_list);
 			mav.addObject("user", uVo);

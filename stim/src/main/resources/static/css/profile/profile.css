@@ -415,7 +415,7 @@ div{
 }
 .comment_content{
 	width: 600px;
-	height : 80px;
+	height : 114px;
 	display: inline-block;
 	position: absolute;
 	margin-top: 10px;
@@ -442,6 +442,26 @@ div{
 	word-break:break-all;
 	word-wrap:break-word;
 }
+
+/* .comment_fix{
+	color: #acb2b8;
+	padding-top: 10px;
+	width: 600px;
+	height: auto;
+	display: inline-block;
+	word-break:break-all;
+	word-wrap:break-word;
+	display: none;
+} */
+/* .comment_updatebtn{
+	position: absolute;
+	outline: 0;
+	min-width: 40px;
+	background-color: rgb(74, 79, 88);
+	color: rgb(228, 228, 228);
+	border: none;
+	cursor: pointer;	
+} */
 .comment_deletebtn{
 	position: absolute;
 	outline: 0;

@@ -124,6 +124,7 @@ function pwdCheck(user_code) {
 	window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbar=yes, resizeable=no, width=400, height=200");
 }
 
+// 할 말 수정 버튼 클릭
 function changeMessage(){
 	if($('#profile_textarea').css('display')=='block'){
 		alert('수정 중 입니다');
@@ -135,6 +136,7 @@ function changeMessage(){
 	
 }
 
+// 할 말 수정
 function edit_context(){
 	let user_code = $('#profileUser_code').val();
 	let profile_context = $('#profile_context').val();
@@ -194,4 +196,5 @@ function movePage(user_code,currentPage, cntPerPage, pageSize){
     
     location.href=url;
 }
+
 

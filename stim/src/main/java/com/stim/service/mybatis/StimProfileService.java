@@ -60,4 +60,7 @@ public interface StimProfileService {
 	// 프로필 댓글 총 갯수
 	public int CountAllComment(int user_code) throws Exception; 
 	
+	// 댓글 수정
+	public void updateComment(ProFileVO pVo) throws Exception;
+	
 }

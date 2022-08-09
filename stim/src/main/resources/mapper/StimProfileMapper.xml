@@ -22,6 +22,12 @@
     	VALUES (comment_code_seq.nextval, #{user_code}, #{comment_context}, sysdate, #{writer_code})
     </insert>
     
+    <update id="updateComment" parameterType="com.stim.vo.ProFileVO">
+    	UPDATE profile_comment_tbl
+    	SET comment_context = #{comment_context}
+    	WHERE user_code = #{user_code}
+    </update>
+    
     <select id="CountAllComment" resultType="int" parameterType="int">
     	SELECT count(*) FROM profile_comment_tbl WHERE user_code = #{user_code}    	
     </select>
