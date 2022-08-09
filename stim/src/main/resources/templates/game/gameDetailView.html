@@ -72,8 +72,8 @@
 					            	<form action="">
 					            		<input th:id="|grade_code${reply.grade_code}|" name="grade_code" type="hidden" th:value="${reply.grade_code}">
 					            		<textarea th:id="|update_context${reply.grade_code}|" class="update_context" name="grade_context"></textarea>
-					            		<span th:id="|textCount${reply.grade_code}|" class="textCount">0</span>
-    									<span class="textTotal">/230</span>
+					            		<span th:id="|textCount${reply.grade_code}|" class="textCount2">0</span>
+    									<span class="textTotal2">/230</span>
 					            		<button type="button" onclick="cancel()">취소</button>
 					            		<button type="button" th:onclick="|edit_reply(${reply.grade_code})|">작성</button>
 		            				</form>

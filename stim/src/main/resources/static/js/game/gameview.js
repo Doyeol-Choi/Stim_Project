@@ -84,6 +84,23 @@ function deleteReply(grade_code, game_code, currentPage, cntPerPage, pageSize){
 }
 
 function change_reply(grade_code){
+	$('.update_context').keyup(function (e) {
+		let contextid = '#update_context' + grade_code;
+		let content = $(contextid).val();
+	    let textid = '#textCount' + grade_code;
+	    // 글자수 세기
+	    if (content.length == 0 || content == '') {
+	    	$(textid).text('0');
+	    } else {
+	    	$(textid).text(content.length);
+	    }
+	    
+	    // 글자수 제한
+	    if (content.length > 230) {
+	    	// 230자 부터는 타이핑 되지 않도록
+	        $(contextid).val($(contextid).val().substring(0, 230));
+	    }
+	})
 	let pid = '#reply_area'+grade_code;
 	let uid = '#reply_update' + grade_code;
 	let textarea = '#update_context' + grade_code;
@@ -133,9 +150,7 @@ function cancel() {
 	$(uid).css('display','none');
 }
 
-
-
-
+// 평점 댓글 입력
 function inputReply(currentPage){
 	let user_code = $("#user_code").val();
 	let game_code = $("#game_code").val();
@@ -168,12 +183,14 @@ function inputReply(currentPage){
 				html += "<form action=''>";
 				html += "<input id='grade_code' name='grade_code' type='hidden' value='"+data.grade_code+"'>";
 				html += "<textarea id='update_context"+data.grade_code+"' class='update_context' name='grade_context'></textarea>";
+				html += "<span id='textCount"+data.grade_code+"' class='textCount2'>0</span>";
+    			html +=	"<span class='textTotal2'>/230</span>";
 				html += "<button type='button' onclick='cancel()'>취소</button>";
 				html += "<button type='button' onclick='edit_reply("+data.grade_code+")'>작성</button>";
 		        html += "</form>";
 	 			html += "</div>";
 				html += "</div>";
-				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
+				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+","+game_code+","+currentPage+",5, 10)' >삭제</button>";
 				html += "<button class='reply_deletebtn' onclick='change_reply("+data.grade_code+")' >수정</button>";
 				html += "</div>";
 
@@ -242,26 +259,30 @@ $(document).ready(function() {
 	    }
 	})
 	
-	$('.update_context').keyup(function (e) {
-		let content = $(this).val();
-	    let code = $(this).prev().val();
-	    let textid = '#textCount' + code;
-	    // 글자수 세기
-	    if (content.length == 0 || content == '') {
-	    	$(textid).text('0');
-	    } else {
-	    	$(textid).text(content.length);
-	    }
-	    
-	    // 글자수 제한
-	    if (content.length > 230) {
-	    	// 230자 부터는 타이핑 되지 않도록
-	        $(this).val($(this).val().substring(0, 230));
-	    }
-	})
 	changeHeight();
+
+	$(".reply_updatebtn").click(function() {
+		$('.update_context').keyup(function (e) {
+			let content = $(this).val();
+		    let code = $(this).prev().val();
+		    let textid = '#textCount' + code;
+		    // 글자수 세기
+		    if (content.length == 0 || content == '') {
+		    	$(textid).text('0');
+		    } else {
+		    	$(textid).text(content.length);
+		    }
+		    
+		    // 글자수 제한
+		    if (content.length > 230) {
+		    	// 230자 부터는 타이핑 되지 않도록
+		        $(this).val($(this).val().substring(0, 230));
+		    }
+		})
+	})
 	
 })
+
 
 //페이지 이동
 function movePage(game_code,currentPage, cntPerPage, pageSize){
