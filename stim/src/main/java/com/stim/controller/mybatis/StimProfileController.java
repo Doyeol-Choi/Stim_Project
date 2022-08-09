@@ -166,8 +166,8 @@ public class StimProfileController {
 			System.out.println(existingPic);
 			// 로그인 유저와 프로필 유저가 같은지 체크
 			if (uVo.getUser_code() == user_code) {
-				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/profile/");
-//				String path = "/var/lib/tomcat9/webapps/image/profile"
+//				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/profile/");
+				String path = "/var/lib/tomcat9/webapps/image/profile";
 				String uuid = UUID.randomUUID().toString();
 				String picName = uuid + "_" + file.getOriginalFilename();
 			    File savePic = new File(path + "/" + picName);
