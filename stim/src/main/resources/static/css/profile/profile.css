@@ -192,6 +192,7 @@ div{
 .prevBtn, .nextBtn {
 	display: inline-block;
 	margin: 0 10px;
+	margin-top: 15px;
 }
 .naviText {
 	color: white;
@@ -385,11 +386,10 @@ div{
    color : transparent;
 }
 
-.textCount{
-	float:right;
+.textCount, .textTotal{
 	color: white;
 } 
-.textTotal{
+.textCount2, .textTotal2{
 	float:right;
 	color: white;
 }
@@ -406,6 +406,10 @@ div{
 }
 .comment_lists{
 	background-color: #262B2F;
+}
+.comment_list{
+	width: 750px;
+	height: 120px;
 }
 .comment_image {
     width: 80px;
@@ -425,7 +429,7 @@ div{
 	height : 114px;
 	display: inline-block;
 	position: absolute;
-	margin-top: 10px;
+/* 	margin-top: 10px; */
 	background-color : #262B2F;
 	color: #ebebeb;
 }
@@ -436,46 +440,74 @@ div{
 	cursor: pointer;
 }
 .comment_regdate{
-	width: 300px;
+	width: 250px;
 	display: inline-block;
 	color: #56707f;
 }
 .comment_context{
 	color: #acb2b8;
 	padding-top: 10px;
-	width: 600px;
+	width: 450px;
 	height: auto;
 	display: inline-block;
 	word-break:break-all;
 	word-wrap:break-word;
 }
 
-/* .comment_fix{
-	color: #acb2b8;
-	padding-top: 10px;
+.comment_fix{
 	width: 600px;
 	height: auto;
 	display: inline-block;
-	word-break:break-all;
-	word-wrap:break-word;
 	display: none;
-} */
-/* .comment_updatebtn{
+} 
+.comment_fixContext{
+	width: 500px;
+	height: 70px;
+	background-color: transparent;
+	color: rgb(228, 228, 228);
+	resize: none;
+	border-radius: 5px;
+}
+
+.comment_fixbtn{
+	position:absolute;
+	bottom: 70px;
+	right: 60px;
+	cursor: pointer;
+}
+
+.comment_fixbtn2 {
+	position:absolute;
+	bottom: 40px;
+	right: 60px;
+	cursor: pointer;
+}
+
+.limitBox {
+	position:absolute;
+	right: 100px;
+}
+
+.comment_updatebtn{
 	position: absolute;
 	outline: 0;
 	min-width: 40px;
 	background-color: rgb(74, 79, 88);
 	color: rgb(228, 228, 228);
 	border: none;
-	cursor: pointer;	
-} */
+	cursor: pointer;
+	right: 5px;	
+	top: 30px;
+} 
 .comment_deletebtn{
     min-width: 40px;
     background-color: rgb(74, 79, 88);
     color: rgb(228, 228, 228);
     border: none;
-    float: right;
-    cursor: pointer;	
+    cursor: pointer;
+    position:absolute;
+    right: 5px;
+    top: 60px;	
 }
 
 .friend_request{

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -232,5 +233,16 @@ public class StimProfileController {
 		stimProfileService.deleteMyFriend(friend_code);
 	}
 	
+	// 댓글 수정
+	@PostMapping("/updateComment")
+	@ResponseBody
+	public void updateComment(@RequestParam("comment_code") int comment_code,
+							  @RequestParam("comment_context") String comment_context) throws Exception{
+		
+		ProFileVO pVo = new ProFileVO();
+		pVo.setComment_context(comment_context);
+		pVo.setComment_code(comment_code);
+		stimProfileService.updateComment(pVo);
+	}
 	
 }

@@ -35,6 +35,8 @@
 	            		<textarea id="profile_context" name="profile_context"></textarea>
 	            		<button type="button" onclick="cancelMessage()">취소</button>
 	            		<button type="button" onclick="edit_context()">작성</button>
+						<span class="textCount">0</span>	
+           				<span class="textTotal">/230</span>
 	            	</form>
 	            </div>
 	            <!--프로필 수정-->
@@ -66,8 +68,8 @@
 							<input type="hidden" id="writer_code" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
 							<textarea id="comment_text" rows="5" cols="60" name="comment_text" placeholder="comment please" wrap="soft" ></textarea>
 							<input id="comment_submit" name="comment_InsertBtn" type="button" value="댓글 남기기" th:onclick="|inputComment(${pagination.currentPage})|">	
-								<span class="textTotal">/230</span>
-								<span class="textCount">0</span>	
+							<span class="textTotal2">/100</span>
+							<span class="textCount2">0</span>	
 						</form>
 					</div>
 				</div>
@@ -80,19 +82,29 @@
 							<div class="comment_content">
 								<div class="comment_nickname" th:text="${list.comment_nickname}" th:onclick="|location.href='/profile/${list.writer_code}'|"></div> 
 								<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
-								<div class="comment_context" th:text="${list.comment_context}"></div>								
-								<!-- <div class="comment_fix">
+								
+								
+								
+								<div th:id="|comment_context${list.comment_code}|" class="comment_context" th:text="${list.comment_context}"></div>								
+								<div th:id="|comment_fix${list.comment_code}|" class="comment_fix">
 									<form action="">
-					            		<input id="profileUser_code" name="user_code" type="hidden" th:value="${user.user_code}">
-					            		<textarea id="comment_fixContext" name="profile_fixContext"></textarea>
-					            		<button type="button" onclick="edit_comment()">작성</button>
-					            	</form>	
-																	
+					            		<input id="comment_code" name="comment_code" type="hidden" th:value="${list.comment_code}">
+					            		<textarea th:id="|comment_fixContext${list.comment_code}|" class="comment_fixContext" name="profile_fixContext"></textarea>
+					            		<button th:id="|comment_fixbtn${list.comment_code}|" class="comment_fixbtn" type="button" th:onclick="|edit_comment(${list.comment_code})|">작성</button>
+					            		<button class="comment_fixbtn2" type="button" th:onclick="|edit_comment_cancle(${list.comment_code})|">취소</button>
+					            		<div class="limitBox">
+											<span th:id="|textCount${list.comment_code}|" class="textCount3">0</span>
+					            			<span class="textTotal3">/100</span>
+					            		</div>
+					            	</form>									
 								</div>
-								<button type="button" sec:authorize="isAuthenticated()" class="comment_updatebtn" th:if="${user.user_code == #authentication.principal.user_code}" th:onclick="changeComment()"> 수정 </button>
-								 -->
-								 <button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="(${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}) and ${#strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
-								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
+								<button type="button" sec:authorize="isAuthenticated()" class="comment_updatebtn" th:if="${user.user_code == #authentication.principal.user_code}" th:onclick="|changeComment(${list.comment_code})|"> 수정 </button>
+								
+								
+								
+								
+								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="(${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}) and ${#strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteComment(${list.comment_code},${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button>
+								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteComment(${list.comment_code},${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button>
 							</div>
 						</div>
 						
@@ -109,8 +121,9 @@
 				        	</div>
 				        	<th:block th:Each="idx : ${#numbers.sequence(pagination.firstPage, pagination.lastPage)}">
 				            	<a href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${idx},${pagination.cntPerPage},${pagination.pageSize})|">
-				                	<span class="pageText" th:if="${pagination.currentPage == idx}" style="color:#00AEEF; font-size:1.5em;" th:text="${idx}"></span>
-									<span class="pageText" th:if="${pagination.currentPage != idx}" th:text="${idx}"></span>
+				            	<span class="pageText" th:if="${idx == 0}" style="color:#00AEEF; font-size:1.5em;">1</span>
+				                	<span class="pageText" th:if="${pagination.currentPage == idx and idx != 0}" style="color:#00AEEF; font-size:1.5em;" th:text="${idx}"></span>
+									<span class="pageText" th:if="${pagination.currentPage != idx and idx != 0}" th:text="${idx}"></span>
 								</a>
 							</th:block>
 							<div class="nextBtn" th:if="${pagination.currentPage != pagination.lastPage}">

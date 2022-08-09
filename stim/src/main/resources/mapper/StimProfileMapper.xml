@@ -25,7 +25,7 @@
     <update id="updateComment" parameterType="com.stim.vo.ProFileVO">
     	UPDATE profile_comment_tbl
     	SET comment_context = #{comment_context}
-    	WHERE user_code = #{user_code}
+    	WHERE comment_code = #{comment_code}
     </update>
     
     <select id="CountAllComment" resultType="int" parameterType="int">

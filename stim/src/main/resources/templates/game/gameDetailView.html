@@ -105,8 +105,9 @@
 				        	</div>
 				        	<th:block th:Each="idx : ${#numbers.sequence(pagination.firstPage, pagination.lastPage)}">
 				            	<a href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${idx},${pagination.cntPerPage},${pagination.pageSize})|">
-				                	<span class="pageText" th:if="${pagination.currentPage == idx}" style="color:#00AEEF; font-size:1.5em;" th:text="${idx}"></span>
-									<span class="pageText" th:if="${pagination.currentPage != idx}" th:text="${idx}"></span>
+				                	<span class="pageText" th:if="${idx == 0}" style="color:#00AEEF; font-size:1.5em;">1</span>
+				                	<span class="pageText" th:if="${pagination.currentPage == idx and idx != 0}" style="color:#00AEEF; font-size:1.5em;" th:text="${idx}"></span>
+									<span class="pageText" th:if="${pagination.currentPage != idx and idx != 0}" th:text="${idx}"></span>
 								</a>
 							</th:block>
 							<div class="nextBtn" th:if="${pagination.currentPage != pagination.lastPage}">
