@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.stim.service.mybatis.StimGameListService;
 import com.stim.service.mybatis.StimWishCartService;
@@ -542,12 +543,20 @@ public class StimGameListController {
 		}
 		return mav;
 	}
-	
+
 	// 게임상세페이지 댓글 삭제
 	@PostMapping("/reply/delete")
-	public void DeleteReply(@RequestParam("grade_code") int grade_code) throws Exception{
+	public void DeleteReplyByCode(@RequestParam("grade_code") int grade_code) throws Exception{
 		stimGameListService.DeleteReplyByCode(grade_code);
 	}
 	
+	//장바구니 삭제	
+	@GetMapping("/reply/update") 
+	public void UpdateReplyByCode(
+		@RequestParam("grade_code")int grade_code,
+		@RequestParam("game_code")int game_code) throws Exception {
+		  	stimGameListService.UpdateReplyByCode(grade_code);  
+
+	  }
 	
 }

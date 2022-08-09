@@ -212,6 +212,11 @@ public class StimGameListServiceImp implements StimGameListService {
 		return stimGameListMapper.SelectLastReply(game_code);
 	}
 
+	@Override
+	public void UpdateReplyByCode(int grade_code) throws Exception {
+		stimGameListMapper.UpdateReplyByCode(grade_code);
+	}
+	
 	// 게임상세페이지 댓글 삭제
 	@Override
 	@Transactional
@@ -275,5 +280,6 @@ public class StimGameListServiceImp implements StimGameListService {
 	public void updateGenre(GameVO gVo) throws Exception {
 		stimGameListMapper.updateGenre(gVo);
 	}
+
 	
 }

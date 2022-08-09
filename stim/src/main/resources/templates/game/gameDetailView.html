@@ -43,17 +43,20 @@
 					</section>
 					<div id="gameGrade">
 						<div sec:authorize="isAuthenticated()">
-							<form id="reply_form" th:action="@{/gamereply}" method="post">
-								<input type="hidden" id="user_code" name="user_code" th:value="${#authentication.principal.user_code}">
-								<input type="hidden" id="game_code" name="user_id" th:value="${gameInfo.game_code}"> 
-								<input type="hidden" id="" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
-								<textarea id="grade_context" name="grade_context" placeholder="댓글과 평점을 남겨주세요" ></textarea>
-								<span class="textCount">0</span>
-    							<span class="textTotal">/230</span>
-								<input id="reply_submit" type="button" value="댓글 남기기" th:onclick="|inputReply(${pagination.currentPage})|">
-								<label><input type="radio" id="grade_b" name="grade_rate" value="b">Bad</label>
-								<label><input type="radio" id="grade_g" name="grade_rate" value="g">Good</label>
-							</form>
+							<div id="reply_write">
+								<form id="reply_form" th:action="@{/gamereply}" method="post">
+									<input type="hidden" id="user_code" name="user_code" th:value="${#authentication.principal.user_code}">
+									<input type="hidden" id="game_code" name="user_id" th:value="${gameInfo.game_code}"> 
+									<input type="hidden" id="" name="writer_code" th:value="${#authentication.principal.user_code}"> <!-- 로그인 시 value가 로그인 한 사람 값이 되야함 -->
+									<textarea id="grade_context" name="grade_context" placeholder="댓글과 평점을 남겨주세요" ></textarea>
+									<span class="textCount">0</span>
+	    							<span class="textTotal">/230</span>
+									<input id="reply_submit" type="button" value="댓글 남기기" th:onclick="|inputReply(${pagination.currentPage})|">
+									<label><input type="radio" id="grade_b" name="grade_rate" value="b">Bad</label>
+									<label><input type="radio" id="grade_g" name="grade_rate" value="g">Good</label>
+								</form>
+							</div>
+							
 						</div>
 					</div>
 		    		<div id="reply_lists">
@@ -68,11 +71,26 @@
 								
 								<span class="grade_regdate" th:text="${#dates.format(reply.grade_regdate,'yyyy년 MM월 dd일 HH시 mm분')}"></span>
 								<p id="comment_area" class="grade_context" th:text="${reply.grade_context}"></p>
+								<div id="reply_update">
+				            	<!-- <form action="">
+				            		<input id="grade_code" name="grade_code" type="hidden" th:value="${reply.grade_code}">
+				            		<textarea id="update_context" name="grade_context"></textarea>
+				            		<button type="button" onclick="cancel()">취소</button>
+				            		<button type="button" onclick="edit_context()">작성</button>
+	            				</form> -->
+	           				 </div>
 							</div>
 							<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
-							th:if="${(reply.user_code == #authentication.principal.user_code) AND #strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteReply(${reply.grade_code},${gameInfo.game_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button> 
+							th:if="${(reply.user_code == #authentication.principal.user_code) AND #strings.equals(#authentication.principal.user_admin, 'N')}" 
+							th:onclick="|deleteReply(${reply.grade_code},${gameInfo.game_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button> 
+							
+							<button sec:authorize="isAuthenticated()" class="reply_updatebtn" 
+							th:if="${(reply.user_code == #authentication.principal.user_code) AND #strings.equals(#authentication.principal.user_admin, 'N')}" 
+							th:onclick="|deleteReply(${reply.grade_code},${gameInfo.game_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|">수정</button> 
+							
+							
 							<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
-							th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteReply(${reply.grade_code})|">삭제</button>
+							th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteReply(${reply.grade_code},${gameInfo.game_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button>
 						</div>
 					</div>
 					<div class="paginate">

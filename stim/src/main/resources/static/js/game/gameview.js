@@ -83,6 +83,63 @@ function deleteReply(grade_code, game_code, currentPage, cntPerPage, pageSize){
 	});
 }
 
+function updateReply(grade_code, game_code){
+	$.ajax({
+		url: "/reply/update",
+		type: "POST",
+		async: true,
+		data: {
+			"grade_code" : grade_code,
+			"game_code"	 : game_code
+		},
+		success: function () {
+		}
+	});
+}
+
+function changeMessage(){
+	if($('#update_context').css('display')=='block'){
+		alert('수정 중 입니다');
+	} else {
+		$('#update_context').val($('#profile_introduce').text());
+	}
+	$('#profile_introduce').css('display','none');
+	$('#profile_textarea').css('display','block');
+	
+}
+
+function edit_reply(){
+	let grade_code = $('#grade_code').val();
+	let grade_context = $('#update_context').val();
+	if (update_context.replace(/\s|　/gi, "").length == 0) {
+    	alert("내용을 입력해주세요.");
+    	$("#profile_context").focus();
+ 	} else {
+		$.ajax({
+			url : "/reply/update",
+			data : {
+				"grade_code" : grade_code,
+				"grade_context" : grade_context
+			},
+			async : true,
+			type : "POST",
+			success: function(){
+				$('#reply_write').css('display','block');
+				$('#reply_update').css('display','none');
+				$('#profile_introduce').text(profile_context);
+			}
+		});
+	}
+}
+
+function cancelMessage() {
+	$('#profile_introduce').css('display','block');
+	$('#profile_textarea').css('display','none');
+}
+
+
+
+
 function inputReply(currentPage){
 	let user_code = $("#user_code").val();
 	let game_code = $("#game_code").val();
