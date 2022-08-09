@@ -82,7 +82,7 @@
 								<span class="comment_regdate" th:text="${#dates.format(list.profile_regdate,'yyyy년 MM월 dd일 HH시 mm 분')}"></span>
 								<div class="comment_context" th:text="${list.comment_context}"></div>
 								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="(${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}) and ${#strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
-								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteComment(${list.comment_code})|">삭제</button>
+								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteComment(${list.comment_code},${user.user_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button>
 							</div>
 						</div>
 						
@@ -91,8 +91,7 @@
 				    	<div class="paging">
 				    		<div class="prevBtn" th:if="${pagination.currentPage != 1}">
 				        		<a class="direction prev" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},1,${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt;&lt; </span></a>
-				        		<a class="direction prev" th:if="${pagination.hasPreviousPage != true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
-				        		<a class="direction prev" th:if="${pagination.hasPreviousPage == true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
+				        		<a class="direction prev" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
 				        	</div>
 				        	<div class="prevBtn" th:if="${pagination.currentPage == 1}">
 				        		<span class="naviTextB"> &lt;&lt; </span>
@@ -105,8 +104,7 @@
 								</a>
 							</th:block>
 							<div class="nextBtn" th:if="${pagination.currentPage != pagination.lastPage}">
-								<a class="direction next" th:if="${pagination.hasNextPage != true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
-								<a class="direction next" th:if="${pagination.hasNextPage == true}" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage+1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
+								<a class="direction next" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.currentPage+1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
 								<a class="direction next" href="javascript:void(0);" th:onclick="|movePage(${user.user_code},${pagination.totalRecordCount},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt;&gt; </span></a>
 							</div>
 							<div class="nextBtn" th:if="${pagination.currentPage == pagination.lastPage}">

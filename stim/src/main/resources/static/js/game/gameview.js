@@ -63,21 +63,23 @@ function paybtn(user_code, game_code ,game_price){
 	
 };
 
-function deleteReply(grade_code){
+function deleteReply(grade_code, game_code, currentPage, cntPerPage, pageSize){
 	let id = "#mentListBox" + grade_code 
 	$.ajax({
-	    url: "/reply/delete",
-	       type: "POST",
-	       async: true,
-	       data: {
-	          "grade_code" : grade_code
-	       },
-	       success: function () {
-	          let height = $(id).css("height").slice(0,-2);
-	          $(id).remove();
-	          
-			  changeHeight(height);
-	       }
+		url: "/reply/delete",
+		type: "POST",
+		async: true,
+		data: {
+			"grade_code" : grade_code
+		},
+		success: function () {
+			let height = $(id).css("height").slice(0,-2);
+			$(id).remove();
+			if($("#reply_lists").children().length == 0) {
+				movePage(game_code,currentPage, cntPerPage, pageSize);
+			}
+			changeHeight(height);
+		}
 	});
 }
 

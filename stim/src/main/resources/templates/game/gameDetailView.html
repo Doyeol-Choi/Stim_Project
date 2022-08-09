@@ -70,7 +70,7 @@
 								<p id="comment_area" class="grade_context" th:text="${reply.grade_context}"></p>
 							</div>
 							<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
-							th:if="${(reply.user_code == #authentication.principal.user_code) AND #strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteReply(${reply.grade_code})|">삭제</button> 
+							th:if="${(reply.user_code == #authentication.principal.user_code) AND #strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteReply(${reply.grade_code},${gameInfo.game_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button> 
 							<button sec:authorize="isAuthenticated()" class="reply_deletebtn" 
 							th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteReply(${reply.grade_code})|">삭제</button>
 						</div>
@@ -79,8 +79,7 @@
 				    	<div class="paging">
 				    		<div class="prevBtn" th:if="${pagination.currentPage != 1}">
 				        		<a class="direction prev" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},1,${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt;&lt; </span></a>
-				        		<a class="direction prev" th:if="${pagination.hasPreviousPage != true}" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
-				        		<a class="direction prev" th:if="${pagination.hasPreviousPage == true}" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
+				        		<a class="direction prev" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${pagination.currentPage-1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &lt; </span></a>
 				        	</div>
 				        	<div class="prevBtn" th:if="${pagination.currentPage == 1}">
 				        		<span class="naviTextB"> &lt;&lt; </span>
@@ -93,8 +92,7 @@
 								</a>
 							</th:block>
 							<div class="nextBtn" th:if="${pagination.currentPage != pagination.lastPage}">
-								<a class="direction next" th:if="${pagination.hasNextPage != true}" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
-								<a class="direction next" th:if="${pagination.hasNextPage == true}" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${pagination.currentPage+1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
+								<a class="direction next" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${pagination.currentPage+1},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt; </span></a>
 								<a class="direction next" href="javascript:void(0);" th:onclick="|movePage(${gameInfo.game_code},${pagination.totalRecordCount},${pagination.cntPerPage},${pagination.pageSize})|"><span class="naviText"> &gt;&gt; </span></a>
 							</div>
 							<div class="nextBtn" th:if="${pagination.currentPage == pagination.lastPage}">
