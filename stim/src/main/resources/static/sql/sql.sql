@@ -189,7 +189,7 @@ INSERT INTO game_tbl VALUES
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'Tricky Towers',16000,'2016-08-02','WeirdBeard','WeirdBeard','마법 주문은 사방에서 날아오고 벽돌은 쉴새없이 쏟아질 겁니다. Tricky Towers로 광란의 즐거움을 느껴보세요!',17,'trickytowers.jpg', '');
 INSERT INTO game_tbl VALUES 
-(game_code_seq.nextval,'썸썸 편의점',21000,'2020-01-15','TALESSHOP','TALESSHOP','집안 사정으로 편의점에서 알바를 하게 된 주인공.심심해서 스마트폰을 만지작 거리다 연애 어플 [SOME SOME]을 다운로드 받는다.SOME SOME을 켜자 세 명의 아가씨와 새로운 인연이 시작되는데.',88,'somesome.jpg', '');
+(game_code_seq.nextval,'썸썸 편의점',21000,'2020-01-15','TALESSHOP','TALESSHOP','집안 사정으로 편의점에서 알바를 하게 된 주인공.심심해서 스마트폰을 만지작 거리다 연애 어플 [SOME SOME]을 다운로드 받는다.SOME SOME을 켜자 세 명의 아가씨와 새로운 인연이 시작되는데.',48,'somesome.jpg', '');
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'BIOHAZARD 6',28200,'2013-03-22','Capcom','Capcom','액션과 서바이벌 호러가 섞인 Biohazard 6는 2013년의 극적인 공포 게임이 될 것을 약속합니다. 치명적인 C 바이러스와 마주하며 이야기는 북미, 전쟁으로 황폐해진 유럽 국가 에도니아, 그리고 중국의 도시 란샹으로 이어집니다.',25,'biohazard.jpg', '');
 INSERT INTO game_tbl VALUES 
@@ -199,7 +199,7 @@ INSERT INTO game_tbl VALUES
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'A Dance of Fire and Ice',6500,'2019-01-25','7th Beat Games','7th Beat Games','A Dance of Fire and Ice는 하나의 키로 간단하게 즐길 수 있는 엄격한 판정의 리듬 게임입니다.',24,'ADanceofFireandIce.jpg', '');
 INSERT INTO game_tbl VALUES 
-(game_code_seq.nextval,'COUNTER-STRIKE',10500,'2000-11-01','Valve','Valve','세계 최고의 온라인 액션 게임을 즐기십시오. 전 세계적으로 유명한 팀 기반의 게임에서 테러리스트가 벌이는 생생한 전투의 현장에 흠뻑 빠지십시오. 팀 동료들과 협력하여 전략적인 미션을 완수하고, 적군 기지를 점령하고 인질을 구출해보십시오.',97,'COUNTER-STRIKE.jpg', '');
+(game_code_seq.nextval,'COUNTER-STRIKE',10500,'2000-11-01','Valve','Valve','세계 최고의 온라인 액션 게임을 즐기십시오. 전 세계적으로 유명한 팀 기반의 게임에서 테러리스트가 벌이는 생생한 전투의 현장에 흠뻑 빠지십시오. 팀 동료들과 협력하여 전략적인 미션을 완수하고, 적군 기지를 점령하고 인질을 구출해보십시오.',57,'COUNTER-STRIKE.jpg', '');
 INSERT INTO game_tbl VALUES 
 (game_code_seq.nextval,'Among Us',5500,'2018-11-17','Innersloth','Innersloth','새로운 Among Us 맵, Airship에 승선하세요! 이 비행선에서 서로 협력하며 위대한 계획을 완수해보세요... 크루원일지, 임포스터 편일지는 또 다른 문제죠.',25,'AmongUs.jpg', '');
 INSERT INTO game_tbl VALUES 
