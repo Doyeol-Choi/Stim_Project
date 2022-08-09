@@ -83,37 +83,47 @@ function deleteReply(grade_code, game_code, currentPage, cntPerPage, pageSize){
 	});
 }
 
-function updateReply(grade_code, game_code){
-	$.ajax({
-		url: "/reply/update",
-		type: "POST",
-		async: true,
-		data: {
-			"grade_code" : grade_code,
-			"game_code"	 : game_code
-		},
-		success: function () {
-		}
-	});
-}
-
-function changeMessage(){
-	if($('#update_context').css('display')=='block'){
+function change_reply(grade_code){
+	$('.update_context').keyup(function (e) {
+		let contextid = '#update_context' + grade_code;
+		let content = $(contextid).val();
+	    let textid = '#textCount' + grade_code;
+	    // 글자수 세기
+	    if (content.length == 0 || content == '') {
+	    	$(textid).text('0');
+	    } else {
+	    	$(textid).text(content.length);
+	    }
+	    
+	    // 글자수 제한
+	    if (content.length > 230) {
+	    	// 230자 부터는 타이핑 되지 않도록
+	        $(contextid).val($(contextid).val().substring(0, 230));
+	    }
+	})
+	let pid = '#reply_area'+grade_code;
+	let uid = '#reply_update' + grade_code;
+	let textarea = '#update_context' + grade_code;
+	let textid = '#textCount' + grade_code;
+	if($(uid).css('display')=='block'){
 		alert('수정 중 입니다');
 	} else {
-		$('#update_context').val($('#profile_introduce').text());
+		$(textarea).val($(pid).text());
+		$(textid).text($(textarea).val().length);
 	}
-	$('#profile_introduce').css('display','none');
-	$('#profile_textarea').css('display','block');
+	$(pid).css('display','none');
+	$(uid).css('display','block');
 	
 }
 
-function edit_reply(){
-	let grade_code = $('#grade_code').val();
-	let grade_context = $('#update_context').val();
+function edit_reply(grade_code){
+	let pid = '#reply_area'+ grade_code;
+	let uid = '#reply_update' + grade_code;
+	let update_context = '#update_context' + grade_code;
+	let grade_context = $(update_context).val();
 	if (update_context.replace(/\s|　/gi, "").length == 0) {
     	alert("내용을 입력해주세요.");
-    	$("#profile_context").focus();
+    	$(update_context).focus();
  	} else {
 		$.ajax({
 			url : "/reply/update",
@@ -124,22 +134,23 @@ function edit_reply(){
 			async : true,
 			type : "POST",
 			success: function(){
-				$('#reply_write').css('display','block');
-				$('#reply_update').css('display','none');
-				$('#profile_introduce').text(profile_context);
+				$(pid).css('display','block');
+				$(uid).css('display','none');
+				$(pid).text(grade_context);
 			}
 		});
 	}
 }
 
-function cancelMessage() {
-	$('#profile_introduce').css('display','block');
-	$('#profile_textarea').css('display','none');
+function cancel() {
+	let grade_code = $('#grade_code').val();
+	let pid = '#reply_area'+grade_code;
+	let uid = '#reply_update' + grade_code;
+	$(pid).css('display','block');
+	$(uid).css('display','none');
 }
 
-
-
-
+// 평점 댓글 입력
 function inputReply(currentPage){
 	let user_code = $("#user_code").val();
 	let game_code = $("#game_code").val();
@@ -167,9 +178,20 @@ function inputReply(currentPage){
 					}else if(data.grade_rate == 'b'){
 						html += "<span id='grade_rateB'>Bad</span>";
 					}
-				html += "<div class='grade_context'>"+data.grade_context+"</div>";
+				html += "<p id='reply_area"+data.grade_code+"' class='grade_context'>"+data.grade_context+"</p>";
+				html += "<div id='reply_update"+data.grade_code+"' class='reply_update'>";
+				html += "<form action=''>";
+				html += "<input id='grade_code' name='grade_code' type='hidden' value='"+data.grade_code+"'>";
+				html += "<textarea id='update_context"+data.grade_code+"' class='update_context' name='grade_context'></textarea>";
+				html += "<span id='textCount"+data.grade_code+"' class='textCount2'>0</span>";
+    			html +=	"<span class='textTotal2'>/230</span>";
+				html += "<button type='button' onclick='cancel()'>취소</button>";
+				html += "<button type='button' onclick='edit_reply("+data.grade_code+")'>작성</button>";
+		        html += "</form>";
+	 			html += "</div>";
 				html += "</div>";
-				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+")' >삭제</button>";
+				html += "<button class='reply_deletebtn' onclick='deleteReply("+data.grade_code+","+game_code+","+currentPage+",5, 10)' >삭제</button>";
+				html += "<button class='reply_deletebtn' onclick='change_reply("+data.grade_code+")' >수정</button>";
 				html += "</div>";
 
 				if(currentPage==1) {
@@ -196,8 +218,15 @@ function inputReply(currentPage){
 
 function dateFormat(){
 	let date = new Date();
-    return date.getFullYear() + "년 " + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분";
- 
+	let dateText;
+	if(date.getMonth() < 10 && date.getDay() < 10) {
+		dateText = date.getFullYear() + "년 0" + (date.getMonth()+1) + "월 0" + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분";
+	} else if(date.getDay() < 10) {
+		dateText = date.getFullYear() + "년 " + (date.getMonth()+1) + "월 0" + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분";
+	} else if(date.getMonth() < 10) {
+		dateText = date.getFullYear() + "년 0" + (date.getMonth()+1) + "월 " + date.getDate() + "일 " + date.getHours() + "시 " + date.getMinutes() + "분";
+	}	
+    return dateText;
 }
 
 function changeHeight(height) {
@@ -229,9 +258,31 @@ $(document).ready(function() {
 	        $(this).val($(this).val().substring(0, 230));
 	    }
 	})
+	
 	changeHeight();
+
+	$(".reply_updatebtn").click(function() {
+		$('.update_context').keyup(function (e) {
+			let content = $(this).val();
+		    let code = $(this).prev().val();
+		    let textid = '#textCount' + code;
+		    // 글자수 세기
+		    if (content.length == 0 || content == '') {
+		    	$(textid).text('0');
+		    } else {
+		    	$(textid).text(content.length);
+		    }
+		    
+		    // 글자수 제한
+		    if (content.length > 230) {
+		    	// 230자 부터는 타이핑 되지 않도록
+		        $(this).val($(this).val().substring(0, 230));
+		    }
+		})
+	})
 	
 })
+
 
 //페이지 이동
 function movePage(game_code,currentPage, cntPerPage, pageSize){

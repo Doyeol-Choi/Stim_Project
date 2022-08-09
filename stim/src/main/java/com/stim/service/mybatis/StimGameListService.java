@@ -71,7 +71,7 @@ public interface StimGameListService {
     public GameReplyVO SelectLastReply(int game_code) throws Exception;
     
     // 게임상세페이지 댓글 수정
-	public void UpdateReplyByCode(int grade_code)throws Exception;
+	public void UpdateReplyByCode(GameReplyVO rVo)throws Exception;
 
     // 게임상세페이지 댓글 삭제
 	public void DeleteReplyByCode(int grade_code) throws Exception;
