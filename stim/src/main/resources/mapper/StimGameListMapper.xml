@@ -243,7 +243,7 @@
     <insert id="InsertReply" parameterType="com.stim.vo.GameReplyVO">
     	INSERT INTO grade_tbl
     	VALUES (grade_code_seq.nextval, #{user_code},
-    	 #{game_code}, #{grade_context}, sysdate, #{grade_rate})
+    	 #{game_code}, #{grade_context}, current_date, #{grade_rate})
     </insert>
     
     	<!-- 해당 게임 상세페이지에 가장 마지막 작성된 댓글 가져오기 -->

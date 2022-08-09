@@ -181,6 +181,7 @@ public class StimAdminController {
 			UserVO uVo = (UserVO) authentication.getPrincipal();
 			if (uVo.getUser_admin().equals("Y")) {
 				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
+//				String path = "/var/lib/tomcat9/webapps/image/game"
 				String uuid = UUID.randomUUID().toString();
 				String picName = uuid + "_" + file.getOriginalFilename();
 				File savePic = new File(path + "/" + picName);
@@ -240,6 +241,7 @@ public class StimAdminController {
 			if (uVo.getUser_admin().equals("Y")) {
 				if(!file.isEmpty()) {
 					String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
+//					String path = "/var/lib/tomcat9/webapps/image/game"
 					String uuid = UUID.randomUUID().toString();
 					String picName = uuid + "_" + file.getOriginalFilename();
 					File savePic = new File(path + "/" + picName);
