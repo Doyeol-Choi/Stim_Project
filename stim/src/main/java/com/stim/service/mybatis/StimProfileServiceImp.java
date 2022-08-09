@@ -32,7 +32,7 @@ public class StimProfileServiceImp implements StimProfileService {
 		stimProfileMapper.UpdateUserInfo(uVo);
 	}
 
-	
+	// 댓글 입력
 	@Override
 	@Transactional
 	public int InsertComment(ProFileVO pVo) throws Exception {
@@ -92,6 +92,7 @@ public class StimProfileServiceImp implements StimProfileService {
 		stimProfileMapper.updateFriendRequest(friend_code);
 	}
 
+	// 친구 삭제 
 	@Override
 	@Transactional
 	public void deleteMyFriend(int friend_code) throws Exception {
@@ -112,11 +113,13 @@ public class StimProfileServiceImp implements StimProfileService {
 		return stimProfileMapper.selectLastComment(user_code);
 	}
 
+	// 프로필 할 말 출력
 	@Override
 	public String SelectProfileContext(int user_code) throws Exception {
 		return stimProfileMapper.SelectProfileContext(user_code);
 	}
 
+	// 프로필 할 말 입력
 	@Override
 	@Transactional
 	public void insertProfileContext(int user_code, String profile_context) throws Exception {
@@ -129,6 +132,12 @@ public class StimProfileServiceImp implements StimProfileService {
 	public int CountAllComment(int user_code) throws Exception {
 		
 		return stimProfileMapper.CountAllComment(user_code);
+	}
+
+	// 댓글 수정
+	@Override
+	public void updateComment(ProFileVO pVo) throws Exception {
+		stimProfileMapper.updateComment(pVo);	
 	}
 
 	
