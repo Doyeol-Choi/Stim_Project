@@ -98,11 +98,7 @@
 					            		</div>
 					            	</form>									
 								</div>
-								<button type="button" sec:authorize="isAuthenticated()" class="comment_updatebtn" th:if="${user.user_code == #authentication.principal.user_code}" th:onclick="|changeComment(${list.comment_code})|"> 수정 </button>
-								
-								
-								
-								
+								<button type="button" sec:authorize="isAuthenticated()" class="comment_updatebtn" th:if="${list.writer_code == #authentication.principal.user_code}" th:onclick="|changeComment(${list.comment_code})|"> 수정 </button>
 								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="(${user.user_code == #authentication.principal.user_code} or ${list.writer_code == #authentication.principal.user_code}) and ${#strings.equals(#authentication.principal.user_admin, 'N')}" th:onclick="|deleteComment(${list.comment_code},${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button>
 								<button sec:authorize="isAuthenticated()" class="comment_deletebtn" th:if="${#strings.equals(#authentication.principal.user_admin, 'Y')}" th:onclick="|deleteComment(${list.comment_code},${user.user_code},${pagination.currentPage},${pagination.cntPerPage},${pagination.pageSize})|">삭제</button>
 							</div>
