@@ -94,7 +94,8 @@ public class StimWishCartServiceImp implements StimWishCartService {
 		stimWishCartMapper.InsertWishGame(user_code,game_code);
 		
 	}
-	// 
+	
+	// 구매시 판매량 증가
 	@Override
 	@Transactional
 	public void UpdateSalesRate(int game_code) throws Exception {

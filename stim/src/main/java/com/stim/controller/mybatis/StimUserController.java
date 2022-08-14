@@ -3,8 +3,9 @@ package com.stim.controller.mybatis;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import javax.annotation.Resource;
 import javax.validation.Valid;
 
 import org.springframework.security.core.Authentication;
@@ -47,7 +48,16 @@ public class StimUserController {
 	@GetMapping("/CheckId")
 	public ModelAndView checkId(@RequestParam("user_id") String user_id) {
 		ModelAndView mav = new ModelAndView();
-		
+		// 정규식으로 특수문자 포함 확인
+		Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+		Matcher matcher = pattern.matcher(user_id);
+		if(user_id.isEmpty() || matcher.find()) {
+			mav.addObject("user_id", user_id);
+			mav.addObject("result", 2);
+			mav.setViewName("user/checkId");
+			
+			return mav;
+		}
 		int result = stimUserService.checkById(user_id);
 		
 		mav.addObject("user_id", user_id);

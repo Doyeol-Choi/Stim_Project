@@ -122,11 +122,10 @@
 }
 .pay_button:hover{
 	background-color: rgba(255, 255, 255, 0.1);
-}
-.pay_button span:hover{
 	color:#00AEEF;
 	cursor: pointer;
 }
+
 #total_price{
 	color: white;
 	font-size: 15px;

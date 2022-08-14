@@ -3,7 +3,6 @@ package com.stim.controller.mybatis;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
@@ -15,7 +14,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
@@ -180,8 +178,8 @@ public class StimAdminController {
 		if(authentication != null) {
 			UserVO uVo = (UserVO) authentication.getPrincipal();
 			if (uVo.getUser_admin().equals("Y")) {
-				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
-//				String path = "/var/lib/tomcat9/webapps/image/game"
+//				String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
+				String path = "/var/lib/tomcat9/webapps/image/game";
 				String uuid = UUID.randomUUID().toString();
 				String picName = uuid + "_" + file.getOriginalFilename();
 				File savePic = new File(path + "/" + picName);
@@ -240,8 +238,8 @@ public class StimAdminController {
 			UserVO uVo = (UserVO) authentication.getPrincipal();
 			if (uVo.getUser_admin().equals("Y")) {
 				if(!file.isEmpty()) {
-					String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
-//					String path = "/var/lib/tomcat9/webapps/image/game"
+//					String path = this.getClass().getResource("/").getPath().replaceAll("/target/classes/", "/src/main/resources/static/image/game/");
+					String path = "/var/lib/tomcat9/webapps/image/game";
 					String uuid = UUID.randomUUID().toString();
 					String picName = uuid + "_" + file.getOriginalFilename();
 					File savePic = new File(path + "/" + picName);

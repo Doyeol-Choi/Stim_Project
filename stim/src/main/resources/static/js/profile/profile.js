@@ -299,7 +299,7 @@ function edit_comment(comment_code){
 			url : "/updateComment",
 			data : {
 				"comment_code" : comment_code,
-				"comment_context" : comment_context
+				"comment_context" : comment_fixContext
 			},
 			async : true,
 			type : "POST",

@@ -49,7 +49,6 @@ public class StimOauth2Service extends DefaultOAuth2UserService {
         String password = bCryptPasswordEncoder.encode("pwd"+uuid);  // 비밀번호 조합
 
         String email = oAuth2UserVO.getEmail();
-//        Role role = Role.ROLE_USER;
 
         UserVO uVo = stimUserMapper.getUserAccount(userId);
         
