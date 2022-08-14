@@ -13,13 +13,13 @@ function checkId() {
 
 function checkIdUse() {
 	opener.regFrom.user_id.value = document.getElementById('user_id').value;
-	opener.regFrom.chkId.value = 'check';
+	opener.regFrom.chkId.value = document.getElementById('user_id').value;
 	
 	self.close();
 }
 
 function checkReg() {
-	if(document.getElementById('chkId').value != 'check'){
+	if(document.getElementById('chkId').value != document.getElementById('user_id').value){
 		alert("아이디 중복체크를 해주세요.");
 		document.getElementById('user_id').focus();
 		return false;

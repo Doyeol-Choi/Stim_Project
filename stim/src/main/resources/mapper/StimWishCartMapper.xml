@@ -46,7 +46,7 @@
     <insert id="InsertCartGame" parameterType="int">
     	INSERT INTO cart_tbl (cart_code, user_code, game_code)
     	SELECT cart_code_seq.nextval, #{user_code},#{game_code} FROM dual
-    	WHERE NOT EXISTS (SELECT cart_code FROM cart_tbl WHERE game_code = #{game_code})
+    	WHERE NOT EXISTS (SELECT cart_code FROM cart_tbl WHERE game_code = #{game_code} and user_code = #{user_code})
     </insert>
     
     <!-- 찜목록 삭제 -->
@@ -111,7 +111,7 @@
     <insert id="InsertWishGame" parameterType="int">
     	INSERT INTO wish_tbl (wish_code, user_code, game_code)
     	SELECT wish_code_seq.nextval, #{user_code},#{game_code} FROM dual
-    	WHERE NOT EXISTS (SELECT wish_code FROM wish_tbl WHERE game_code = #{game_code})
+    	WHERE NOT EXISTS (SELECT wish_code FROM wish_tbl WHERE game_code = #{game_code} and user_code = #{user_code})
     </insert>
     
     <update id="UpdateSalesRate" parameterType="int">

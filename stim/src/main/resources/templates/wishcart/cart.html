@@ -34,7 +34,6 @@
 					</th:block>
 				</div>
 				<div class="content_bottom">
-					
 					<span class="game_releaseDate">출시일: </span>[[${#dates.format(cart.game_releaseDate,'yyyy-MM-dd')}]]
 					<div class="genre_box">
 						<span>태그:</span> [[${cart.genre_1}]], [[${cart.genre_2}]], [[${cart.genre_3}]]
@@ -42,14 +41,6 @@
 					<button class="delete_cart_button" th:onclick="|location.href='@{/delete_cart(cart_code=${cart.cart_code},user_code=${cart.user_code})}'|" >
 						<span class="delete_cart">삭제</span>
 					</button>
-					
-					
-					<!--ajax <button class="delete_cart_button" th:onclick="|delcart(${cart.cart_code, cart.game_price, total[].total[0].total_price})|" >
-						<span class="delete_cart">삭제</span>
-					</button> -->
-					
-					
-					
 				</div>
 			</div>
     	</div>
