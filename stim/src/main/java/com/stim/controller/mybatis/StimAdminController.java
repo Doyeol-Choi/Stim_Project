@@ -46,7 +46,9 @@ public class StimAdminController {
 			if (uVo.getUser_admin().equals("Y")) {
 				try {
 					List<GameVO> list = stimGameListService.SelectAllGameList();
+					int listSize = list.size();
 					mav.addObject("gameList", list);
+					mav.addObject("listSize", listSize);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,13 +62,13 @@ public class StimAdminController {
 	
 	// 할인 목록 갱신
 	@PostMapping("/changeDiscountList")
-	public void changeDiscountList(Authentication authentication) {
+	public void changeDiscountList(@RequestParam("listSize") int listSize, Authentication authentication) {
 		if(authentication != null) {
 			UserVO uVo = (UserVO) authentication.getPrincipal();
 			if (uVo.getUser_admin().equals("Y")) {
 				try {
 					stimGameListService.discountListRemove();
-					List <Integer> list = stimGameListService.randomGame(38);	// 추후 게임 목록 개수로 변경
+					List <Integer> list = stimGameListService.randomGame(listSize);
 					Random random = new Random();
 					for (int code : list) {
 						int discount = (random.nextInt(19)+1) * 5;

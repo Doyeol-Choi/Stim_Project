@@ -39,7 +39,7 @@ public class SecurityConfig {
 		http.cors()
 	    		.configurationSource(corsConfigurationSource())
 	    .and()
-	    	.rememberMe()
+	    	.rememberMe()	// 로그인 유지를 위한 설정
                 .rememberMeParameter("remember-me")
                 .userDetailsService(stimUserService)
                 .tokenRepository(tokenRepository())

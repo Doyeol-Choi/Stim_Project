@@ -204,7 +204,7 @@ public class StimUserController {
 				try {
 					List<UserVO> uList = stimUserService.SelectUserAll();
 					// 랜덤으로 유저 코드 뽑기
-					List<Integer> randomList = stimUserService.randomCode(uList.size());	// 추후 총 유저 수로 변경
+					List<Integer> randomList = stimUserService.randomCode(uList.size());
 					List<SearchUserVO> userList = new ArrayList<>();
 					for(int code : randomList) {
 						SearchUserVO randomUser = stimUserService.SearchUserByCodeLogin(code, login_code);
@@ -228,7 +228,7 @@ public class StimUserController {
 				try {
 					List<UserVO> uList = stimUserService.SelectUserAll();
 					// 랜덤으로 유저 코드 뽑기
-					List<Integer> randomList = stimUserService.randomCode(uList.size());	// 추후 총 유저 수로 변경
+					List<Integer> randomList = stimUserService.randomCode(uList.size());
 					List<SearchUserVO> userList = new ArrayList<>();
 					for(int code : randomList) {						
 						SearchUserVO randomUser = stimUserService.SearchUserByCode(code);

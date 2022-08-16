@@ -1,8 +1,11 @@
 /* 할인 목록 갱신 */
-function changeDiscount() {
+function changeDiscount(listSize) {
 	$.ajax({
 		url: "/changeDiscountList",
 			type: "Post",
+			data: {
+				"listSize" : listSize
+			},
 			async: true,
 			success: function () {
 				alert("할인 게임 목록이 갱신되었습니다.")
